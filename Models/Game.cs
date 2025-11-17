@@ -11,7 +11,7 @@
         public GameCategory Category { get; set; }
         public decimal MinBet { get; set; }
         public decimal MaxBet { get; set; }
-        public decimal RTP { get; set; } // Return To Player percentage
+        public decimal RTP { get; set; }
         public bool IsPopular { get; set; }
         public bool IsNew { get; set; }
         public bool HasJackpot { get; set; }
