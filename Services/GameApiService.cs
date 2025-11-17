@@ -15,85 +15,77 @@ namespace SafeCasino.Services
         {
             var games = new List<Game>();
             var providers = new[] { "NetEnt", "Microgaming", "PlayTech", "Evolution", "Pragmatic Play", "Novomatic" };
-            var slotNames = new[] { "Book of Ra", "Starburst", "Gonzo's Quest", "Mega Moolah", "Dead or Alive",
-                                    "Bonanza", "Sweet Bonanza", "Gates of Olympus", "Wolf Gold", "Great Rhino" };
-            var tableNames = new[] { "European Roulette", "American Roulette", "Blackjack Pro", "Baccarat Gold",
-                                     "Casino Hold'em", "Three Card Poker", "Caribbean Stud" };
-            var liveNames = new[] { "Live Roulette", "Live Blackjack", "Live Baccarat", "Live Dream Catcher",
-                                   "Live Monopoly", "Live Crazy Time", "Live Lightning Roulette" };
+
+            // 5 categories with 10 games each = 50 games total
+            var gamesByCategory = new Dictionary<GameCategory, string[]>
+            {
+                [GameCategory.Slots] = new[]
+                {
+                    "Book of Ra", "Starburst", "Gonzo's Quest", "Mega Moolah", "Dead or Alive",
+                    "Bonanza", "Sweet Bonanza", "Gates of Olympus", "Wolf Gold", "Great Rhino"
+                },
+                [GameCategory.Roulette] = new[]
+                {
+                    "European Roulette", "American Roulette", "French Roulette", "Lightning Roulette",
+                    "Immersive Roulette", "Speed Roulette", "Auto Roulette", "Double Ball Roulette",
+                    "Mini Roulette", "Multi-Wheel Roulette"
+                },
+                [GameCategory.Blackjack] = new[]
+                {
+                    "Classic Blackjack", "Blackjack Pro", "Perfect Blackjack", "VIP Blackjack",
+                    "Blackjack Switch", "Spanish 21", "Pontoon", "Double Exposure Blackjack",
+                    "Atlantic City Blackjack", "Vegas Strip Blackjack"
+                },
+                [GameCategory.LiveCasino] = new[]
+                {
+                    "Live Roulette", "Live Blackjack", "Live Baccarat", "Live Dream Catcher",
+                    "Live Monopoly", "Live Crazy Time", "Live Lightning Dice", "Live Deal or No Deal",
+                    "Live Mega Ball", "Live Dragon Tiger"
+                },
+                [GameCategory.Jackpot] = new[]
+                {
+                    "Mega Fortune", "Hall of Gods", "Arabian Nights", "Mega Moolah Isis",
+                    "Major Millions", "King Cashalot", "Treasure Nile", "Cash Splash",
+                    "Fruit Fiesta", "SupaJax"
+                }
+            };
 
             int id = 1;
 
-            // Generate Slots
-            foreach (var name in slotNames)
+            foreach (var category in gamesByCategory)
             {
-                games.Add(new Game
+                for (int i = 0; i < category.Value.Length; i++)
                 {
-                    Id = id++,
-                    Name = name,
-                    Description = $"Spannende slot {name} met geweldige bonussen!",
-                    Provider = providers[Random.Shared.Next(providers.Length)],
-                    ThumbnailUrl = $"https://picsum.photos/300/200?random={id}",
-                    GameUrl = $"/play/{id}",
-                    Category = GameCategory.Slots,
-                    MinBet = 0.10m,
-                    MaxBet = 100m,
-                    RTP = 94m + (decimal)(Random.Shared.NextDouble() * 4),
-                    IsPopular = Random.Shared.Next(100) > 70,
-                    IsNew = Random.Shared.Next(100) > 80,
-                    HasJackpot = Random.Shared.Next(100) > 75,
-                    AddedDate = DateTime.Now.AddDays(-Random.Shared.Next(365)),
-                    Tags = new List<string> { "Bonus", "Free Spins", "Wild" }
-                });
-            }
-
-            // Generate Table Games
-            foreach (var name in tableNames)
-            {
-                games.Add(new Game
-                {
-                    Id = id++,
-                    Name = name,
-                    Description = $"Klassiek tafelspel {name} voor echte casino liefhebbers!",
-                    Provider = providers[Random.Shared.Next(providers.Length)],
-                    ThumbnailUrl = $"https://picsum.photos/300/200?random={id}",
-                    GameUrl = $"/play/{id}",
-                    Category = name.Contains("Roulette") ? GameCategory.Roulette :
-                             name.Contains("Blackjack") ? GameCategory.Blackjack :
-                             name.Contains("Baccarat") ? GameCategory.Baccarat :
-                             GameCategory.TableGames,
-                    MinBet = 1m,
-                    MaxBet = 500m,
-                    RTP = 97m + (decimal)(Random.Shared.NextDouble() * 2),
-                    IsPopular = Random.Shared.Next(100) > 60,
-                    IsNew = Random.Shared.Next(100) > 90,
-                    HasJackpot = false,
-                    AddedDate = DateTime.Now.AddDays(-Random.Shared.Next(365)),
-                    Tags = new List<string> { "Strategie", "Klassiek" }
-                });
-            }
-
-            // Generate Live Casino Games
-            foreach (var name in liveNames)
-            {
-                games.Add(new Game
-                {
-                    Id = id++,
-                    Name = name,
-                    Description = $"Live casino ervaring met {name} en echte dealers!",
-                    Provider = "Evolution",
-                    ThumbnailUrl = $"https://picsum.photos/300/200?random={id}",
-                    GameUrl = $"/play/{id}",
-                    Category = GameCategory.LiveCasino,
-                    MinBet = 5m,
-                    MaxBet = 1000m,
-                    RTP = 97m + (decimal)(Random.Shared.NextDouble() * 2),
-                    IsPopular = Random.Shared.Next(100) > 50,
-                    IsNew = Random.Shared.Next(100) > 85,
-                    HasJackpot = false,
-                    AddedDate = DateTime.Now.AddDays(-Random.Shared.Next(365)),
-                    Tags = new List<string> { "Live", "HD Stream", "Dealers" }
-                });
+                    var name = category.Value[i];
+                    games.Add(new Game
+                    {
+                        Id = id++,
+                        Name = name,
+                        Description = $"Speel {name} en ervaar de spanning!",
+                        Provider = providers[Random.Shared.Next(providers.Length)],
+                        ThumbnailUrl = $"https://picsum.photos/seed/{id}/400/300",
+                        GameUrl = $"/play/{id}",
+                        Category = category.Key,
+                        MinBet = category.Key == GameCategory.Slots ? 0.10m :
+                                category.Key == GameCategory.Jackpot ? 0.20m : 1m,
+                        MaxBet = category.Key == GameCategory.LiveCasino ? 1000m :
+                                category.Key == GameCategory.Jackpot ? 200m : 500m,
+                        RTP = 94m + (decimal)(Random.Shared.NextDouble() * 4),
+                        IsPopular = i < 3, // First 3 games in each category are popular
+                        IsNew = i >= 7, // Last 3 games in each category are new
+                        HasJackpot = category.Key == GameCategory.Jackpot,
+                        AddedDate = DateTime.Now.AddDays(-Random.Shared.Next(365)),
+                        Tags = category.Key switch
+                        {
+                            GameCategory.Slots => new List<string> { "Bonus", "Free Spins", "Wild" },
+                            GameCategory.Roulette => new List<string> { "Klassiek", "Strategie" },
+                            GameCategory.Blackjack => new List<string> { "Kaartspel", "Strategie" },
+                            GameCategory.LiveCasino => new List<string> { "Live", "HD Stream", "Dealers" },
+                            GameCategory.Jackpot => new List<string> { "Jackpot", "Grote Winsten", "Progressive" },
+                            _ => new List<string>()
+                        }
+                    });
+                }
             }
 
             return games;
