@@ -113,11 +113,11 @@
                 <div class="col-md-3 mb-4">
                     <h5>Informatie</h5>
                     <ul>
-                        <li><a asp-controller="Home" asp-action="Index">Over Ons</a></li>
+                        <li><a asp-controller="Home" asp-action="About">Over Ons</a></li>
                         <li><a asp-controller="FAQ" asp-action="Index">Veelgestelde Vragen</a></li>
                         <li><a asp-controller="Support" asp-action="Index">Klantenservice</a></li>
                         <li><a asp-controller="Home" asp-action="Privacy">Verantwoord Spelen</a></li>
-                        <li><a href="#">Algemene Voorwaarden</a></li>
+                        <li><a asp-controller="Home" asp-action="Terms">Algemene Voorwaarden</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4">
@@ -141,8 +141,8 @@
                     </div>
                     <div class="col-md-6 text-md-end">
                         <a asp-controller="Home" asp-action="Privacy">Privacy Policy</a> |
-                        <a href="#">Cookies</a> |
-                        <a href="#">Disclaimer</a>
+                        <a asp-controller="Home" asp-action="Terms">Disclaimer</a> |
+                        <a href="#">Cookies</a>
                     </div>
                 </div>
                 <div class="row mt-3">
