@@ -1,6 +1,150 @@
-﻿namespace SafeCasino.Views.Support
-{
-    public class Index
-    {
-    }
+﻿@{
+    ViewData["Title"] = "Klantensupport";
 }
+
+<div class="container py-5">
+    <h1 class="section-title text-center mb-5">
+        <i class="fas fa-headset"></i> Klantensupport
+    </h1>
+
+    <div class="row g-5">
+        <!-- Support Form -->
+        <div class="col-lg-6">
+            <div class="support-form">
+                <h4 class="mb-4">
+                    <i class="fas fa-envelope"></i> Stuur ons een bericht
+                </h4>
+
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+
+                <form method="post" action="@Url.Action("SubmitTicket", "Support")">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Naam</label>
+                        <input type="text" class="form-control" id="name" name="name"
+                               required placeholder="Jouw naam">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-mailadres</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                               required placeholder="jouw@email.com">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Onderwerp</label>
+                        <input type="text" class="form-control" id="subject" name="subject"
+                               required placeholder="Wat is je vraag?">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Bericht</label>
+                        <textarea class="form-control" id="message" name="message"
+                                  rows="5" required placeholder="Beschrijf je probleem in detail..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-paper-plane"></i> Bericht Verzenden
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Support Info -->
+        <div class="col-lg-6">
+            <div class="support-info">
+                <h4 class="mb-4">
+                    <i class="fas fa-info-circle"></i> Andere Manieren om Contact Op Te Nemen
+                </h4>
+
+                <div class="contact-method">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h5>Bel Ons</h5>
+                        <p class="text-muted mb-2">Telefoonnummer: <strong>+32 2 123 45 67</strong></p>
+                        <small class="text-muted">Maandag t/m Vrijdag: 09:00 - 18:00 CET</small>
+                    </div>
+                </div>
+
+                <div class="contact-method">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h5>E-mail</h5>
+                        <p class="text-muted mb-2">E-mailadres: <strong>support@safecasino.be</strong></p>
+                        <small class="text-muted">We antwoorden binnen 24 uur</small>
+                    </div>
+                </div>
+
+                <div class="contact-method">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h5>24/7 Beschikbaarheid</h5>
+                        <p class="text-muted mb-2">Live chat beschikbaar op onze website</p>
+                        <small class="text-muted">Directe communicatie met ons support team</small>
+                    </div>
+                </div>
+
+                <div class="contact-method">
+                    <i class="fas fa-comments"></i>
+                    <div>
+                        <h5>Social Media</h5>
+                        <p class="text-muted mb-2">Volg ons op social media voor updates</p>
+                        <div class="mt-2">
+                            <a href="#" class="me-2"><i class="fab fa-facebook fa-lg"></i></a>
+                            <a href="#" class="me-2"><i class="fab fa-twitter fa-lg"></i></a>
+                            <a href="#" class="me-2"><i class="fab fa-instagram fa-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <h5 class="mb-3">Veel Gestelde Vragen?</h5>
+                <p class="text-muted mb-3">
+                    Check onze FAQ pagina voor antwoorden op veel gestelde vragen.
+                </p>
+                <a asp-controller="FAQ" asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-question-circle"></i> Ga naar FAQ
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Response Time Info -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card" style="background: var(--bg-card); border: none;">
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-3">
+                        <i class="fas fa-hourglass-half"></i> Antwoord Snelheid
+                    </h5>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="py-3">
+                                <h3 style="color: var(--success-color);">~5 min</h3>
+                                <p class="text-muted">Live Chat</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="py-3">
+                                <h3 style="color: var(--primary-color);">~30 min</h3>
+                                <p class="text-muted">Telefoon</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="py-3">
+                                <h3 style="color: var(--accent-color);">~24 uur</h3>
+                                <p class="text-muted">E-mail</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
