@@ -44,6 +44,24 @@ namespace SafeCasino.Controllers
             return View();
         }
 
+        public IActionResult About()
+        {
+            var language = Request.Cookies["language"] ?? "nl";
+            ViewData["Translations"] = _localizationService.GetAllStrings(language);
+            ViewData["CurrentLanguage"] = language;
+
+            return View();
+        }
+
+        public IActionResult Terms()
+        {
+            var language = Request.Cookies["language"] ?? "nl";
+            ViewData["Translations"] = _localizationService.GetAllStrings(language);
+            ViewData["CurrentLanguage"] = language;
+
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
