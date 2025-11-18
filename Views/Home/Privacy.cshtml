@@ -1,248 +1,215 @@
-﻿@model SafeCasino.ViewModels.GameDetailViewModel
-@{
-    ViewData["Title"] = Model.Game.Name;
+﻿@{
+    ViewData["Title"] = "Verantwoord Spelen";
 }
 
 <div class="container py-5">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
-            <li class="breadcrumb-item"><a asp-controller="Games" asp-action="Index">Spellen</a></li>
-            <li class="breadcrumb-item active">@Model.Game.Name</li>
-        </ol>
-    </nav>
+    <h1 class="section-title text-center mb-5">
+        <i class="fas fa-shield-alt"></i> Verantwoord Spelen
+    </h1>
 
     <div class="row g-4">
-        <!-- Game Image & Info -->
-        <div class="col-lg-6">
-            <div class="card" style="background: var(--bg-card); border: none;">
-                <img src="@Model.Game.ThumbnailUrl" alt="@Model.Game.Name" class="card-img-top" style="border-radius: 12px;">
+        <div class="col-lg-8 mx-auto">
+            <!-- Intro -->
+            <div class="card" style="background: var(--bg-card); border: none; margin-bottom: 2rem;">
                 <div class="card-body">
-                    <h2 class="card-title mb-3">@Model.Game.Name</h2>
-                    <div class="d-flex gap-2 mb-3 flex-wrap">
-                        @if (Model.Game.IsPopular)
-                        {
-                            <span class="badge badge-popular">
-                                <i class="fas fa-fire"></i> POPULAIR
-                            </span>
-                        }
-                        @if (Model.Game.IsNew)
-                        {
-                            <span class="badge badge-new">
-                                <i class="fas fa-star"></i> NIEUW
-                            </span>
-                        }
-                        @if (Model.Game.HasJackpot)
-                        {
-                            <span class="badge badge-jackpot">
-                                <i class="fas fa-trophy"></i> JACKPOT
-                            </span>
-                        }
-                        <span class="badge" style="background: var(--bg-dark);">
-                            @Model.Game.Category
-                        </span>
-                    </div>
-
-                    <p class="card-text text-muted mb-4">@Model.Game.Description</p>
-
-                    <div class="row g-3 mb-4">
-                        <div class="col-6">
-                            <div class="p-3" style="background: var(--bg-dark); border-radius: 8px;">
-                                <small class="text-muted d-block mb-1">
-                                    <i class="fas fa-building"></i> Provider
-                                </small>
-                                <strong>@Model.Game.Provider</strong>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="p-3" style="background: var(--bg-dark); border-radius: 8px;">
-                                <small class="text-muted d-block mb-1">
-                                    <i class="fas fa-chart-line"></i> RTP
-                                </small>
-                                <strong>@Model.Game.RTP.ToString("F2")%</strong>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="p-3" style="background: var(--bg-dark); border-radius: 8px;">
-                                <small class="text-muted d-block mb-1">
-                                    <i class="fas fa-coins"></i> Min Inzet
-                                </small>
-                                <strong>€@Model.Game.MinBet</strong>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="p-3" style="background: var(--bg-dark); border-radius: 8px;">
-                                <small class="text-muted d-block mb-1">
-                                    <i class="fas fa-coins"></i> Max Inzet
-                                </small>
-                                <strong>€@Model.Game.MaxBet</strong>
-                            </div>
-                        </div>
-                    </div>
-
-                    @if (Model.Game.Tags.Any())
-                    {
-                        <div class="mb-4">
-                            <small class="text-muted d-block mb-2">
-                                <i class="fas fa-tags"></i> Tags
-                            </small>
-                            <div class="d-flex gap-2 flex-wrap">
-                                @foreach (var tag in Model.Game.Tags)
-                                {
-                                    <span class="badge" style="background: var(--bg-dark);">@tag</span>
-                                }
-                            </div>
-                        </div>
-                    }
-
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-primary btn-lg" onclick="alert('Demo modus wordt gestart...')">
-                            <i class="fas fa-play"></i> Speel Demo
-                        </button>
-                        <button class="btn btn-success btn-lg" onclick="alert('Login om met echt geld te spelen')">
-                            <i class="fas fa-dollar-sign"></i> Speel met Echt Geld
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Game Features & Related -->
-        <div class="col-lg-6">
-            <!-- Game Features -->
-            <div class="card mb-4" style="background: var(--bg-card); border: none;">
-                <div class="card-body">
-                    <h4 class="card-title mb-4">
-                        <i class="fas fa-info-circle"></i> Over Dit Spel
-                    </h4>
-                    <div class="row g-3">
-                        <div class="col-12">
-                            <div class="d-flex align-items-center p-3" style="background: var(--bg-dark); border-radius: 8px;">
-                                <i class="fas fa-dice fa-2x me-3" style="color: var(--primary-color);"></i>
-                                <div>
-                                    <strong>Speltype</strong>
-                                    <p class="mb-0 text-muted small">@Model.Game.Category spel met unieke features</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center p-3" style="background: var(--bg-dark); border-radius: 8px;">
-                                <i class="fas fa-mobile-alt fa-2x me-3" style="color: var(--primary-color);"></i>
-                                <div>
-                                    <strong>Mobiel Vriendelijk</strong>
-                                    <p class="mb-0 text-muted small">Speel op desktop, tablet en mobiel</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center p-3" style="background: var(--bg-dark); border-radius: 8px;">
-                                <i class="fas fa-shield-alt fa-2x me-3" style="color: var(--primary-color);"></i>
-                                <div>
-                                    <strong>Eerlijk & Veilig</strong>
-                                    <p class="mb-0 text-muted small">Gecertificeerde Random Number Generator</p>
-                                </div>
-                            </div>
-                        </div>
-                        @if (Model.Game.HasJackpot)
-                        {
-                            <div class="col-12">
-                                <div class="d-flex align-items-center p-3" style="background: linear-gradient(135deg, var(--accent-color) 0%, #ff6b6b 100%); border-radius: 8px;">
-                                    <i class="fas fa-trophy fa-2x me-3"></i>
-                                    <div>
-                                        <strong>Progressive Jackpot</strong>
-                                        <p class="mb-0 small">Win de grote jackpot!</p>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
+                    <p class="lead text-center mb-0">
+                        Bij SafeCasino stellen we je gezondheid en welzijn voorop. Gokken moet plezierig blijven -
+                        niet verslavend. We stellen verschillende tools en resources beschikbaar om je te helpen
+                        verantwoord te spelen.
+                    </p>
                 </div>
             </div>
 
-            <!-- Related Games -->
-            @if (Model.RelatedGames.Any())
-            {
-                <div class="card" style="background: var(--bg-card); border: none;">
-                    <div class="card-body">
-                        <h4 class="card-title mb-4">
-                            <i class="fas fa-gamepad"></i> Vergelijkbare Spellen
-                        </h4>
-                        <div class="row g-3">
-                            @foreach (var game in Model.RelatedGames)
-                            {
-                                <div class="col-12">
-                                    <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id"
-                                       class="text-decoration-none">
-                                        <div class="d-flex align-items-center p-2"
-                                             style="background: var(--bg-dark); border-radius: 8px; transition: all 0.3s ease;"
-                                             onmouseover="this.style.background='var(--primary-color)'"
-                                             onmouseout="this.style.background='var(--bg-dark)'">
-                                            <img src="@game.ThumbnailUrl"
-                                                 alt="@game.Name"
-                                                 style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px;"
-                                                 class="me-3">
-                                            <div class="flex-grow-1">
-                                                <strong class="d-block">@game.Name</strong>
-                                                <small class="text-muted">@game.Provider</small>
-                                            </div>
-                                            <i class="fas fa-chevron-right"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                            }
-                        </div>
-                        <div class="text-center mt-3">
-                            <a asp-controller="Games" asp-action="Index" asp-route-category="@Model.Game.Category"
-                               class="btn btn-secondary">
-                                <i class="fas fa-th"></i> Bekijk Alle @Model.Game.Category Spellen
-                            </a>
+            <!-- Key Sections -->
+            <h3 class="mb-4" style="color: var(--primary-color);">
+                <i class="fas fa-lightbulb"></i> Tips voor Verantwoord Spelen
+            </h3>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                    Stel jezelf limieten
+                </div>
+                <div class="faq-answer">
+                    Bepaal voordat je begint hoeveel je wilt besteden en hoe lang je wilt spelen.
+                    Gebruik onze ingebouwde limit tools om:
+                    <ul class="mt-2">
+                        <li>Dagelijkse, wekelijkse of maandelijkse stortingslimieten in te stellen</li>
+                        <li>Verlieslimieten te bepalen</li>
+                        <li>Inzetlimieten per sessie in te stellen</li>
+                        <li>Time-out periodes in te plannen</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                    Gebruik alleen geld dat je kunt missen
+                </div>
+                <div class="faq-answer">
+                    Speel alleen met bedragen die je je kunt veroorloven om te verliezen.
+                    Gokken moet een vorm van entertainment zijn, niet een manier om geld te verdienen.
+                    Beschouw je inzet als kosten voor vermaak, net als een bioscoopkaartje.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                    Neem regelmatig pauzes
+                </div>
+                <div class="faq-answer">
+                    Gokken gedurende lange periodes kan verslavend worden. We raden aan:
+                    <ul class="mt-2">
+                        <li>Na elke sessie minstens 1 uur pauze in te nemen</li>
+                        <li>Niet meer dan 2 uur per dag te spelen</li>
+                        <li>Regelmatig "gaming-vrije" dagen in te plannen</li>
+                        <li>Andere hobbies te cultiveren</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                    Nooit achtervolgingsgokken
+                </div>
+                <div class="faq-answer">
+                    Als je verliest, speel dan niet meer om je verliezen terug te winnen.
+                    Dit is "achtervolgingsgokken" en leidt bijna altijd tot grotere verliezen.
+                    Accepteer verliezen als onderdeel van het spel en stop als je van plan was te stoppen.
+                </div>
+            </div>
+
+            <h3 class="mb-4 mt-5" style="color: var(--primary-color);">
+                <i class="fas fa-warning"></i> Waarschuwingstekenen van Gokverslaving
+            </h3>
+
+            <div class="faq-item">
+                <div class="faq-answer">
+                    Wees voorzichtig als je het volgende ervaart:
+                    <ul class="mt-2">
+                        <li>Je denkt voortdurend aan gokken</li>
+                        <li>Je hebt steeds meer geld nodig voor dezelfde spanning</li>
+                        <li>Je probeert verliezen terug te winnen</li>
+                        <li>Je verbergt je gokactiviteiten voor vrienden/familie</li>
+                        <li>Je gaat gokken om problemen te vergeten</li>
+                        <li>Je maakt schulden door gokken</li>
+                        <li>Je kunt niet stoppen, ook al wil je dat</li>
+                        <li>Je voelt je schuldig of beschaamd over je gokken</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="mb-4 mt-5" style="color: var(--primary-color);">
+                <i class="fas fa-hands-helping"></i> Hulp & Resources
+            </h3>
+
+            <div class="row g-3">
+                <div class="col-12">
+                    <div class="card" style="background: var(--bg-dark); border: 2px solid var(--border-color);">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-phone"></i> Loket Kansspelen
+                            </h5>
+                            <p class="card-text">
+                                Gratis en anoniem helpdesk voor gokvraagstukken in Nederland en België.
+                            </p>
+                            <p class="mb-0">
+                                <strong>Telefoon:</strong> <a href="tel:0800035777">0800 35 777</a><br>
+                                <strong>Website:</strong> <a href="https://www.kansspelautoriteit.nl/" target="_blank">
+                                    www.kansspelautoriteit.nl
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
-            }
-        </div>
-    </div>
 
-    <!-- Game Rules/Instructions (Optional) -->
-    <div class="row mt-5">
-        <div class="col-12">
-            <div class="card" style="background: var(--bg-card); border: none;">
-                <div class="card-body">
-                    <h4 class="card-title mb-4">
-                        <i class="fas fa-book"></i> Spelregels & Tips
-                    </h4>
-                    <div class="row g-4">
-                        <div class="col-md-4">
-                            <h5><i class="fas fa-play-circle" style="color: var(--primary-color);"></i> Hoe te Spelen</h5>
-                            <p class="text-muted">
-                                @Model.Game.Name is makkelijk te leren. Selecteer je inzet, start het spel en geniet
-                                van de spanning!
+                <div class="col-12">
+                    <div class="card" style="background: var(--bg-dark); border: 2px solid var(--border-color);">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-globe"></i> GambleAware
+                            </h5>
+                            <p class="card-text">
+                                Onafhankelijke organisatie die informatie en ondersteuning biedt.
+                            </p>
+                            <p class="mb-0">
+                                <strong>Website:</strong> <a href="https://www.gambleaware.be/" target="_blank">
+                                    www.gambleaware.be
+                                </a><br>
+                                <strong>Email:</strong> <a href="mailto:info@gambleaware.be">info@gambleaware.be</a>
                             </p>
                         </div>
-                        <div class="col-md-4">
-                            <h5><i class="fas fa-lightbulb" style="color: var(--accent-color);"></i> Tips</h5>
-                            <p class="text-muted">
-                                Begin met de demo modus om het spel te leren kennen. Stel altijd je limieten in voordat
-                                je begint met spelen.
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="card" style="background: var(--bg-dark); border: 2px solid var(--border-color);">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-users"></i> Anonieme Gokkers
+                            </h5>
+                            <p class="card-text">
+                                Steungroep voor mensen met gokverslaving (gebaseerd op 12-stappenmodel).
+                            </p>
+                            <p class="mb-0">
+                                <strong>Website:</strong> <a href="https://www.ag-belgium.be/" target="_blank">
+                                    www.ag-belgium.be
+                                </a>
                             </p>
                         </div>
-                        <div class="col-md-4">
-                            <h5><i class="fas fa-trophy" style="color: var(--success-color);"></i> Winnen</h5>
-                            <p class="text-muted">
-                                Met een RTP van @Model.Game.RTP.ToString("F1")% biedt dit spel eerlijke winkansen.
-                                Speel verantwoord en veel succes!
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="card" style="background: var(--bg-dark); border: 2px solid var(--border-color);">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-headset"></i> SafeCasino Support
+                            </h5>
+                            <p class="card-text">
+                                Onze klantenservice kan je helpen met zelfuitsluiting en verlieslimieten.
+                            </p>
+                            <p class="mb-0">
+                                <strong>Email:</strong> <a href="mailto:support@safecasino.be">support@safecasino.be</a><br>
+                                <strong>Telefoon:</strong> <a href="tel:+3221234567">+32 2 123 45 67</a>
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Back to Games -->
-    <div class="text-center mt-4">
-        <a asp-controller="Games" asp-action="Index" class="btn btn-secondary btn-lg">
-            <i class="fas fa-arrow-left"></i> Terug naar Alle Spellen
-        </a>
+            <h3 class="mb-4 mt-5" style="color: var(--primary-color);">
+                <i class="fas fa-lock"></i> Zelfuitsluiting
+            </h3>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Wat is zelfuitsluiting?
+                </div>
+                <div class="faq-answer">
+                    Zelfuitsluiting is een permanent verbod dat je jezelf kunt opleggen.
+                    Wanneer je je account sluit, kun je gedurende een bepaalde periode (meestal 6 maanden tot 5 jaar)
+                    niet inloggen of geld storten. Dit geeft je de mogelijkheid om van gokken af te komen.
+                    <br><br>
+                    <strong>Je kunt nu je account sluiten door contact op te nemen met onze support team:</strong>
+                    <div class="mt-3">
+                        <a asp-controller="Support" asp-action="Index" class="btn btn-danger">
+                            <i class="fas fa-envelope"></i> Contact Opnemen
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warning Banner -->
+            <div class="alert alert-warning mt-5" role="alert">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>Waarschuwing:</strong> Gokken kan verslavend zijn en kan financiële problemen veroorzaken.
+                Als je het gevoel hebt dat je een gokprobleem hebt, zoek dan onmiddellijk hulp op via een van de
+                contactgegevens hierboven.
+            </div>
+        </div>
     </div>
 </div>
