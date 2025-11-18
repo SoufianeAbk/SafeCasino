@@ -1,229 +1,268 @@
-﻿@{
-    ViewData["Title"] = "Veelgestelde Vragen";
+﻿@model SafeCasino.ViewModels.GameListViewModel
+@{
+    ViewData["Title"] = "Spellen";
 }
 
 <div class="container py-5">
-    <h1 class="section-title text-center mb-5">
-        <i class="fas fa-question-circle"></i> Veelgestelde Vragen
-    </h1>
-
-    <div class="row">
-        <div class="col-lg-8 mx-auto">
-            <!-- Account & Registratie -->
-            <h3 class="mb-4" style="color: var(--primary-color);">
-                <i class="fas fa-user"></i> Account & Registratie
-            </h3>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    Hoe maak ik een account aan?
-                </div>
-                <div class="faq-answer">
-                    Klik op de "Registreer" knop rechtsboven en vul het registratieformulier in met je persoonlijke gegevens.
-                    Je moet minimaal 18 jaar oud zijn om een account aan te maken. Na registratie ontvang je een bevestigingsmail.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    Kan ik meerdere accounts hebben?
-                </div>
-                <div class="faq-answer">
-                    Nee, volgens onze algemene voorwaarden mag elke persoon slechts één account hebben.
-                    Meerdere accounts kunnen leiden tot opschorting van al je accounts.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    Hoe reset ik mijn wachtwoord?
-                </div>
-                <div class="faq-answer">
-                    Klik op "Wachtwoord vergeten" op de inlogpagina. Voer je emailadres in en je ontvangt een link
-                    om je wachtwoord te resetten.
-                </div>
-            </div>
-
-            <!-- Storten & Opnemen -->
-            <h3 class="mb-4 mt-5" style="color: var(--primary-color);">
-                <i class="fas fa-wallet"></i> Storten & Opnemen
-            </h3>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    Welke betaalmethoden accepteren jullie?
-                </div>
-                <div class="faq-answer">
-                    We accepteren verschillende betaalmethoden zoals:
-                    <ul class="mt-2">
-                        <li>Creditcards (Visa, Mastercard)</li>
-                        <li>Bancontact</li>
-                        <li>PayPal</li>
-                        <li>Bankoverschrijving</li>
-                        <li>Skrill</li>
-                        <li>Neteller</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    Wat is het minimum en maximum stortingsbedrag?
-                </div>
-                <div class="faq-answer">
-                    Het minimum stortingsbedrag is €10. Het maximum stortingsbedrag varieert per betaalmethode,
-                    maar ligt meestal tussen €5.000 en €10.000 per transactie.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    Hoe lang duurt het voordat mijn opname is verwerkt?
-                </div>
-                <div class="faq-answer">
-                    Opnames worden meestal binnen 24 uur verwerkt. De verwerkingstijd kan variëren afhankelijk van
-                    je gekozen betaalmethode:
-                    <ul class="mt-2">
-                        <li>E-wallets (PayPal, Skrill): 0-24 uur</li>
-                        <li>Creditcard: 3-5 werkdagen</li>
-                        <li>Bankoverschrijving: 3-7 werkdagen</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Spellen & Gameplay -->
-            <h3 class="mb-4 mt-5" style="color: var(--primary-color);">
-                <i class="fas fa-gamepad"></i> Spellen & Gameplay
-            </h3>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    Kan ik de spellen gratis proberen?
-                </div>
-                <div class="faq-answer">
-                    Ja! Veel van onze spellen kun je in demo-modus spelen zonder echt geld in te zetten.
-                    Zo kun je de spellen eerst uitproberen voordat je met echt geld speelt.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    Wat betekent RTP?
-                </div>
-                <div class="faq-answer">
-                    RTP staat voor "Return to Player" (terugkeer naar speler). Dit is het percentage van alle inzetten
-                    dat een spel gemiddeld terugbetaalt aan spelers over een lange periode. Bijvoorbeeld, een RTP van
-                    96% betekent dat van elke €100 ingezet, gemiddeld €96 wordt terugbetaald aan spelers.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    Zijn de spellen eerlijk?
-                </div>
-                <div class="faq-answer">
-                    Absoluut! Alle onze spellen gebruiken een Random Number Generator (RNG) die is getest en
-                    gecertificeerd door onafhankelijke testbureaus. Dit garandeert volledig willekeurige en eerlijke
-                    spelresultaten.
-                </div>
-            </div>
-
-            <!-- Bonussen & Promoties -->
-            <h3 class="mb-4 mt-5" style="color: var(--primary-color);">
-                <i class="fas fa-gift"></i> Bonussen & Promoties
-            </h3>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    Wat zijn de inzetvereisten voor bonussen?
-                </div>
-                <div class="faq-answer">
-                    Inzetvereisten (ook wel wagering requirements genoemd) bepalen hoeveel keer je het bonusbedrag
-                    moet inzetten voordat je het kunt opnemen. Bijvoorbeeld, bij een bonus van €100 met 35x inzetvereisten,
-                    moet je €3.500 inzetten voordat je de bonus kunt opnemen.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    Kan ik een bonus weigeren?
-                </div>
-                <div class="faq-answer">
-                    Ja, je kunt ervoor kiezen om geen bonus te ontvangen bij je storting. Je kunt dit aangeven tijdens
-                    het stortingsproces, of contact opnemen met onze klantenservice om een actieve bonus te verwijderen.
-                </div>
-            </div>
-
-            <!-- Veiligheid & Verantwoord Spelen -->
-            <h3 class="mb-4 mt-5" style="color: var(--primary-color);">
-                <i class="fas fa-shield-alt"></i> Veiligheid & Verantwoord Spelen
-            </h3>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    Hoe beveiligen jullie mijn persoonlijke gegevens?
-                </div>
-                <div class="faq-answer">
-                    We gebruiken geavanceerde SSL-encryptie om al je persoonlijke en financiële gegevens te beschermen.
-                    Je gegevens worden opgeslagen op beveiligde servers en worden nooit gedeeld met derden zonder je
-                    toestemming.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    Kan ik limieten instellen op mijn account?
-                </div>
-                <div class="faq-answer">
-                    Ja! We moedigen verantwoord spelen aan. Je kunt verschillende limieten instellen:
-                    <ul class="mt-2">
-                        <li>Dagelijkse, wekelijkse of maandelijkse stortingslimieten</li>
-                        <li>Inzetlimieten per sessie</li>
-                        <li>Verlieslimieten</li>
-                        <li>Time-out periodes</li>
-                        <li>Zelfuitsluiting</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    Wat doe ik als ik hulp nodig heb bij gokverslaving?
-                </div>
-                <div class="faq-answer">
-                    Als je het gevoel hebt dat gokken een probleem voor je wordt, zijn er verschillende organisaties
-                    die je kunnen helpen:
-                    <ul class="mt-2">
-                        <li>Loket Kansspelen: 0800 35 777</li>
-                        <li>GambleAware: www.gambleaware.be</li>
-                        <li>Anonieme Gokkers: www.ag-belgium.be</li>
-                    </ul>
-                    Je kunt ook contact met ons opnemen om je account te sluiten of een time-out periode in te stellen.
-                </div>
-            </div>
-        </div>
+    <!-- Games Header -->
+    <div class="mb-5">
+        <h1 class="section-title mb-3">
+            <i class="fas fa-gamepad"></i> Casino Spellen
+        </h1>
+        <p class="text-muted">Ontdek meer dan 50 spannende spellen</p>
     </div>
 
-    <!-- Contact CTA -->
-    <div class="text-center mt-5 p-5" style="background: var(--bg-card); border-radius: 12px;">
-        <h3 class="mb-3">Vraag niet beantwoord?</h3>
-        <p class="text-muted mb-4">Ons support team staat 24/7 voor je klaar</p>
-        <a asp-controller="Support" asp-action="Index" class="btn btn-primary btn-lg">
-            <i class="fas fa-headset"></i> Neem Contact Op
-        </a>
+    <div class="row g-4">
+        <!-- Filters Sidebar -->
+        <div class="col-lg-3">
+            <form method="get" class="filter-section filter-form">
+                <!-- Search -->
+                <div class="mb-3">
+                    <label for="SearchTerm" class="form-label"><i class="fas fa-search"></i> Zoeken</label>
+                    <input type="text" class="form-control" id="SearchTerm" name="SearchTerm" 
+                           placeholder="Zoek spellen..." value="@Model.Filters.SearchTerm">
+                </div>
+
+                <!-- Category -->
+                <div class="mb-3">
+                    <label for="Category" class="form-label"><i class="fas fa-th-large"></i> Categorie</label>
+                    <select class="form-select" id="Category" name="Category">
+                        <option value="">Alle Categorieën</option>
+                        @if (Model.AvailableCategories.Any())
+                        {
+                            @foreach (var category in Model.AvailableCategories)
+                            {
+                                var _catSelected = Model.Filters.Category == category ? " selected" : string.Empty;
+                                @Html.Raw($"<option value=\"{category}\"{_catSelected}>{category}</option>")
+                            }
+                        }
+                    </select>
+                </div>
+
+                <!-- Provider -->
+                <div class="mb-3">
+                    <label for="Provider" class="form-label"><i class="fas fa-building"></i> Provider</label>
+                    <select class="form-select" id="Provider" name="Provider">
+                        <option value="">Alle Providers</option>
+                        @if (Model.AvailableProviders.Any())
+                        {
+                            @foreach (var provider in Model.AvailableProviders)
+                            {
+                                var _provSelected = Model.Filters.Provider == provider ? " selected" : string.Empty;
+                                @Html.Raw($"<option value=\"{provider}\"{_provSelected}>{provider}</option>")
+                            }
+                        }
+                    </select>
+                </div>
+
+                <!-- Bet Range -->
+                <div class="mb-3">
+                    <label class="form-label"><i class="fas fa-coins"></i> Inzet Bereik</label>
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <input type="number" class="form-control" name="MinBet" 
+                                   placeholder="Min" value="@Model.Filters.MinBet" step="0.01">
+                        </div>
+                        <div class="col-6">
+                            <input type="number" class="form-control" name="MaxBet" 
+                                   placeholder="Max" value="@Model.Filters.MaxBet" step="0.01">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Special Features -->
+                <div class="mb-3">
+                    <label class="form-label"><i class="fas fa-star"></i> Bijzonderheden</label>
+                    
+                    <div class="form-check">
+                        @Html.CheckBox("HasJackpot", Model.Filters.HasJackpot == true, new { @class = "form-check-input", id = "HasJackpot", value = "true" })
+                        <label class="form-check-label" for="HasJackpot">
+                            Heeft Jackpot
+                        </label>
+                    </div>
+                    
+                    <div class="form-check">
+                        @Html.CheckBox("IsNew", Model.Filters.IsNew == true, new { @class = "form-check-input", id = "IsNew", value = "true" })
+                        <label class="form-check-label" for="IsNew">
+                            Alleen Nieuw
+                        </label>
+                    </div>
+                    
+                    <div class="form-check">
+                        @Html.CheckBox("IsPopular", Model.Filters.IsPopular == true, new { @class = "form-check-input", id = "IsPopular", value = "true" })
+                        <label class="form-check-label" for="IsPopular">
+                            Alleen Populair
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Sort -->
+                <div class="mb-3">
+                    <label for="SortBy" class="form-label"><i class="fas fa-sort"></i> Sorteren</label>
+                    <select class="form-select" id="SortBy" name="SortBy">
+                        @{
+                            var _sName = Model.Filters.SortBy == "Name" ? " selected" : string.Empty;
+                            var _sRtp = Model.Filters.SortBy == "RTP" ? " selected" : string.Empty;
+                            var _sPop = Model.Filters.SortBy == "Popular" ? " selected" : string.Empty;
+                            var _sNew = Model.Filters.SortBy == "New" ? " selected" : string.Empty;
+                        }
+                        @Html.Raw($"<option value=\"Name\"{_sName}>Naam A-Z</option>")
+                        @Html.Raw($"<option value=\"RTP\"{_sRtp}>RTP Hoog naar Laag</option>")
+                        @Html.Raw($"<option value=\"Popular\"{_sPop}>Populair</option>")
+                        @Html.Raw($"<option value=\"New\"{_sNew}>Nieuwste</option>")
+                    </select>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-filter"></i> Filter Toepassen
+                    </button>
+                    <a href="@Url.Action("Index", "Games")" class="btn btn-secondary clear-filters">
+                        <i class="fas fa-times"></i> Filters Wissen
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Games Grid -->
+        <div class="col-lg-9">
+            <!-- Results Info -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <p class="text-muted mb-0">
+                        <strong>@Model.TotalGames</strong> spellen gevonden
+                        @if (!string.IsNullOrEmpty(Model.Filters.SearchTerm))
+                        {
+                            <span>voor "<strong>@Model.Filters.SearchTerm</strong>"</span>
+                        }
+                    </p>
+                </div>
+            </div>
+
+            @if (Model.Games.Any())
+            {
+                <!-- Games Grid -->
+                <div class="games-grid">
+                    @foreach (var game in Model.Games)
+                    {
+                        <div class="game-card fade-in">
+                            <img src="@game.ThumbnailUrl" alt="@game.Name" class="game-image" />
+                            <div class="game-info">
+                                <h5 class="game-title">@game.Name</h5>
+                                <p class="game-provider">@game.Provider</p>
+                                
+                                <div class="game-badges mb-2">
+                                    @if (game.IsPopular)
+                                    {
+                                        <span class="badge badge-popular">
+                                            <i class="fas fa-fire"></i> POPULAIR
+                                        </span>
+                                    }
+                                    @if (game.IsNew)
+                                    {
+                                        <span class="badge badge-new">
+                                            <i class="fas fa-star"></i> NIEUW
+                                        </span>
+                                    }
+                                    @if (game.HasJackpot)
+                                    {
+                                        <span class="badge badge-jackpot">
+                                            <i class="fas fa-trophy"></i> JACKPOT
+                                        </span>
+                                    }
+                                </div>
+
+                                <div class="mb-2 small">
+                                    <div class="d-flex justify-content-between text-muted">
+                                        <span><i class="fas fa-chart-line"></i> RTP: @game.RTP.ToString("F1")%</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between text-muted">
+                                        <span>€@game.MinBet - €@game.MaxBet</span>
+                                    </div>
+                                </div>
+
+                                <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id" 
+                                   class="game-play-btn text-decoration-none">
+                                    <i class="fas fa-play"></i> Meer Info
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <!-- Pagination -->
+                @if (Model.TotalPages > 1)
+                {
+                    <nav aria-label="Page navigation" class="mt-5">
+                        <ul class="pagination justify-content-center">
+                            @if (Model.HasPreviousPage)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-route-pageNumber="@(Model.CurrentPage - 1)">
+                                        <i class="fas fa-chevron-left"></i> Vorige
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item disabled">
+                                    <span class="page-link"><i class="fas fa-chevron-left"></i> Vorige</span>
+                                </li>
+                            }
+
+                            @for (int i = 1; i <= Model.TotalPages; i++)
+                            {
+                                @if (i == Model.CurrentPage)
+                                {
+                                    <li class="page-item active">
+                                        <span class="page-link">@i</span>
+                                    </li>
+                                }
+                                else if (i == 1 || i == Model.TotalPages || (i >= Model.CurrentPage - 1 && i <= Model.CurrentPage + 1))
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" asp-route-pageNumber="@i">@i</a>
+                                    </li>
+                                }
+                                else if (i == 2 || i == Model.TotalPages - 1)
+                                {
+                                    <li class="page-item disabled">
+                                        <span class="page-link">...</span>
+                                    </li>
+                                }
+                            }
+
+                            @if (Model.HasNextPage)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-route-pageNumber="@(Model.CurrentPage + 1)">
+                                        Volgende <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item disabled">
+                                    <span class="page-link">Volgende <i class="fas fa-chevron-right"></i></span>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                }
+            }
+            else
+            {
+                <!-- No Games Found -->
+                <div class="text-center py-5">
+                    <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                    <h4>Geen spellen gevonden</h4>
+                    <p class="text-muted mb-3">Probeer een ander zoekterm of filter</p>
+                    <a asp-action="Index" class="btn btn-primary">
+                        <i class="fas fa-redo"></i> Filters Wissen
+                    </a>
+                </div>
+            }
+        </div>
     </div>
 </div>
