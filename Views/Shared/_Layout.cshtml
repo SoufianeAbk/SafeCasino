@@ -72,11 +72,71 @@
                                 <i class="fas fa-headset"></i> Support
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-login" href="#">
-                                <i class="fas fa-sign-in-alt"></i> Login
-                            </a>
-                        </li>
+
+                        <!-- LOGIN SECTION - UPDATED FOR LOGIN SYSTEM -->
+                        @if (Context.Session.GetString("Username") != null)
+                        {
+                            <!-- User is logged in -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-user-circle"></i>
+                                    @{
+                                        var email = Context.Session.GetString("Username");
+                                        var displayName = email.Split('@')[0];
+                                    }
+                                    @displayName
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Account" asp-action="Profile">
+                                            <i class="fas fa-user-circle"></i> Mijn Profiel
+                                        </a>
+                                    </li>
+                                    @if (Context.Session.GetString("UserType") == "Admin")
+                                    {
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Admin" asp-action="Index">
+                                                <i class="fas fa-shield-alt"></i> Admin Panel
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Admin" asp-action="Games">
+                                                <i class="fas fa-gamepad"></i> Games Beheer
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Admin" asp-action="Users">
+                                                <i class="fas fa-users"></i> Users Beheer
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Admin" asp-action="Reports">
+                                                <i class="fas fa-chart-bar"></i> Rapporten
+                                            </a>
+                                        </li>
+                                    }
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <form method="post" action="@Url.Action("Logout", "Account")" style="margin: 0;">
+                                            <button type="submit" class="dropdown-item" style="cursor: pointer; background: none; border: none; text-align: left; width: 100%; padding: 0.5rem 1rem;">
+                                                <i class="fas fa-sign-out-alt"></i> Uitloggen
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <!-- User is not logged in -->
+                            <li class="nav-item">
+                                <a class="nav-link btn-login" asp-controller="Account" asp-action="Login">
+                                    <i class="fas fa-sign-in-alt"></i> Login
+                                </a>
+                            </li>
+                        }
+                        <!-- END LOGIN SECTION -->
                     </ul>
                 </div>
             </div>
