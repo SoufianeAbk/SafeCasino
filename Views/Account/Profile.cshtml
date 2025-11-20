@@ -1,0 +1,174 @@
+﻿@{
+    ViewData["Title"] = "Mijn Profiel";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <i class="fas fa-user-circle fa-5x mb-3" style="color: var(--primary-color);"></i>
+                <h1 class="section-title">Mijn Profiel</h1>
+                <p class="text-muted">Beheer je accountinstellingen</p>
+            </div>
+
+            <!-- Profile Card -->
+            <div class="card" style="background: var(--bg-card); border: none;">
+                <div class="card-body p-5">
+                    <!-- User Info -->
+                    <div class="row g-4 mb-5">
+                        <div class="col-md-6">
+                            <div class="p-4" style="background: var(--bg-dark); border-radius: 12px;">
+                                <small class="text-muted d-block mb-2">
+                                    <i class="fas fa-envelope"></i> Email
+                                </small>
+                                <strong class="d-block text-break">@ViewData["Username"]</strong>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-4" style="background: var(--bg-dark); border-radius: 12px;">
+                                <small class="text-muted d-block mb-2">
+                                    <i class="fas fa-user-tag"></i> Gebruikerstype
+                                </small>
+                                <strong class="d-block">
+                                    @{
+                                        var userType = ViewData["UserType"]?.ToString();
+                                        <span class="badge @(userType == "Admin" ? "bg-warning" : "bg-primary")">
+                                            @(userType == "Admin" ? "Administrator" : "Speler")
+                                        </span>
+                                    }
+                                </strong>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-4" style="background: var(--bg-dark); border-radius: 12px;">
+                                <small class="text-muted d-block mb-2">
+                                    <i class="fas fa-clock"></i> Inlogdatum
+                                </small>
+                                <strong class="d-block">@ViewData["LoginTime"]</strong>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-4" style="background: var(--bg-dark); border-radius: 12px;">
+                                <small class="text-muted d-block mb-2">
+                                    <i class="fas fa-id-card"></i> Account Status
+                                </small>
+                                <strong class="d-block">
+                                    <span class="badge bg-success">Actief</span>
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr style="border-color: var(--border-color);">
+
+                    <!-- Account Settings -->
+                    <h4 class="mb-4">
+                        <i class="fas fa-cog"></i> Accountinstellingen
+                    </h4>
+
+                    <div class="row g-3 mb-5">
+                        <div class="col-12">
+                            <button class="btn btn-primary w-100">
+                                <i class="fas fa-lock"></i> Wachtwoord wijzigen
+                            </button>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-secondary w-100">
+                                <i class="fas fa-shield-alt"></i> Beveiligingsinstellingen
+                            </button>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-secondary w-100">
+                                <i class="fas fa-bell"></i> Meldingsinstellingen
+                            </button>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-secondary w-100">
+                                <i class="fas fa-language"></i> Taalvoorkeur
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Responsible Gaming -->
+                    <h4 class="mb-4">
+                        <i class="fas fa-heart"></i> Verantwoord Spelen
+                    </h4>
+
+                    <div class="row g-3 mb-5">
+                        <div class="col-12">
+                            <div class="p-3" style="background: var(--bg-dark); border-radius: 8px;">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <strong class="d-block">Speellimieten</strong>
+                                        <small class="text-muted">Stel dagelijkse of wekelijkse limieten in</small>
+                                    </div>
+                                    <a href="#" class="btn btn-sm btn-primary">Beheer</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="p-3" style="background: var(--bg-dark); border-radius: 8px;">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <strong class="d-block">Time-out Periode</strong>
+                                        <small class="text-muted">Neem een pauze van je account</small>
+                                    </div>
+                                    <a href="#" class="btn btn-sm btn-primary">Activeer</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="p-3" style="background: var(--bg-dark); border-radius: 8px; border-left: 4px solid var(--danger-color);">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <strong class="d-block">Zelfuitsluiting</strong>
+                                        <small class="text-muted">Permanent je account sluiten</small>
+                                    </div>
+                                    <a href="#" class="btn btn-sm btn-danger">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <hr style="border-color: var(--border-color);">
+
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary w-100">
+                                <i class="fas fa-home"></i> Terug naar Home
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <form method="post" action="@Url.Action("Logout", "Account")" style="display: inline;">
+                                <button type="submit" class="btn btn-danger w-100">
+                                    <i class="fas fa-sign-out-alt"></i> Uitloggen
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Info -->
+            <div class="mt-4">
+                <div class="alert alert-info" role="alert">
+                    <i class="fas fa-lock"></i> <strong>Account Beveiligd</strong>
+                    <p class="mb-0 mt-2 small">
+                        Je account wordt beschermd door SSL-encryptie en geavanceerde beveiligingsmaatregelen.
+                        Je wachtwoord wordt nooit opgeslagen in leesbare vorm.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .badge {
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-weight: 600;
+    }
+</style>

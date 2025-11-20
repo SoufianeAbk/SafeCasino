@@ -1,0 +1,208 @@
+﻿@{
+    ViewData["Title"] = "Admin Login";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-6 mx-auto">
+            <div class="card" style="background: linear-gradient(135deg, var(--bg-card) 0%, #4c1d95 100%); border: 2px solid var(--accent-color);">
+                <div class="card-body p-5">
+                    <!-- Header -->
+                    <div class="text-center mb-5">
+                        <i class="fas fa-shield-alt fa-4x mb-3" style="color: var(--accent-color);"></i>
+                        <h2 class="card-title mb-2">
+                            <i class="fas fa-lock"></i> Admin Panel Login
+                        </h2>
+                        <p class="text-muted">Administratorgebruikers alleen</p>
+                    </div>
+
+                    <!-- Security Warning -->
+                    <div class="alert alert-warning alert-dismissible fade show mb-4" role="alert">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Beveiligde toegang</strong>
+                        <p class="mb-0 mt-2 small">
+                            Dit panel is alleen voor geautoriseerde administrators. Ongeautoriseerde toegang is niet toegestaan.
+                        </p>
+                    </div>
+
+                    <!-- Error Message -->
+                    @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"]?.ToString()))
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-circle"></i> @ViewData["ErrorMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+
+                    <!-- Login Form -->
+                    <form method="post" action="@Url.Action("AdminLogin", "Account")">
+                        <!-- Username/Email -->
+                        <div class="mb-4">
+                            <label for="username" class="form-label">
+                                <i class="fas fa-user-shield"></i> Admin Gebruikersnaam
+                            </label>
+                            <input type="email"
+                                   class="form-control form-control-lg"
+                                   id="username"
+                                   name="username"
+                                   placeholder="casinoadmin@ehb.be"
+                                   required
+                                   autocomplete="email"
+                                   value="casinoadmin@ehb.be">
+                            <small class="text-muted mt-1 d-block">
+                                <i class="fas fa-info-circle"></i> Demo: casinoadmin@ehb.be
+                            </small>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-4">
+                            <label for="password" class="form-label">
+                                <i class="fas fa-key"></i> Wachtwoord
+                            </label>
+                            <input type="password"
+                                   class="form-control form-control-lg"
+                                   id="password"
+                                   name="password"
+                                   placeholder="Voer je wachtwoord in"
+                                   required
+                                   autocomplete="current-password"
+                                   value="Admin!321">
+                            <small class="text-muted mt-1 d-block">
+                                <i class="fas fa-info-circle"></i> Demo: Admin!321
+                            </small>
+                        </div>
+
+                        <!-- Two Factor (Optional) -->
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input"
+                                       type="checkbox"
+                                       id="twoFactor"
+                                       name="twoFactor"
+                                       disabled>
+                                <label class="form-check-label" for="twoFactor">
+                                    Two-Factor Authenticatie inschakelen
+                                    <span class="badge bg-secondary ms-2">Binnenkort beschikbaar</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Login Button -->
+                        <button type="submit" class="btn btn-warning btn-lg w-100 mb-3">
+                            <i class="fas fa-sign-in-alt"></i> Admin Login
+                        </button>
+                    </form>
+
+                    <!-- Divider -->
+                    <div class="text-center mb-4">
+                        <small class="text-muted">
+                            <span style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+                                Of
+                            </span>
+                        </small>
+                    </div>
+
+                    <!-- User Login Link -->
+                    <div class="text-center mb-4">
+                        <a href="@Url.Action("Login", "Account")" class="btn btn-secondary btn-lg w-100">
+                            <i class="fas fa-user"></i> Gebruiker Login
+                        </a>
+                    </div>
+
+                    <!-- Footer Links -->
+                    <div class="text-center">
+                        <small class="text-muted">
+                            <a href="@Url.Action("Index", "Home")" class="text-muted text-decoration-none">
+                                <i class="fas fa-arrow-left"></i> Terug naar Home
+                            </a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Help Section -->
+            <div class="mt-4">
+                <div class="card" style="background: var(--bg-card); border: 2px solid var(--accent-color);">
+                    <div class="card-body">
+                        <h6 class="card-title mb-3">
+                            <i class="fas fa-tools" style="color: var(--accent-color);"></i> Admin Resources
+                        </h6>
+                        <ul class="list-unstyled small">
+                            <li class="mb-2">
+                                <i class="fas fa-circle-notch" style="color: var(--success-color);"></i>
+                                <strong>Status:</strong> Admin panel operationeel
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-database"></i>
+                                <strong>Database:</strong> Verbonden
+                            </li>
+                            <li>
+                                <i class="fas fa-headset"></i>
+                                <a href="@Url.Action("Index", "Support")" class="text-decoration-none text-muted">
+                                    Support nodig?
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Access Log Info -->
+    <div class="row mt-5">
+        <div class="col-lg-6 mx-auto">
+            <div class="alert alert-info" role="alert">
+                <i class="fas fa-shield-alt"></i> <strong>Beveiligde Toegang</strong>
+                <p class="mb-0 mt-2 small">
+                    Alle admin activiteiten worden gelogd. Login pogingen worden gemonitord voor veiligheid.
+                    <br><br>
+                    <strong>Laatste login:</strong> Geen record
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control, .form-control-lg {
+        background: var(--bg-dark);
+        border: 2px solid var(--border-color);
+        color: var(--text-light);
+    }
+
+        .form-control:focus, .form-control-lg:focus {
+            background: var(--bg-dark);
+            border-color: var(--accent-color);
+            color: var(--text-light);
+            box-shadow: 0 0 0 0.2rem rgba(245, 158, 11, 0.25);
+        }
+
+    .form-label {
+        color: var(--text-light);
+        font-weight: 600;
+    }
+
+    .form-check-input {
+        background: var(--bg-dark);
+        border: 2px solid var(--border-color);
+    }
+
+        .form-check-input:checked {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+    .btn-warning {
+        background: var(--accent-color);
+        border: none;
+        color: var(--bg-darker);
+        font-weight: 600;
+    }
+
+        .btn-warning:hover {
+            background: #f59e0b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+        }
+</style>
