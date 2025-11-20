@@ -4,6 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IGameApiService, GameApiService>();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddSingleton<ILocalizationService, LocalizationService>();
 builder.Services.AddMemoryCache();
 
@@ -12,6 +13,7 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(30);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
+    options.Cookie.Name = "SafeCasino.Session";
 });
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
