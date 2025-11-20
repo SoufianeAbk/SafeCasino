@@ -16,37 +16,32 @@ namespace SafeCasino.Services
             var games = new List<Game>();
             var providers = new[] { "NetEnt", "Microgaming", "PlayTech", "Evolution", "Pragmatic Play", "Novomatic" };
 
-            // 5 categories with 10 games each = 50 games total
+            // 5 categories with 5 games each = 25 games total
             var gamesByCategory = new Dictionary<GameCategory, string[]>
             {
                 [GameCategory.Slots] = new[]
                 {
-                    "Book of Ra", "Starburst", "Gonzo's Quest", "Mega Moolah", "Dead or Alive",
-                    "Bonanza", "Sweet Bonanza", "Gates of Olympus", "Wolf Gold", "Great Rhino"
+                    "Book of Ra", "Starburst", "Gonzo's Quest", "Mega Moolah", "Dead or Alive"
                 },
                 [GameCategory.Roulette] = new[]
                 {
                     "European Roulette", "American Roulette", "French Roulette", "Lightning Roulette",
-                    "Immersive Roulette", "Speed Roulette", "Auto Roulette", "Double Ball Roulette",
-                    "Mini Roulette", "Multi-Wheel Roulette"
+                    "Immersive Roulette"
                 },
                 [GameCategory.Blackjack] = new[]
                 {
                     "Classic Blackjack", "Blackjack Pro", "Perfect Blackjack", "VIP Blackjack",
-                    "Blackjack Switch", "Spanish 21", "Pontoon", "Double Exposure Blackjack",
-                    "Atlantic City Blackjack", "Vegas Strip Blackjack"
+                    "Blackjack Switch"
                 },
                 [GameCategory.LiveCasino] = new[]
                 {
                     "Live Roulette", "Live Blackjack", "Live Baccarat", "Live Dream Catcher",
-                    "Live Monopoly", "Live Crazy Time", "Live Lightning Dice", "Live Deal or No Deal",
-                    "Live Mega Ball", "Live Dragon Tiger"
+                    "Live Monopoly"
                 },
                 [GameCategory.Jackpot] = new[]
                 {
                     "Mega Fortune", "Hall of Gods", "Arabian Nights", "Mega Moolah Isis",
-                    "Major Millions", "King Cashalot", "Treasure Nile", "Cash Splash",
-                    "Fruit Fiesta", "SupaJax"
+                    "Major Millions"
                 }
             };
 
@@ -71,8 +66,8 @@ namespace SafeCasino.Services
                         MaxBet = category.Key == GameCategory.LiveCasino ? 1000m :
                                 category.Key == GameCategory.Jackpot ? 200m : 500m,
                         RTP = 94m + (decimal)(Random.Shared.NextDouble() * 4),
-                        IsPopular = i < 3, // First 3 games in each category are popular
-                        IsNew = i >= 7, // Last 3 games in each category are new
+                        IsPopular = i < 2, // First 2 games in each category are popular
+                        IsNew = i >= 3, // Last 2 games in each category are new
                         HasJackpot = category.Key == GameCategory.Jackpot,
                         AddedDate = DateTime.Now.AddDays(-Random.Shared.Next(365)),
                         Tags = category.Key switch
