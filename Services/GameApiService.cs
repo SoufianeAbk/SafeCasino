@@ -49,16 +49,21 @@ namespace SafeCasino.Services
 
             foreach (var category in gamesByCategory)
             {
+                var categoryFolder = category.Key.ToString().ToLower();
+
                 for (int i = 0; i < category.Value.Length; i++)
                 {
                     var name = category.Value[i];
+                    // Converteer game naam naar filename (lowercase, spaties naar hyphens)
+                    var imageFilename = name.ToLower().Replace(" ", "-").Replace("'", "");
+
                     games.Add(new Game
                     {
                         Id = id++,
                         Name = name,
                         Description = $"Speel {name} en ervaar de spanning!",
                         Provider = providers[Random.Shared.Next(providers.Length)],
-                        ThumbnailUrl = $"https://picsum.photos/seed/{id}/400/300",
+                        ThumbnailUrl = $"/images/games/{categoryFolder}/{imageFilename}.jpg",
                         GameUrl = $"/play/{id}",
                         Category = category.Key,
                         MinBet = category.Key == GameCategory.Slots ? 0.10m :
