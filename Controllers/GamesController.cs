@@ -123,6 +123,37 @@ namespace SafeCasino.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Play(int id)
+        {
+            try
+            {
+                var game = await _gameApiService.GetGameByIdAsync(id);
+                if (game == null)
+                {
+                    return NotFound();
+                }
+
+                var language = Request.Cookies["language"] ?? "nl";
+                ViewData["Translations"] = _localizationService.GetAllStrings(language);
+                ViewData["CurrentLanguage"] = language;
+
+                var viewModel = new GameDetailViewModel
+                {
+                    Game = game,
+                    CurrentLanguage = language,
+                    IsDemo = true
+                };
+
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error loading game for play: {GameId}", id);
+                return View("Error");
+            }
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Popular()
         {
             try
@@ -195,15 +226,6 @@ namespace SafeCasino.Controllers
                 _logger.LogError(ex, "Error loading jackpot games");
                 return View("Error");
             }
-        }
-
-        [HttpPost]
-        public IActionResult Play(int id, bool demo = true)
-        {
-            // In een echte applicatie zou je hier naar het spel navigeren
-            // Voor nu redirect naar details
-            TempData["PlayMode"] = demo ? "demo" : "real";
-            return RedirectToAction(nameof(Details), new { id });
         }
     }
 }
