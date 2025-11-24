@@ -96,12 +96,9 @@
                     }
 
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary btn-lg" onclick="alert('Demo modus wordt gestart...')">
+                        <a href="@Url.Action("Play", "Games", new { id = Model.Game.Id })" class="btn btn-primary btn-lg">
                             <i class="fas fa-play"></i> Speel Demo
-                        </button>
-                        <button class="btn btn-success btn-lg" onclick="alert('Login om met echt geld te spelen')">
-                            <i class="fas fa-dollar-sign"></i> Speel met Echt Geld
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
