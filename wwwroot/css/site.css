@@ -517,6 +517,29 @@ body {
         margin-right: 1rem;
     }
 
+    .contact-method h5 {
+        color: var(--text-light) !important;
+        font-weight: 700;
+    }
+
+    .contact-method p {
+        color: var(--text-light) !important;
+    }
+
+    .contact-method small {
+        color: var(--text-light) !important;
+    }
+
+    .contact-method a {
+        color: var(--primary-color) !important;
+        text-decoration: none;
+    }
+
+        .contact-method a:hover {
+            color: var(--secondary-color) !important;
+            text-decoration: underline;
+        }
+
 /* ==================== BREADCRUMB ==================== */
 .breadcrumb {
     background: rgba(45, 27, 78, 0.4);
