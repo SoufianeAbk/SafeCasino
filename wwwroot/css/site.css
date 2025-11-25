@@ -543,6 +543,49 @@ body {
     }
 }
 
+/* Breadcrumb */
+.breadcrumb {
+    background: rgba(45, 27, 78, 0.4);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+}
+
+.breadcrumb-item {
+    color: var(--text-light);
+}
+
+    .breadcrumb-item a {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        .breadcrumb-item a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+    .breadcrumb-item.active {
+        color: var(--text-gray);
+    }
+
+/* Card Styling */
+.card {
+    color: var(--text-light) !important;
+}
+
+.card-title {
+    color: var(--text-light) !important;
+}
+
+.card-text {
+    color: var(--text-light) !important;
+}
+
+.card-body {
+    color: var(--text-light) !important;
+}
+
 /* Animations */
 .fade-in {
     animation: fadeIn 0.5s ease-out;
@@ -608,7 +651,7 @@ body {
     gap: 1.5rem;
     flex-wrap: wrap;
     align-items: center;
-    color: var(--text-gray);
+    color: var(--text-light);
     font-size: 0.95rem;
 }
 
@@ -616,6 +659,7 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    color: var(--text-light) !important;
 }
 
 .separator {
@@ -684,7 +728,7 @@ body {
 
 .control-label {
     font-size: 0.85rem;
-    color: var(--text-gray);
+    color: var(--text-light);
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 0.5px;
@@ -748,7 +792,7 @@ body {
 
 .stat-label {
     font-size: 0.75rem;
-    color: var(--text-gray);
+    color: var(--text-light);
     text-transform: uppercase;
 }
 
@@ -825,6 +869,7 @@ body {
     font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
+    color: var(--text-light);
 }
 
 .message-amount {

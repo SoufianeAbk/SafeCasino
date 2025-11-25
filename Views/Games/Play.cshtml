@@ -1,470 +1,268 @@
-﻿@model SafeCasino.ViewModels.GameDetailViewModel
+﻿@model SafeCasino.ViewModels.GameListViewModel
 @{
-    ViewData["Title"] = "Speel " + Model.Game.Name;
+    ViewData["Title"] = "Spellen";
 }
 
-<div class="game-play-container">
-    <div class="container-lg">
-        <!-- Game Header -->
-        <div class="game-header mb-4">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <div class="game-header-content">
-                        <h1 class="game-title mb-2">
-                            <i class="fas fa-gamepad"></i> @Model.Game.Name
-                            <span class="badge bg-info ms-2">
-                                <i class="fas fa-vial"></i> Demo Mode
-                            </span>
-                        </h1>
-                        <div class="game-info-bar">
-                            <span class="info-item">
-                                <i class="fas fa-coins"></i> <strong>Speelgeld:</strong> <span id="game-balance" class="balance-amount">€1.000,00</span>
-                            </span>
-                            <span class="separator">•</span>
-                            <span class="info-item">
-                                <i class="fas fa-chart-line"></i> <strong>RTP:</strong> @Model.Game.RTP.ToString("F1")%
-                            </span>
-                            <span class="separator">•</span>
-                            <span class="info-item">
-                                <i class="fas fa-building"></i> <strong>Provider:</strong> @Model.Game.Provider
-                            </span>
+<div class="container py-5">
+    <!-- Games Header -->
+    <div class="mb-5">
+        <h1 class="section-title mb-3">
+            <i class="fas fa-gamepad"></i> Casino Spellen
+        </h1>
+        <p style="color: var(--text-light);">Ontdek meer dan 50 spannende spellen</p>
+    </div>
+
+    <div class="row g-4">
+        <!-- Filters Sidebar -->
+        <div class="col-lg-3">
+            <form method="get" class="filter-section filter-form">
+                <!-- Search -->
+                <div class="mb-3">
+                    <label for="SearchTerm" class="form-label" style="color: var(--text-light);"><i class="fas fa-search"></i> Zoeken</label>
+                    <input type="text" class="form-control" id="SearchTerm" name="SearchTerm"
+                           placeholder="Zoek spellen..." value="@Model.Filters.SearchTerm">
+                </div>
+
+                <!-- Category -->
+                <div class="mb-3">
+                    <label for="Category" class="form-label" style="color: var(--text-light);"><i class="fas fa-th-large"></i> Categorie</label>
+                    <select class="form-select" id="Category" name="Category">
+                        <option value="">Alle Categorieën</option>
+                        @if (Model.AvailableCategories.Any())
+                        {
+                            @foreach (var category in Model.AvailableCategories)
+                            {
+                                var _catSelected = Model.Filters.Category == category ? " selected" : string.Empty;
+                                @Html.Raw($"<option value=\"{category}\"{_catSelected}>{category}</option>")
+                            }
+                        }
+                    </select>
+                </div>
+
+                <!-- Provider -->
+                <div class="mb-3">
+                    <label for="Provider" class="form-label" style="color: var(--text-light);"><i class="fas fa-building"></i> Provider</label>
+                    <select class="form-select" id="Provider" name="Provider">
+                        <option value="">Alle Providers</option>
+                        @if (Model.AvailableProviders.Any())
+                        {
+                            @foreach (var provider in Model.AvailableProviders)
+                            {
+                                var _provSelected = Model.Filters.Provider == provider ? " selected" : string.Empty;
+                                @Html.Raw($"<option value=\"{provider}\"{_provSelected}>{provider}</option>")
+                            }
+                        }
+                    </select>
+                </div>
+
+                <!-- Bet Range -->
+                <div class="mb-3">
+                    <label class="form-label" style="color: var(--text-light);"><i class="fas fa-coins"></i> Inzet Bereik</label>
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <input type="number" class="form-control" name="MinBet"
+                                   placeholder="Min" value="@Model.Filters.MinBet" step="0.01">
+                        </div>
+                        <div class="col-6">
+                            <input type="number" class="form-control" name="MaxBet"
+                                   placeholder="Max" value="@Model.Filters.MaxBet" step="0.01">
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 text-md-end">
-                    <a asp-controller="Games" asp-action="Details" asp-route-id="@Model.Game.Id" class="btn btn-outline-light btn-lg">
-                        <i class="fas fa-arrow-left"></i> Terug
+
+                <!-- Special Features -->
+                <div class="mb-3">
+                    <label class="form-label" style="color: var(--text-light);"><i class="fas fa-star"></i> Bijzonderheden</label>
+
+                    <div class="form-check">
+                        @Html.CheckBox("HasJackpot", Model.Filters.HasJackpot == true, new { @class = "form-check-input", id = "HasJackpot", value = "true" })
+                        <label class="form-check-label" for="HasJackpot" style="color: var(--text-light);">
+                            Heeft Jackpot
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        @Html.CheckBox("IsNew", Model.Filters.IsNew == true, new { @class = "form-check-input", id = "IsNew", value = "true" })
+                        <label class="form-check-label" for="IsNew" style="color: var(--text-light);">
+                            Alleen Nieuw
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        @Html.CheckBox("IsPopular", Model.Filters.IsPopular == true, new { @class = "form-check-input", id = "IsPopular", value = "true" })
+                        <label class="form-check-label" for="IsPopular" style="color: var(--text-light);">
+                            Alleen Populair
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Sort -->
+                <div class="mb-3">
+                    <label for="SortBy" class="form-label" style="color: var(--text-light);"><i class="fas fa-sort"></i> Sorteren</label>
+                    <select class="form-select" id="SortBy" name="SortBy">
+                        @{
+                            var _sName = Model.Filters.SortBy == "Name" ? " selected" : string.Empty;
+                            var _sRtp = Model.Filters.SortBy == "RTP" ? " selected" : string.Empty;
+                            var _sPop = Model.Filters.SortBy == "Popular" ? " selected" : string.Empty;
+                            var _sNew = Model.Filters.SortBy == "New" ? " selected" : string.Empty;
+                        }
+                        @Html.Raw($"<option value=\"Name\"{_sName}>Naam A-Z</option>")
+                        @Html.Raw($"<option value=\"RTP\"{_sRtp}>RTP Hoog naar Laag</option>")
+                        @Html.Raw($"<option value=\"Popular\"{_sPop}>Populair</option>")
+                        @Html.Raw($"<option value=\"New\"{_sNew}>Nieuwste</option>")
+                    </select>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-filter"></i> Filter Toepassen
+                    </button>
+                    <a href="@Url.Action("Index", "Games")" class="btn btn-secondary clear-filters">
+                        <i class="fas fa-times"></i> Filters Wissen
                     </a>
                 </div>
-            </div>
+            </form>
         </div>
 
-        <!-- Game Main Container -->
-        <div class="game-main-container">
-            <!-- Game Viewport -->
-            <div class="game-viewport">
-                <div id="game-container" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-                    <div style="text-align: center; color: var(--text-gray);">
-                        <div class="spinner-border text-primary mb-3" role="status">
-                            <span class="visually-hidden">Laadt...</span>
+        <!-- Games Grid -->
+        <div class="col-lg-9">
+            <!-- Results Info -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <p style="color: var(--text-light); margin-bottom: 0;">
+                        <strong>@Model.TotalGames</strong> spellen gevonden
+                        @if (!string.IsNullOrEmpty(Model.Filters.SearchTerm))
+                        {
+                            <span>voor "<strong>@Model.Filters.SearchTerm</strong>"</span>
+                        }
+                    </p>
+                </div>
+            </div>
+
+            @if (Model.Games.Any())
+            {
+                <!-- Games Grid -->
+                <div class="games-grid">
+                    @foreach (var game in Model.Games)
+                    {
+                        <div class="game-card fade-in">
+                            <img src="@game.ThumbnailUrl" alt="@game.Name" class="game-image" />
+                            <div class="game-info">
+                                <h5 class="game-title">@game.Name</h5>
+                                <p class="game-provider">@game.Provider</p>
+
+                                <div class="game-badges mb-2">
+                                    @if (game.IsPopular)
+                                    {
+                                        <span class="badge badge-popular">
+                                            <i class="fas fa-fire"></i> POPULAIR
+                                        </span>
+                                    }
+                                    @if (game.IsNew)
+                                    {
+                                        <span class="badge badge-new">
+                                            <i class="fas fa-star"></i> NIEUW
+                                        </span>
+                                    }
+                                    @if (game.HasJackpot)
+                                    {
+                                        <span class="badge badge-jackpot">
+                                            <i class="fas fa-trophy"></i> JACKPOT
+                                        </span>
+                                    }
+                                </div>
+
+                                <div class="mb-2 small">
+                                    <div class="d-flex justify-content-between" style="color: var(--text-light);">
+                                        <span><i class="fas fa-chart-line"></i> RTP: @game.RTP.ToString("F1")%</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between" style="color: var(--text-light);">
+                                        <span>€@game.MinBet - €@game.MaxBet</span>
+                                    </div>
+                                </div>
+
+                                <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id"
+                                   class="game-play-btn text-decoration-none">
+                                    <i class="fas fa-play"></i> Meer Info
+                                </a>
+                            </div>
                         </div>
-                        <p style="font-size: 1.1rem;">Game wordt geladen...</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Game Controls Panel -->
-            <div class="game-controls-panel">
-                <!-- Saldo -->
-                <div class="control-section">
-                    <span class="control-label"><i class="fas fa-wallet"></i> Saldo</span>
-                    <div class="stat-display">
-                        <div class="stat-label">BESCHIKBAAR</div>
-                        <div class="stat-value" id="balance-display">€1.000</div>
-                    </div>
+                    }
                 </div>
 
-                <!-- Huidige Inzet -->
-                <div class="control-section">
-                    <span class="control-label"><i class="fas fa-coins"></i> Inzet</span>
-                    <div class="bet-input-group">
-                        <span style="display: flex; align-items: center; color: var(--text-gray); padding: 0 0.5rem;">€</span>
-                        <input type="number" id="bet-amount" value="10" min="0.10" step="0.10" max="1000">
-                    </div>
-                    <div class="bet-preset-buttons">
-                        <button class="bet-preset-btn" onclick="setBet(1)">€1</button>
-                        <button class="bet-preset-btn" onclick="setBet(5)">€5</button>
-                        <button class="bet-preset-btn" onclick="setBet(10)">€10</button>
-                        <button class="bet-preset-btn" onclick="setBet(50)">€50</button>
-                    </div>
-                </div>
+                <!-- Pagination -->
+                @if (Model.TotalPages > 1)
+                {
+                    <nav aria-label="Page navigation" class="mt-5">
+                        <ul class="pagination justify-content-center">
+                            @if (Model.HasPreviousPage)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-route-pageNumber="@(Model.CurrentPage - 1)">
+                                        <i class="fas fa-chevron-left"></i> Vorige
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item disabled">
+                                    <span class="page-link"><i class="fas fa-chevron-left"></i> Vorige</span>
+                                </li>
+                            }
 
-                <!-- Huidige Winst -->
-                <div class="control-section">
-                    <span class="control-label"><i class="fas fa-trophy"></i> Huidige Winst</span>
-                    <div class="stat-display">
-                        <div class="stat-label">WINST</div>
-                        <div class="stat-value" id="win-display">€0,00</div>
-                    </div>
-                </div>
+                            @for (int i = 1; i <= Model.TotalPages; i++)
+                            {
+                                @if (i == Model.CurrentPage)
+                                {
+                                    <li class="page-item active">
+                                        <span class="page-link">@i</span>
+                                    </li>
+                                }
+                                else if (i == 1 || i == Model.TotalPages || (i >= Model.CurrentPage - 1 && i <= Model.CurrentPage + 1))
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" asp-route-pageNumber="@i">@i</a>
+                                    </li>
+                                }
+                                else if (i == 2 || i == Model.TotalPages - 1)
+                                {
+                                    <li class="page-item disabled">
+                                        <span class="page-link">...</span>
+                                    </li>
+                                }
+                            }
 
-                <!-- Play Button -->
-                <div class="control-section">
-                    <button id="play-btn" class="btn-play">
-                        <i class="fas fa-play"></i> Start Spel
-                    </button>
+                            @if (Model.HasNextPage)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-route-pageNumber="@(Model.CurrentPage + 1)">
+                                        Volgende <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item disabled">
+                                    <span class="page-link">Volgende <i class="fas fa-chevron-right"></i></span>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                }
+            }
+            else
+            {
+                <!-- No Games Found -->
+                <div class="text-center py-5">
+                    <i class="fas fa-inbox fa-3x" style="color: var(--text-gray); margin-bottom: 1rem; display: block;"></i>
+                    <h4 style="color: var(--text-light);">Geen spellen gevonden</h4>
+                    <p style="color: var(--text-light); margin-bottom: 1rem;">Probeer een ander zoekterm of filter</p>
+                    <a asp-action="Index" class="btn btn-primary">
+                        <i class="fas fa-redo"></i> Filters Wissen
+                    </a>
                 </div>
-
-                <!-- Game Stats -->
-                <div class="control-section" style="border-top: 2px solid var(--border-color); padding-top: 1rem;">
-                    <span class="control-label">Game Info</span>
-                    <div style="font-size: 0.9rem; color: var(--text-gray); line-height: 1.8;">
-                        <div><strong>Categorie:</strong> @Model.Game.Category</div>
-                        <div><strong>Min Inzet:</strong> €@Model.Game.MinBet</div>
-                        <div><strong>Max Inzet:</strong> €@Model.Game.MaxBet</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Demo Notice -->
-        <div class="demo-notice">
-            <i class="fas fa-exclamation-triangle"></i> Dit is een demo versie met virtueel geld.
-            Gokken kan verslavend zijn - speel altijd verantwoord!
+            }
         </div>
     </div>
 </div>
-
-<!-- Game Message Popup -->
-<div id="game-message" class="game-message">
-    <div class="message-icon" id="message-icon">🎉</div>
-    <div class="message-text" id="message-text">GEWONNEN!</div>
-    <div class="message-amount" id="message-amount">+€100,00</div>
-</div>
-
-<script>
-    let gameBalance = 1000;
-    let currentBet = 10;
-    let gameActive = false;
-    const gameCategory = "@Model.Game.Category.ToString().ToLower()";
-
-    // Utility Functions
-    function setBet(amount) {
-        document.getElementById('bet-amount').value = amount;
-        updateDisplay();
-    }
-
-    function updateDisplay() {
-        const balance = parseFloat(document.getElementById('bet-amount').value || 0) || currentBet;
-        document.getElementById('balance-display').textContent = '€' + gameBalance.toFixed(2);
-        document.getElementById('game-balance').textContent = '€' + gameBalance.toFixed(2);
-        currentBet = balance;
-    }
-
-    function showMessage(icon, title, amount) {
-        const msgElement = document.getElementById('game-message');
-        document.getElementById('message-icon').textContent = icon;
-        document.getElementById('message-text').textContent = title;
-        document.getElementById('message-amount').textContent = (amount >= 0 ? '+' : '') + '€' + Math.abs(amount).toFixed(2);
-        msgElement.classList.add('show');
-
-        setTimeout(() => {
-            msgElement.classList.remove('show');
-        }, 3000);
-    }
-
-    function updateWinDisplay(amount) {
-        document.getElementById('win-display').textContent = '€' + amount.toFixed(2);
-    }
-
-    // Initialize Game
-    document.addEventListener('DOMContentLoaded', function() {
-        const playBtn = document.getElementById('play-btn');
-        const betInput = document.getElementById('bet-amount');
-
-        playBtn.addEventListener('click', startGame);
-        betInput.addEventListener('change', updateDisplay);
-
-        loadGameByCategory();
-        updateDisplay();
-    });
-
-    function loadGameByCategory() {
-        switch(gameCategory) {
-            case 'slots':
-                loadSlotsGame();
-                break;
-            case 'roulette':
-                loadRouletteGame();
-                break;
-            case 'blackjack':
-                loadBlackjackGame();
-                break;
-            case 'live casino':
-            case 'livecasino':
-                loadPokerGame();
-                break;
-            case 'jackpot':
-                loadJackpotGame();
-                break;
-            default:
-                loadSlotsGame();
-        }
-    }
-
-    function startGame() {
-        const bet = parseFloat(document.getElementById('bet-amount').value);
-
-        if (bet > gameBalance) {
-            alert('Onvoldoende saldo!');
-            return;
-        }
-
-        if (bet <= 0) {
-            alert('Voer een geldige inzet in!');
-            return;
-        }
-
-        gameBalance -= bet;
-        currentBet = bet;
-        gameActive = true;
-        triggerGameAction();
-    }
-
-    function triggerGameAction() {
-        // Wordt geïmplementeerd in specifieke game functions
-    }
-
-    // ==================== SLOTS GAME ====================
-    function loadSlotsGame() {
-        const container = document.getElementById('game-container');
-        const symbols = ['🍎', '🍊', '🍋', '🍇', '💎', '👑', '⭐', '7️⃣'];
-        let spinning = false;
-
-        container.innerHTML = `
-            <div style="text-align: center; width: 100%;">
-                <div style="display: flex; justify-content: center; gap: 20px; margin: 20px 0; perspective: 1000px;">
-                    <div class="reel" id="reel-0">${symbols[0]}</div>
-                    <div class="reel" id="reel-1">${symbols[1]}</div>
-                    <div class="reel" id="reel-2">${symbols[2]}</div>
-                </div>
-                <p style="font-size: 1.1rem; margin-top: 20px; color: var(--text-gray);">Klik op Start Spel om te spelen</p>
-            </div>
-        `;
-
-        window.triggerGameAction = function() {
-            if (spinning) return;
-            spinning = true;
-
-            const reels = document.querySelectorAll('.reel');
-            reels.forEach(reel => reel.classList.add('spinning'));
-
-            let spins = 0;
-            const spinInterval = setInterval(() => {
-                reels.forEach(reel => {
-                    reel.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-                });
-                spins++;
-
-                if (spins > 25) {
-                    clearInterval(spinInterval);
-                    reels.forEach(reel => reel.classList.remove('spinning'));
-
-                    const finalSymbols = [
-                        symbols[Math.floor(Math.random() * symbols.length)],
-                        symbols[Math.floor(Math.random() * symbols.length)],
-                        symbols[Math.floor(Math.random() * symbols.length)]
-                    ];
-
-                    reels.forEach((reel, idx) => {
-                        reel.textContent = finalSymbols[idx];
-                    });
-
-                    const allSame = finalSymbols[0] === finalSymbols[1] && finalSymbols[1] === finalSymbols[2];
-                    const twoSame = (finalSymbols[0] === finalSymbols[1] || finalSymbols[1] === finalSymbols[2] || finalSymbols[0] === finalSymbols[2]);
-
-                    if (allSame) {
-                        const multiplier = [5, 10, 20, 50, 100, 200, 300, 500][Math.floor(Math.random() * 8)];
-                        const winAmount = currentBet * multiplier;
-                        gameBalance += winAmount;
-                        updateWinDisplay(winAmount);
-                        showMessage('🎉', 'JACKPOT!', winAmount);
-                    } else if (twoSame) {
-                        const winAmount = currentBet * 3;
-                        gameBalance += winAmount;
-                        updateWinDisplay(winAmount);
-                        showMessage('✨', 'WINST!', winAmount);
-                    } else {
-                        updateWinDisplay(0);
-                        showMessage('😢', 'Verloren', 0);
-                    }
-
-                    updateDisplay();
-                    spinning = false;
-                }
-            }, 100);
-        };
-    }
-
-    // ==================== ROULETTE GAME ====================
-    function loadRouletteGame() {
-        const container = document.getElementById('game-container');
-        const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
-        const numbers = Array.from({length: 37}, (_, i) => i);
-
-        container.innerHTML = `
-            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column;">
-                <div style="position: relative; width: 280px; height: 280px; margin-bottom: 20px;">
-                    <div id="roulette-wheel" style="width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(${numbers.map((n, i) => {
-                        const color = n === 0 ? '#2d5016' : (redNumbers.includes(n) ? '#e74c3c' : '#1a1a1a');
-                        return color + ' ' + (i / 37) * 100 + '% ' + ((i + 1) / 37) * 100 + '%';
-                    }).join(', ')}); border: 8px solid var(--accent-color); position: relative; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 0 0 30px rgba(245, 158, 11, 0.5), inset 0 0 20px rgba(0,0,0,0.5);">
-                        🎯
-                    </div>
-                    <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: var(--accent-color); border-radius: 50%; border: 2px solid #fff; z-index: 10; box-shadow: 0 0 10px var(--accent-color);"></div>
-                </div>
-                <div style="text-align: center;">
-                    <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0 0 5px 0;">Winnend Nummer</p>
-                    <h2 id="winning-number" style="color: var(--accent-color); font-size: 2.5rem; margin: 0;">-</h2>
-                </div>
-            </div>
-        `;
-
-        window.triggerGameAction = function() {
-            const wheel = document.getElementById('roulette-wheel');
-            const winningNumber = Math.floor(Math.random() * 37);
-            const isRed = redNumbers.includes(winningNumber);
-
-            const rotations = 8 + Math.random() * 3;
-            const finalRotation = (winningNumber / 37) * 360;
-
-            wheel.style.transition = 'transform 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            wheel.style.transform = `rotate(${rotations * 360 + finalRotation}deg)`;
-
-            setTimeout(() => {
-                document.getElementById('winning-number').textContent = winningNumber;
-
-                const isWin = Math.random() > 0.6;
-                if (isWin) {
-                    const payout = currentBet * 2;
-                    gameBalance += payout;
-                    updateWinDisplay(payout);
-                    showMessage('🎉', 'VELD GERAAKT!', payout);
-                } else {
-                    updateWinDisplay(0);
-                    showMessage('😢', 'Verloren', 0);
-                }
-                updateDisplay();
-            }, 2500);
-        };
-    }
-
-    // ==================== BLACKJACK GAME ====================
-    function loadBlackjackGame() {
-        const container = document.getElementById('game-container');
-        const suits = ['♠', '♥', '♦', '♣'];
-        const values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-
-        container.innerHTML = `
-            <div style="width: 100%; display: flex; justify-content: space-around; text-align: center;">
-                <div>
-                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 10px;">DEALER</p>
-                    <div id="dealer-cards" style="display: flex; justify-content: center; gap: 5px; margin-bottom: 10px; min-height: 100px;"></div>
-                    <p style="color: var(--accent-color); font-size: 1.3rem; font-weight: bold;">Total: <span id="dealer-total">?</span></p>
-                </div>
-                <div style="border-left: 2px solid var(--border-color); padding-left: 20px;">
-                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 10px;">JOUW KAARTEN</p>
-                    <div id="player-cards" style="display: flex; justify-content: center; gap: 5px; margin-bottom: 10px; min-height: 100px;"></div>
-                    <p style="color: var(--success-color); font-size: 1.3rem; font-weight: bold;">Total: <span id="player-total">0</span></p>
-                </div>
-            </div>
-        `;
-
-        window.triggerGameAction = function() {
-            const playerTotal = Math.floor(Math.random() * 10) + 15;
-            const dealerTotal = Math.floor(Math.random() * 10) + 16;
-
-            document.getElementById('player-total').textContent = playerTotal;
-            document.getElementById('dealer-total').textContent = dealerTotal;
-
-            const playerWins = playerTotal > 21 ? false : (dealerTotal > 21 || playerTotal > dealerTotal);
-
-            setTimeout(() => {
-                if (playerTotal > 21) {
-                    showMessage('😢', 'BUST! Verloren', 0);
-                    updateWinDisplay(0);
-                } else if (playerWins) {
-                    const winAmount = currentBet * 2;
-                    gameBalance += winAmount;
-                    updateWinDisplay(winAmount);
-                    showMessage('🎉', 'JIJ WINT!', winAmount);
-                } else {
-                    updateWinDisplay(0);
-                    showMessage('😢', 'Dealer wint', 0);
-                }
-                updateDisplay();
-            }, 500);
-        };
-    }
-
-    // ==================== JACKPOT GAME ====================
-    function loadJackpotGame() {
-        const container = document.getElementById('game-container');
-        const symbols = ['💎', '💰', '👑', '🏆', '⭐', '7️⃣'];
-
-        container.innerHTML = `
-            <div style="width: 100%; text-align: center;">
-                <div style="background: linear-gradient(135deg, var(--accent-color) 0%, #ff6b6b 100%); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-                    <p style="font-size: 0.85rem; color: white; margin: 0 0 8px 0; text-transform: uppercase; font-weight: bold;">Progressive Jackpot</p>
-                    <h2 style="color: white; margin: 0; font-size: 2.2rem;">€50.000+</h2>
-                </div>
-                <div style="display: flex; justify-content: center; gap: 15px; margin: 20px 0;">
-                    <div class="reel" id="reel-0">${symbols[0]}</div>
-                    <div class="reel" id="reel-1">${symbols[1]}</div>
-                    <div class="reel" id="reel-2">${symbols[2]}</div>
-                </div>
-                <p style="color: var(--text-gray);">Klik op Start Spel</p>
-            </div>
-        `;
-
-        window.triggerGameAction = function() {
-            const reels = document.querySelectorAll('.reel');
-            reels.forEach(r => r.classList.add('spinning'));
-
-            let spins = 0;
-            const spinInterval = setInterval(() => {
-                reels.forEach(r => r.textContent = symbols[Math.floor(Math.random() * symbols.length)]);
-                spins++;
-
-                if (spins > 30) {
-                    clearInterval(spinInterval);
-                    reels.forEach(r => r.classList.remove('spinning'));
-
-                    const isJackpot = Math.random() < 0.05;
-                    if (isJackpot) {
-                        const jackpot = 50000;
-                        gameBalance += jackpot;
-                        updateWinDisplay(jackpot);
-                        showMessage('🎉', 'JACKPOT GEWONNEN!!!', jackpot);
-                    } else {
-                        updateWinDisplay(0);
-                        showMessage('😢', 'Bijna!', 0);
-                    }
-                    updateDisplay();
-                }
-            }, 80);
-        };
-    }
-
-    // ==================== POKER GAME ====================
-    function loadPokerGame() {
-        const container = document.getElementById('game-container');
-
-        container.innerHTML = `
-            <div style="width: 100%; text-align: center;">
-                <div style="background: linear-gradient(180deg, #1a5c1a 0%, #0d3d0d 100%); padding: 20px; border-radius: 15px; margin-bottom: 15px;">
-                    <h4 style="color: var(--accent-color); margin: 0 0 10px 0;">Community Cards</h4>
-                    <div id="community-cards" style="display: flex; justify-content: center; gap: 3px; flex-wrap: wrap; min-height: 80px;"></div>
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <h4 style="color: var(--accent-color); margin: 0 0 10px 0;">Jouw Kaarten</h4>
-                    <div id="player-cards" style="display: flex; justify-content: center; gap: 3px; flex-wrap: wrap; min-height: 80px;"></div>
-                </div>
-                <p style="color: var(--text-gray); margin: 0;">Live Poker - Start het spel</p>
-            </div>
-        `;
-
-        window.triggerGameAction = function() {
-            const winAmount = Math.random() > 0.5 ? currentBet * 2 : 0;
-            gameBalance += winAmount;
-            updateWinDisplay(winAmount);
-
-            if (winAmount > 0) {
-                showMessage('🎉', 'HAND GEWONNEN!', winAmount);
-            } else {
-                showMessage('😢', 'Verloren', 0);
-            }
-            updateDisplay();
-        };
-    }
-</script>
