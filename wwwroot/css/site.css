@@ -1,3 +1,5 @@
+/* SafeCasino Clean CSS */
+
 :root {
     --primary-color: #9333ea;
     --primary-dark: #7e22ce;
@@ -23,16 +25,15 @@ html, body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: var(--bg-darker);
     color: var(--text-light);
-    min-height: 100vh;
 }
 
 body {
-    padding-bottom: 80px;
+    padding-bottom: 100px;
 }
 
-/* Navigation */
+/* ==================== NAVIGATION ==================== */
 .navbar {
-    background: linear-gradient(135deg, var(--bg-dark) 0%, #2d0a4e 100%) !important;
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #2d0a4e 100%);
     padding: 1rem 0;
     box-shadow: 0 2px 10px rgba(147, 51, 234, 0.3);
 }
@@ -41,10 +42,8 @@ body {
     font-size: 1.8rem;
     font-weight: 800;
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    /* stylelint-disable-next-line property-no-vendor-prefix */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    /* stylelint-disable-next-line property-no-vendor-prefix */
     background-clip: text;
     color: transparent;
 }
@@ -78,7 +77,7 @@ body {
         box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4);
     }
 
-/* Hero Section */
+/* ==================== HERO SECTION ==================== */
 .hero-section {
     background: linear-gradient(135deg, var(--bg-dark) 0%, #4c0563 100%);
     padding: 4rem 0;
@@ -87,26 +86,13 @@ body {
     overflow: hidden;
 }
 
-    .hero-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path fill="%239333ea" fill-opacity="0.1" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"></path></svg>') repeat-x;
-        opacity: 0.3;
-    }
-
     .hero-section h1 {
         font-size: 3rem;
         font-weight: 800;
         margin-bottom: 1rem;
         background: linear-gradient(135deg, var(--text-light) 0%, var(--secondary-color) 100%);
-        /* stylelint-disable-next-line property-no-vendor-prefix */
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        /* stylelint-disable-next-line property-no-vendor-prefix */
         background-clip: text;
         color: transparent;
     }
@@ -117,7 +103,7 @@ body {
         margin-bottom: 2rem;
     }
 
-/* Featured Banners */
+/* ==================== FEATURED BANNERS ==================== */
 .featured-banners {
     margin: 3rem 0;
 }
@@ -130,6 +116,9 @@ body {
     position: relative;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
     .banner-card:hover {
@@ -138,12 +127,7 @@ body {
     }
 
 .banner-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     text-align: center;
-    z-index: 2;
 }
 
 .banner-card h3 {
@@ -161,7 +145,7 @@ body {
     border: none;
 }
 
-/* Category Icons */
+/* ==================== CATEGORIES ==================== */
 .category-section {
     margin: 3rem 0;
     text-align: center;
@@ -207,7 +191,7 @@ body {
     color: var(--text-light);
 }
 
-/* Game Cards */
+/* ==================== GAMES GRID ==================== */
 .games-section {
     margin: 3rem 0;
 }
@@ -307,11 +291,6 @@ body {
     }
 }
 
-.badge-exclusive {
-    background: var(--danger-color);
-    color: white;
-}
-
 .game-play-btn {
     width: 100%;
     background: var(--primary-color);
@@ -328,7 +307,7 @@ body {
         transform: translateY(-2px);
     }
 
-/* Filters */
+/* ==================== FORMS & INPUTS ==================== */
 .filter-section {
     background: var(--bg-card);
     padding: 1.5rem;
@@ -336,7 +315,8 @@ body {
     margin-bottom: 2rem;
 }
 
-.form-control, .form-select {
+.form-control,
+.form-select {
     background: var(--bg-dark);
     border: 1px solid var(--border-color);
     color: var(--text-light);
@@ -344,7 +324,8 @@ body {
     padding: 0.6rem 1rem;
 }
 
-    .form-control:focus, .form-select:focus {
+    .form-control:focus,
+    .form-select:focus {
         background: var(--bg-dark);
         border-color: var(--primary-color);
         color: var(--text-light);
@@ -356,7 +337,16 @@ body {
         color: var(--text-light);
     }
 
-/* Buttons */
+.form-label {
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.form-check-label {
+    color: var(--text-light);
+}
+
+/* ==================== BUTTONS ==================== */
 .btn-primary {
     background: var(--primary-color);
     border: none;
@@ -370,6 +360,7 @@ body {
         background: var(--primary-dark);
         transform: translateY(-2px);
         box-shadow: 0 5px 15px rgba(147, 51, 234, 0.4);
+        color: white;
     }
 
 .btn-secondary {
@@ -385,9 +376,16 @@ body {
     .btn-secondary:hover {
         background: var(--bg-dark);
         border-color: var(--primary-color);
+        color: var(--text-light);
     }
 
-/* Pagination */
+.btn-danger {
+    background: var(--danger-color);
+    border: none;
+    color: white;
+}
+
+/* ==================== PAGINATION ==================== */
 .pagination {
     margin-top: 3rem;
 }
@@ -403,6 +401,7 @@ body {
     .page-item .page-link:hover {
         background: var(--primary-color);
         border-color: var(--primary-color);
+        color: white;
     }
 
 .page-item.active .page-link {
@@ -410,7 +409,26 @@ body {
     border-color: var(--primary-color);
 }
 
-/* Footer */
+/* ==================== CARDS ==================== */
+.card {
+    background: var(--bg-card) !important;
+    color: var(--text-light) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.card-title {
+    color: var(--text-light) !important;
+}
+
+.card-text {
+    color: var(--text-light) !important;
+}
+
+.card-body {
+    color: var(--text-light) !important;
+}
+
+/* ==================== FOOTER ==================== */
 .footer {
     background: var(--bg-dark);
     color: var(--text-gray);
@@ -453,7 +471,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* FAQ Page */
+/* ==================== FAQ PAGE ==================== */
 .faq-item {
     background: var(--bg-card);
     border-radius: 12px;
@@ -474,7 +492,7 @@ body {
     line-height: 1.6;
 }
 
-/* Support Page */
+/* ==================== SUPPORT PAGE ==================== */
 .support-form {
     background: var(--bg-card);
     padding: 2rem;
@@ -499,51 +517,7 @@ body {
         margin-right: 1rem;
     }
 
-/* Loading Overlay */
-.loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(15, 3, 25, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .hero-section h1 {
-        font-size: 2rem;
-    }
-
-    .games-grid {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-        gap: 1rem;
-    }
-
-    .category-grid {
-        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-        gap: 1rem;
-    }
-
-    .category-icon {
-        width: 80px;
-        height: 80px;
-    }
-
-        .category-icon i {
-            font-size: 1.5rem;
-        }
-
-    .navbar-brand {
-        font-size: 1.4rem;
-    }
-}
-
-/* Breadcrumb */
+/* ==================== BREADCRUMB ==================== */
 .breadcrumb {
     background: rgba(45, 27, 78, 0.4);
     border-radius: 8px;
@@ -569,24 +543,7 @@ body {
         color: var(--text-gray);
     }
 
-/* Card Styling */
-.card {
-    color: var(--text-light) !important;
-}
-
-.card-title {
-    color: var(--text-light) !important;
-}
-
-.card-text {
-    color: var(--text-light) !important;
-}
-
-.card-body {
-    color: var(--text-light) !important;
-}
-
-/* Animations */
+/* ==================== ANIMATIONS ==================== */
 .fade-in {
     animation: fadeIn 0.5s ease-out;
 }
@@ -603,7 +560,7 @@ body {
     }
 }
 
-/* Scrollbar */
+/* ==================== SCROLLBAR ==================== */
 ::-webkit-scrollbar {
     width: 12px;
 }
@@ -633,7 +590,7 @@ body {
     border: 2px solid var(--border-color);
     border-radius: 16px;
     padding: 1.5rem;
-    backdrop-filter: blur(10px);
+    margin-bottom: 2rem;
 }
 
     .game-header .game-title {
@@ -643,6 +600,7 @@ body {
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        color: transparent;
         margin: 0;
     }
 
@@ -653,13 +611,14 @@ body {
     align-items: center;
     color: var(--text-light);
     font-size: 0.95rem;
+    margin-top: 1rem;
 }
 
 .info-item {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: var(--text-light) !important;
+    color: var(--text-light);
 }
 
 .separator {
@@ -692,17 +651,6 @@ body {
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(245, 158, 11, 0.15);
 }
-
-    .game-viewport::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path fill="%23f59e0b" fill-opacity="0.05" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"></path></svg>') repeat;
-        opacity: 0.5;
-    }
 
 #game-container {
     width: 100%;
@@ -878,63 +826,6 @@ body {
     font-weight: 800;
 }
 
-.reel {
-    width: 80px;
-    height: 140px;
-    background: var(--bg-dark);
-    border: 3px solid var(--accent-color);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    box-shadow: inset 0 0 10px rgba(245, 158, 11, 0.3);
-    transition: transform 0.1s ease;
-}
-
-    .reel.spinning {
-        animation: reelSpin 0.1s linear;
-    }
-
-@keyframes reelSpin {
-    0%, 100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(10px);
-    }
-}
-
-.roulette-wheel {
-    animation: wheelSpin 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-@keyframes wheelSpin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(var(--final-rotation));
-    }
-}
-
-.card {
-    width: 60px;
-    height: 90px;
-    background: white;
-    border: 2px solid #333;
-    border-radius: 6px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    margin: 3px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
 .demo-notice {
     background: linear-gradient(135deg, #f59e0b 0%, #ff6b6b 100%);
     border: 2px solid var(--accent-color);
@@ -946,6 +837,7 @@ body {
     font-weight: 600;
 }
 
+/* ==================== RESPONSIVE ==================== */
 @media (max-width: 1024px) {
     .game-main-container {
         grid-template-columns: 1fr;
@@ -963,6 +855,33 @@ body {
 }
 
 @media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .games-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 1rem;
+    }
+
+    .category-grid {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 1rem;
+    }
+
+    .category-icon {
+        width: 80px;
+        height: 80px;
+    }
+
+        .category-icon i {
+            font-size: 1.5rem;
+        }
+
+    .navbar-brand {
+        font-size: 1.4rem;
+    }
+
     .game-viewport {
         min-height: 350px;
         padding: 1rem;
@@ -971,4 +890,33 @@ body {
     .game-header .game-title {
         font-size: 1.5rem;
     }
+}
+
+/* ==================== ALERTS ==================== */
+.alert {
+    border-radius: 12px;
+}
+
+.alert-info {
+    background: rgba(147, 51, 234, 0.1);
+    border: 2px solid var(--primary-color);
+    color: var(--text-light);
+}
+
+.alert-warning {
+    background: rgba(245, 158, 11, 0.1);
+    border: 2px solid var(--accent-color);
+    color: var(--text-light);
+}
+
+.alert-danger {
+    background: rgba(239, 68, 68, 0.1);
+    border: 2px solid var(--danger-color);
+    color: var(--text-light);
+}
+
+.alert-success {
+    background: rgba(16, 185, 129, 0.1);
+    border: 2px solid var(--success-color);
+    color: var(--text-light);
 }

@@ -1,268 +1,232 @@
-﻿@model SafeCasino.ViewModels.GameListViewModel
+﻿@model SafeCasino.ViewModels.GameDetailViewModel
 @{
-    ViewData["Title"] = "Spellen";
+    ViewData["Title"] = "Speel " + Model.Game.Name;
 }
 
-<div class="container py-5">
-    <!-- Games Header -->
-    <div class="mb-5">
-        <h1 class="section-title mb-3">
-            <i class="fas fa-gamepad"></i> Casino Spellen
-        </h1>
-        <p style="color: var(--text-light);">Ontdek meer dan 50 spannende spellen</p>
-    </div>
-
-    <div class="row g-4">
-        <!-- Filters Sidebar -->
-        <div class="col-lg-3">
-            <form method="get" class="filter-section filter-form">
-                <!-- Search -->
-                <div class="mb-3">
-                    <label for="SearchTerm" class="form-label" style="color: var(--text-light);"><i class="fas fa-search"></i> Zoeken</label>
-                    <input type="text" class="form-control" id="SearchTerm" name="SearchTerm"
-                           placeholder="Zoek spellen..." value="@Model.Filters.SearchTerm">
-                </div>
-
-                <!-- Category -->
-                <div class="mb-3">
-                    <label for="Category" class="form-label" style="color: var(--text-light);"><i class="fas fa-th-large"></i> Categorie</label>
-                    <select class="form-select" id="Category" name="Category">
-                        <option value="">Alle Categorieën</option>
-                        @if (Model.AvailableCategories.Any())
-                        {
-                            @foreach (var category in Model.AvailableCategories)
-                            {
-                                var _catSelected = Model.Filters.Category == category ? " selected" : string.Empty;
-                                @Html.Raw($"<option value=\"{category}\"{_catSelected}>{category}</option>")
-                            }
-                        }
-                    </select>
-                </div>
-
-                <!-- Provider -->
-                <div class="mb-3">
-                    <label for="Provider" class="form-label" style="color: var(--text-light);"><i class="fas fa-building"></i> Provider</label>
-                    <select class="form-select" id="Provider" name="Provider">
-                        <option value="">Alle Providers</option>
-                        @if (Model.AvailableProviders.Any())
-                        {
-                            @foreach (var provider in Model.AvailableProviders)
-                            {
-                                var _provSelected = Model.Filters.Provider == provider ? " selected" : string.Empty;
-                                @Html.Raw($"<option value=\"{provider}\"{_provSelected}>{provider}</option>")
-                            }
-                        }
-                    </select>
-                </div>
-
-                <!-- Bet Range -->
-                <div class="mb-3">
-                    <label class="form-label" style="color: var(--text-light);"><i class="fas fa-coins"></i> Inzet Bereik</label>
-                    <div class="row g-2">
-                        <div class="col-6">
-                            <input type="number" class="form-control" name="MinBet"
-                                   placeholder="Min" value="@Model.Filters.MinBet" step="0.01">
-                        </div>
-                        <div class="col-6">
-                            <input type="number" class="form-control" name="MaxBet"
-                                   placeholder="Max" value="@Model.Filters.MaxBet" step="0.01">
-                        </div>
+<div class="game-play-container">
+    <div class="container-fluid">
+        <!-- Game Header -->
+        <div class="game-header mb-4">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                    <h1 class="game-title mb-2">@Model.Game.Name</h1>
+                    <div class="game-info-bar">
+                        <span class="info-item">
+                            <i class="fas fa-building"></i> @Model.Game.Provider
+                        </span>
+                        <span class="separator">|</span>
+                        <span class="info-item">
+                            <i class="fas fa-chart-line"></i> RTP: @Model.Game.RTP.ToString("F1")%
+                        </span>
+                        <span class="separator">|</span>
+                        <span class="info-item">
+                            <i class="fas fa-coins"></i> €@Model.Game.MinBet - €@Model.Game.MaxBet
+                        </span>
+                        <span class="separator">|</span>
+                        <span class="info-item">
+                            <i class="fas fa-wallet"></i> Balans: <span class="balance-amount">€1.234,56</span>
+                        </span>
                     </div>
                 </div>
-
-                <!-- Special Features -->
-                <div class="mb-3">
-                    <label class="form-label" style="color: var(--text-light);"><i class="fas fa-star"></i> Bijzonderheden</label>
-
-                    <div class="form-check">
-                        @Html.CheckBox("HasJackpot", Model.Filters.HasJackpot == true, new { @class = "form-check-input", id = "HasJackpot", value = "true" })
-                        <label class="form-check-label" for="HasJackpot" style="color: var(--text-light);">
-                            Heeft Jackpot
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        @Html.CheckBox("IsNew", Model.Filters.IsNew == true, new { @class = "form-check-input", id = "IsNew", value = "true" })
-                        <label class="form-check-label" for="IsNew" style="color: var(--text-light);">
-                            Alleen Nieuw
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        @Html.CheckBox("IsPopular", Model.Filters.IsPopular == true, new { @class = "form-check-input", id = "IsPopular", value = "true" })
-                        <label class="form-check-label" for="IsPopular" style="color: var(--text-light);">
-                            Alleen Populair
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Sort -->
-                <div class="mb-3">
-                    <label for="SortBy" class="form-label" style="color: var(--text-light);"><i class="fas fa-sort"></i> Sorteren</label>
-                    <select class="form-select" id="SortBy" name="SortBy">
-                        @{
-                            var _sName = Model.Filters.SortBy == "Name" ? " selected" : string.Empty;
-                            var _sRtp = Model.Filters.SortBy == "RTP" ? " selected" : string.Empty;
-                            var _sPop = Model.Filters.SortBy == "Popular" ? " selected" : string.Empty;
-                            var _sNew = Model.Filters.SortBy == "New" ? " selected" : string.Empty;
-                        }
-                        @Html.Raw($"<option value=\"Name\"{_sName}>Naam A-Z</option>")
-                        @Html.Raw($"<option value=\"RTP\"{_sRtp}>RTP Hoog naar Laag</option>")
-                        @Html.Raw($"<option value=\"Popular\"{_sPop}>Populair</option>")
-                        @Html.Raw($"<option value=\"New\"{_sNew}>Nieuwste</option>")
-                    </select>
-                </div>
-
-                <!-- Buttons -->
-                <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-filter"></i> Filter Toepassen
-                    </button>
-                    <a href="@Url.Action("Index", "Games")" class="btn btn-secondary clear-filters">
-                        <i class="fas fa-times"></i> Filters Wissen
-                    </a>
-                </div>
-            </form>
+                <a href="@Url.Action("Details", "Games", new { id = Model.Game.Id })" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Terug naar Details
+                </a>
+            </div>
         </div>
 
-        <!-- Games Grid -->
-        <div class="col-lg-9">
-            <!-- Results Info -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <div>
-                    <p style="color: var(--text-light); margin-bottom: 0;">
-                        <strong>@Model.TotalGames</strong> spellen gevonden
-                        @if (!string.IsNullOrEmpty(Model.Filters.SearchTerm))
-                        {
-                            <span>voor "<strong>@Model.Filters.SearchTerm</strong>"</span>
-                        }
-                    </p>
+        <!-- Main Game Container -->
+        <div class="game-main-container">
+            <!-- Game Viewport -->
+            <div class="game-viewport">
+                <div id="game-container">
+                    <!-- Game will be rendered here -->
+                    <div class="text-center">
+                        <p style="color: var(--text-light); font-size: 1.1rem; margin-bottom: 1rem;">
+                            <i class="fas fa-gamepad fa-3x mb-3" style="display: block; color: var(--primary-color);"></i>
+                            Klik op Start Spel om te spelen
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            @if (Model.Games.Any())
-            {
-                <!-- Games Grid -->
-                <div class="games-grid">
-                    @foreach (var game in Model.Games)
-                    {
-                        <div class="game-card fade-in">
-                            <img src="@game.ThumbnailUrl" alt="@game.Name" class="game-image" />
-                            <div class="game-info">
-                                <h5 class="game-title">@game.Name</h5>
-                                <p class="game-provider">@game.Provider</p>
-
-                                <div class="game-badges mb-2">
-                                    @if (game.IsPopular)
-                                    {
-                                        <span class="badge badge-popular">
-                                            <i class="fas fa-fire"></i> POPULAIR
-                                        </span>
-                                    }
-                                    @if (game.IsNew)
-                                    {
-                                        <span class="badge badge-new">
-                                            <i class="fas fa-star"></i> NIEUW
-                                        </span>
-                                    }
-                                    @if (game.HasJackpot)
-                                    {
-                                        <span class="badge badge-jackpot">
-                                            <i class="fas fa-trophy"></i> JACKPOT
-                                        </span>
-                                    }
-                                </div>
-
-                                <div class="mb-2 small">
-                                    <div class="d-flex justify-content-between" style="color: var(--text-light);">
-                                        <span><i class="fas fa-chart-line"></i> RTP: @game.RTP.ToString("F1")%</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between" style="color: var(--text-light);">
-                                        <span>€@game.MinBet - €@game.MaxBet</span>
-                                    </div>
-                                </div>
-
-                                <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id"
-                                   class="game-play-btn text-decoration-none">
-                                    <i class="fas fa-play"></i> Meer Info
-                                </a>
-                            </div>
-                        </div>
-                    }
+            <!-- Game Controls Panel -->
+            <div class="game-controls-panel">
+                <!-- Bet Amount -->
+                <div class="control-section">
+                    <label class="control-label">
+                        <i class="fas fa-coins"></i> Inzet
+                    </label>
+                    <div class="bet-input-group">
+                        <input type="number" id="betAmount" value="1.00" min="@Model.Game.MinBet" max="@Model.Game.MaxBet" step="0.01" placeholder="Inzet bedrag">
+                    </div>
+                    <div class="bet-preset-buttons">
+                        <button class="bet-preset-btn" onclick="setBet(0.10)">€0,10</button>
+                        <button class="bet-preset-btn" onclick="setBet(1.00)">€1,00</button>
+                        <button class="bet-preset-btn" onclick="setBet(5.00)">€5,00</button>
+                        <button class="bet-preset-btn" onclick="setBet(10.00)">€10,00</button>
+                    </div>
                 </div>
 
-                <!-- Pagination -->
-                @if (Model.TotalPages > 1)
-                {
-                    <nav aria-label="Page navigation" class="mt-5">
-                        <ul class="pagination justify-content-center">
-                            @if (Model.HasPreviousPage)
-                            {
-                                <li class="page-item">
-                                    <a class="page-link" asp-route-pageNumber="@(Model.CurrentPage - 1)">
-                                        <i class="fas fa-chevron-left"></i> Vorige
-                                    </a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="page-item disabled">
-                                    <span class="page-link"><i class="fas fa-chevron-left"></i> Vorige</span>
-                                </li>
-                            }
+                <!-- Stats Display -->
+                <div class="control-section">
+                    <div class="stat-display">
+                        <div class="stat-label">Totale Inzet</div>
+                        <div class="stat-value">€<span id="totalBet">1.00</span></div>
+                    </div>
+                    <div class="stat-display">
+                        <div class="stat-label">Huidge Winst</div>
+                        <div class="stat-value" style="color: var(--success-color);">€<span id="totalWin">0.00</span></div>
+                    </div>
+                    <div class="stat-display">
+                        <div class="stat-label">Balans</div>
+                        <div class="stat-value">€<span id="balance">1234.56</span></div>
+                    </div>
+                </div>
 
-                            @for (int i = 1; i <= Model.TotalPages; i++)
-                            {
-                                @if (i == Model.CurrentPage)
-                                {
-                                    <li class="page-item active">
-                                        <span class="page-link">@i</span>
-                                    </li>
-                                }
-                                else if (i == 1 || i == Model.TotalPages || (i >= Model.CurrentPage - 1 && i <= Model.CurrentPage + 1))
-                                {
-                                    <li class="page-item">
-                                        <a class="page-link" asp-route-pageNumber="@i">@i</a>
-                                    </li>
-                                }
-                                else if (i == 2 || i == Model.TotalPages - 1)
-                                {
-                                    <li class="page-item disabled">
-                                        <span class="page-link">...</span>
-                                    </li>
-                                }
-                            }
+                <!-- Play Button -->
+                <div class="control-section">
+                    <button class="btn-play" id="playBtn" onclick="playGame()">
+                        <i class="fas fa-play"></i> Start Spel
+                    </button>
+                </div>
 
-                            @if (Model.HasNextPage)
-                            {
-                                <li class="page-item">
-                                    <a class="page-link" asp-route-pageNumber="@(Model.CurrentPage + 1)">
-                                        Volgende <i class="fas fa-chevron-right"></i>
-                                    </a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="page-item disabled">
-                                    <span class="page-link">Volgende <i class="fas fa-chevron-right"></i></span>
-                                </li>
-                            }
+                <!-- Demo Notice -->
+                <div class="demo-notice">
+                    <i class="fas fa-info-circle"></i> Dit is DEMO modus met virtueel geld
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Results Message -->
+        <div class="game-message" id="gameMessage">
+            <div class="message-icon" id="messageIcon">
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="message-text" id="messageText">Gewonnen!</div>
+            <div class="message-amount">+€<span id="messageAmount">10.00</span></div>
+            <button class="btn btn-primary mt-3" onclick="closeGameMessage()">Doorgaan</button>
+        </div>
+
+        <!-- Game Info Section -->
+        <div class="row mt-5">
+            <div class="col-lg-8 mx-auto">
+                <div class="card" style="background: var(--bg-card); border: none;">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4" style="color: var(--text-light);">
+                            <i class="fas fa-info-circle"></i> Over Dit Spel
+                        </h4>
+                        <p style="color: var(--text-light);">@Model.Game.Description</p>
+
+                        <h5 style="color: var(--text-light); margin-top: 2rem; margin-bottom: 1rem;">
+                            <i class="fas fa-check-circle"></i> Spelfeatures
+                        </h5>
+                        <ul style="color: var(--text-light);">
+                            <li><strong>Categorie:</strong> @Model.Game.Category</li>
+                            <li><strong>Provider:</strong> @Model.Game.Provider</li>
+                            <li><strong>RTP:</strong> @Model.Game.RTP.ToString("F1")%</li>
+                            <li><strong>Min Inzet:</strong> €@Model.Game.MinBet</li>
+                            <li><strong>Max Inzet:</strong> €@Model.Game.MaxBet</li>
                         </ul>
-                    </nav>
-                }
-            }
-            else
-            {
-                <!-- No Games Found -->
-                <div class="text-center py-5">
-                    <i class="fas fa-inbox fa-3x" style="color: var(--text-gray); margin-bottom: 1rem; display: block;"></i>
-                    <h4 style="color: var(--text-light);">Geen spellen gevonden</h4>
-                    <p style="color: var(--text-light); margin-bottom: 1rem;">Probeer een ander zoekterm of filter</p>
-                    <a asp-action="Index" class="btn btn-primary">
-                        <i class="fas fa-redo"></i> Filters Wissen
-                    </a>
+
+                        @if (Model.Game.Tags.Any())
+                        {
+                            <h5 style="color: var(--text-light); margin-top: 2rem; margin-bottom: 1rem;">
+                                <i class="fas fa-tags"></i> Tags
+                            </h5>
+                            <div class="mb-3">
+                                @foreach (var tag in Model.Game.Tags)
+                                {
+                                    <span class="badge" style="background: var(--primary-color); color: white; margin-right: 0.5rem; margin-bottom: 0.5rem;">@tag</span>
+                                }
+                            </div>
+                        }
+
+                        <div class="alert alert-info mt-4" role="alert">
+                            <i class="fas fa-shield-alt"></i>
+                            <strong>Eerlijk en Veilig:</strong> Dit spel gebruikt een gecertificeerde Random Number Generator. Alle resultaten zijn volledig willekeurig.
+                        </div>
+                    </div>
                 </div>
-            }
+            </div>
+        </div>
+
+        <!-- Responsible Gaming Banner -->
+        <div class="row mt-5 mb-5">
+            <div class="col-lg-8 mx-auto">
+                <div class="alert alert-warning" role="alert">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Verantwoord Spelen:</strong> Gokken kan verslavend zijn. Speel altijd verantwoord en stel limieten in.
+                    <a href="@Url.Action("Index", "Home", new { anchor = "responsible" })" class="alert-link">Meer informatie</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    // Game functions
+    function setBet(amount) {
+        document.getElementById('betAmount').value = amount.toFixed(2);
+        document.getElementById('totalBet').textContent = amount.toFixed(2);
+    }
+
+    function playGame() {
+        const betAmount = parseFloat(document.getElementById('betAmount').value);
+        const balance = parseFloat(document.getElementById('balance').textContent);
+
+        if (betAmount > balance) {
+            alert('Onvoldoende saldo!');
+            return;
+        }
+
+        const playBtn = document.getElementById('playBtn');
+        playBtn.disabled = true;
+        playBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Spelen...';
+
+        // Simulate game play
+        setTimeout(() => {
+            // Random win/loss
+            const won = Math.random() > 0.5;
+            const multiplier = won ? 2 : 0;
+            const winAmount = betAmount * multiplier;
+            const newBalance = balance - betAmount + winAmount;
+
+            // Update display
+            document.getElementById('balance').textContent = newBalance.toFixed(2);
+            document.getElementById('totalWin').textContent = (parseFloat(document.getElementById('totalWin').textContent) + winAmount).toFixed(2);
+
+            // Show message
+            if (won) {
+                showGameMessage('Gewonnen!', winAmount, 'success');
+            } else {
+                showGameMessage('Verloren!', 0, 'danger');
+            }
+
+            // Reset button
+            playBtn.disabled = false;
+            playBtn.innerHTML = '<i class="fas fa-play"></i> Start Spel';
+        }, 2000);
+    }
+
+    function showGameMessage(title, amount, type) {
+        const message = document.getElementById('gameMessage');
+        const icon = document.getElementById('messageIcon');
+        const text = document.getElementById('messageText');
+        const msgAmount = document.getElementById('messageAmount');
+
+        text.textContent = title;
+        msgAmount.textContent = amount.toFixed(2);
+
+        if (type === 'success') {
+            icon.innerHTML = '<i class="fas fa-star" style="color: var(--success-color);"></i>';
+        } else {
+            icon.innerHTML = '<i class="fas fa-times-circle" style="color: var(--danger-color);"></i>';
+        }
+
+        message.classList.add('show');
+    }
+
+    function closeGameMessage() {
+        document.getElementById('gameMessage').classList.remove('show');
+    }
+</script>
