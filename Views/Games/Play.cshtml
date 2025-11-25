@@ -24,7 +24,7 @@
                         </span>
                         <span class="separator">|</span>
                         <span class="info-item">
-                            <i class="fas fa-wallet"></i> Balans: <span class="balance-amount">€1.234,56</span>
+                            <i class="fas fa-wallet"></i> Balans: <span class="balance-amount">€<span id="balanceDisplay">1.234,56</span></span>
                         </span>
                     </div>
                 </div>
@@ -38,13 +38,36 @@
         <div class="game-main-container">
             <!-- Game Viewport -->
             <div class="game-viewport">
-                <div id="game-container">
-                    <!-- Game will be rendered here -->
-                    <div class="text-center">
-                        <p style="color: var(--text-light); font-size: 1.1rem; margin-bottom: 1rem;">
-                            <i class="fas fa-gamepad fa-3x mb-3" style="display: block; color: var(--primary-color);"></i>
-                            Klik op Start Spel om te spelen
-                        </p>
+                <div id="game-container" class="roulette-container-wrapper">
+                    <!-- Roulette Wheel SVG -->
+                    <div class="roulette-wheel-holder">
+                        <svg id="rouletteWheel" class="roulette-wheel" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Outer golden ring -->
+                            <circle cx="250" cy="250" r="240" fill="none" stroke="#f59e0b" stroke-width="8" />
+
+                            <!-- Wheel segments and numbers -->
+                            <g id="wheelSegments" class="wheel-segments"></g>
+
+                            <!-- Center circle -->
+                            <circle cx="250" cy="250" r="30" fill="#f59e0b" stroke="#f59e0b" stroke-width="2" />
+                            <circle cx="250" cy="250" r="22" fill="#1a0525" />
+                            <circle cx="250" cy="250" r="12" fill="#f59e0b" />
+                        </svg>
+
+                        <!-- Ball -->
+                        <div class="roulette-ball" id="rouletteBall"></div>
+
+                        <!-- Winning number indicator at top -->
+                        <div class="winning-indicator">
+                            <div class="indicator-triangle"></div>
+                            <div class="indicator-number" id="resultNumber">00</div>
+                        </div>
+
+                        <!-- Spin counter -->
+                        <div class="spin-info">
+                            <div id="spinStatus" class="spin-status">Bereid je voor...</div>
+                            <div id="spinRotation" class="spin-rotation">0°</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -67,14 +90,31 @@
                     </div>
                 </div>
 
+                <!-- Bet Type Selection -->
+                <div class="control-section">
+                    <label class="control-label">
+                        <i class="fas fa-cube"></i> Inzettype
+                    </label>
+                    <select id="betType" class="form-select">
+                        <option value="number">Enkel getal (36:1)</option>
+                        <option value="red">Rood (1:1)</option>
+                        <option value="black">Zwart (1:1)</option>
+                        <option value="even">Even (1:1)</option>
+                        <option value="odd">Oneven (1:1)</option>
+                        <option value="high">Hoog 19-36 (1:1)</option>
+                        <option value="low">Laag 1-18 (1:1)</option>
+                    </select>
+                    <input type="number" id="selectedNumber" min="0" max="36" value="0" placeholder="Getal (0-36)" class="form-select mt-2" style="display:none;">
+                </div>
+
                 <!-- Stats Display -->
                 <div class="control-section">
                     <div class="stat-display">
-                        <div class="stat-label">Totale Inzet</div>
+                        <div class="stat-label">Inzet</div>
                         <div class="stat-value">€<span id="totalBet">1.00</span></div>
                     </div>
                     <div class="stat-display">
-                        <div class="stat-label">Huidge Winst</div>
+                        <div class="stat-label">Winst</div>
                         <div class="stat-value" style="color: var(--success-color);">€<span id="totalWin">0.00</span></div>
                     </div>
                     <div class="stat-display">
@@ -85,8 +125,8 @@
 
                 <!-- Play Button -->
                 <div class="control-section">
-                    <button class="btn-play" id="playBtn" onclick="playGame()">
-                        <i class="fas fa-play"></i> Start Spel
+                    <button class="btn-play" id="playBtn" onclick="startRoulette()">
+                        <i class="fas fa-play"></i> Start Spin
                     </button>
                 </div>
 
@@ -97,14 +137,19 @@
             </div>
         </div>
 
-        <!-- Game Results Message -->
-        <div class="game-message" id="gameMessage">
-            <div class="message-icon" id="messageIcon">
-                <i class="fas fa-star"></i>
+        <!-- Result Modal -->
+        <div class="game-result-modal" id="gameResultModal">
+            <div class="result-content">
+                <div class="result-header" id="resultHeader">
+                    <i class="fas fa-star" id="resultIcon"></i>
+                </div>
+                <div class="result-title" id="resultTitle">Gewonnen!</div>
+                <div class="result-amount">
+                    +€<span id="resultAmount">50.00</span>
+                </div>
+                <div class="result-details" id="resultDetails"></div>
+                <button class="btn btn-primary mt-3" onclick="closeResult()">Doorgaan</button>
             </div>
-            <div class="message-text" id="messageText">Gewonnen!</div>
-            <div class="message-amount">+€<span id="messageAmount">10.00</span></div>
-            <button class="btn btn-primary mt-3" onclick="closeGameMessage()">Doorgaan</button>
         </div>
 
         <!-- Game Info Section -->
@@ -113,37 +158,37 @@
                 <div class="card" style="background: var(--bg-card); border: none;">
                     <div class="card-body">
                         <h4 class="card-title mb-4" style="color: var(--text-light);">
-                            <i class="fas fa-info-circle"></i> Over Dit Spel
+                            <i class="fas fa-info-circle"></i> American Roulette
                         </h4>
-                        <p style="color: var(--text-light);">@Model.Game.Description</p>
+                        <p style="color: var(--text-light);">
+                            Speel American Roulette, een van 's werelds populairste casinospellen. Voorspel waar de bal zal landen
+                            op het draaiende wiel met getallen van 0 tot 36 (plus 00).
+                        </p>
 
                         <h5 style="color: var(--text-light); margin-top: 2rem; margin-bottom: 1rem;">
-                            <i class="fas fa-check-circle"></i> Spelfeatures
+                            <i class="fas fa-check-circle"></i> Inzet Opties
                         </h5>
                         <ul style="color: var(--text-light);">
-                            <li><strong>Categorie:</strong> @Model.Game.Category</li>
-                            <li><strong>Provider:</strong> @Model.Game.Provider</li>
-                            <li><strong>RTP:</strong> @Model.Game.RTP.ToString("F1")%</li>
-                            <li><strong>Min Inzet:</strong> €@Model.Game.MinBet</li>
-                            <li><strong>Max Inzet:</strong> €@Model.Game.MaxBet</li>
+                            <li><strong>Enkel getal:</strong> Win 36x je inzet</li>
+                            <li><strong>Rood/Zwart:</strong> Win 2x je inzet</li>
+                            <li><strong>Even/Oneven:</strong> Win 2x je inzet</li>
+                            <li><strong>Hoog (19-36) / Laag (1-18):</strong> Win 2x je inzet</li>
                         </ul>
 
-                        @if (Model.Game.Tags.Any())
-                        {
-                            <h5 style="color: var(--text-light); margin-top: 2rem; margin-bottom: 1rem;">
-                                <i class="fas fa-tags"></i> Tags
-                            </h5>
-                            <div class="mb-3">
-                                @foreach (var tag in Model.Game.Tags)
-                                {
-                                    <span class="badge" style="background: var(--primary-color); color: white; margin-right: 0.5rem; margin-bottom: 0.5rem;">@tag</span>
-                                }
-                            </div>
-                        }
+                        <h5 style="color: var(--text-light); margin-top: 2rem; margin-bottom: 1rem;">
+                            <i class="fas fa-star"></i> Spelregels
+                        </h5>
+                        <ul style="color: var(--text-light);">
+                            <li>Plaats je inzet(ten) op het getal of de combinatie waarop je denkt dat de bal zal landen</li>
+                            <li>Klik "Start Spin" om het wiel te draaien</li>
+                            <li>Het wiel zal tussen 2-5 seconden draaien</li>
+                            <li>Je wint als de bal op je geselecteerde getal of combinatie landt</li>
+                        </ul>
 
                         <div class="alert alert-info mt-4" role="alert">
                             <i class="fas fa-shield-alt"></i>
-                            <strong>Eerlijk en Veilig:</strong> Dit spel gebruikt een gecertificeerde Random Number Generator. Alle resultaten zijn volledig willekeurig.
+                            <strong>Eerlijk en Veilig:</strong> Dit spel gebruikt een gecertificeerde Random Number Generator.
+                            Alle resultaten zijn volledig willekeurig.
                         </div>
                     </div>
                 </div>
@@ -163,70 +208,508 @@
     </div>
 </div>
 
+<style>
+    /* Roulette specific styles */
+    .roulette-container-wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .roulette-wheel-holder {
+        position: relative;
+        width: 400px;
+        height: 400px;
+    }
+
+    .roulette-wheel {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 0 30px rgba(245, 158, 11, 0.3));
+        transition: transform 0.1s linear;
+    }
+
+        .roulette-wheel.spinning {
+            filter: drop-shadow(0 0 40px rgba(245, 158, 11, 0.8));
+        }
+
+    .roulette-ball {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: radial-gradient(circle at 30% 30%, #ffd700, #ffaa00);
+        border-radius: 50%;
+        top: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), inset -2px -2px 4px rgba(0, 0, 0, 0.3);
+        z-index: 10;
+    }
+
+    .winning-indicator {
+        position: absolute;
+        top: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+    }
+
+    .indicator-triangle {
+        width: 0;
+        height: 0;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-top: 20px solid #f59e0b;
+        margin: 0 auto;
+    }
+
+    .indicator-number {
+        background: #f59e0b;
+        color: var(--bg-darker);
+        padding: 5px 15px;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-top: 5px;
+        min-width: 40px;
+    }
+
+    .spin-info {
+        position: absolute;
+        bottom: -60px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        width: 200px;
+    }
+
+    .spin-status {
+        color: var(--text-light);
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .spin-rotation {
+        color: var(--accent-color);
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    /* Result Modal */
+    .game-result-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+    }
+
+        .game-result-modal.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+    .result-content {
+        background: var(--bg-card);
+        border: 3px solid var(--accent-color);
+        border-radius: 20px;
+        padding: 2.5rem;
+        text-align: center;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        max-width: 400px;
+        animation: slideUp 0.4s ease;
+    }
+
+    .result-header {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .result-header i {
+            animation: bounce 0.6s ease;
+        }
+
+    .result-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: var(--text-light);
+    }
+
+    .result-amount {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin: 1rem 0;
+        color: var(--success-color);
+    }
+
+    .result-details {
+        color: var(--text-gray);
+        font-size: 0.95rem;
+        margin: 1rem 0;
+        line-height: 1.6;
+    }
+
+    @@keyframes bounce {
+        0%, 100%
+
+    {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    }
+
+    @@keyframes slideUp {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    /* Bet type selector visibility */
+    .bet-select-group {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-top: 0.5rem;
+    }
+
+    .bet-select-btn {
+        flex: 1;
+        min-width: 80px;
+        padding: 0.5rem;
+        background: var(--bg-dark);
+        border: 2px solid var(--border-color);
+        color: var(--text-light);
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.8rem;
+        transition: all 0.3s ease;
+    }
+
+        .bet-select-btn:hover {
+            border-color: var(--primary-color);
+        }
+
+        .bet-select-btn.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+</style>
+
 <script>
-    // Game functions
+    // Roulette Game Variables
+    const ROULETTE_NUMBERS = [0, 26, 3, 35, 12, 28, 7, 29, 18, 22, 9, 31, 14, 20, 1, 33, 16, 24, 5, 10, 23, 8, 30, 11, 36, 13, 27, 6, 34, 17, 25, 2, 21, 4, 19, 15, 32];
+    const RED_NUMBERS = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
+    const BLACK_NUMBERS = [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35];
+
+    let gameState = {
+        isSpinning: false,
+        balance: 1234.56,
+        currentBet: 1.00,
+        betType: 'number',
+        selectedNumber: 0,
+        lastResult: null
+    };
+
+    // Initialize roulette wheel
+    function initializeRouletteWheel() {
+        const wheelSegments = document.getElementById('wheelSegments');
+        wheelSegments.innerHTML = '';
+
+        const segmentAngle = 360 / 37;
+
+        ROULETTE_NUMBERS.forEach((num, index) => {
+            const angle = (index * segmentAngle) - 90;
+            const nextAngle = ((index + 1) * segmentAngle) - 90;
+
+            // Create segment
+            const radius = 200;
+            const x1 = 250 + radius * Math.cos((angle * Math.PI) / 180);
+            const y1 = 250 + radius * Math.sin((angle * Math.PI) / 180);
+            const x2 = 250 + radius * Math.cos((nextAngle * Math.PI) / 180);
+            const y2 = 250 + radius * Math.sin((nextAngle * Math.PI) / 180);
+
+            const isRed = RED_NUMBERS.includes(num);
+            const color = num === 0 ? '#1a7f3e' : (isRed ? '#e63946' : '#1a1a1a');
+
+            // Segment
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', `M 250 250 L ${x1} ${y1} A 200 200 0 0 1 ${x2} ${y2} Z`);
+            path.setAttribute('fill', color);
+            path.setAttribute('stroke', '#f59e0b');
+            path.setAttribute('stroke-width', '2');
+            path.setAttribute('class', 'wheel-segment');
+            wheelSegments.appendChild(path);
+
+            // Number text
+            const midAngle = (angle + nextAngle) / 2;
+            const textRadius = 150;
+            const textX = 250 + textRadius * Math.cos((midAngle * Math.PI) / 180);
+            const textY = 250 + textRadius * Math.sin((midAngle * Math.PI) / 180);
+
+            const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            text.setAttribute('x', textX);
+            text.setAttribute('y', textY);
+            text.setAttribute('text-anchor', 'middle');
+            text.setAttribute('dominant-baseline', 'middle');
+            text.setAttribute('font-size', '16');
+            text.setAttribute('font-weight', 'bold');
+            text.setAttribute('fill', '#ffffff');
+            text.setAttribute('class', 'wheel-number');
+            text.textContent = num;
+            wheelSegments.appendChild(text);
+        });
+    }
+
+    // Set bet amount
     function setBet(amount) {
+        gameState.currentBet = amount;
         document.getElementById('betAmount').value = amount.toFixed(2);
         document.getElementById('totalBet').textContent = amount.toFixed(2);
     }
 
-    function playGame() {
-        const betAmount = parseFloat(document.getElementById('betAmount').value);
-        const balance = parseFloat(document.getElementById('balance').textContent);
+    // Start roulette spin
+    function startRoulette() {
+        if (gameState.isSpinning) return;
 
-        if (betAmount > balance) {
+        const betAmount = parseFloat(document.getElementById('betAmount').value);
+        const betType = document.getElementById('betType').value;
+
+        if (betAmount > gameState.balance) {
             alert('Onvoldoende saldo!');
             return;
         }
 
+        gameState.isSpinning = true;
+        gameState.betType = betType;
+        gameState.currentBet = betAmount;
+
         const playBtn = document.getElementById('playBtn');
         playBtn.disabled = true;
-        playBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Spelen...';
+        playBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Draait...';
 
-        // Simulate game play
-        setTimeout(() => {
-            // Random win/loss
-            const won = Math.random() > 0.5;
-            const multiplier = won ? 2 : 0;
-            const winAmount = betAmount * multiplier;
-            const newBalance = balance - betAmount + winAmount;
+        // Deduct bet from balance
+        gameState.balance -= betAmount;
+        updateBalance();
 
-            // Update display
-            document.getElementById('balance').textContent = newBalance.toFixed(2);
-            document.getElementById('totalWin').textContent = (parseFloat(document.getElementById('totalWin').textContent) + winAmount).toFixed(2);
+        // Random spin duration (2-5 seconds)
+        const spinDuration = 2000 + Math.random() * 3000;
+        const totalRotation = 360 * (3 + Math.random() * 5);
 
-            // Show message
-            if (won) {
-                showGameMessage('Gewonnen!', winAmount, 'success');
-            } else {
-                showGameMessage('Verloren!', 0, 'danger');
-            }
-
-            // Reset button
-            playBtn.disabled = false;
-            playBtn.innerHTML = '<i class="fas fa-play"></i> Start Spel';
-        }, 2000);
+        spinWheel(spinDuration, totalRotation);
     }
 
-    function showGameMessage(title, amount, type) {
-        const message = document.getElementById('gameMessage');
-        const icon = document.getElementById('messageIcon');
-        const text = document.getElementById('messageText');
-        const msgAmount = document.getElementById('messageAmount');
+    // Spin wheel animation
+    function spinWheel(duration, totalRotation) {
+        const wheel = document.getElementById('rouletteWheel');
+        const startTime = Date.now();
+        const statusEl = document.getElementById('spinStatus');
+        const rotationEl = document.getElementById('spinRotation');
 
-        text.textContent = title;
-        msgAmount.textContent = amount.toFixed(2);
+        wheel.classList.add('spinning');
+        statusEl.textContent = 'Draaiing...';
 
-        if (type === 'success') {
-            icon.innerHTML = '<i class="fas fa-star" style="color: var(--success-color);"></i>';
-        } else {
-            icon.innerHTML = '<i class="fas fa-times-circle" style="color: var(--danger-color);"></i>';
+        function animate() {
+            const elapsed = Date.now() - startTime;
+            const progress = elapsed / duration;
+
+            if (progress < 1) {
+                const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+                const currentRotation = totalRotation * easeOutCubic;
+
+                wheel.style.transform = `rotate(${currentRotation}deg)`;
+                rotationEl.textContent = `${Math.round(currentRotation)}°`;
+
+                requestAnimationFrame(animate);
+            } else {
+                wheel.style.transform = `rotate(${totalRotation}deg)`;
+                rotationEl.textContent = `${Math.round(totalRotation)}°`;
+                wheel.classList.remove('spinning');
+                onSpinComplete(totalRotation % 360);
+            }
         }
 
-        message.classList.add('show');
+        animate();
     }
 
-    function closeGameMessage() {
-        document.getElementById('gameMessage').classList.remove('show');
+    // Handle spin completion
+    function onSpinComplete(finalRotation) {
+        // Calculate which number won
+        const segmentAngle = 360 / 37;
+        const normalizedRotation = (360 - finalRotation + 90) % 360;
+        const winningIndex = Math.floor(normalizedRotation / segmentAngle) % 37;
+        const winningNumber = ROULETTE_NUMBERS[winningIndex];
+
+        gameState.lastResult = winningNumber;
+
+        // Update result display
+        document.getElementById('resultNumber').textContent = winningNumber.toString().padStart(2, '0');
+
+        // Check if player won
+        const won = checkWin(winningNumber);
+
+        // Update UI
+        updateBalance();
+        showResult(winningNumber, won);
+
+        // Reset button
+        const playBtn = document.getElementById('playBtn');
+        playBtn.disabled = false;
+        playBtn.innerHTML = '<i class="fas fa-play"></i> Start Spin';
+
+        gameState.isSpinning = false;
     }
+
+    // Check if player won
+    function checkWin(winningNumber) {
+        const betType = gameState.betType;
+
+        switch (betType) {
+            case 'number':
+                return winningNumber === gameState.selectedNumber;
+            case 'red':
+                return RED_NUMBERS.includes(winningNumber);
+            case 'black':
+                return BLACK_NUMBERS.includes(winningNumber);
+            case 'even':
+                return winningNumber !== 0 && winningNumber % 2 === 0;
+            case 'odd':
+                return winningNumber !== 0 && winningNumber % 2 === 1;
+            case 'high':
+                return winningNumber >= 19 && winningNumber <= 36;
+            case 'low':
+                return winningNumber >= 1 && winningNumber <= 18;
+            default:
+                return false;
+        }
+    }
+
+    // Calculate winnings
+    function calculateWinnings(won) {
+        if (!won) return 0;
+
+        const multipliers = {
+            'number': 36,
+            'red': 2,
+            'black': 2,
+            'even': 2,
+            'odd': 2,
+            'high': 2,
+            'low': 2
+        };
+
+        const multiplier = multipliers[gameState.betType];
+        return gameState.currentBet * multiplier;
+    }
+
+    // Show result modal
+    function showResult(winningNumber, won) {
+        const modal = document.getElementById('gameResultModal');
+        const icon = document.getElementById('resultIcon');
+        const title = document.getElementById('resultTitle');
+        const amount = document.getElementById('resultAmount');
+        const details = document.getElementById('resultDetails');
+
+        if (won) {
+            const winnings = calculateWinnings(true);
+            gameState.balance += winnings;
+
+            icon.className = 'fas fa-star';
+            icon.style.color = 'var(--success-color)';
+            title.textContent = 'GEWONNEN!';
+            title.style.color = 'var(--success-color)';
+            amount.textContent = winnings.toFixed(2);
+            amount.style.color = 'var(--success-color)';
+
+            details.innerHTML = `
+                <strong>Nummer:</strong> ${winningNumber}<br>
+                <strong>Inzet:</strong> €${gameState.currentBet.toFixed(2)}<br>
+                <strong>Vermenigvuldiger:</strong> ${multipliers[gameState.betType]}x
+            `;
+        } else {
+            icon.className = 'fas fa-times-circle';
+            icon.style.color = 'var(--danger-color)';
+            title.textContent = 'VERLOREN';
+            title.style.color = 'var(--danger-color)';
+            amount.textContent = '0.00';
+            amount.style.color = 'var(--danger-color)';
+
+            details.innerHTML = `
+                <strong>Nummer:</strong> ${winningNumber}<br>
+                <strong>Je inzet:</strong> €${gameState.currentBet.toFixed(2)}<br>
+                <strong>Beter geluk volgende keer!</strong>
+            `;
+        }
+
+        modal.classList.add('show');
+    }
+
+    // Close result modal
+    function closeResult() {
+        document.getElementById('gameResultModal').classList.remove('show');
+    }
+
+    // Update balance display
+    function updateBalance() {
+        const formatted = gameState.balance.toLocaleString('nl-NL', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('balance').textContent = formatted;
+        document.getElementById('balanceDisplay').textContent = formatted;
+    }
+
+    // Handle bet type change
+    document.addEventListener('DOMContentLoaded', function () {
+        const betTypeSelect = document.getElementById('betType');
+        const numberInput = document.getElementById('selectedNumber');
+
+        betTypeSelect.addEventListener('change', function () {
+            if (this.value === 'number') {
+                numberInput.style.display = 'block';
+                gameState.selectedNumber = parseInt(numberInput.value);
+            } else {
+                numberInput.style.display = 'none';
+                gameState.selectedNumber = 0;
+            }
+            gameState.betType = this.value;
+        });
+
+        numberInput.addEventListener('change', function () {
+            gameState.selectedNumber = parseInt(this.value);
+        });
+
+        // Initialize
+        initializeRouletteWheel();
+        updateBalance();
+    });
+
+    // Allow closing modal with Escape key
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            closeResult();
+        }
+    });
 </script>
