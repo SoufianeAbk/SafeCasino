@@ -56,6 +56,7 @@ namespace SafeCasino.Services
             try
             {
                 return _dbContext.Users
+                    .AsEnumerable()  // ← Switch naar LINQ-to-Objects
                     .Select(u => (u.UserType, u.Username))
                     .ToList();
             }
