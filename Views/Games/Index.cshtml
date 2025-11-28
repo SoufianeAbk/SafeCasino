@@ -16,6 +16,11 @@
         <!-- Filters Sidebar -->
         <div class="col-lg-3">
             <form method="get" class="filter-section filter-form">
+                <!-- Hidden inputs to preserve filter state -->
+                <input type="hidden" name="pageSize" value="@Model.Filters.PageSize" />
+                <input type="hidden" name="sortBy" value="@Model.Filters.SortBy" />
+                <input type="hidden" name="sortDescending" value="@Model.Filters.SortDescending" />
+
                 <!-- Search -->
                 <div class="mb-3">
                     <label for="SearchTerm" class="form-label" style="color: var(--text-light);"><i class="fas fa-search"></i> Zoeken</label>
