@@ -27,9 +27,9 @@ namespace SafeCasino.Controllers
             ViewData["Translations"] = _localizationService.GetAllStrings(language);
             ViewData["CurrentLanguage"] = language;
 
-            // Get featured games for home page
-            ViewData["PopularGames"] = await _gameApiService.GetPopularGamesAsync(6);
-            ViewData["NewGames"] = await _gameApiService.GetNewGamesAsync(6);
+            // Get featured games for home page - Only 3 per category
+            ViewData["PopularGames"] = await _gameApiService.GetPopularGamesAsync(3);
+            ViewData["NewGames"] = await _gameApiService.GetNewGamesAsync(3);
             ViewData["JackpotGames"] = await _gameApiService.GetJackpotGamesAsync(3);
 
             return View();
