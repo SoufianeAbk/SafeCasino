@@ -94,31 +94,33 @@
             <h2 class="section-title mb-0">Populaire Spellen</h2>
             <a asp-controller="Games" asp-action="Popular" class="btn btn-secondary">Bekijk Alle</a>
         </div>
-        <div class="games-grid">
+        <div class="row g-4">
             @foreach (var game in popularGames)
             {
-                <div class="game-card fade-in">
-                    <img src="@game.ThumbnailUrl" alt="@game.Name" class="game-image" />
-                    <div class="game-info">
-                        <h5 class="game-title">@game.Name</h5>
-                        <p class="game-provider">@game.Provider</p>
-                        <div class="game-badges">
-                            @if (game.IsPopular)
-                            {
-                                <span class="badge badge-popular">POPULAIR</span>
-                            }
-                            @if (game.IsNew)
-                            {
-                                <span class="badge badge-new">NIEUW</span>
-                            }
-                            @if (game.HasJackpot)
-                            {
-                                <span class="badge badge-jackpot">JACKPOT</span>
-                            }
+                <div class="col-md-4">
+                    <div class="game-card fade-in">
+                        <img src="@game.ThumbnailUrl" alt="@game.Name" class="game-image" />
+                        <div class="game-info">
+                            <h5 class="game-title">@game.Name</h5>
+                            <p class="game-provider">@game.Provider</p>
+                            <div class="game-badges">
+                                @if (game.IsPopular)
+                                {
+                                    <span class="badge badge-popular">POPULAIR</span>
+                                }
+                                @if (game.IsNew)
+                                {
+                                    <span class="badge badge-new">NIEUW</span>
+                                }
+                                @if (game.HasJackpot)
+                                {
+                                    <span class="badge badge-jackpot">JACKPOT</span>
+                                }
+                            </div>
+                            <button class="game-play-btn" onclick="location.href='@Url.Action("Details", "Games", new { id = game.Id })'">
+                                <i class="fas fa-play"></i> Speel Nu
+                            </button>
                         </div>
-                        <button class="game-play-btn" onclick="location.href='@Url.Action("Details", "Games", new { id = game.Id })'">
-                            <i class="fas fa-play"></i> Speel Nu
-                        </button>
                     </div>
                 </div>
             }
@@ -134,24 +136,26 @@
             <h2 class="section-title mb-0">Nieuwe Spellen</h2>
             <a asp-controller="Games" asp-action="New" class="btn btn-secondary">Bekijk Alle</a>
         </div>
-        <div class="games-grid">
+        <div class="row g-4">
             @foreach (var game in newGames)
             {
-                <div class="game-card fade-in">
-                    <img src="@game.ThumbnailUrl" alt="@game.Name" class="game-image" />
-                    <div class="game-info">
-                        <h5 class="game-title">@game.Name</h5>
-                        <p class="game-provider">@game.Provider</p>
-                        <div class="game-badges">
-                            <span class="badge badge-new">NIEUW</span>
-                            @if (game.HasJackpot)
-                            {
-                                <span class="badge badge-jackpot">JACKPOT</span>
-                            }
+                <div class="col-md-4">
+                    <div class="game-card fade-in">
+                        <img src="@game.ThumbnailUrl" alt="@game.Name" class="game-image" />
+                        <div class="game-info">
+                            <h5 class="game-title">@game.Name</h5>
+                            <p class="game-provider">@game.Provider</p>
+                            <div class="game-badges">
+                                <span class="badge badge-new">NIEUW</span>
+                                @if (game.HasJackpot)
+                                {
+                                    <span class="badge badge-jackpot">JACKPOT</span>
+                                }
+                            </div>
+                            <button class="game-play-btn" onclick="location.href='@Url.Action("Details", "Games", new { id = game.Id })'">
+                                <i class="fas fa-play"></i> Speel Nu
+                            </button>
                         </div>
-                        <button class="game-play-btn" onclick="location.href='@Url.Action("Details", "Games", new { id = game.Id })'">
-                            <i class="fas fa-play"></i> Speel Nu
-                        </button>
                     </div>
                 </div>
             }
