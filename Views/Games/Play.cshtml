@@ -62,12 +62,6 @@
                             <div class="indicator-triangle"></div>
                             <div class="indicator-number" id="resultNumber">00</div>
                         </div>
-
-                        <!-- Spin counter -->
-                        <div class="spin-info">
-                            <div id="spinStatus" class="spin-status">Bereid je voor...</div>
-                            <div id="spinRotation" class="spin-rotation">0°</div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -276,27 +270,6 @@
         min-width: 40px;
     }
 
-    .spin-info {
-        position: absolute;
-        bottom: -60px;
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
-        width: 200px;
-    }
-
-    .spin-status {
-        color: var(--text-light);
-        font-weight: 600;
-        margin-bottom: 5px;
-    }
-
-    .spin-rotation {
-        color: var(--accent-color);
-        font-size: 0.9rem;
-        font-weight: 600;
-    }
-
     /* Result Modal */
     .game-result-modal {
         position: fixed;
@@ -362,31 +335,25 @@
     }
 
     @@keyframes bounce {
-        0%, 100%
+        0%, 100% {
+            transform: translateY(0);
+        }
 
-    {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-20px);
-    }
-
+        50% {
+            transform: translateY(-20px);
+        }
     }
 
     @@keyframes slideUp {
-        from
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
 
-    {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     /* Bet type selector visibility */
@@ -528,11 +495,8 @@
     function spinWheel(duration, totalRotation) {
         const wheel = document.getElementById('rouletteWheel');
         const startTime = Date.now();
-        const statusEl = document.getElementById('spinStatus');
-        const rotationEl = document.getElementById('spinRotation');
 
         wheel.classList.add('spinning');
-        statusEl.textContent = 'Draaiing...';
 
         function animate() {
             const elapsed = Date.now() - startTime;
@@ -543,12 +507,10 @@
                 const currentRotation = totalRotation * easeOutCubic;
 
                 wheel.style.transform = `rotate(${currentRotation}deg)`;
-                rotationEl.textContent = `${Math.round(currentRotation)}°`;
 
                 requestAnimationFrame(animate);
             } else {
                 wheel.style.transform = `rotate(${totalRotation}deg)`;
-                rotationEl.textContent = `${Math.round(totalRotation)}°`;
                 wheel.classList.remove('spinning');
                 onSpinComplete(totalRotation % 360);
             }

@@ -20,6 +20,16 @@
                 <input type="hidden" name="pageSize" value="@Model.Filters.PageSize" />
                 <input type="hidden" name="sortBy" value="@Model.Filters.SortBy" />
                 <input type="hidden" name="sortDescending" value="@Model.Filters.SortDescending" />
+                <input type="hidden" name="pageNumber" value="1" />
+
+                <!-- Preserve all filter selections -->
+                <input type="hidden" name="searchTerm" value="@Model.Filters.SearchTerm" />
+                <input type="hidden" name="provider" value="@Model.Filters.Provider" />
+                <input type="hidden" name="minBet" value="@Model.Filters.MinBet" />
+                <input type="hidden" name="maxBet" value="@Model.Filters.MaxBet" />
+                <input type="hidden" name="hasJackpot" value="@(Model.Filters.HasJackpot.HasValue? Model.Filters.HasJackpot.Value.ToString().ToLower() : "")" />
+                <input type="hidden" name="isNew" value="@(Model.Filters.IsNew.HasValue? Model.Filters.IsNew.Value.ToString().ToLower() : "")" />
+                <input type="hidden" name="isPopular" value="@(Model.Filters.IsPopular.HasValue? Model.Filters.IsPopular.Value.ToString().ToLower() : "")" />
 
                 <!-- Search -->
                 <div class="mb-3">
