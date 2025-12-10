@@ -324,6 +324,26 @@ body {
     padding: 0.6rem 1rem;
 }
 
+    /* FIX: Placeholder text visibility */
+    .form-control::placeholder {
+        color: #cccccc;
+        opacity: 1;
+    }
+
+    .form-control::-webkit-input-placeholder {
+        color: #cccccc;
+        opacity: 1;
+    }
+
+    .form-control::-moz-placeholder {
+        color: #cccccc;
+        opacity: 1;
+    }
+
+    .form-control:-ms-input-placeholder {
+        color: #cccccc;
+    }
+
     .form-control:focus,
     .form-select:focus {
         background: var(--bg-dark);
@@ -462,12 +482,17 @@ body {
             color: var(--primary-color);
         }
 
+    /* FIX: Make footer text more visible */
+    .footer p {
+        color: #d1d5db !important;
+    }
+
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
     margin-top: 2rem;
     border-top: 1px solid var(--border-color);
-    color: var(--text-gray);
+    color: #d1d5db;
     font-size: 0.9rem;
 }
 
@@ -913,6 +938,11 @@ body {
     .game-header .game-title {
         font-size: 1.5rem;
     }
+}
+
+/* ==================== TEXT UTILITIES ==================== */
+.text-muted {
+    color: #d1d5db !important;
 }
 
 /* ==================== ALERTS ==================== */
