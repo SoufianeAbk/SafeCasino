@@ -1,6 +1,6 @@
 ﻿@model SafeCasino.ViewModels.GameListViewModel
 @{
-    ViewData["Title"] = @Localize("Games");
+    ViewData["Title"] = Localize("Games");
 }
 
 <div class="container py-5">
@@ -11,6 +11,14 @@
         </h1>
         <p style="color: var(--text-light);">@Localize("DiscoverGames")</p>
     </div>
+
+    @{
+        // Precompute localized strings used inside Html.Raw interpolations
+        var nameAz = Localize("NameAZ");
+        var highToLow = Localize("HighToLow");
+        var popularText = Localize("Popular");
+        var newestText = Localize("Newest");
+    }
 
     <div class="row g-4">
         <!-- Filters Sidebar -->
@@ -27,15 +35,15 @@
                 <input type="hidden" name="provider" value="@Model.Filters.Provider" />
                 <input type="hidden" name="minBet" value="@Model.Filters.MinBet" />
                 <input type="hidden" name="maxBet" value="@Model.Filters.MaxBet" />
-                <input type="hidden" name="hasJackpot" value="@(Model.Filters.HasJackpot.HasValue? Model.Filters.HasJackpot.Value.ToString().ToLower() : "")" />
-                <input type="hidden" name="isNew" value="@(Model.Filters.IsNew.HasValue? Model.Filters.IsNew.Value.ToString().ToLower() : "")" />
-                <input type="hidden" name="isPopular" value="@(Model.Filters.IsPopular.HasValue? Model.Filters.IsPopular.Value.ToString().ToLower() : "")" />
+                <input type="hidden" name="hasJackpot" value="@(Model.Filters.HasJackpot.HasValue ? Model.Filters.HasJackpot.Value.ToString().ToLower() : "")" />
+                <input type="hidden" name="isNew" value="@(Model.Filters.IsNew.HasValue ? Model.Filters.IsNew.Value.ToString().ToLower() : "")" />
+                <input type="hidden" name="isPopular" value="@(Model.Filters.IsPopular.HasValue ? Model.Filters.IsPopular.Value.ToString().ToLower() : "")" />
 
                 <!-- Search -->
                 <div class="mb-3">
                     <label for="SearchTerm" class="form-label" style="color: var(--text-light);"><i class="fas fa-search"></i> @Localize("Search")</label>
                     <input type="text" class="form-control" id="SearchTerm" name="SearchTerm"
-                           placeholder="@Localize("SearchGames")" value="@Model.Filters.SearchTerm">
+                           placeholder='@Localize("SearchGames")' value="@Model.Filters.SearchTerm">
                 </div>
 
                 <!-- Category -->
@@ -76,11 +84,11 @@
                     <div class="row g-2">
                         <div class="col-6">
                             <input type="number" class="form-control" name="MinBet"
-                                   placeholder="@Localize("Min")" value="@Model.Filters.MinBet" step="0.01">
+                                   placeholder='@Localize("Min")' value="@Model.Filters.MinBet" step="0.01">
                         </div>
                         <div class="col-6">
                             <input type="number" class="form-control" name="MaxBet"
-                                   placeholder="@Localize("Max")" value="@Model.Filters.MaxBet" step="0.01">
+                                   placeholder='@Localize("Max")' value="@Model.Filters.MaxBet" step="0.01">
                         </div>
                     </div>
                 </div>
@@ -121,10 +129,10 @@
                             var _sPop = Model.Filters.SortBy == "Popular" ? " selected" : string.Empty;
                             var _sNew = Model.Filters.SortBy == "New" ? " selected" : string.Empty;
                         }
-                        @Html.Raw($"<option value=\"Name\"{_sName}>@Localize("NameAZ")</option>")
-                        @Html.Raw($"<option value=\"RTP\"{_sRtp}>RTP @Localize("HighToLow")</option>")
-                        @Html.Raw($"<option value=\"Popular\"{_sPop}>@Localize("Popular")</option>")
-                        @Html.Raw($"<option value=\"New\"{_sNew}>@Localize("Newest")</option>")
+                        @Html.Raw($"<option value=\"Name\"{_sName}>{nameAz}</option>")
+                        @Html.Raw($"<option value=\"RTP\"{_sRtp}>RTP {highToLow}</option>")
+                        @Html.Raw($"<option value=\"Popular\"{_sPop}>{popularText}</option>")
+                        @Html.Raw($"<option value=\"New\"{_sNew}>{newestText}</option>")
                     </select>
                 </div>
 

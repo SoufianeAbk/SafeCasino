@@ -1,242 +1,124 @@
-﻿@model SafeCasino.ViewModels.GameDetailViewModel
+﻿@model SafeCasino.Models.Game
 @{
-    ViewData["Title"] = Model.Game.Name;
+    ViewData["Title"] = "Game Details";
+    var lang = Context.Request.Cookies["language"] ?? "nl";
 }
 
 <div class="container py-5">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">@Localize("Home")</a></li>
-            <li class="breadcrumb-item"><a asp-controller="Games" asp-action="Index">@Localize("Games")</a></li>
-            <li class="breadcrumb-item active">@Model.Game.Name</li>
-        </ol>
-    </nav>
-
-    <div class="row g-4">
-        <!-- Game Image & Info -->
-        <div class="col-lg-6">
-            <div class="card" style="background: var(--bg-card); border: none;">
-                <img src="@Model.Game.ThumbnailUrl" alt="@Model.Game.Name" class="card-img-top" style="border-radius: 12px;">
-                <div class="card-body">
-                    <h2 class="card-title mb-3" style="color: var(--text-light);">@Model.Game.Name</h2>
-                    <div class="d-flex gap-2 mb-3 flex-wrap">
-                        @if (Model.Game.IsPopular)
-                        {
-                            <span class="badge badge-popular">
-                                <i class="fas fa-fire"></i> @Localize("Popular")
-                            </span>
-                        }
-                        @if (Model.Game.IsNew)
-                        {
-                            <span class="badge badge-new">
-                                <i class="fas fa-star"></i> @Localize("New")
-                            </span>
-                        }
-                        @if (Model.Game.HasJackpot)
-                        {
-                            <span class="badge badge-jackpot">
-                                <i class="fas fa-trophy"></i> @Localize("Jackpot")
-                            </span>
-                        }
-                        <span class="badge" style="background: var(--bg-dark);">
-                            @Model.Game.Category
-                        </span>
-                    </div>
-
-                    <p class="card-text" style="color: var(--text-light); margin-bottom: 1.5rem;">@Model.Game.Description</p>
-
-                    <div class="row g-3 mb-4">
-                        <div class="col-6">
-                            <div class="p-3" style="background: var(--bg-dark); border-radius: 8px;">
-                                <small style="color: var(--text-light); display: block; margin-bottom: 0.5rem;">
-                                    <i class="fas fa-building"></i> @Localize("Provider")
-                                </small>
-                                <strong style="color: var(--text-light);">@Model.Game.Provider</strong>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="p-3" style="background: var(--bg-dark); border-radius: 8px;">
-                                <small style="color: var(--text-light); display: block; margin-bottom: 0.5rem;">
-                                    <i class="fas fa-chart-line"></i> @Localize("RTP")
-                                </small>
-                                <strong style="color: var(--accent-color);">@Model.Game.RTP.ToString("F2")%</strong>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="p-3" style="background: var(--bg-dark); border-radius: 8px;">
-                                <small style="color: var(--text-light); display: block; margin-bottom: 0.5rem;">
-                                    <i class="fas fa-coins"></i> @Localize("MinBet")
-                                </small>
-                                <strong style="color: var(--text-light);">€@Model.Game.MinBet</strong>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="p-3" style="background: var(--bg-dark); border-radius: 8px;">
-                                <small style="color: var(--text-light); display: block; margin-bottom: 0.5rem;">
-                                    <i class="fas fa-coins"></i> @Localize("MaxBet")
-                                </small>
-                                <strong style="color: var(--text-light);">€@Model.Game.MaxBet</strong>
-                            </div>
-                        </div>
-                    </div>
-
-                    @if (Model.Game.Tags.Any())
-                    {
-                        <div class="mb-4">
-                            <small style="color: var(--text-light); display: block; margin-bottom: 0.5rem;">
-                                <i class="fas fa-tags"></i> @Localize("Tags")
-                            </small>
-                            <div class="d-flex gap-2 flex-wrap">
-                                @foreach (var tag in Model.Game.Tags)
-                                {
-                                    <span class="badge" style="background: var(--bg-dark); color: var(--text-light);">@tag</span>
-                                }
-                            </div>
-                        </div>
-                    }
-
-                    <div class="d-grid gap-2">
-                        <a href="@Url.Action("Play", "Games", new { id = Model.Game.Id })" class="btn btn-primary btn-lg">
-                            <i class="fas fa-play"></i> @Localize("PlayDemo")
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Game Features & Related -->
-        <div class="col-lg-6">
-            <!-- Game Features -->
-            <div class="card mb-4" style="background: var(--bg-card); border: none;">
-                <div class="card-body">
-                    <h4 class="card-title mb-4" style="color: var(--text-light);">
-                        <i class="fas fa-info-circle"></i> @Localize("AboutThisGame")
-                    </h4>
-                    <div class="row g-3">
-                        <div class="col-12">
-                            <div class="d-flex align-items-center p-3" style="background: var(--bg-dark); border-radius: 8px;">
-                                <i class="fas fa-dice fa-2x me-3" style="color: var(--primary-color);"></i>
-                                <div>
-                                    <strong style="color: var(--text-light);">@Localize("GameType")</strong>
-                                    <p class="mb-0" style="color: var(--text-light); font-size: 0.9rem;">@Model.Game.Category @Localize("GameWithFeatures")</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center p-3" style="background: var(--bg-dark); border-radius: 8px;">
-                                <i class="fas fa-mobile-alt fa-2x me-3" style="color: var(--primary-color);"></i>
-                                <div>
-                                    <strong style="color: var(--text-light);">@Localize("MobileFriendly")</strong>
-                                    <p class="mb-0" style="color: var(--text-light); font-size: 0.9rem;">@Localize("PlayOnDesktopTabletMobile")</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center p-3" style="background: var(--bg-dark); border-radius: 8px;">
-                                <i class="fas fa-shield-alt fa-2x me-3" style="color: var(--primary-color);"></i>
-                                <div>
-                                    <strong style="color: var(--text-light);">@Localize("FairAndSafe")</strong>
-                                    <p class="mb-0" style="color: var(--text-light); font-size: 0.9rem;">@Localize("CertifiedRNG")</p>
-                                </div>
-                            </div>
-                        </div>
-                        @if (Model.Game.HasJackpot)
-                        {
-                            <div class="col-12">
-                                <div class="d-flex align-items-center p-3" style="background: linear-gradient(135deg, var(--accent-color) 0%, #ff6b6b 100%); border-radius: 8px;">
-                                    <i class="fas fa-trophy fa-2x me-3" style="color: white;"></i>
-                                    <div>
-                                        <strong style="color: white;">@Localize("ProgressiveJackpot")</strong>
-                                        <p class="mb-0" style="color: white; font-size: 0.9rem;">@Localize("WinBigJackpot")</p>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-
-            <!-- Related Games -->
-            @if (Model.RelatedGames.Any())
-            {
-                <div class="card" style="background: var(--bg-card); border: none;">
-                    <div class="card-body">
-                        <h4 class="card-title mb-4" style="color: var(--text-light);">
-                            <i class="fas fa-gamepad"></i> @Localize("SimilarGames")
-                        </h4>
-                        <div class="row g-3">
-                            @foreach (var game in Model.RelatedGames)
-                            {
-                                <div class="col-12">
-                                    <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id"
-                                       class="text-decoration-none">
-                                        <div class="d-flex align-items-center p-2"
-                                             style="background: var(--bg-dark); border-radius: 8px; transition: all 0.3s ease;"
-                                             onmouseover="this.style.background='var(--primary-color)'"
-                                             onmouseout="this.style.background='var(--bg-dark)'">
-                                            <img src="@game.ThumbnailUrl"
-                                                 alt="@game.Name"
-                                                 style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px;"
-                                                 class="me-3">
-                                            <div class="flex-grow-1">
-                                                <strong class="d-block" style="color: var(--text-light);">@game.Name</strong>
-                                                <small style="color: var(--text-light);">@game.Provider</small>
-                                            </div>
-                                            <i class="fas fa-chevron-right" style="color: var(--text-light);"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                            }
-                        </div>
-                        <div class="text-center mt-3">
-                            <a asp-controller="Games" asp-action="Index" asp-route-category="@Model.Game.Category"
-                               class="btn btn-secondary">
-                                <i class="fas fa-th"></i> @Localize("ViewAllCategory") @Model.Game.Category @Localize("Games")
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-
-    <!-- Game Rules/Instructions -->
-    <div class="row mt-5">
-        <div class="col-12">
-            <div class="card" style="background: var(--bg-card); border: none;">
-                <div class="card-body">
-                    <h4 class="card-title mb-4" style="color: var(--text-light);">
-                        <i class="fas fa-book"></i> @Localize("GameRules")
-                    </h4>
-                    <div class="row g-4">
-                        <div class="col-md-4">
-                            <h5 style="color: var(--text-light);"><i class="fas fa-play-circle" style="color: var(--primary-color);"></i> @Localize("HowToPlay")</h5>
-                            <p style="color: var(--text-light);">
-                                @Model.Game.Name @Localize("IsEasyToLearn"). @Localize("SelectBetStartGameEnjoy")
-                            </p>
-                        </div>
-                        <div class="col-md-4">
-                            <h5 style="color: var(--text-light);"><i class="fas fa-lightbulb" style="color: var(--accent-color);"></i> @Localize("Tips")</h5>
-                            <p style="color: var(--text-light);">
-                                @Localize("StartWithDemoMode"). @Localize("AlwaysSetLimits")
-                            </p>
-                        </div>
-                        <div class="col-md-4">
-                            <h5 style="color: var(--text-light);"><i class="fas fa-trophy" style="color: var(--success-color);"></i> @Localize("Winning")</h5>
-                            <p style="color: var(--text-light);">
-                                @Localize("WithRTP") @Model.Game.RTP.ToString("F1")% @Localize("OffersGoodOdds"). @Localize("PlayResponsiblyGoodLuck")
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Back to Games -->
-    <div class="text-center mt-4">
-        <a asp-controller="Games" asp-action="Index" class="btn btn-secondary btn-lg">
-            <i class="fas fa-arrow-left"></i> @Localize("BackToGames")
+    <div class="mb-4">
+        <a href="/Game" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i>@localizationService.GetString("BackToGames", lang)
         </a>
     </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="game-image-card">
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid rounded" />
+                }
+                else
+                {
+                    <div class="placeholder-image text-center">
+                        <i class="fas fa-gamepad fa-10x text-muted"></i>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="game-info-card">
+                <h1 class="mb-3">@Model.Name</h1>
+
+                <div class="mb-3">
+                    <span class="badge bg-primary me-2">@Model.Category</span>
+                    @if (Model.IsPopular)
+                    {
+                        <span class="badge bg-warning">@localizationService.GetString("Popular", lang)</span>
+                    }
+                    @if (Model.IsNew)
+                    {
+                        <span class="badge bg-success">@localizationService.GetString("New", lang)</span>
+                    }
+                </div>
+
+                <p class="lead">@Model.Description</p>
+
+                <div class="game-stats mb-4">
+                    <div class="row">
+                        <div class="col-6 mb-2">
+                            <strong>@localizationService.GetString("MinBet", lang):</strong> €@Model.MinBet
+                        </div>
+                        <div class="col-6 mb-2">
+                            <strong>@localizationService.GetString("MaxBet", lang):</strong> €@Model.MaxBet
+                        </div>
+                        <div class="col-6 mb-2">
+                            <strong>@localizationService.GetString("Players", lang):</strong> @Model.PlayersCount
+                        </div>
+                        <div class="col-6 mb-2">
+                            <strong>@localizationService.GetString("Rating", lang):</strong> @Model.Rating / 5
+                        </div>
+                    </div>
+                </div>
+
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <a href="/Game/Play/@Model.Id" class="btn btn-primary btn-lg w-100 mb-2">
+                        <i class="fas fa-play me-2"></i>@localizationService.GetString("PlayNow", lang)
+                    </a>
+                    <button class="btn btn-outline-secondary w-100">
+                        <i class="fas fa-heart me-2"></i>@localizationService.GetString("AddToFavorites", lang)
+                    </button>
+                }
+                else
+                {
+                    <a href="/Account/Login" class="btn btn-primary btn-lg w-100">
+                        <i class="fas fa-sign-in-alt me-2"></i>@localizationService.GetString("LoginToPlay", lang)
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.Rules))
+    {
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="rules-card">
+                    <h2 class="mb-4">@localizationService.GetString("HowToPlay", lang)</h2>
+                    <div>@Html.Raw(Model.Rules)</div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
+
+<style>
+    .game-image-card {
+        background: white;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .placeholder-image {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 15px;
+        padding: 100px 50px;
+    }
+
+    .game-info-card {
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .rules-card {
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+</style>

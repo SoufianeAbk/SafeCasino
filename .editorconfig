@@ -1,4 +1,4 @@
-﻿// Services/ILocalizationService.cs
+// Services/ILocalizationService.cs
 namespace SafeCasino.Services
 {
     public interface ILocalizationService
@@ -59,8 +59,7 @@ namespace SafeCasino.Services
                 ["WelcomeToSafeCasino"] = "Welkom bij SafeCasino",
                 ["About"] = "Over",
                 ["Privacy"] = "Privacy",
-                ["Contact"] = "Contact",
-                // add any other keys referenced by views/controllers
+                ["Contact"] = "Contact"
             },
             ["en"] = new Dictionary<string, string>
             {
@@ -106,8 +105,7 @@ namespace SafeCasino.Services
                 ["WelcomeToSafeCasino"] = "Welcome to SafeCasino",
                 ["About"] = "About",
                 ["Privacy"] = "Privacy",
-                ["Contact"] = "Contact",
-                // add any other keys referenced by views/controllers
+                ["Contact"] = "Contact"
             }
         };
 
@@ -127,6 +125,7 @@ namespace SafeCasino.Services
             if (!_translations.ContainsKey(language))
                 language = "nl";
 
+            // Return a copy to avoid external mutation
             return new Dictionary<string, string>(_translations[language]);
         }
     }

@@ -1,231 +1,243 @@
 ﻿@{
-    ViewData["Title"] = "Home";
-    var popularGames = ViewData["PopularGames"] as List<SafeCasino.Models.Game> ?? new List<SafeCasino.Models.Game>();
-    var newGames = ViewData["NewGames"] as List<SafeCasino.Models.Game> ?? new List<SafeCasino.Models.Game>();
-    var jackpotGames = ViewData["JackpotGames"] as List<SafeCasino.Models.Game> ?? new List<SafeCasino.Models.Game>();
+    ViewData["Title"] = localizationService.GetString("Home", currentLanguage);
 }
 
-<!-- Hero Section -->
-<div class="hero-section">
-    <div class="container">
-        <h1>SafeCasino</h1>
-        <p>@Localize("DiscoverGames")</p>
-        <a asp-controller="Games" asp-action="Index" class="btn btn-primary btn-lg">
-            <i class="fas fa-play"></i> @Localize("BeginPlaying")
-        </a>
-    </div>
-</div>
+@functions {
+    private string Localize(string key) => localizationService.GetString(key, currentLanguage) ?? key;
+}
 
-<!-- Featured Banners -->
-<div class="container featured-banners">
-    <div class="row g-3">
-        <div class="col-md-4">
-            <div class="banner-card" style="background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);">
-                <div class="banner-content">
-                    <h3>€10 @Localize("Bonus")</h3>
-                    <p>@Localize("DailyBonus")</p>
-                    <button class="btn">@Localize("PlayNow")</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="banner-card" style="background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);">
-                <div class="banner-content">
-                    <h3>@Localize("Jackpot")</h3>
-                    <p>€180.000+ @Localize("PrizePool")</p>
-                    <button class="btn">@Localize("MoreInfo")</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="banner-card" style="background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);">
-                <div class="banner-content">
-                    <h3>@Localize("LiveCasino")</h3>
-                    <p>@Localize("RealDealers")</p>
-                    <button class="btn">@Localize("PlayNow")</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Category Section -->
-<div class="container category-section">
-    <h2 class="section-title text-center">@Localize("ChooseCategory")</h2>
-    <div class="category-grid">
-        <a asp-controller="Games" asp-action="Index" asp-route-category="Slots" class="text-decoration-none">
-            <div class="category-icon">
-                <i class="fas fa-star"></i>
-            </div>
-            <div class="category-name">@Localize("Slots")</div>
-        </a>
-        <a asp-controller="Games" asp-action="Index" asp-route-category="Roulette" class="text-decoration-none">
-            <div class="category-icon">
-                <i class="fas fa-circle-notch"></i>
-            </div>
-            <div class="category-name">@Localize("Roulette")</div>
-        </a>
-        <a asp-controller="Games" asp-action="Index" asp-route-category="Blackjack" class="text-decoration-none">
-            <div class="category-icon">
-                <i class="fas fa-heart"></i>
-            </div>
-            <div class="category-name">@Localize("Blackjack")</div>
-        </a>
-        <a asp-controller="Games" asp-action="Index" asp-route-category="LiveCasino" class="text-decoration-none">
-            <div class="category-icon">
-                <i class="fas fa-video"></i>
-            </div>
-            <div class="category-name">@Localize("LiveCasino")</div>
-        </a>
-        <a asp-controller="Games" asp-action="Index" asp-route-category="Jackpot" class="text-decoration-none">
-            <div class="category-icon">
-                <i class="fas fa-trophy"></i>
-            </div>
-            <div class="category-name">@Localize("Jackpot")</div>
-        </a>
-    </div>
-</div>
-
-<!-- Popular Games -->
-@if (popularGames.Any())
-{
-    <div class="container games-section">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="section-title mb-0">@Localize("PopularGames")</h2>
-            <a asp-controller="Games" asp-action="Popular" class="btn btn-secondary">@Localize("ViewAll")</a>
-        </div>
-        <div class="row g-4">
-            @foreach (var game in popularGames)
-            {
-                <div class="col-md-4">
-                    <div class="game-card fade-in">
-                        <img src="@game.ThumbnailUrl" alt="@game.Name" class="game-image" />
-                        <div class="game-info">
-                            <h5 class="game-title">@game.Name</h5>
-                            <p class="game-provider">@game.Provider</p>
-                            <div class="game-badges">
-                                @if (game.IsPopular)
-                                {
-                                    <span class="badge badge-popular">@Localize("Popular")</span>
-                                }
-                                @if (game.IsNew)
-                                {
-                                    <span class="badge badge-new">@Localize("New")</span>
-                                }
-                                @if (game.HasJackpot)
-                                {
-                                    <span class="badge badge-jackpot">@Localize("Jackpot")</span>
-                                }
-                            </div>
-                            <button class="game-play-btn" onclick="location.href='@Url.Action("Details", "Games", new { id = game.Id })'">
-                                <i class="fas fa-play"></i> @Localize("PlayNow")
-                            </button>
-                        </div>
+<div class="home-container">
+    <!-- Hero Section -->
+    <section class="hero-section text-white text-center py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-3 fw-bold mb-4">
+                        @Localize("WelcomeToSafeCasino")
+                    </h1>
+                    <p class="lead mb-4">
+                        @Localize("HeroDescription")
+                    </p>
+                    <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
+                        <a href="/Account/Register" class="btn btn-light btn-lg">
+                            <i class="fas fa-user-plus me-2"></i>@Localize("GetStarted")
+                        </a>
+                        <a href="/Game" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-gamepad me-2"></i>@Localize("PlayNow")
+                        </a>
                     </div>
                 </div>
-            }
-        </div>
-    </div>
-}
-
-<!-- New Games -->
-@if (newGames.Any())
-{
-    <div class="container games-section">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="section-title mb-0">@Localize("NewGames")</h2>
-            <a asp-controller="Games" asp-action="New" class="btn btn-secondary">@Localize("ViewAll")</a>
-        </div>
-        <div class="row g-4">
-            @foreach (var game in newGames)
-            {
-                <div class="col-md-4">
-                    <div class="game-card fade-in">
-                        <img src="@game.ThumbnailUrl" alt="@game.Name" class="game-image" />
-                        <div class="game-info">
-                            <h5 class="game-title">@game.Name</h5>
-                            <p class="game-provider">@game.Provider</p>
-                            <div class="game-badges">
-                                <span class="badge badge-new">@Localize("New")</span>
-                                @if (game.HasJackpot)
-                                {
-                                    <span class="badge badge-jackpot">@Localize("Jackpot")</span>
-                                }
-                            </div>
-                            <button class="game-play-btn" onclick="location.href='@Url.Action("Details", "Games", new { id = game.Id })'">
-                                <i class="fas fa-play"></i> @Localize("PlayNow")
-                            </button>
-                        </div>
+                <div class="col-lg-6 mt-4 mt-lg-0">
+                    <div class="hero-image">
+                        <i class="fas fa-dice-five fa-10x text-warning"></i>
                     </div>
                 </div>
-            }
+            </div>
         </div>
-    </div>
-}
+    </section>
 
-<!-- Jackpot Games -->
-@if (jackpotGames.Any())
-{
-    <div class="container games-section">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="section-title mb-0">
-                <i class="fas fa-trophy"></i> @Localize("JackpotGames")
-            </h2>
-            <a asp-controller="Games" asp-action="Jackpot" class="btn btn-secondary">@Localize("ViewAll")</a>
-        </div>
-        <div class="row g-4">
-            @foreach (var game in jackpotGames)
-            {
+    <!-- Features Section -->
+    <section class="features-section py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">@Localize("WhyChooseUs")</h2>
+            <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="game-card fade-in">
-                        <img src="@game.ThumbnailUrl" alt="@game.Name" class="game-image" />
-                        <div class="game-info">
-                            <h5 class="game-title">@game.Name</h5>
-                            <p class="game-provider">@game.Provider</p>
-                            <div class="game-badges">
-                                <span class="badge badge-jackpot">@Localize("Jackpot")</span>
-                            </div>
-                            <button class="game-play-btn" onclick="location.href='@Url.Action("Details", "Games", new { id = game.Id })'">
-                                <i class="fas fa-play"></i> @Localize("PlayNow")
-                            </button>
+                    <div class="feature-card text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-shield-alt fa-3x text-primary"></i>
                         </div>
+                        <h4>@Localize("SafeAndSecure")</h4>
+                        <p class="text-muted">@Localize("SafeDescription")</p>
                     </div>
                 </div>
-            }
+                <div class="col-md-4">
+                    <div class="feature-card text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-bolt fa-3x text-warning"></i>
+                        </div>
+                        <h4>@Localize("FastPayouts")</h4>
+                        <p class="text-muted">@Localize("PayoutsDescription")</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-headset fa-3x text-success"></i>
+                        </div>
+                        <h4>@Localize("Support247")</h4>
+                        <p class="text-muted">@Localize("SupportDescription")</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-}
+    </section>
 
-<!-- Features Section -->
-<div class="container py-5">
-    <div class="row g-4 text-center">
-        <div class="col-md-3">
-            <div class="feature-card">
-                <i class="fas fa-shield-alt fa-3x mb-3" style="color: var(--primary-color);"></i>
-                <h5>@Localize("SafeAndTrusted")</h5>
-                <p class="text-muted">@Localize("SafeTransactions")</p>
+    <!-- Popular Games Section -->
+    <section class="games-section py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">@Localize("PopularGames")</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="game-card">
+                        <div class="game-icon">
+                            <i class="fas fa-circle-notch fa-4x"></i>
+                        </div>
+                        <h3>@Localize("Roulette")</h3>
+                        <p>@Localize("RouletteDescription")</p>
+                        <a href="/Game/Roulette" class="btn btn-primary">
+                            @Localize("PlayNow") <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="game-card">
+                        <div class="game-icon">
+                            <i class="fas fa-coins fa-4x"></i>
+                        </div>
+                        <h3>@Localize("Slots")</h3>
+                        <p>@Localize("SlotsDescription")</p>
+                        <a href="/Game/Slots" class="btn btn-primary">
+                            @Localize("PlayNow") <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="game-card">
+                        <div class="game-icon">
+                            <i class="fas fa-heart fa-4x"></i>
+                        </div>
+                        <h3>@Localize("Blackjack")</h3>
+                        <p>@Localize("BlackjackDescription")</p>
+                        <a href="/Game/Blackjack" class="btn btn-primary">
+                            @Localize("PlayNow") <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="feature-card">
-                <i class="fas fa-headset fa-3x mb-3" style="color: var(--primary-color);"></i>
-                <h5>@Localize("Support24_7")</h5>
-                <p class="text-muted">@Localize("AlwaysAvailable")</p>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section py-5">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                        <h3 class="display-4 fw-bold">10K+</h3>
+                        <p>@Localize("ActivePlayers")</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <i class="fas fa-gamepad fa-3x text-primary mb-3"></i>
+                        <h3 class="display-4 fw-bold">50+</h3>
+                        <p>@Localize("Games")</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <i class="fas fa-trophy fa-3x text-warning mb-3"></i>
+                        <h3 class="display-4 fw-bold">€1M+</h3>
+                        <p>@Localize("PaidOut")</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <i class="fas fa-star fa-3x text-warning mb-3"></i>
+                        <h3 class="display-4 fw-bold">4.8</h3>
+                        <p>@Localize("Rating")</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="feature-card">
-                <i class="fas fa-bolt fa-3x mb-3" style="color: var(--primary-color);"></i>
-                <h5>@Localize("FastPayouts")</h5>
-                <p class="text-muted">@Localize("ReceiveWinnings")</p>
-            </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section text-white text-center py-5">
+        <div class="container">
+            <h2 class="display-4 fw-bold mb-4">@Localize("ReadyToStart")</h2>
+            <p class="lead mb-4">@Localize("CTADescription")</p>
+            <a href="/Account/Register" class="btn btn-light btn-lg">
+                <i class="fas fa-rocket me-2"></i>@Localize("JoinNow")
+            </a>
         </div>
-        <div class="col-md-3">
-            <div class="feature-card">
-                <i class="fas fa-mobile-alt fa-3x mb-3" style="color: var(--primary-color);"></i>
-                <h5>@Localize("MobileFriendly")</h5>
-                <p class="text-muted">@Localize("PlayAnywhere")</p>
-            </div>
-        </div>
-    </div>
+    </section>
 </div>
+
+<style>
+    .home-container {
+        padding: 0;
+    }
+
+    .hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 500px;
+        display: flex;
+        align-items: center;
+    }
+
+    .hero-image {
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @@keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    .features-section {
+        background: #f8f9fa;
+    }
+
+    .feature-card {
+        background: white;
+        border-radius: 15px;
+        transition: all 0.3s ease;
+        height: 100%;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+    .game-card {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+    .game-icon {
+        color: #667eea;
+        margin-bottom: 20px;
+    }
+
+    .stats-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .stat-item {
+        padding: 20px;
+    }
+
+    .cta-section {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        padding: 80px 0;
+    }
+</style>

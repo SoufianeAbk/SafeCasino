@@ -2,57 +2,53 @@
 
 namespace SafeCasino.Controllers
 {
-    /// <summary>
-    /// Controller for handling language switching
-    /// Stores language preference in cookies
-    /// </summary>
     public class LanguageController : Controller
     {
         /// <summary>
-        /// Set the language and redirect back to previous page
-        /// Usage: /Language/Set/en or /Language/Set/nl
+        /// Sets the language cookie and redirects back to the referring page
         /// </summary>
-        [HttpGet]
-        public IActionResult Set(string language)
+        /// <param name="lang">Language code (nl, en, fr)</param>
+        [HttpGet("/Language/Set/{lang}")]
+        public IActionResult Set(string lang)
         {
-            // Validate language code
-            if (string.IsNullOrEmpty(language) || (language != "nl" && language != "en"))
+            // Validate language parameter
+            var supportedLanguages = new[] { "nl", "en", "fr" };
+            if (string.IsNullOrEmpty(lang) || !supportedLanguages.Contains(lang.ToLower()))
             {
-                language = "nl"; // Default to Dutch
+                lang = "nl"; // Default to Dutch
             }
 
-            // Set cookie to persist language choice (expires in 1 year)
-            Response.Cookies.Append(
-                "language",
-                language,
-                new CookieOptions
-                {
-                    Expires = DateTimeOffset.UtcNow.AddYears(1),
-                    HttpOnly = false,
-                    IsEssential = true,
-                    SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Lax
-                }
-            );
-
-            // Redirect back to referring page, or home if none
-            var referer = Request.Headers["Referer"].ToString();
-            if (!string.IsNullOrEmpty(referer))
+            // Set language cookie
+            Response.Cookies.Append("language", lang.ToLower(), new CookieOptions
             {
-                return Redirect(referer);
+                Expires = DateTimeOffset.UtcNow.AddYears(1),  // Cookie expires in 1 year
+                HttpOnly = false,                              // Allow JavaScript access if needed
+                Secure = false,                                // Set to true in production with HTTPS
+                SameSite = SameSiteMode.Lax,                  // Protect against CSRF
+                Path = "/"                                     // Available throughout the site
+            });
+
+            // Get the referring URL from headers
+            string returnUrl = Request.Headers["Referer"].ToString();
+
+            // If no referer, redirect to home page
+            if (string.IsNullOrEmpty(returnUrl))
+            {
+                return RedirectToAction("Index", "Home");
             }
 
-            return RedirectToAction("Index", "Home");
+            // Redirect back to the page the user came from
+            return Redirect(returnUrl);
         }
 
         /// <summary>
-        /// Get current language (for AJAX requests)
-        /// Returns JSON with current language code
+        /// Gets the current language from cookie (optional endpoint for AJAX)
         /// </summary>
-        [HttpGet]
-        public IActionResult GetCurrentLanguage()
+        [HttpGet("/Language/Current")]
+        public IActionResult Current()
         {
-            var language = Request.Cookies["language"] ?? "nl";
-            return Json(new { language });
+            var currentLanguage = Request.Cookies["language"] ?? "nl";
+            return Json(new { language = currentLanguage });
         }
     }
 }

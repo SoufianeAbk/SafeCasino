@@ -11,8 +11,19 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<SafeCasinoDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// ✅ IMPORTANT: Register LocalizationService as Scoped (NOT Singleton)
+// Add Session
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+// Register Services
 builder.Services.AddScoped<ILocalizationService, LocalizationService>();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<IGameApiService, GameApiService>();
 
 var app = builder.Build();
 
@@ -27,6 +38,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// Enable session BEFORE authorization
+app.UseSession();
 
 app.UseAuthorization();
 

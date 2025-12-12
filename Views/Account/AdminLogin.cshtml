@@ -1,206 +1,77 @@
-﻿@* AdminLogin.cshtml - CORRECTED (Actually Working!) *@
-@model SafeCasino.Models.AdminLoginRequest
-
+﻿@model SafeCasino.Models.AdminLoginRequest
 @{
-    // Get the localization service and language from context
-    var localizationService = ViewContext.HttpContext.RequestServices
-        .GetService(typeof(ILocalizationService)) as ILocalizationService;
-    var currentLanguage = ViewContext.HttpContext.Request.Cookies["language"] ?? "nl";
-
-    ViewData["Title"] = localizationService?.GetString("AdminLogin", currentLanguage) ?? "Admin Login";
-}
-
-@* Helper function to localize text *@
-@functions {
-    public string Localize(string key)
-    {
-        if (localizationService == null)
-            return key;
-
-        var result = localizationService.GetString(key, currentLanguage);
-        return string.IsNullOrEmpty(result) ? key : result;
-    }
-
-    public string GetLanguage()
-    {
-        return currentLanguage;
-    }
+    ViewData["Title"] = "Admin Login";
+    var lang = Context.Request.Cookies["language"] ?? "nl";
 }
 
 <div class="admin-login-container">
     <div class="login-card">
-        <h1 class="text-center mb-4">@Localize("AdminLogin")</h1>
+        <h1 class="text-center mb-4">@localizationService.GetString("AdminLogin", lang)</h1>
 
         @if (ViewData["ErrorMessage"] != null)
         {
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>@Localize("Error"):</strong> @ViewData["ErrorMessage"]
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <div class="alert alert-danger">
+                <strong>@localizationService.GetString("Error", lang):</strong> @ViewData["ErrorMessage"]
             </div>
         }
 
-        <form method="post" action="/Admin/Login" class="login-form">
-            <div class="form-group mb-3">
-                <label for="username" class="form-label">@Localize("Username")</label>
-                <input type="text"
-                       id="username"
-                       name="Username"
-                       class="form-control"
-                       placeholder="@Localize("Username")"
-                       required
-                       autofocus />
+        <form method="post" action="/Admin/Login">
+            <div class="mb-3">
+                <label class="form-label">@localizationService.GetString("Username", lang)</label>
+                <input type="text" name="Username" class="form-control" required />
             </div>
 
-            <div class="form-group mb-3">
-                <label for="password" class="form-label">@Localize("Password")</label>
-                <input type="password"
-                       id="password"
-                       name="Password"
-                       class="form-control"
-                       placeholder="@Localize("Password")"
-                       required />
+            <div class="mb-3">
+                <label class="form-label">@localizationService.GetString("Password", lang)</label>
+                <input type="password" name="Password" class="form-control" required />
             </div>
 
-            <div class="form-check mb-3">
-                <input type="checkbox" id="rememberMe" name="RememberMe" class="form-check-input" />
-                <label class="form-check-label" for="rememberMe">
-                    @Localize("RememberMe")
-                </label>
+            <div class="mb-3">
+                <input type="checkbox" name="RememberMe" class="form-check-input" id="remember" />
+                <label class="form-check-label" for="remember">@localizationService.GetString("RememberMe", lang)</label>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">@Localize("Login")</button>
+            <button type="submit" class="btn btn-primary w-100">@localizationService.GetString("Login", lang)</button>
         </form>
 
         <hr />
-
-        <p class="text-center text-muted">
-            <a href="/">@Localize("Back") @Localize("Home")</a>
+        <p class="text-center">
+            <a href="/">@localizationService.GetString("BackToHome", lang)</a>
         </p>
     </div>
 
-    <!-- Language Switcher -->
-    <div class="language-switcher position-absolute top-0 end-0 m-3">
-        <a href="/Language/Set/nl" class="btn btn-sm @(GetLanguage() == "nl" ? "btn-primary" : "btn-outline-secondary")">
-            🇳🇱 NL
-        </a>
-        <a href="/Language/Set/en" class="btn btn-sm @(GetLanguage() == "en" ? "btn-primary" : "btn-outline-secondary")">
-            🇬🇧 EN
-        </a>
+    <div class="language-switcher">
+        <a href="/Language/Set/nl" class="btn btn-sm btn-outline-light">NL</a>
+        <a href="/Language/Set/en" class="btn btn-sm btn-outline-light">EN</a>
     </div>
 </div>
 
 <style>
     .admin-login-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        position: relative;
     }
 
     .login-card {
         background: white;
+        border-radius: 15px;
         padding: 40px;
-        border-radius: 10px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         width: 100%;
-        max-width: 400px;
+        max-width: 450px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
     }
-
-        .login-card h1 {
-            color: #333;
-            font-weight: 700;
-            margin-bottom: 30px;
-        }
-
-    .login-form .form-control {
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        padding: 10px 15px;
-        font-size: 14px;
-        transition: border-color 0.3s;
-    }
-
-        .login-form .form-control:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-        }
-
-    .btn-primary {
-        background: #667eea;
-        border: none;
-        padding: 10px;
-        font-weight: 600;
-        transition: background 0.3s;
-    }
-
-        .btn-primary:hover {
-            background: #5568d3;
-        }
 
     .language-switcher {
-        display: flex;
-        gap: 8px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
     }
 
         .language-switcher .btn {
-            font-size: 12px;
-            padding: 8px 12px;
-            font-weight: 600;
-            border: 1px solid transparent;
+            margin-left: 5px;
         }
-
-        .language-switcher .btn-primary {
-            background: #667eea;
-            border-color: #667eea;
-        }
-
-        .language-switcher .btn-outline-secondary {
-            color: white;
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-
-            .language-switcher .btn-outline-secondary:hover {
-                background: rgba(255, 255, 255, 0.1);
-                border-color: white;
-            }
-
-    .alert {
-        font-size: 14px;
-        margin-bottom: 20px;
-    }
-
-    .form-label {
-        font-weight: 500;
-        color: #333;
-        margin-bottom: 5px;
-    }
-
-    .form-check-label {
-        margin-left: 5px;
-        user-select: none;
-    }
-
-    hr {
-        margin: 20px 0;
-        border: none;
-        border-top: 1px solid #eee;
-    }
-
-    .text-center {
-        text-align: center;
-    }
-
-    .text-muted {
-        color: #6c757d;
-    }
-
-        .text-muted a {
-            color: #667eea;
-            text-decoration: none;
-        }
-
-            .text-muted a:hover {
-                text-decoration: underline;
-            }
 </style>
