@@ -1,7 +1,6 @@
 ﻿@model SafeCasino.Models.LoginRequest
 @{
     ViewData["Title"] = "Login";
-    var lang = Context.Request.Cookies["language"] ?? "nl";
 }
 
 <div class="user-login-container">
@@ -9,44 +8,44 @@
         <div class="text-center mb-4">
             <i class="fas fa-dice-five fa-3x text-primary"></i>
             <h1 class="mt-3">SafeCasino</h1>
-            <p class="text-muted">@LocalizationService.GetString("WelcomeBack", lang)</p>
+            <p class="text-muted">@Localize("WelcomeBack")</p>
         </div>
 
         @if (ViewData["ErrorMessage"] != null)
         {
             <div class="alert alert-danger">
-                <strong>@LocalizationService.GetString("Error", lang):</strong> @ViewData["ErrorMessage"]
+                <strong>@Localize("Error"):</strong> @ViewData["ErrorMessage"]
             </div>
         }
 
         <form method="post" action="/Account/Login">
             <div class="mb-3">
-                <label class="form-label">@LocalizationService.GetString("Email", lang)</label>
-                <input type="email" name="Email" class="form-control" placeholder="@LocalizationService.GetString("EnterEmail", lang)" required />
+                <label class="form-label">@Localize("Email")</label>
+                <input type="email" name="Email" class="form-control" placeholder="@Localize("EnterEmail")" required />
             </div>
 
             <div class="mb-3">
-                <label class="form-label">@LocalizationService.GetString("Password", lang)</label>
-                <input type="password" name="Password" class="form-control" placeholder="@LocalizationService.GetString("EnterPassword", lang)" required />
+                <label class="form-label">@Localize("Password")</label>
+                <input type="password" name="Password" class="form-control" placeholder="@Localize("EnterPassword")" required />
             </div>
 
             <div class="mb-3">
                 <input type="checkbox" name="RememberMe" class="form-check-input" id="remember" />
-                <label class="form-check-label" for="remember">@LocalizationService.GetString("RememberMe", lang)</label>
+                <label class="form-check-label" for="remember">@Localize("RememberMe")</label>
             </div>
 
             <button type="submit" class="btn btn-primary w-100 mb-3">
-                <i class="fas fa-sign-in-alt me-2"></i>@LocalizationService.GetString("Login", lang)
+                <i class="fas fa-sign-in-alt me-2"></i>@Localize("Login")
             </button>
 
             <div class="text-center">
-                <span>@LocalizationService.GetString("DontHaveAccount", lang)?</span>
-                <a href="/Account/Register">@LocalizationService.GetString("Register", lang)</a>
+                <span>@Localize("DontHaveAccount")?</span>
+                <a href="/Account/Register">@Localize("Register")</a>
             </div>
         </form>
 
         <div class="text-center mt-4">
-            <a href="/">@LocalizationService.GetString("BackToHome", lang)</a>
+            <a href="/">@Localize("BackToHome")</a>
         </div>
     </div>
 
