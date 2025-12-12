@@ -1,22 +1,21 @@
-﻿@model SafeCasino.Models.Game
+﻿@model SafeCasino.ViewModels.GameDetailViewModel
 @{
     ViewData["Title"] = "Game Details";
-    var lang = Context.Request.Cookies["language"] ?? "nl";
 }
 
 <div class="container py-5">
     <div class="mb-4">
-        <a href="/Game" class="btn btn-outline-secondary">
-            <i class="fas fa-arrow-left me-2"></i>@localizationService.GetString("BackToGames", lang)
+        <a href="/Games" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i>@Localize("BackToGames")
         </a>
     </div>
 
     <div class="row">
         <div class="col-lg-6">
             <div class="game-image-card">
-                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                @if (!string.IsNullOrEmpty(Model.Game.ThumbnailUrl))
                 {
-                    <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid rounded" />
+                    <img src="@Model.Game.ThumbnailUrl" alt="@Model.Game.Name" class="img-fluid rounded" />
                 }
                 else
                 {
@@ -29,69 +28,57 @@
 
         <div class="col-lg-6">
             <div class="game-info-card">
-                <h1 class="mb-3">@Model.Name</h1>
+                <h1 class="mb-3">@Model.Game.Name</h1>
 
                 <div class="mb-3">
-                    <span class="badge bg-primary me-2">@Model.Category</span>
-                    @if (Model.IsPopular)
+                    <span class="badge bg-primary me-2">@Model.Game.Category</span>
+                    @if (Model.Game.IsPopular)
                     {
-                        <span class="badge bg-warning">@localizationService.GetString("Popular", lang)</span>
+                        <span class="badge bg-warning">@Localize("Popular")</span>
                     }
-                    @if (Model.IsNew)
+                    @if (Model.Game.IsNew)
                     {
-                        <span class="badge bg-success">@localizationService.GetString("New", lang)</span>
+                        <span class="badge bg-success">@Localize("New")</span>
                     }
                 </div>
 
-                <p class="lead">@Model.Description</p>
+                <p class="lead">@Model.Game.Description</p>
 
                 <div class="game-stats mb-4">
                     <div class="row">
                         <div class="col-6 mb-2">
-                            <strong>@localizationService.GetString("MinBet", lang):</strong> €@Model.MinBet
+                            <strong>@Localize("MinBet"):</strong> €@Model.Game.MinBet
                         </div>
                         <div class="col-6 mb-2">
-                            <strong>@localizationService.GetString("MaxBet", lang):</strong> €@Model.MaxBet
+                            <strong>@Localize("MaxBet"):</strong> €@Model.Game.MaxBet
                         </div>
                         <div class="col-6 mb-2">
-                            <strong>@localizationService.GetString("Players", lang):</strong> @Model.PlayersCount
+                            <strong>@Localize("Players"):</strong> N/A
                         </div>
                         <div class="col-6 mb-2">
-                            <strong>@localizationService.GetString("Rating", lang):</strong> @Model.Rating / 5
+                            <strong>@Localize("Rating"):</strong> N/A
                         </div>
                     </div>
                 </div>
 
                 @if (User.Identity?.IsAuthenticated == true)
                 {
-                    <a href="/Game/Play/@Model.Id" class="btn btn-primary btn-lg w-100 mb-2">
-                        <i class="fas fa-play me-2"></i>@localizationService.GetString("PlayNow", lang)
+                    <a href="/Games/Play/@Model.Game.Id" class="btn btn-primary btn-lg w-100 mb-2">
+                        <i class="fas fa-play me-2"></i>@Localize("PlayNow")
                     </a>
                     <button class="btn btn-outline-secondary w-100">
-                        <i class="fas fa-heart me-2"></i>@localizationService.GetString("AddToFavorites", lang)
+                        <i class="fas fa-heart me-2"></i>@Localize("AddToFavorites")
                     </button>
                 }
                 else
                 {
                     <a href="/Account/Login" class="btn btn-primary btn-lg w-100">
-                        <i class="fas fa-sign-in-alt me-2"></i>@localizationService.GetString("LoginToPlay", lang)
+                        <i class="fas fa-sign-in-alt me-2"></i>@Localize("LoginToPlay")
                     </a>
                 }
             </div>
         </div>
     </div>
-
-    @if (!string.IsNullOrEmpty(Model.Rules))
-    {
-        <div class="row mt-5">
-            <div class="col-12">
-                <div class="rules-card">
-                    <h2 class="mb-4">@localizationService.GetString("HowToPlay", lang)</h2>
-                    <div>@Html.Raw(Model.Rules)</div>
-                </div>
-            </div>
-        </div>
-    }
 </div>
 
 <style>
@@ -109,13 +96,6 @@
     }
 
     .game-info-card {
-        background: white;
-        border-radius: 20px;
-        padding: 40px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-
-    .rules-card {
         background: white;
         border-radius: 20px;
         padding: 40px;
