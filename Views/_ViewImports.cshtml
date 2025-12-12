@@ -3,15 +3,24 @@
 @using SafeCasino.Services
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-@* 
-    BELANGRIJK: In ASP.NET Core kunnen we GEEN @helper gebruiken in _ViewImports!
-    We moeten de functies in elke view definiëren OF inline code gebruiken.
-    
-    Deze variabelen worden beschikbaar gemaakt voor alle views:
-*@
-
 @inject ILocalizationService localizationService
 
 @{
     var currentLanguage = ViewContext.HttpContext.Request.Cookies["language"] ?? "nl";
+}
+
+@functions {
+    private string Localize(string key)
+    {
+        var lang = ViewContext.HttpContext.Request.Cookies["language"] ?? "nl";
+        return localizationService.GetString(key, lang) ?? key;
+    }
+}
+
+@functions {
+    private string Localize(string key)
+    {
+        var lang = ViewContext.HttpContext.Request.Cookies["language"] ?? "nl";
+        return localizationService.GetString(key, lang) ?? key;
+    }
 }

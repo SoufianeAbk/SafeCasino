@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var currentLanguage = ViewContext.HttpContext.Request.Cookies["language"] ?? "nl";
+}
+
+<!DOCTYPE html>
 <html lang="@currentLanguage">
 <head>
     <meta charset="utf-8" />
@@ -11,11 +15,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
-
-    @functions {
-        private string Localize(string key) => localizationService.GetString(key, currentLanguage) ?? key;
-        private string GetLanguage() => currentLanguage;
-    }
 
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -37,23 +36,18 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Game">
+                            <a class="nav-link" href="/Games">
                                 <i class="fas fa-gamepad me-1"></i>@Localize("Games")
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Game/Roulette">
-                                <i class="fas fa-circle-notch me-1"></i>@Localize("Roulette")
+                            <a class="nav-link" href="/FAQ">
+                                <i class="fas fa-question-circle me-1"></i>@Localize("FAQ")
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Game/Slots">
-                                <i class="fas fa-coins me-1"></i>@Localize("Slots")
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Game/Blackjack">
-                                <i class="fas fa-heart me-1"></i>@Localize("Blackjack")
+                            <a class="nav-link" href="/Privacy">
+                                <i class="fas fa-shield-alt me-1"></i>@Localize("Privacy")
                             </a>
                         </li>
                     </ul>
@@ -61,13 +55,13 @@
                     <!-- Language Switcher -->
                     <div class="d-flex align-items-center me-3">
                         <div class="btn-group" role="group">
-                            <a href="/Language/Set/nl" class="btn btn-sm @(GetLanguage() == "nl" ? "btn-primary" : "btn-outline-light")">
+                            <a href="/Language/Set/nl" class="btn btn-sm @(currentLanguage == "nl" ? "btn-primary" : "btn-outline-light")">
                                 NL
                             </a>
-                            <a href="/Language/Set/en" class="btn btn-sm @(GetLanguage() == "en" ? "btn-primary" : "btn-outline-light")">
+                            <a href="/Language/Set/en" class="btn btn-sm @(currentLanguage == "en" ? "btn-primary" : "btn-outline-light")">
                                 EN
                             </a>
-                            <a href="/Language/Set/fr" class="btn btn-sm @(GetLanguage() == "fr" ? "btn-primary" : "btn-outline-light")">
+                            <a href="/Language/Set/fr" class="btn btn-sm @(currentLanguage == "fr" ? "btn-primary" : "btn-outline-light")">
                                 FR
                             </a>
                         </div>
@@ -140,7 +134,7 @@
                     <h6>@Localize("QuickLinks")</h6>
                     <ul class="list-unstyled small">
                         <li><a href="/">@Localize("Home")</a></li>
-                        <li><a href="/Game">@Localize("Games")</a></li>
+                        <li><a href="/Games">@Localize("Games")</a></li>
                         <li><a href="/About">@Localize("About")</a></li>
                         <li><a href="/Privacy">@Localize("Privacy")</a></li>
                     </ul>
