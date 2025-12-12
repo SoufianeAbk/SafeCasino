@@ -9,9 +9,9 @@
 <div class="hero-section">
     <div class="container">
         <h1>SafeCasino</h1>
-        <p>Ontdek meer dan 50 spannende casino spellen!</p>
+        <p>@Localize("DiscoverGames")</p>
         <a asp-controller="Games" asp-action="Index" class="btn btn-primary btn-lg">
-            <i class="fas fa-play"></i> Begin met Spelen
+            <i class="fas fa-play"></i> @Localize("BeginPlaying")
         </a>
     </div>
 </div>
@@ -22,27 +22,27 @@
         <div class="col-md-4">
             <div class="banner-card" style="background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);">
                 <div class="banner-content">
-                    <h3>€10 GRATIS</h3>
-                    <p>Dagelijkse Bonus</p>
-                    <button class="btn">SPEEL NU</button>
+                    <h3>€10 @Localize("Bonus")</h3>
+                    <p>@Localize("DailyBonus")</p>
+                    <button class="btn">@Localize("PlayNow")</button>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="banner-card" style="background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);">
                 <div class="banner-content">
-                    <h3>JACKPOT</h3>
-                    <p>€180.000+ Prijs Pool</p>
-                    <button class="btn">MEER INFO</button>
+                    <h3>@Localize("Jackpot")</h3>
+                    <p>€180.000+ @Localize("PrizePool")</p>
+                    <button class="btn">@Localize("MoreInfo")</button>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="banner-card" style="background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);">
                 <div class="banner-content">
-                    <h3>LIVE CASINO</h3>
-                    <p>Echte Dealers</p>
-                    <button class="btn">SPEEL NU</button>
+                    <h3>@Localize("LiveCasino")</h3>
+                    <p>@Localize("RealDealers")</p>
+                    <button class="btn">@Localize("PlayNow")</button>
                 </div>
             </div>
         </div>
@@ -51,37 +51,37 @@
 
 <!-- Category Section -->
 <div class="container category-section">
-    <h2 class="section-title text-center">Kies Je Categorie</h2>
+    <h2 class="section-title text-center">@Localize("ChooseCategory")</h2>
     <div class="category-grid">
         <a asp-controller="Games" asp-action="Index" asp-route-category="Slots" class="text-decoration-none">
             <div class="category-icon">
                 <i class="fas fa-star"></i>
             </div>
-            <div class="category-name">Slots</div>
+            <div class="category-name">@Localize("Slots")</div>
         </a>
         <a asp-controller="Games" asp-action="Index" asp-route-category="Roulette" class="text-decoration-none">
             <div class="category-icon">
                 <i class="fas fa-circle-notch"></i>
             </div>
-            <div class="category-name">Roulette</div>
+            <div class="category-name">@Localize("Roulette")</div>
         </a>
         <a asp-controller="Games" asp-action="Index" asp-route-category="Blackjack" class="text-decoration-none">
             <div class="category-icon">
                 <i class="fas fa-heart"></i>
             </div>
-            <div class="category-name">Blackjack</div>
+            <div class="category-name">@Localize("Blackjack")</div>
         </a>
         <a asp-controller="Games" asp-action="Index" asp-route-category="LiveCasino" class="text-decoration-none">
             <div class="category-icon">
                 <i class="fas fa-video"></i>
             </div>
-            <div class="category-name">Live Casino</div>
+            <div class="category-name">@Localize("LiveCasino")</div>
         </a>
         <a asp-controller="Games" asp-action="Index" asp-route-category="Jackpot" class="text-decoration-none">
             <div class="category-icon">
                 <i class="fas fa-trophy"></i>
             </div>
-            <div class="category-name">Jackpot</div>
+            <div class="category-name">@Localize("Jackpot")</div>
         </a>
     </div>
 </div>
@@ -91,8 +91,8 @@
 {
     <div class="container games-section">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="section-title mb-0">Populaire Spellen</h2>
-            <a asp-controller="Games" asp-action="Popular" class="btn btn-secondary">Bekijk Alle</a>
+            <h2 class="section-title mb-0">@Localize("PopularGames")</h2>
+            <a asp-controller="Games" asp-action="Popular" class="btn btn-secondary">@Localize("ViewAll")</a>
         </div>
         <div class="row g-4">
             @foreach (var game in popularGames)
@@ -106,19 +106,19 @@
                             <div class="game-badges">
                                 @if (game.IsPopular)
                                 {
-                                    <span class="badge badge-popular">POPULAIR</span>
+                                    <span class="badge badge-popular">@Localize("Popular")</span>
                                 }
                                 @if (game.IsNew)
                                 {
-                                    <span class="badge badge-new">NIEUW</span>
+                                    <span class="badge badge-new">@Localize("New")</span>
                                 }
                                 @if (game.HasJackpot)
                                 {
-                                    <span class="badge badge-jackpot">JACKPOT</span>
+                                    <span class="badge badge-jackpot">@Localize("Jackpot")</span>
                                 }
                             </div>
                             <button class="game-play-btn" onclick="location.href='@Url.Action("Details", "Games", new { id = game.Id })'">
-                                <i class="fas fa-play"></i> Speel Nu
+                                <i class="fas fa-play"></i> @Localize("PlayNow")
                             </button>
                         </div>
                     </div>
@@ -133,8 +133,8 @@
 {
     <div class="container games-section">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="section-title mb-0">Nieuwe Spellen</h2>
-            <a asp-controller="Games" asp-action="New" class="btn btn-secondary">Bekijk Alle</a>
+            <h2 class="section-title mb-0">@Localize("NewGames")</h2>
+            <a asp-controller="Games" asp-action="New" class="btn btn-secondary">@Localize("ViewAll")</a>
         </div>
         <div class="row g-4">
             @foreach (var game in newGames)
@@ -146,14 +146,14 @@
                             <h5 class="game-title">@game.Name</h5>
                             <p class="game-provider">@game.Provider</p>
                             <div class="game-badges">
-                                <span class="badge badge-new">NIEUW</span>
+                                <span class="badge badge-new">@Localize("New")</span>
                                 @if (game.HasJackpot)
                                 {
-                                    <span class="badge badge-jackpot">JACKPOT</span>
+                                    <span class="badge badge-jackpot">@Localize("Jackpot")</span>
                                 }
                             </div>
                             <button class="game-play-btn" onclick="location.href='@Url.Action("Details", "Games", new { id = game.Id })'">
-                                <i class="fas fa-play"></i> Speel Nu
+                                <i class="fas fa-play"></i> @Localize("PlayNow")
                             </button>
                         </div>
                     </div>
@@ -169,9 +169,9 @@
     <div class="container games-section">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h2 class="section-title mb-0">
-                <i class="fas fa-trophy"></i> Jackpot Spellen
+                <i class="fas fa-trophy"></i> @Localize("JackpotGames")
             </h2>
-            <a asp-controller="Games" asp-action="Jackpot" class="btn btn-secondary">Bekijk Alle</a>
+            <a asp-controller="Games" asp-action="Jackpot" class="btn btn-secondary">@Localize("ViewAll")</a>
         </div>
         <div class="row g-4">
             @foreach (var game in jackpotGames)
@@ -183,10 +183,10 @@
                             <h5 class="game-title">@game.Name</h5>
                             <p class="game-provider">@game.Provider</p>
                             <div class="game-badges">
-                                <span class="badge badge-jackpot">JACKPOT</span>
+                                <span class="badge badge-jackpot">@Localize("Jackpot")</span>
                             </div>
                             <button class="game-play-btn" onclick="location.href='@Url.Action("Details", "Games", new { id = game.Id })'">
-                                <i class="fas fa-play"></i> Speel Nu
+                                <i class="fas fa-play"></i> @Localize("PlayNow")
                             </button>
                         </div>
                     </div>
@@ -202,29 +202,29 @@
         <div class="col-md-3">
             <div class="feature-card">
                 <i class="fas fa-shield-alt fa-3x mb-3" style="color: var(--primary-color);"></i>
-                <h5>Veilig & Betrouwbaar</h5>
-                <p class="text-muted">100% veilige transacties met SSL encryptie</p>
+                <h5>@Localize("SafeAndTrusted")</h5>
+                <p class="text-muted">@Localize("SafeTransactions")</p>
             </div>
         </div>
         <div class="col-md-3">
             <div class="feature-card">
                 <i class="fas fa-headset fa-3x mb-3" style="color: var(--primary-color);"></i>
-                <h5>24/7 Support</h5>
-                <p class="text-muted">Altijd bereikbaar voor jouw vragen</p>
+                <h5>@Localize("Support24_7")</h5>
+                <p class="text-muted">@Localize("AlwaysAvailable")</p>
             </div>
         </div>
         <div class="col-md-3">
             <div class="feature-card">
                 <i class="fas fa-bolt fa-3x mb-3" style="color: var(--primary-color);"></i>
-                <h5>Snelle Uitbetalingen</h5>
-                <p class="text-muted">Ontvang je winst binnen 24 uur</p>
+                <h5>@Localize("FastPayouts")</h5>
+                <p class="text-muted">@Localize("ReceiveWinnings")</p>
             </div>
         </div>
         <div class="col-md-3">
             <div class="feature-card">
                 <i class="fas fa-mobile-alt fa-3x mb-3" style="color: var(--primary-color);"></i>
-                <h5>Mobiel Vriendelijk</h5>
-                <p class="text-muted">Speel overal en altijd op je mobiel</p>
+                <h5>@Localize("MobileFriendly")</h5>
+                <p class="text-muted">@Localize("PlayAnywhere")</p>
             </div>
         </div>
     </div>

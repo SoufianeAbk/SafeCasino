@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Inloggen";
+    ViewData["Title"] = @Localize("SignIn");
 }
 
 <div class="container py-5">
@@ -10,8 +10,8 @@
                     <!-- Header -->
                     <div class="text-center mb-5">
                         <i class="fas fa-dice fa-4x mb-3" style="color: var(--primary-color);"></i>
-                        <h2 class="card-title mb-2">SafeCasino Login</h2>
-                        <p class="text-muted">Welkom terug! Meld je aan om te spelen</p>
+                        <h2 class="card-title mb-2">SafeCasino @Localize("Login")</h2>
+                        <p class="text-muted">@Localize("WelcomeBack")! @Localize("SignInToPlay")</p>
                     </div>
 
                     <!-- Error Message -->
@@ -28,7 +28,7 @@
                         <!-- Username/Email -->
                         <div class="mb-4">
                             <label for="username" class="form-label">
-                                <i class="fas fa-user"></i> Gebruikersnaam / Email
+                                <i class="fas fa-user"></i> @Localize("UsernameEmail")
                             </label>
                             <input type="email"
                                    class="form-control form-control-lg"
@@ -39,25 +39,25 @@
                                    autocomplete="email"
                                    value="casinouser@ehb.be">
                             <small class="text-muted mt-1 d-block">
-                                <i class="fas fa-info-circle"></i> Demo: casinouser@ehb.be
+                                <i class="fas fa-info-circle"></i> @Localize("Demo"): casinouser@ehb.be
                             </small>
                         </div>
 
                         <!-- Password -->
                         <div class="mb-4">
                             <label for="password" class="form-label">
-                                <i class="fas fa-lock"></i> Wachtwoord
+                                <i class="fas fa-lock"></i> @Localize("Password")
                             </label>
                             <input type="password"
                                    class="form-control form-control-lg"
                                    id="password"
                                    name="password"
-                                   placeholder="Voer je wachtwoord in"
+                                   placeholder="@Localize("EnterPassword")"
                                    required
                                    autocomplete="current-password"
                                    value="User!321">
                             <small class="text-muted mt-1 d-block">
-                                <i class="fas fa-info-circle"></i> Demo: User!321
+                                <i class="fas fa-info-circle"></i> @Localize("Demo"): User!321
                             </small>
                         </div>
 
@@ -68,13 +68,13 @@
                                    id="rememberMe"
                                    name="rememberMe">
                             <label class="form-check-label" for="rememberMe">
-                                Houd me aangemeld
+                                @Localize("RememberMe")
                             </label>
                         </div>
 
                         <!-- Login Button -->
                         <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">
-                            <i class="fas fa-sign-in-alt"></i> Inloggen
+                            <i class="fas fa-sign-in-alt"></i> @Localize("SignIn")
                         </button>
                     </form>
 
@@ -82,7 +82,7 @@
                     <div class="text-center mb-4">
                         <small class="text-muted">
                             <span style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
-                                Of
+                                @Localize("Or")
                             </span>
                         </small>
                     </div>
@@ -90,21 +90,21 @@
                     <!-- Admin Login Link -->
                     <div class="text-center mb-4">
                         <a href="@Url.Action("AdminLogin", "Account")" class="btn btn-secondary btn-lg w-100">
-                            <i class="fas fa-shield-alt"></i> Admin Login
+                            <i class="fas fa-shield-alt"></i> @Localize("AdminLogin")
                         </a>
                     </div>
 
                     <!-- Footer Links -->
                     <div class="text-center">
                         <p class="text-muted mb-3">
-                            Nog geen account?
+                            @Localize("NoAccount")
                             <a href="#" style="color: var(--primary-color); text-decoration: none;">
-                                Registreer hier
+                                @Localize("RegisterHere")
                             </a>
                         </p>
                         <small class="text-muted">
                             <a href="@Url.Action("Index", "Home")" class="text-muted text-decoration-none">
-                                <i class="fas fa-arrow-left"></i> Terug naar Home
+                                <i class="fas fa-arrow-left"></i> @Localize("BackToHome")
                             </a>
                         </small>
                     </div>
@@ -116,17 +116,17 @@
                 <div class="card" style="background: var(--bg-card); border: 1px solid var(--border-color);">
                     <div class="card-body">
                         <h6 class="card-title mb-3">
-                            <i class="fas fa-question-circle" style="color: var(--accent-color);"></i> Hulp nodig?
+                            <i class="fas fa-question-circle" style="color: var(--accent-color);"></i> @Localize("NeedHelp")
                         </h6>
                         <ul class="list-unstyled small">
                             <li class="mb-2">
                                 <a href="@Url.Action("Index", "FAQ")" class="text-decoration-none text-muted">
-                                    <i class="fas fa-book"></i> Veelgestelde vragen
+                                    <i class="fas fa-book"></i> @Localize("FAQ")
                                 </a>
                             </li>
                             <li>
                                 <a href="@Url.Action("Index", "Support")" class="text-decoration-none text-muted">
-                                    <i class="fas fa-headset"></i> Neem contact op
+                                    <i class="fas fa-headset"></i> @Localize("ContactUs")
                                 </a>
                             </li>
                         </ul>
@@ -140,10 +140,9 @@
     <div class="row mt-5">
         <div class="col-lg-6 mx-auto">
             <div class="alert alert-info" role="alert">
-                <i class="fas fa-lock"></i> <strong>Je account is beveiligd!</strong>
+                <i class="fas fa-lock"></i> <strong>@Localize("AccountSecured")!</strong>
                 <p class="mb-0 mt-2 small">
-                    Wij gebruiken geavanceerde SSL-encryptie om je persoonlijke gegevens te beschermen.
-                    Deel je wachtwoord nooit met anderen.
+                    @Localize("PasswordProtection")
                 </p>
             </div>
         </div>

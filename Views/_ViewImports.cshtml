@@ -1,3 +1,13 @@
 ﻿@using SafeCasino
 @using SafeCasino.Models
+@using SafeCasino.Services
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    // Make localizationService available to all views
+    var localizationService = ViewContext.HttpContext.RequestServices
+        .GetService(typeof(ILocalizationService)) as ILocalizationService;
+
+    // Get current language from cookie
+    var currentLanguage = ViewContext.HttpContext.Request.Cookies["language"] ?? "nl";
+}

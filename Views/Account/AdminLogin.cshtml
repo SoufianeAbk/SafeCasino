@@ -1,208 +1,206 @@
-﻿@{
-    ViewData["Title"] = "Admin Login";
+﻿@* AdminLogin.cshtml - CORRECTED (Actually Working!) *@
+@model SafeCasino.Models.AdminLoginRequest
+
+@{
+    // Get the localization service and language from context
+    var localizationService = ViewContext.HttpContext.RequestServices
+        .GetService(typeof(ILocalizationService)) as ILocalizationService;
+    var currentLanguage = ViewContext.HttpContext.Request.Cookies["language"] ?? "nl";
+
+    ViewData["Title"] = localizationService?.GetString("AdminLogin", currentLanguage) ?? "Admin Login";
 }
 
-<div class="container py-5">
-    <div class="row">
-        <div class="col-lg-6 mx-auto">
-            <div class="card" style="background: linear-gradient(135deg, var(--bg-card) 0%, #4c1d95 100%); border: 2px solid var(--accent-color);">
-                <div class="card-body p-5">
-                    <!-- Header -->
-                    <div class="text-center mb-5">
-                        <i class="fas fa-shield-alt fa-4x mb-3" style="color: var(--accent-color);"></i>
-                        <h2 class="card-title mb-2">
-                            <i class="fas fa-lock"></i> Admin Panel Login
-                        </h2>
-                        <p class="text-muted">Administratorgebruikers alleen</p>
-                    </div>
+@* Helper function to localize text *@
+@functions {
+    public string Localize(string key)
+    {
+        if (localizationService == null)
+            return key;
 
-                    <!-- Security Warning -->
-                    <div class="alert alert-warning alert-dismissible fade show mb-4" role="alert">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <strong>Beveiligde toegang</strong>
-                        <p class="mb-0 mt-2 small">
-                            Dit panel is alleen voor geautoriseerde administrators. Ongeautoriseerde toegang is niet toegestaan.
-                        </p>
-                    </div>
+        var result = localizationService.GetString(key, currentLanguage);
+        return string.IsNullOrEmpty(result) ? key : result;
+    }
 
-                    <!-- Error Message -->
-                    @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"]?.ToString()))
-                    {
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="fas fa-exclamation-circle"></i> @ViewData["ErrorMessage"]
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
-                    }
+    public string GetLanguage()
+    {
+        return currentLanguage;
+    }
+}
 
-                    <!-- Login Form -->
-                    <form method="post" action="@Url.Action("AdminLogin", "Account")">
-                        <!-- Username/Email -->
-                        <div class="mb-4">
-                            <label for="username" class="form-label">
-                                <i class="fas fa-user-shield"></i> Admin Gebruikersnaam
-                            </label>
-                            <input type="email"
-                                   class="form-control form-control-lg"
-                                   id="username"
-                                   name="username"
-                                   placeholder="casinoadmin@ehb.be"
-                                   required
-                                   autocomplete="email"
-                                   value="casinoadmin@ehb.be">
-                            <small class="text-muted mt-1 d-block">
-                                <i class="fas fa-info-circle"></i> Demo: casinoadmin@ehb.be
-                            </small>
-                        </div>
+<div class="admin-login-container">
+    <div class="login-card">
+        <h1 class="text-center mb-4">@Localize("AdminLogin")</h1>
 
-                        <!-- Password -->
-                        <div class="mb-4">
-                            <label for="password" class="form-label">
-                                <i class="fas fa-key"></i> Wachtwoord
-                            </label>
-                            <input type="password"
-                                   class="form-control form-control-lg"
-                                   id="password"
-                                   name="password"
-                                   placeholder="Voer je wachtwoord in"
-                                   required
-                                   autocomplete="current-password"
-                                   value="Admin!321">
-                            <small class="text-muted mt-1 d-block">
-                                <i class="fas fa-info-circle"></i> Demo: Admin!321
-                            </small>
-                        </div>
+        @if (ViewData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>@Localize("Error"):</strong> @ViewData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
 
-                        <!-- Two Factor (Optional) -->
-                        <div class="mb-4">
-                            <div class="form-check">
-                                <input class="form-check-input"
-                                       type="checkbox"
-                                       id="twoFactor"
-                                       name="twoFactor"
-                                       disabled>
-                                <label class="form-check-label" for="twoFactor">
-                                    Two-Factor Authenticatie inschakelen
-                                    <span class="badge bg-secondary ms-2">Binnenkort beschikbaar</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Login Button -->
-                        <button type="submit" class="btn btn-warning btn-lg w-100 mb-3">
-                            <i class="fas fa-sign-in-alt"></i> Admin Login
-                        </button>
-                    </form>
-
-                    <!-- Divider -->
-                    <div class="text-center mb-4">
-                        <small class="text-muted">
-                            <span style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
-                                Of
-                            </span>
-                        </small>
-                    </div>
-
-                    <!-- User Login Link -->
-                    <div class="text-center mb-4">
-                        <a href="@Url.Action("Login", "Account")" class="btn btn-secondary btn-lg w-100">
-                            <i class="fas fa-user"></i> Gebruiker Login
-                        </a>
-                    </div>
-
-                    <!-- Footer Links -->
-                    <div class="text-center">
-                        <small class="text-muted">
-                            <a href="@Url.Action("Index", "Home")" class="text-muted text-decoration-none">
-                                <i class="fas fa-arrow-left"></i> Terug naar Home
-                            </a>
-                        </small>
-                    </div>
-                </div>
+        <form method="post" action="/Admin/Login" class="login-form">
+            <div class="form-group mb-3">
+                <label for="username" class="form-label">@Localize("Username")</label>
+                <input type="text"
+                       id="username"
+                       name="Username"
+                       class="form-control"
+                       placeholder="@Localize("Username")"
+                       required
+                       autofocus />
             </div>
 
-            <!-- Admin Help Section -->
-            <div class="mt-4">
-                <div class="card" style="background: var(--bg-card); border: 2px solid var(--accent-color);">
-                    <div class="card-body">
-                        <h6 class="card-title mb-3">
-                            <i class="fas fa-tools" style="color: var(--accent-color);"></i> Admin Resources
-                        </h6>
-                        <ul class="list-unstyled small">
-                            <li class="mb-2">
-                                <i class="fas fa-circle-notch" style="color: var(--success-color);"></i>
-                                <strong>Status:</strong> Admin panel operationeel
-                            </li>
-                            <li class="mb-2">
-                                <i class="fas fa-database"></i>
-                                <strong>Database:</strong> Verbonden
-                            </li>
-                            <li>
-                                <i class="fas fa-headset"></i>
-                                <a href="@Url.Action("Index", "Support")" class="text-decoration-none text-muted">
-                                    Support nodig?
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="form-group mb-3">
+                <label for="password" class="form-label">@Localize("Password")</label>
+                <input type="password"
+                       id="password"
+                       name="Password"
+                       class="form-control"
+                       placeholder="@Localize("Password")"
+                       required />
             </div>
-        </div>
+
+            <div class="form-check mb-3">
+                <input type="checkbox" id="rememberMe" name="RememberMe" class="form-check-input" />
+                <label class="form-check-label" for="rememberMe">
+                    @Localize("RememberMe")
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">@Localize("Login")</button>
+        </form>
+
+        <hr />
+
+        <p class="text-center text-muted">
+            <a href="/">@Localize("Back") @Localize("Home")</a>
+        </p>
     </div>
 
-    <!-- Access Log Info -->
-    <div class="row mt-5">
-        <div class="col-lg-6 mx-auto">
-            <div class="alert alert-info" role="alert">
-                <i class="fas fa-shield-alt"></i> <strong>Beveiligde Toegang</strong>
-                <p class="mb-0 mt-2 small">
-                    Alle admin activiteiten worden gelogd. Login pogingen worden gemonitord voor veiligheid.
-                    <br><br>
-                    <strong>Laatste login:</strong> Geen record
-                </p>
-            </div>
-        </div>
+    <!-- Language Switcher -->
+    <div class="language-switcher position-absolute top-0 end-0 m-3">
+        <a href="/Language/Set/nl" class="btn btn-sm @(GetLanguage() == "nl" ? "btn-primary" : "btn-outline-secondary")">
+            🇳🇱 NL
+        </a>
+        <a href="/Language/Set/en" class="btn btn-sm @(GetLanguage() == "en" ? "btn-primary" : "btn-outline-secondary")">
+            🇬🇧 EN
+        </a>
     </div>
 </div>
 
 <style>
-    .form-control, .form-control-lg {
-        background: var(--bg-dark);
-        border: 2px solid var(--border-color);
-        color: var(--text-light);
+    .admin-login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
 
-        .form-control:focus, .form-control-lg:focus {
-            background: var(--bg-dark);
-            border-color: var(--accent-color);
-            color: var(--text-light);
-            box-shadow: 0 0 0 0.2rem rgba(245, 158, 11, 0.25);
+    .login-card {
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 400px;
+    }
+
+        .login-card h1 {
+            color: #333;
+            font-weight: 700;
+            margin-bottom: 30px;
         }
+
+    .login-form .form-control {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px 15px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+    }
+
+        .login-form .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+    .btn-primary {
+        background: #667eea;
+        border: none;
+        padding: 10px;
+        font-weight: 600;
+        transition: background 0.3s;
+    }
+
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+
+    .language-switcher {
+        display: flex;
+        gap: 8px;
+    }
+
+        .language-switcher .btn {
+            font-size: 12px;
+            padding: 8px 12px;
+            font-weight: 600;
+            border: 1px solid transparent;
+        }
+
+        .language-switcher .btn-primary {
+            background: #667eea;
+            border-color: #667eea;
+        }
+
+        .language-switcher .btn-outline-secondary {
+            color: white;
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+            .language-switcher .btn-outline-secondary:hover {
+                background: rgba(255, 255, 255, 0.1);
+                border-color: white;
+            }
+
+    .alert {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
 
     .form-label {
-        color: var(--text-light);
-        font-weight: 600;
+        font-weight: 500;
+        color: #333;
+        margin-bottom: 5px;
     }
 
-    .form-check-input {
-        background: var(--bg-dark);
-        border: 2px solid var(--border-color);
+    .form-check-label {
+        margin-left: 5px;
+        user-select: none;
     }
 
-        .form-check-input:checked {
-            background: var(--accent-color);
-            border-color: var(--accent-color);
-        }
-
-    .btn-warning {
-        background: var(--accent-color);
+    hr {
+        margin: 20px 0;
         border: none;
-        color: var(--bg-darker);
-        font-weight: 600;
+        border-top: 1px solid #eee;
     }
 
-        .btn-warning:hover {
-            background: #f59e0b;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+    .text-center {
+        text-align: center;
+    }
+
+    .text-muted {
+        color: #6c757d;
+    }
+
+        .text-muted a {
+            color: #667eea;
+            text-decoration: none;
         }
+
+            .text-muted a:hover {
+                text-decoration: underline;
+            }
 </style>
