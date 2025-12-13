@@ -1,4 +1,4 @@
-﻿@{
+@{
     var currentLanguage = ViewContext.HttpContext.Request.Cookies["language"] ?? "nl";
 }
 
@@ -32,22 +32,22 @@
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="/">
-                                <i class="fas fa-home me-1"></i>@Localize("Home")
+                                <i class="fas fa-home me-1"></i>@Html.Localize("Home")
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/Games">
-                                <i class="fas fa-gamepad me-1"></i>@Localize("Games")
+                                <i class="fas fa-gamepad me-1"></i>@Html.Localize("Games")
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/FAQ">
-                                <i class="fas fa-question-circle me-1"></i>@Localize("FAQ")
+                                <i class="fas fa-question-circle me-1"></i>@Html.Localize("FAQ")
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/Privacy">
-                                <i class="fas fa-shield-alt me-1"></i>@Localize("Privacy")
+                                <i class="fas fa-shield-alt me-1"></i>@Html.Localize("Privacy")
                             </a>
                         </li>
                     </ul>
@@ -79,19 +79,19 @@
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
                                         <a class="dropdown-item" href="/Account/Profile">
-                                            <i class="fas fa-user me-2"></i>@Localize("Profile")
+                                            <i class="fas fa-user me-2"></i>@Html.Localize("Profile")
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="/Account/Settings">
-                                            <i class="fas fa-cog me-2"></i>@Localize("Settings")
+                                            <i class="fas fa-cog me-2"></i>@Html.Localize("Settings")
                                         </a>
                                     </li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
                                         <form method="post" action="/Account/Logout" class="d-inline">
                                             <button type="submit" class="dropdown-item">
-                                                <i class="fas fa-sign-out-alt me-2"></i>@Localize("Logout")
+                                                <i class="fas fa-sign-out-alt me-2"></i>@Html.Localize("Logout")
                                             </button>
                                         </form>
                                     </li>
@@ -104,12 +104,12 @@
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" href="/Account/Login">
-                                    <i class="fas fa-sign-in-alt me-1"></i>@Localize("Login")
+                                    <i class="fas fa-sign-in-alt me-1"></i>@Html.Localize("Login")
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="btn btn-primary btn-sm ms-2" href="/Account/Register">
-                                    <i class="fas fa-user-plus me-1"></i>@Localize("Register")
+                                    <i class="fas fa-user-plus me-1"></i>@Html.Localize("Register")
                                 </a>
                             </li>
                         </ul>
@@ -128,19 +128,19 @@
             <div class="row py-4">
                 <div class="col-md-4">
                     <h5>SafeCasino</h5>
-                    <p class="small">@Localize("FooterTagline")</p>
+                    <p class="small">@Html.Localize("FooterTagline")</p>
                 </div>
                 <div class="col-md-4">
-                    <h6>@Localize("QuickLinks")</h6>
+                    <h6>@Html.Localize("QuickLinks")</h6>
                     <ul class="list-unstyled small">
-                        <li><a href="/">@Localize("Home")</a></li>
-                        <li><a href="/Games">@Localize("Games")</a></li>
-                        <li><a href="/About">@Localize("About")</a></li>
-                        <li><a href="/Privacy">@Localize("Privacy")</a></li>
+                        <li><a href="/">@Html.Localize("Home")</a></li>
+                        <li><a href="/Games">@Html.Localize("Games")</a></li>
+                        <li><a href="/About">@Html.Localize("About")</a></li>
+                        <li><a href="/Privacy">@Html.Localize("Privacy")</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <h6>@Localize("Contact")</h6>
+                    <h6>@Html.Localize("Contact")</h6>
                     <p class="small">
                         <i class="fas fa-envelope me-2"></i>info@safecasino.be<br />
                         <i class="fas fa-phone me-2"></i>+32 2 123 45 67
@@ -148,7 +148,7 @@
                 </div>
             </div>
             <div class="text-center py-3 border-top">
-                <small>&copy; 2024 SafeCasino - @Localize("AllRightsReserved")</small>
+                <small>&copy; 2024 SafeCasino - @Html.Localize("AllRightsReserved")</small>
             </div>
         </div>
     </footer>
