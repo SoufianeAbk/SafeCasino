@@ -31,6 +31,14 @@ builder.Services.AddScoped<IGameApiService, GameApiService>();
 
 var app = builder.Build();
 
+// Initialize LocalizationHelper with services
+using (var scope = app.Services.CreateScope())
+{
+    var httpContextAccessor = scope.ServiceProvider.GetRequiredService<IHttpContextAccessor>();
+    var localizationService = scope.ServiceProvider.GetRequiredService<ILocalizationService>();
+    LocalizationHelper.Initialize(httpContextAccessor, localizationService);
+}
+
 // Initialize database on startup
 using (var scope = app.Services.CreateScope())
 {
