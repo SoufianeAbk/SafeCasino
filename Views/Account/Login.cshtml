@@ -1,4 +1,4 @@
-﻿@model SafeCasino.Models.LoginRequest
+@model SafeCasino.Models.LoginRequest
 @{
     ViewData["Title"] = "Login";
 }
@@ -8,44 +8,44 @@
         <div class="text-center mb-4">
             <i class="fas fa-dice-five fa-3x text-primary"></i>
             <h1 class="mt-3">SafeCasino</h1>
-            <p class="text-muted">@Localize("WelcomeBack")</p>
+            <p class="text-muted">@Html.Localize("WelcomeBack")</p>
         </div>
 
         @if (ViewData["ErrorMessage"] != null)
         {
             <div class="alert alert-danger">
-                <strong>@Localize("Error"):</strong> @ViewData["ErrorMessage"]
+                <strong>@Html.Localize("Error"):</strong> @ViewData["ErrorMessage"]
             </div>
         }
 
         <form method="post" action="/Account/Login">
             <div class="mb-3">
-                <label class="form-label">@Localize("Email")</label>
-                <input type="email" name="Email" class="form-control" placeholder="@Localize("EnterEmail")" required />
+                <label class="form-label">@Html.Localize("Email")</label>
+                <input type="email" name="Email" class="form-control" placeholder="@Html.Localize("EnterEmail")" required />
             </div>
 
             <div class="mb-3">
-                <label class="form-label">@Localize("Password")</label>
-                <input type="password" name="Password" class="form-control" placeholder="@Localize("EnterPassword")" required />
+                <label class="form-label">@Html.Localize("Password")</label>
+                <input type="password" name="Password" class="form-control" placeholder="@Html.Localize("EnterPassword")" required />
             </div>
 
             <div class="mb-3">
                 <input type="checkbox" name="RememberMe" class="form-check-input" id="remember" />
-                <label class="form-check-label" for="remember">@Localize("RememberMe")</label>
+                <label class="form-check-label" for="remember">@Html.Localize("RememberMe")</label>
             </div>
 
             <button type="submit" class="btn btn-primary w-100 mb-3">
-                <i class="fas fa-sign-in-alt me-2"></i>@Localize("Login")
+                <i class="fas fa-sign-in-alt me-2"></i>@Html.Localize("Login")
             </button>
 
             <div class="text-center">
-                <span>@Localize("DontHaveAccount")?</span>
-                <a href="/Account/Register">@Localize("Register")</a>
+                <span>@Html.Localize("DontHaveAccount")?</span>
+                <a href="/Account/Register">@Html.Localize("Register")</a>
             </div>
         </form>
 
         <div class="text-center mt-4">
-            <a href="/">@Localize("BackToHome")</a>
+            <a href="/">@Html.Localize("BackToHome")</a>
         </div>
     </div>
 
