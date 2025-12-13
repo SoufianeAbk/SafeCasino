@@ -1,66 +1,66 @@
-﻿@{
-    ViewData["Title"] = @Localize("FAQ");
+@{
+    ViewData["Title"] = Html.Localize("FAQ");
 }
 
 <div class="container py-5">
     <h1 class="section-title text-center mb-5">
-        <i class="fas fa-question-circle"></i> @Localize("FAQ")
+        <i class="fas fa-question-circle"></i> @Html.Localize("FAQ")
     </h1>
 
     <div class="row">
         <div class="col-lg-8 mx-auto">
             <!-- Account & Registratie -->
             <h3 class="mb-4" style="color: var(--primary-color);">
-                <i class="fas fa-user"></i> @Localize("AccountRegistration")
+                <i class="fas fa-user"></i> @Html.Localize("AccountRegistration")
             </h3>
 
             <div class="faq-item">
                 <div class="faq-question">
                     <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    @Localize("HowToCreateAccount")
+                    @Html.Localize("HowToCreateAccount")
                 </div>
                 <div class="faq-answer">
-                    @Localize("ClickRegisterAndFillForm"). @Localize("MustBe18Years"). @Localize("ReceiveConfirmationEmail").
+                    @Html.Localize("ClickRegisterAndFillForm"). @Html.Localize("MustBe18Years"). @Html.Localize("ReceiveConfirmationEmail").
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">
                     <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    @Localize("CanIHaveMultipleAccounts")
+                    @Html.Localize("CanIHaveMultipleAccounts")
                 </div>
                 <div class="faq-answer">
-                    @Localize("NoMultipleAccountsAllowed"). @Localize("MultipleAccountsSuspension").
+                    @Html.Localize("NoMultipleAccountsAllowed"). @Html.Localize("MultipleAccountsSuspension").
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">
                     <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    @Localize("HowToResetPassword")
+                    @Html.Localize("HowToResetPassword")
                 </div>
                 <div class="faq-answer">
-                    @Localize("ClickForgotPasswordAndEmail"). @Localize("ReceiveResetLink").
+                    @Html.Localize("ClickForgotPasswordAndEmail"). @Html.Localize("ReceiveResetLink").
                 </div>
             </div>
 
             <!-- Storten & Opnemen -->
             <h3 class="mb-4 mt-5" style="color: var(--primary-color);">
-                <i class="fas fa-wallet"></i> @Localize("DepositsWithdrawals")
+                <i class="fas fa-wallet"></i> @Html.Localize("DepositsWithdrawals")
             </h3>
 
             <div class="faq-item">
                 <div class="faq-question">
                     <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    @Localize("WhichPaymentMethods")
+                    @Html.Localize("WhichPaymentMethods")
                 </div>
                 <div class="faq-answer">
-                    @Localize("WeAcceptPaymentMethods"):
+                    @Html.Localize("WeAcceptPaymentMethods"):
                     <ul class="mt-2">
-                        <li>@Localize("CreditCards") (Visa, Mastercard)</li>
+                        <li>@Html.Localize("CreditCards") (Visa, Mastercard)</li>
                         <li>Bancontact</li>
                         <li>PayPal</li>
-                        <li>@Localize("BankTransfer")</li>
+                        <li>@Html.Localize("BankTransfer")</li>
                         <li>Skrill</li>
                         <li>Neteller</li>
                     </ul>
@@ -70,116 +70,116 @@
             <div class="faq-item">
                 <div class="faq-question">
                     <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    @Localize("MinMaxDepositAmount")
+                    @Html.Localize("MinMaxDepositAmount")
                 </div>
                 <div class="faq-answer">
-                    @Localize("MinimumDeposit10Euro"). @Localize("MaximumVariesByMethod").
+                    @Html.Localize("MinimumDeposit10Euro"). @Html.Localize("MaximumVariesByMethod").
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">
                     <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    @Localize("WithdrawalProcessingTime")
+                    @Html.Localize("WithdrawalProcessingTime")
                 </div>
                 <div class="faq-answer">
-                    @Localize("WithdrawalsProcessedWithin24Hours"). @Localize("ProcessingTimeVaries"):
+                    @Html.Localize("WithdrawalsProcessedWithin24Hours"). @Html.Localize("ProcessingTimeVaries"):
                     <ul class="mt-2">
-                        <li>@Localize("EWallets") (PayPal, Skrill): 0-24 @Localize("Hours")</li>
-                        <li>@Localize("CreditCard"): 3-5 @Localize("WorkingDays")</li>
-                        <li>@Localize("BankTransfer"): 3-7 @Localize("WorkingDays")</li>
+                        <li>@Html.Localize("EWallets") (PayPal, Skrill): 0-24 @Html.Localize("Hours")</li>
+                        <li>@Html.Localize("CreditCard"): 3-5 @Html.Localize("WorkingDays")</li>
+                        <li>@Html.Localize("BankTransfer"): 3-7 @Html.Localize("WorkingDays")</li>
                     </ul>
                 </div>
             </div>
 
             <!-- Spellen & Gameplay -->
             <h3 class="mb-4 mt-5" style="color: var(--primary-color);">
-                <i class="fas fa-gamepad"></i> @Localize("GamesGameplay")
+                <i class="fas fa-gamepad"></i> @Html.Localize("GamesGameplay")
             </h3>
 
             <div class="faq-item">
                 <div class="faq-question">
                     <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    @Localize("CanIPlayGamesFree")
+                    @Html.Localize("CanIPlayGamesFree")
                 </div>
                 <div class="faq-answer">
-                    @Localize("YesPlayDemoMode"). @Localize("TryGamesBefore").
+                    @Html.Localize("YesPlayDemoMode"). @Html.Localize("TryGamesBefore").
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">
                     <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    @Localize("WhatIsRTP")
+                    @Html.Localize("WhatIsRTP")
                 </div>
                 <div class="faq-answer">
-                    @Localize("RTPDefinition"). @Localize("RTPExplanation").
+                    @Html.Localize("RTPDefinition"). @Html.Localize("RTPExplanation").
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">
                     <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    @Localize("AreGamesFair")
+                    @Html.Localize("AreGamesFair")
                 </div>
                 <div class="faq-answer">
-                    @Localize("GamesUseCertifiedRNG"). @Localize("GuaranteesFairResults").
+                    @Html.Localize("GamesUseCertifiedRNG"). @Html.Localize("GuaranteesFairResults").
                 </div>
             </div>
 
             <!-- Bonussen & Promoties -->
             <h3 class="mb-4 mt-5" style="color: var(--primary-color);">
-                <i class="fas fa-gift"></i> @Localize("BonusesPromotions")
+                <i class="fas fa-gift"></i> @Html.Localize("BonusesPromotions")
             </h3>
 
             <div class="faq-item">
                 <div class="faq-question">
                     <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    @Localize("WhatAreWagering")
+                    @Html.Localize("WhatAreWagering")
                 </div>
                 <div class="faq-answer">
-                    @Localize("WageringDefinition"). @Localize("WageringExample").
+                    @Html.Localize("WageringDefinition"). @Html.Localize("WageringExample").
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">
                     <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    @Localize("CanIDeclineBonus")
+                    @Html.Localize("CanIDeclineBonus")
                 </div>
                 <div class="faq-answer">
-                    @Localize("YesCanDeclineBonus"). @Localize("ContactSupportToRemove").
+                    @Html.Localize("YesCanDeclineBonus"). @Html.Localize("ContactSupportToRemove").
                 </div>
             </div>
 
             <!-- Veiligheid & Verantwoord Spelen -->
             <h3 class="mb-4 mt-5" style="color: var(--primary-color);">
-                <i class="fas fa-shield-alt"></i> @Localize("SecurityResponsibleGaming")
+                <i class="fas fa-shield-alt"></i> @Html.Localize("SecurityResponsibleGaming")
             </h3>
 
             <div class="faq-item">
                 <div class="faq-question">
                     <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    @Localize("HowProtectPersonalData")
+                    @Html.Localize("HowProtectPersonalData")
                 </div>
                 <div class="faq-answer">
-                    @Localize("WeUseSSLEncryption"). @Localize("DataNotShared").
+                    @Html.Localize("WeUseSSLEncryption"). @Html.Localize("DataNotShared").
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">
                     <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    @Localize("CanISetLimits")
+                    @Html.Localize("CanISetLimits")
                 </div>
                 <div class="faq-answer">
-                    @Localize("YesEncourageResponsiblePlay"). @Localize("CanSetLimits"):
+                    @Html.Localize("YesEncourageResponsiblePlay"). @Html.Localize("CanSetLimits"):
                     <ul class="mt-2">
-                        <li>@Localize("DailyWeeklyMonthlyLimits")</li>
-                        <li>@Localize("BettingLimitsPerSession")</li>
-                        <li>@Localize("LossLimits")</li>
-                        <li>@Localize("TimeoutPeriods")</li>
-                        <li>@Localize("SelfExclusion")</li>
+                        <li>@Html.Localize("DailyWeeklyMonthlyLimits")</li>
+                        <li>@Html.Localize("BettingLimitsPerSession")</li>
+                        <li>@Html.Localize("LossLimits")</li>
+                        <li>@Html.Localize("TimeoutPeriods")</li>
+                        <li>@Html.Localize("SelfExclusion")</li>
                     </ul>
                 </div>
             </div>
@@ -187,16 +187,16 @@
             <div class="faq-item">
                 <div class="faq-question">
                     <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                    @Localize("WhatIfGamblingProblem")
+                    @Html.Localize("WhatIfGamblingProblem")
                 </div>
                 <div class="faq-answer">
-                    @Localize("SeveralOrganizationsCanHelp"):
+                    @Html.Localize("SeveralOrganizationsCanHelp"):
                     <ul class="mt-2">
-                        <li>@Localize("HelplineLoketKansspelen"): 0800 35 777</li>
+                        <li>@Html.Localize("HelplineLoketKansspelen"): 0800 35 777</li>
                         <li>GambleAware: www.gambleaware.be</li>
-                        <li>@Localize("AnonymousGamblers"): www.ag-belgium.be</li>
+                        <li>@Html.Localize("AnonymousGamblers"): www.ag-belgium.be</li>
                     </ul>
-                    @Localize("ContactUsToCloseAccount").
+                    @Html.Localize("ContactUsToCloseAccount").
                 </div>
             </div>
         </div>
@@ -204,10 +204,10 @@
 
     <!-- Contact CTA -->
     <div class="text-center mt-5 p-5" style="background: var(--bg-card); border-radius: 12px;">
-        <h3 class="mb-3">@Localize("QuestionNotAnswered")</h3>
-        <p class="text-muted mb-4">@Localize("SupportTeam24_7")</p>
+        <h3 class="mb-3">@Html.Localize("QuestionNotAnswered")</h3>
+        <p class="text-muted mb-4">@Html.Localize("SupportTeam24_7")</p>
         <a asp-controller="Support" asp-action="Index" class="btn btn-primary btn-lg">
-            <i class="fas fa-headset"></i> @Localize("ContactUs")
+            <i class="fas fa-headset"></i> @Html.Localize("ContactUs")
         </a>
     </div>
 </div>
