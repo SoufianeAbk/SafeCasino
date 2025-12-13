@@ -4,28 +4,28 @@
 
 <div class="home-container">
     <!-- Hero Section -->
-    <section class="hero-section text-white text-center py-5">
+    <section class="hero-section">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h1 class="display-3 fw-bold mb-4">
+                    <h1 class="hero-title">
                         @Localize("WelcomeToSafeCasino")
                     </h1>
-                    <p class="lead mb-4">
+                    <p class="hero-subtitle">
                         @Localize("HeroDescription")
                     </p>
-                    <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
-                        <a href="/Account/Register" class="btn btn-light btn-lg">
+                    <div class="hero-buttons">
+                        <a href="/Account/Register" class="btn btn-primary">
                             <i class="fas fa-user-plus me-2"></i>@Localize("GetStarted")
                         </a>
-                        <a href="/Games" class="btn btn-outline-light btn-lg">
+                        <a href="/Games" class="btn btn-outline-light">
                             <i class="fas fa-gamepad me-2"></i>@Localize("PlayNow")
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-6 mt-4 mt-lg-0">
+                <div class="col-lg-6 text-center d-none d-lg-block">
                     <div class="hero-image">
-                        <i class="fas fa-dice-five fa-10x text-warning"></i>
+                        <i class="fas fa-dice-five"></i>
                     </div>
                 </div>
             </div>
@@ -33,35 +33,35 @@
     </section>
 
     <!-- Features Section -->
-    <section class="features-section py-5">
+    <section class="features-section">
         <div class="container">
-            <h2 class="text-center mb-5">@Localize("WhyChooseUs")</h2>
+            <h2 class="section-title">@Localize("WhyChooseUs")</h2>
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="feature-card text-center p-4">
-                        <div class="feature-icon mb-3">
-                            <i class="fas fa-shield-alt fa-3x text-primary"></i>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
                         </div>
                         <h4>@Localize("SafeAndSecure")</h4>
-                        <p class="text-muted">@Localize("SafeDescription")</p>
+                        <p>@Localize("SafeDescription")</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="feature-card text-center p-4">
-                        <div class="feature-icon mb-3">
-                            <i class="fas fa-bolt fa-3x text-warning"></i>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
                         </div>
                         <h4>@Localize("FastPayouts")</h4>
-                        <p class="text-muted">@Localize("PayoutsDescription")</p>
+                        <p>@Localize("PayoutsDescription")</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="feature-card text-center p-4">
-                        <div class="feature-icon mb-3">
-                            <i class="fas fa-headset fa-3x text-success"></i>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
                         </div>
                         <h4>@Localize("Support247")</h4>
-                        <p class="text-muted">@Localize("SupportDescription")</p>
+                        <p>@Localize("SupportDescription")</p>
                     </div>
                 </div>
             </div>
@@ -69,79 +69,81 @@
     </section>
 
     <!-- Popular Games Section -->
-    <section class="games-section py-5 bg-light">
+    <section class="games-section">
         <div class="container">
-            <h2 class="text-center mb-5">@Localize("PopularGames")</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="game-card">
-                        <div class="game-icon">
-                            <i class="fas fa-circle-notch fa-4x"></i>
-                        </div>
-                        <h3>@Localize("Roulette")</h3>
-                        <p>@Localize("RouletteDescription")</p>
-                        <a href="/Games" class="btn btn-primary">
-                            @Localize("PlayNow") <i class="fas fa-arrow-right ms-2"></i>
-                        </a>
+            <h2 class="section-title">@Localize("PopularGames")</h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-icon">
+                        <i class="fas fa-circle-notch"></i>
                     </div>
+                    <h3>@Localize("Roulette")</h3>
+                    <p>@Localize("RouletteDescription")</p>
+                    <a href="/Games" class="btn btn-sm btn-primary">
+                        @Localize("PlayNow") <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
                 </div>
-                <div class="col-md-4">
-                    <div class="game-card">
-                        <div class="game-icon">
-                            <i class="fas fa-coins fa-4x"></i>
-                        </div>
-                        <h3>@Localize("Slots")</h3>
-                        <p>@Localize("SlotsDescription")</p>
-                        <a href="/Games" class="btn btn-primary">
-                            @Localize("PlayNow") <i class="fas fa-arrow-right ms-2"></i>
-                        </a>
+                <div class="game-card">
+                    <div class="game-icon">
+                        <i class="fas fa-coins"></i>
                     </div>
+                    <h3>@Localize("Slots")</h3>
+                    <p>@Localize("SlotsDescription")</p>
+                    <a href="/Games" class="btn btn-sm btn-primary">
+                        @Localize("PlayNow") <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
                 </div>
-                <div class="col-md-4">
-                    <div class="game-card">
-                        <div class="game-icon">
-                            <i class="fas fa-heart fa-4x"></i>
-                        </div>
-                        <h3>@Localize("Blackjack")</h3>
-                        <p>@Localize("BlackjackDescription")</p>
-                        <a href="/Games" class="btn btn-primary">
-                            @Localize("PlayNow") <i class="fas fa-arrow-right ms-2"></i>
-                        </a>
+                <div class="game-card">
+                    <div class="game-icon">
+                        <i class="fas fa-heart"></i>
                     </div>
+                    <h3>@Localize("Blackjack")</h3>
+                    <p>@Localize("BlackjackDescription")</p>
+                    <a href="/Games" class="btn btn-sm btn-primary">
+                        @Localize("PlayNow") <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Stats Section -->
-    <section class="stats-section py-5">
+    <section class="stats-section">
         <div class="container">
-            <div class="row text-center g-4">
-                <div class="col-md-3">
-                    <div class="stat-item">
-                        <i class="fas fa-users fa-3x text-primary mb-3"></i>
-                        <h3 class="display-4 fw-bold">10K+</h3>
+            <div class="row g-4">
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>10K+</h4>
                         <p>@Localize("ActivePlayers")</p>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="stat-item">
-                        <i class="fas fa-gamepad fa-3x text-primary mb-3"></i>
-                        <h3 class="display-4 fw-bold">50+</h3>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h4>50+</h4>
                         <p>@Localize("Games")</p>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="stat-item">
-                        <i class="fas fa-trophy fa-3x text-warning mb-3"></i>
-                        <h3 class="display-4 fw-bold">€1M+</h3>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h4>€1M+</h4>
                         <p>@Localize("PaidOut")</p>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="stat-item">
-                        <i class="fas fa-star fa-3x text-warning mb-3"></i>
-                        <h3 class="display-4 fw-bold">4.8</h3>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4>4.8★</h4>
                         <p>@Localize("Rating")</p>
                     </div>
                 </div>
@@ -150,90 +152,13 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="cta-section text-white text-center py-5">
-        <div class="container">
-            <h2 class="display-4 fw-bold mb-4">@Localize("ReadyToStart")</h2>
-            <p class="lead mb-4">@Localize("CTADescription")</p>
+    <section class="cta-section">
+        <div class="container text-center">
+            <h2 class="cta-title">@Localize("ReadyToStart")</h2>
+            <p class="cta-subtitle">@Localize("CTADescription")</p>
             <a href="/Account/Register" class="btn btn-light btn-lg">
                 <i class="fas fa-rocket me-2"></i>@Localize("JoinNow")
             </a>
         </div>
     </section>
 </div>
-
-<style>
-    .home-container {
-        padding: 0;
-    }
-
-    .hero-section {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 500px;
-        display: flex;
-        align-items: center;
-    }
-
-    .hero-image {
-        animation: float 3s ease-in-out infinite;
-    }
-
-    @@keyframes float {
-        0%, 100% {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-20px);
-        }
-    }
-
-    .features-section {
-        background: #f8f9fa;
-    }
-
-    .feature-card {
-        background: white;
-        border-radius: 15px;
-        transition: all 0.3s ease;
-        height: 100%;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-    .game-card {
-        background: white;
-        border-radius: 15px;
-        padding: 30px;
-        text-align: center;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-        .game-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-    .game-icon {
-        color: #667eea;
-        margin-bottom: 20px;
-    }
-
-    .stats-section {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-    }
-
-    .stat-item {
-        padding: 20px;
-    }
-
-    .cta-section {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        padding: 80px 0;
-    }
-</style>
