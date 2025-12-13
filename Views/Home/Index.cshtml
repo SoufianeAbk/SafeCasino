@@ -1,5 +1,5 @@
-﻿@{
-    ViewData["Title"] = localizationService.GetString("Home", currentLanguage);
+@{
+    ViewData["Title"] = Html.Localize("Home");
 }
 
 <div class="home-container">
@@ -9,17 +9,17 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <h1 class="display-3 fw-bold mb-4">
-                        @Localize("WelcomeToSafeCasino")
+                        @Html.Localize("WelcomeToSafeCasino")
                     </h1>
                     <p class="lead mb-4">
-                        @Localize("HeroDescription")
+                        @Html.Localize("HeroDescription")
                     </p>
                     <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
                         <a href="/Account/Register" class="btn btn-light btn-lg">
-                            <i class="fas fa-user-plus me-2"></i>@Localize("GetStarted")
+                            <i class="fas fa-user-plus me-2"></i>@Html.Localize("GetStarted")
                         </a>
                         <a href="/Game" class="btn btn-outline-light btn-lg">
-                            <i class="fas fa-gamepad me-2"></i>@Localize("PlayNow")
+                            <i class="fas fa-gamepad me-2"></i>@Html.Localize("PlayNow")
                         </a>
                     </div>
                 </div>
@@ -35,15 +35,15 @@
     <!-- Features Section -->
     <section class="features-section py-5">
         <div class="container">
-            <h2 class="text-center mb-5">@Localize("WhyChooseUs")</h2>
+            <h2 class="text-center mb-5">@Html.Localize("WhyChooseUs")</h2>
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="feature-card text-center p-4">
                         <div class="feature-icon mb-3">
                             <i class="fas fa-shield-alt fa-3x text-primary"></i>
                         </div>
-                        <h4>@Localize("SafeAndSecure")</h4>
-                        <p class="text-muted">@Localize("SafeDescription")</p>
+                        <h4>@Html.Localize("SafeAndSecure")</h4>
+                        <p class="text-muted">@Html.Localize("SafeDescription")</p>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -51,8 +51,8 @@
                         <div class="feature-icon mb-3">
                             <i class="fas fa-bolt fa-3x text-warning"></i>
                         </div>
-                        <h4>@Localize("FastPayouts")</h4>
-                        <p class="text-muted">@Localize("PayoutsDescription")</p>
+                        <h4>@Html.Localize("FastPayouts")</h4>
+                        <p class="text-muted">@Html.Localize("PayoutsDescription")</p>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -60,8 +60,8 @@
                         <div class="feature-icon mb-3">
                             <i class="fas fa-headset fa-3x text-success"></i>
                         </div>
-                        <h4>@Localize("Support247")</h4>
-                        <p class="text-muted">@Localize("SupportDescription")</p>
+                        <h4>@Html.Localize("Support247")</h4>
+                        <p class="text-muted">@Html.Localize("SupportDescription")</p>
                     </div>
                 </div>
             </div>
@@ -71,17 +71,17 @@
     <!-- Popular Games Section -->
     <section class="games-section py-5 bg-light">
         <div class="container">
-            <h2 class="text-center mb-5">@Localize("PopularGames")</h2>
+            <h2 class="text-center mb-5">@Html.Localize("PopularGames")</h2>
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="game-card">
                         <div class="game-icon">
                             <i class="fas fa-circle-notch fa-4x"></i>
                         </div>
-                        <h3>@Localize("Roulette")</h3>
-                        <p>@Localize("RouletteDescription")</p>
+                        <h3>@Html.Localize("Roulette")</h3>
+                        <p>@Html.Localize("RouletteDescription")</p>
                         <a href="/Game/Roulette" class="btn btn-primary">
-                            @Localize("PlayNow") <i class="fas fa-arrow-right ms-2"></i>
+                            @Html.Localize("PlayNow") <i class="fas fa-arrow-right ms-2"></i>
                         </a>
                     </div>
                 </div>
@@ -90,10 +90,10 @@
                         <div class="game-icon">
                             <i class="fas fa-coins fa-4x"></i>
                         </div>
-                        <h3>@Localize("Slots")</h3>
-                        <p>@Localize("SlotsDescription")</p>
+                        <h3>@Html.Localize("Slots")</h3>
+                        <p>@Html.Localize("SlotsDescription")</p>
                         <a href="/Game/Slots" class="btn btn-primary">
-                            @Localize("PlayNow") <i class="fas fa-arrow-right ms-2"></i>
+                            @Html.Localize("PlayNow") <i class="fas fa-arrow-right ms-2"></i>
                         </a>
                     </div>
                 </div>
@@ -102,10 +102,10 @@
                         <div class="game-icon">
                             <i class="fas fa-heart fa-4x"></i>
                         </div>
-                        <h3>@Localize("Blackjack")</h3>
-                        <p>@Localize("BlackjackDescription")</p>
+                        <h3>@Html.Localize("Blackjack")</h3>
+                        <p>@Html.Localize("BlackjackDescription")</p>
                         <a href="/Game/Blackjack" class="btn btn-primary">
-                            @Localize("PlayNow") <i class="fas fa-arrow-right ms-2"></i>
+                            @Html.Localize("PlayNow") <i class="fas fa-arrow-right ms-2"></i>
                         </a>
                     </div>
                 </div>
@@ -121,28 +121,28 @@
                     <div class="stat-item">
                         <i class="fas fa-users fa-3x text-primary mb-3"></i>
                         <h3 class="display-4 fw-bold">10K+</h3>
-                        <p>@Localize("ActivePlayers")</p>
+                        <p>@Html.Localize("ActivePlayers")</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="stat-item">
                         <i class="fas fa-gamepad fa-3x text-primary mb-3"></i>
                         <h3 class="display-4 fw-bold">50+</h3>
-                        <p>@Localize("Games")</p>
+                        <p>@Html.Localize("Games")</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="stat-item">
                         <i class="fas fa-trophy fa-3x text-warning mb-3"></i>
                         <h3 class="display-4 fw-bold">€1M+</h3>
-                        <p>@Localize("PaidOut")</p>
+                        <p>@Html.Localize("PaidOut")</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="stat-item">
                         <i class="fas fa-star fa-3x text-warning mb-3"></i>
                         <h3 class="display-4 fw-bold">4.8</h3>
-                        <p>@Localize("Rating")</p>
+                        <p>@Html.Localize("Rating")</p>
                     </div>
                 </div>
             </div>
@@ -152,10 +152,10 @@
     <!-- CTA Section -->
     <section class="cta-section text-white text-center py-5">
         <div class="container">
-            <h2 class="display-4 fw-bold mb-4">@Localize("ReadyToStart")</h2>
-            <p class="lead mb-4">@Localize("CTADescription")</p>
+            <h2 class="display-4 fw-bold mb-4">@Html.Localize("ReadyToStart")</h2>
+            <p class="lead mb-4">@Html.Localize("CTADescription")</p>
             <a href="/Account/Register" class="btn btn-light btn-lg">
-                <i class="fas fa-rocket me-2"></i>@Localize("JoinNow")
+                <i class="fas fa-rocket me-2"></i>@Html.Localize("JoinNow")
             </a>
         </div>
     </section>
