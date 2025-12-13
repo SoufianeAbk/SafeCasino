@@ -5,37 +5,37 @@
 
 <div class="admin-login-container">
     <div class="login-card">
-        <h1 class="text-center mb-4">@Html.Localize("AdminLogin")</h1>
+        <h1 class="text-center mb-4">@Localize("AdminLogin")</h1>
 
         @if (ViewData["ErrorMessage"] != null)
         {
             <div class="alert alert-danger">
-                <strong>@Html.Localize("Error"):</strong> @ViewData["ErrorMessage"]
+                <strong>@Localize("Error"):</strong> @ViewData["ErrorMessage"]
             </div>
         }
 
         <form method="post" action="/Account/AdminLogin">
             <div class="mb-3">
-                <label class="form-label">@Html.Localize("Username")</label>
+                <label class="form-label">@Localize("Username")</label>
                 <input type="text" name="Username" class="form-control" required />
             </div>
 
             <div class="mb-3">
-                <label class="form-label">@Html.Localize("Password")</label>
+                <label class="form-label">@Localize("Password")</label>
                 <input type="password" name="Password" class="form-control" required />
             </div>
 
             <div class="mb-3">
                 <input type="checkbox" name="RememberMe" class="form-check-input" id="remember" />
-                <label class="form-check-label" for="remember">@Html.Localize("RememberMe")</label>
+                <label class="form-check-label" for="remember">@Localize("RememberMe")</label>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">@Html.Localize("Login")</button>
+            <button type="submit" class="btn btn-primary w-100">@Localize("Login")</button>
         </form>
 
         <hr />
         <p class="text-center">
-            <a href="/">@Html.Localize("BackToHome")</a>
+            <a href="/">@Localize("BackToHome")</a>
         </p>
     </div>
 
