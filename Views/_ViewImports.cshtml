@@ -1,12 +1,14 @@
 @using SafeCasino
 @using SafeCasino.Models
 @using SafeCasino.Services
-@using SafeCasino.Extensions
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-@inject ILocalizationService localizationService
-@inject IHtmlHelper<dynamic> Html
+@inject ILocalizationService LocalizationService
 
-@{
-    var currentLanguage = ViewContext.HttpContext.Request.Cookies["language"] ?? "nl";
+@functions {
+    public string Localize(string key)
+    {
+        var language = ViewContext.HttpContext.Request.Cookies["language"] ?? "nl";
+        return LocalizationService.GetString(key, language) ?? key;
+    }
 }
