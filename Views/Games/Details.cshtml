@@ -1,4 +1,4 @@
-﻿@model SafeCasino.ViewModels.GameDetailViewModel
+@model SafeCasino.ViewModels.GameDetailViewModel
 @{
     ViewData["Title"] = "Game Details";
 }
@@ -6,7 +6,7 @@
 <div class="container py-5">
     <div class="mb-4">
         <a href="/Games" class="btn btn-outline-secondary">
-            <i class="fas fa-arrow-left me-2"></i>@Localize("BackToGames")
+            <i class="fas fa-arrow-left me-2"></i>@Html.Localize("BackToGames")
         </a>
     </div>
 
@@ -34,11 +34,11 @@
                     <span class="badge bg-primary me-2">@Model.Game.Category</span>
                     @if (Model.Game.IsPopular)
                     {
-                        <span class="badge bg-warning">@Localize("Popular")</span>
+                        <span class="badge bg-warning">@Html.Localize("Popular")</span>
                     }
                     @if (Model.Game.IsNew)
                     {
-                        <span class="badge bg-success">@Localize("New")</span>
+                        <span class="badge bg-success">@Html.Localize("New")</span>
                     }
                 </div>
 
@@ -47,16 +47,16 @@
                 <div class="game-stats mb-4">
                     <div class="row">
                         <div class="col-6 mb-2">
-                            <strong>@Localize("MinBet"):</strong> €@Model.Game.MinBet
+                            <strong>@Html.Localize("MinBet"):</strong> €@Model.Game.MinBet
                         </div>
                         <div class="col-6 mb-2">
-                            <strong>@Localize("MaxBet"):</strong> €@Model.Game.MaxBet
+                            <strong>@Html.Localize("MaxBet"):</strong> €@Model.Game.MaxBet
                         </div>
                         <div class="col-6 mb-2">
-                            <strong>@Localize("Players"):</strong> N/A
+                            <strong>@Html.Localize("Players"):</strong> N/A
                         </div>
                         <div class="col-6 mb-2">
-                            <strong>@Localize("Rating"):</strong> N/A
+                            <strong>@Html.Localize("Rating"):</strong> N/A
                         </div>
                     </div>
                 </div>
@@ -64,16 +64,16 @@
                 @if (User.Identity?.IsAuthenticated == true)
                 {
                     <a href="/Games/Play/@Model.Game.Id" class="btn btn-primary btn-lg w-100 mb-2">
-                        <i class="fas fa-play me-2"></i>@Localize("PlayNow")
+                        <i class="fas fa-play me-2"></i>@Html.Localize("PlayNow")
                     </a>
                     <button class="btn btn-outline-secondary w-100">
-                        <i class="fas fa-heart me-2"></i>@Localize("AddToFavorites")
+                        <i class="fas fa-heart me-2"></i>@Html.Localize("AddToFavorites")
                     </button>
                 }
                 else
                 {
                     <a href="/Account/Login" class="btn btn-primary btn-lg w-100">
-                        <i class="fas fa-sign-in-alt me-2"></i>@Localize("LoginToPlay")
+                        <i class="fas fa-sign-in-alt me-2"></i>@Html.Localize("LoginToPlay")
                     </a>
                 }
             </div>
