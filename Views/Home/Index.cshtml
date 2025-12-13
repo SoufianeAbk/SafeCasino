@@ -2,10 +2,6 @@
     ViewData["Title"] = localizationService.GetString("Home", currentLanguage);
 }
 
-@functions {
-    private string Localize(string key) => localizationService.GetString(key, currentLanguage) ?? key;
-}
-
 <div class="home-container">
     <!-- Hero Section -->
     <section class="hero-section text-white text-center py-5">

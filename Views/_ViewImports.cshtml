@@ -16,11 +16,3 @@
         return localizationService.GetString(key, lang) ?? key;
     }
 }
-
-@functions {
-    private string Localize(string key)
-    {
-        var lang = ViewContext.HttpContext.Request.Cookies["language"] ?? "nl";
-        return localizationService.GetString(key, lang) ?? key;
-    }
-}

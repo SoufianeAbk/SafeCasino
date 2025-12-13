@@ -7,6 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container
 builder.Services.AddControllersWithViews();
 
+// Add HttpContextAccessor
+builder.Services.AddHttpContextAccessor();
+
 // Add DbContext
 builder.Services.AddDbContext<SafeCasinoDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
