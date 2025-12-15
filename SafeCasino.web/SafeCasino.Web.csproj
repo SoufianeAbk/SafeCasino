@@ -1,16 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\SafeCasino.Data\SafeCasino.Data.csproj" />
     <ProjectReference Include="..\SafeCasino.Shared\SafeCasino.Shared.csproj" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <Folder Include="Controllers\Api\" />
     <Folder Include="Controllers\Admin\" />
@@ -21,5 +27,4 @@
     <Folder Include="Services\Interfaces\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
-
 </Project>
