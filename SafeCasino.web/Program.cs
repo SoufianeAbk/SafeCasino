@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using SafeCasino.Data.Data;
 using SafeCasino.Data.Entities;
@@ -11,7 +12,11 @@ builder.Services.AddControllersWithViews();
 
 // DbContext registreren
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.ConfigureWarnings(w =>
+        w.Ignore(RelationalEventId.PendingModelChangesWarning));
+});
 
 // Identity configureren
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
