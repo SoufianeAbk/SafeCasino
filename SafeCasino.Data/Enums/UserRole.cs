@@ -1,12 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SafeCasino.Data.Enums
+﻿namespace SafeCasino.Data.Enums
 {
-    internal class UserRole
+    /// <summary>
+    /// Enum voor de verschillende gebruikersrollen in het casino systeem
+    /// </summary>
+    public enum UserRole
     {
+        /// <summary>
+        /// Standaard speler rol
+        /// </summary>
+        Player = 0,
+
+        /// <summary>
+        /// Administrator met volledige rechten
+        /// </summary>
+        Admin = 1,
+
+        /// <summary>
+        /// Moderator met beperkte beheersrechten
+        /// </summary>
+        Moderator = 2
     }
 }

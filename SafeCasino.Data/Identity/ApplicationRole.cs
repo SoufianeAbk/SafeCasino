@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace SafeCasino.Data.Identity
 {
-    internal class ApplicationRole
+    /// <summary>
+    /// Custom rol klasse voor Identity
+    /// </summary>
+    public class ApplicationRole : IdentityRole
     {
+        /// <summary>
+        /// Beschrijving van de rol
+        /// </summary>
+        public string? Description { get; set; }
     }
 }
