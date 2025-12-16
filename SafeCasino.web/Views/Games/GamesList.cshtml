@@ -1,0 +1,128 @@
+﻿@model List<SafeCasino.Data.Entities.CasinoGame>
+@{
+    ViewData["Title"] = ViewBag.Title ?? "Games";
+}
+
+<div class="container py-4">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="display-4">
+                @if (ViewBag.Title == "Populaire Games")
+                {
+                    <i class="fas fa-fire text-danger"></i>
+                }
+                else if (ViewBag.Title == "Nieuwe Games")
+                {
+                    <i class="fas fa-star text-warning"></i>
+                }
+                else
+                {
+                    <i class="fas fa-gamepad"></i>
+                }
+                @ViewBag.Title
+            </h1>
+            <p class="lead">@Model.Count games gevonden</p>
+        </div>
+    </div>
+
+    <!-- Games Grid -->
+    @if (Model.Any())
+    {
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+            @foreach (var game in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 game-card">
+                        <img src="@game.ThumbnailUrl" class="card-img-top" alt="@game.Name"
+                             onerror="this.src='/images/placeholder-game.jpg'" />
+                        <div class="card-body">
+                            @if (game.IsNew)
+                            {
+                                <span class="badge bg-success mb-2">Nieuw</span>
+                            }
+                            @if (game.IsPopular)
+                            {
+                                <span class="badge bg-warning text-dark mb-2">Populair</span>
+                            }
+
+                            <h5 class="card-title">@game.Name</h5>
+                            <p class="card-text text-muted small">@game.Provider.Name</p>
+                            <p class="card-text"><small class="text-muted">@game.Category.Name</small></p>
+
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <small class="text-muted">
+                                    <i class="fas fa-percentage"></i> RTP: @game.RtpPercentage%
+                                </small>
+                                <small class="text-muted">
+                                    <i class="fas fa-play"></i> @game.PlayCount
+                                </small>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <div class="d-grid gap-2">
+                                <a asp-action="Details" asp-route-id="@game.Id" class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-info-circle"></i> Details
+                                </a>
+                                @if (User.Identity?.IsAuthenticated == true)
+                                {
+                                    <a asp-action="Play" asp-route-id="@game.Id" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-play"></i> Speel Nu
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Account" asp-action="Login"
+                                       asp-route-returnUrl="@Url.Action("Play", new { id = game.Id })"
+                                       class="btn btn-primary btn-sm">
+                                        <i class="fas fa-sign-in-alt"></i> Log in om te spelen
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <i class="fas fa-sad-tear fa-5x text-muted mb-3"></i>
+                <h3>Geen games gevonden</h3>
+                <p class="text-muted">Er zijn momenteel geen games in deze categorie.</p>
+                <a asp-action="Index" class="btn btn-primary mt-3">
+                    <i class="fas fa-arrow-left"></i> Terug naar alle games
+                </a>
+            </div>
+        </div>
+    }
+
+    <!-- Back Button -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Terug naar overzicht
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .game-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+            .game-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            }
+
+            .game-card img {
+                height: 200px;
+                object-fit: cover;
+            }
+    </style>
+}

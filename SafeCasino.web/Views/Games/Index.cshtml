@@ -1,0 +1,151 @@
+﻿@model SafeCasino.Web.ViewModels.GamesIndexViewModel
+@{
+    ViewData["Title"] = "Casino Games";
+}
+
+<div class="container-fluid py-4">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="display-4"><i class="fas fa-gamepad"></i> Casino Games</h1>
+            <p class="lead">Ontdek onze collectie van @Model.TotalGames spellen</p>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form asp-action="Index" method="get" class="row g-3">
+                        <!-- Zoeken -->
+                        <div class="col-md-4">
+                            <label class="form-label">Zoeken</label>
+                            <input type="text" name="search" value="@Model.SearchQuery" class="form-control" placeholder="Zoek naar spel..." />
+                        </div>
+
+                        <!-- Categorie -->
+                        <div class="col-md-4">
+                            <label class="form-label">Categorie</label>
+                            <select name="categoryId" class="form-select">
+                                <option value="">Alle categorieën</option>
+                                @foreach (var category in Model.Categories)
+                                {
+                                    <option value="@category.Id" selected="@(Model.SelectedCategoryId == category.Id)">
+                                        @category.Name
+                                    </option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- Sorteren -->
+                        <div class="col-md-3">
+                            <label class="form-label">Sorteren</label>
+                            <select name="sortBy" class="form-select">
+                                <option value="">Standaard</option>
+                                <option value="popular" selected="@(Model.SortBy == "popular")">Populair</option>
+                                <option value="new" selected="@(Model.SortBy == "new")">Nieuw</option>
+                                <option value="rtp" selected="@(Model.SortBy == "rtp")">Hoogste RTP</option>
+                                <option value="name" selected="@(Model.SortBy == "name")">Naam A-Z</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-1 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Categorieën -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="btn-group" role="group">
+                <a asp-action="Index" class="btn @(Model.SelectedCategoryId == null ? "btn-primary" : "btn-outline-primary")">
+                    Alle Games
+                </a>
+                @foreach (var category in Model.Categories)
+                {
+                    <a asp-action="Index" asp-route-categoryId="@category.Id"
+                       class="btn @(Model.SelectedCategoryId == category.Id ? "btn-primary" : "btn-outline-primary")">
+                        @category.Name
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Games Grid -->
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+        @foreach (var game in Model.Games)
+        {
+            <div class="col">
+                <div class="card h-100 game-card">
+                    <img src="@game.ThumbnailUrl" class="card-img-top" alt="@game.Name"
+                         onerror="this.src='/images/placeholder-game.jpg'" />
+                    <div class="card-body">
+                        @if (game.IsNew)
+                        {
+                            <span class="badge bg-success mb-2">Nieuw</span>
+                        }
+                        @if (game.IsPopular)
+                        {
+                            <span class="badge bg-warning text-dark mb-2">Populair</span>
+                        }
+
+                        <h5 class="card-title">@game.Name</h5>
+                        <p class="card-text text-muted small">@game.Provider.Name</p>
+                        <p class="card-text"><small>@game.Category.Name</small></p>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">
+                                <i class="fas fa-percentage"></i> RTP: @game.RtpPercentage%
+                            </small>
+                            <small class="text-muted">
+                                <i class="fas fa-play"></i> @game.PlayCount
+                            </small>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a asp-action="Details" asp-route-id="@game.Id" class="btn btn-primary btn-sm w-100">
+                            <i class="fas fa-info-circle"></i> Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (!Model.Games.Any())
+    {
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <i class="fas fa-search fa-5x text-muted mb-3"></i>
+                <h3>Geen games gevonden</h3>
+                <p class="text-muted">Probeer een andere zoekopdracht of filter</p>
+            </div>
+        </div>
+    }
+</div>
+
+@section Styles {
+    <style>
+        .game-card {
+            transition: transform 0.2s;
+        }
+
+            .game-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            }
+
+            .game-card img {
+                height: 200px;
+                object-fit: cover;
+            }
+    </style>
+}

@@ -1,0 +1,190 @@
+﻿@model SafeCasino.Web.ViewModels.GameDetailsViewModel
+@{
+    ViewData["Title"] = Model.Game.Name;
+}
+
+<div class="container py-4">
+    <!-- Game Header -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <img src="@Model.Game.ThumbnailUrl" class="img-fluid rounded shadow" alt="@Model.Game.Name"
+                 onerror="this.src='/images/placeholder-game.jpg'" />
+        </div>
+        <div class="col-md-8">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                    <h1 class="display-5">@Model.Game.Name</h1>
+                    <p class="lead text-muted">@Model.Game.Provider.Name</p>
+                </div>
+                <div>
+                    @if (Model.Game.IsNew)
+                    {
+                        <span class="badge bg-success fs-6">Nieuw</span>
+                    }
+                    @if (Model.Game.IsPopular)
+                    {
+                        <span class="badge bg-warning text-dark fs-6">Populair</span>
+                    }
+                </div>
+            </div>
+
+            <p class="mb-4">@Model.Game.Description</p>
+
+            <!-- Game Stats -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h6 class="text-muted mb-1">RTP</h6>
+                            <h4 class="mb-0">@Model.Game.RtpPercentage%</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h6 class="text-muted mb-1">Min. Inzet</h6>
+                            <h4 class="mb-0">€@Model.Game.MinimumBet</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h6 class="text-muted mb-1">Max. Inzet</h6>
+                            <h4 class="mb-0">€@Model.Game.MaximumBet</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h6 class="text-muted mb-1">Gespeeld</h6>
+                            <h4 class="mb-0">@Model.Game.PlayCount</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-grid gap-2 d-md-flex">
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <a asp-action="Play" asp-route-id="@Model.Game.Id" class="btn btn-primary btn-lg">
+                        <i class="fas fa-play"></i> Speel Nu
+                    </a>
+                }
+                else
+                {
+                    <a asp-action="Login" asp-controller="Account" asp-route-returnUrl="@Url.Action("Play", new { id = Model.Game.Id })"
+                       class="btn btn-primary btn-lg">
+                        <i class="fas fa-sign-in-alt"></i> Log in om te spelen
+                    </a>
+                }
+                <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                    <i class="fas fa-arrow-left"></i> Terug naar overzicht
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-5" />
+
+    <!-- Reviews Section -->
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2>Reviews</h2>
+                    @if (Model.TotalReviews > 0)
+                    {
+                        <p class="text-muted">
+                            <i class="fas fa-star text-warning"></i>
+                            @Model.AverageRating.ToString("F1") / 5.0 (@Model.TotalReviews reviews)
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="text-muted">Nog geen reviews</p>
+                    }
+                </div>
+                @if (Model.CanReview && !Model.UserHasReviewed)
+                {
+                    <a asp-controller="Reviews" asp-action="Create" asp-route-gameId="@Model.Game.Id"
+                       class="btn btn-success">
+                        <i class="fas fa-plus"></i> Review schrijven
+                    </a>
+                }
+                else if (Model.UserHasReviewed)
+                {
+                    <span class="badge bg-info">Je hebt dit spel al beoordeeld</span>
+                }
+            </div>
+
+            <!-- Reviews List -->
+            @if (Model.Reviews.Any())
+            {
+                <div class="row row-cols-1 g-4">
+                    @foreach (var review in Model.Reviews)
+                    {
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <div>
+                                            <h5 class="card-title mb-1">@review.Title</h5>
+                                            <p class="text-muted mb-2">
+                                                <small>
+                                                    door @review.User.FirstName @review.User.LastName -
+                                                    @review.CreatedDate.ToString("dd MMM yyyy")
+                                                </small>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (i <= review.Rating)
+                                                {
+                                                    <i class="fas fa-star text-warning"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="far fa-star text-warning"></i>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                    <p class="card-text">@review.Content</p>
+
+                                    @if (User.Identity?.Name == review.User.UserName)
+                                    {
+                                        <div class="mt-3">
+                                            <a asp-controller="Reviews" asp-action="Edit" asp-route-id="@review.Id"
+                                               class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-edit"></i> Bewerken
+                                            </a>
+                                            <form asp-controller="Reviews" asp-action="Delete" asp-route-id="@review.Id"
+                                                  method="post" class="d-inline"
+                                                  onsubmit="return confirm('Weet je zeker dat je deze review wilt verwijderen?')">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-trash"></i> Verwijderen
+                                                </button>
+                                            </form>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="fas fa-comment-slash fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">Nog geen reviews voor dit spel. Wees de eerste!</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
