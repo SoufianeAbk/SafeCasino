@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "Toegang Geweigerd";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <div class="card shadow-lg border-danger">
+                <div class="card-body p-5">
+                    <i class="fas fa-lock fa-5x text-danger mb-4"></i>
+                    <h1 class="display-4 text-danger mb-3">Toegang Geweigerd</h1>
+                    <p class="lead mb-4">
+                        Je hebt geen toegang tot deze pagina.
+                    </p>
+                    <p class="text-muted mb-4">
+                        Deze pagina is alleen toegankelijk voor gebruikers met specifieke rechten.
+                        Als je denkt dat je wel toegang zou moeten hebben, neem dan contact op met de administrator.
+                    </p>
+
+                    <div class="alert alert-warning" role="alert">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Let op:</strong> Als je niet bent ingelogd, probeer dan eerst in te loggen.
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <div class="d-flex justify-content-center gap-3">
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-primary btn-lg">
+                                <i class="fas fa-home"></i> Ga naar Home
+                            </a>
+                            <a asp-controller="Games" asp-action="Index" class="btn btn-outline-primary btn-lg">
+                                <i class="fas fa-gamepad"></i> Bekijk Games
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account" asp-action="Login"
+                               asp-route-returnUrl="@Context.Request.Path"
+                               class="btn btn-success btn-lg">
+                                <i class="fas fa-sign-in-alt"></i> Inloggen
+                            </a>
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                                <i class="fas fa-home"></i> Ga naar Home
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Help Section -->
+            <div class="card mt-4 shadow">
+                <div class="card-body">
+                    <h5><i class="fas fa-question-circle text-info"></i> Waarom zie ik dit?</h5>
+                    <ul class="text-start list-unstyled mt-3">
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i>
+                            Je bent niet ingelogd
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i>
+                            Je hebt niet de juiste rol voor deze pagina
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i>
+                            Deze pagina is alleen voor administrators
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .card {
+            border-radius: 15px;
+        }
+
+        .fa-lock {
+            animation: shake 0.5s;
+        }
+
+        @@keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-10px);
+            }
+
+            75% {
+                transform: translateX(10px);
+            }
+        }
+    </style>
+}
