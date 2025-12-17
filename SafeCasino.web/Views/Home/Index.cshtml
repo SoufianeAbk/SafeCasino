@@ -1,100 +1,238 @@
 ﻿@{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "SafeCasino - Online Casino met 9,000+ Games";
     var popularGames = ViewBag.PopularGames as List<SafeCasino.Data.Entities.CasinoGame>;
     var newGames = ViewBag.NewGames as List<SafeCasino.Data.Entities.CasinoGame>;
     var categories = ViewBag.Categories as List<SafeCasino.Data.Entities.GameCategory>;
 }
 
 <!-- Hero Section -->
-<div class="hero-section bg-dark text-white py-5">
-    <div class="container">
+<div class="hero-section text-white">
+    <div class="container py-5">
         <div class="row align-items-center">
-            <div class="col-lg-6">
-                <h1 class="display-3 fw-bold mb-4">Welkom bij SafeCasino</h1>
-                <p class="lead mb-4">
-                    Ontdek honderden casino games van topzware providers.
-                    Speel veilig en verantwoord met de beste RTP percentages.
+            <div class="col-lg-12 text-center fade-in-up">
+                <h1 class="display-3 fw-bold mb-4">
+                    ONLINE CASINO MET 9,000+ GAMES
+                </h1>
+                <p class="lead mb-5" style="font-size: 1.4rem; max-width: 800px; margin: 0 auto;">
+                    Ontdek de meest uitgebreide collectie casino games van topzware providers.
+                    Speel veilig, verantwoord en geniet van de hoogste RTP percentages.
                 </p>
-                @if (User.Identity?.IsAuthenticated == true)
+                @if (User.Identity?.IsAuthenticated != true)
                 {
-                    <a asp-controller="Games" asp-action="Index" class="btn btn-primary btn-lg">
-                        <i class="fas fa-gamepad"></i> Bekijk Alle Games
-                    </a>
-                }
-                else
-                {
-                    <a asp-controller="Account" asp-action="Register" class="btn btn-success btn-lg me-2">
-                        <i class="fas fa-user-plus"></i> Registreer Nu
-                    </a>
-                    <a asp-controller="Account" asp-action="Login" class="btn btn-outline-light btn-lg">
-                        <i class="fas fa-sign-in-alt"></i> Inloggen
-                    </a>
+                    <div class="d-flex gap-3 justify-content-center">
+                        <a asp-controller="Account" asp-action="Register" class="btn btn-promo btn-lg px-5">
+                            <i class="fas fa-user-plus"></i> REGISTREER NU
+                        </a>
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-outline-light btn-lg px-5">
+                            <i class="fas fa-sign-in-alt"></i> INLOGGEN
+                        </a>
+                    </div>
                 }
             </div>
-            <div class="col-lg-6">
-                <div class="row g-3">
-                    <div class="col-6">
-                        <div class="card bg-primary text-white">
-                            <div class="card-body text-center">
-                                <i class="fas fa-gamepad fa-3x mb-3"></i>
-                                <h3>100+</h3>
-                                <p class="mb-0">Games</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="card bg-success text-white">
-                            <div class="card-body text-center">
-                                <i class="fas fa-users fa-3x mb-3"></i>
-                                <h3>10K+</h3>
-                                <p class="mb-0">Spelers</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="card bg-warning text-dark">
-                            <div class="card-body text-center">
-                                <i class="fas fa-shield-alt fa-3x mb-3"></i>
-                                <h3>100%</h3>
-                                <p class="mb-0">Veilig</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="card bg-info text-white">
-                            <div class="card-body text-center">
-                                <i class="fas fa-star fa-3x mb-3"></i>
-                                <h3>4.8</h3>
-                                <p class="mb-0">Rating</p>
-                            </div>
-                        </div>
-                    </div>
+        </div>
+    </div>
+</div>
+
+<!-- Promotional Banners -->
+<div class="section-bg-dark">
+    <div class="container py-5">
+        <div class="row g-4">
+            <!-- Daily Boost Promo -->
+            <div class="col-lg-4">
+                <div class="promo-banner" style="background: linear-gradient(135deg, #e74c3c 20%, #8e44ad 80%);">
+                    <span class="promo-label">DAILY BOOST</span>
+                    <h2 class="promo-title">TOT €10</h2>
+                    <p class="promo-subtitle">
+                        Speel & win 10 keer<br />
+                        Ontvang 25% cashback
+                    </p>
+                    <a asp-controller="Games" asp-action="Index" class="btn btn-promo">
+                        SPEEL NU
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tournament Promo -->
+            <div class="col-lg-4">
+                <div class="promo-banner" style="background: linear-gradient(135deg, #e91e63 20%, #9c27b0 80%);">
+                    <span class="promo-label">ANIMAL TOURNAMENT</span>
+                    <h2 class="promo-title">€30000<small style="font-size: 0.5em;"> DAILY</small></h2>
+                    <p class="promo-subtitle">
+                        Haal je deel uit de<br />
+                        dagelijkse prijzenpot
+                    </p>
+                    <a asp-controller="Games" asp-action="Index" class="btn btn-promo">
+                        MEER INFO
+                    </a>
+                </div>
+            </div>
+
+            <!-- Live Crash Game Promo -->
+            <div class="col-lg-4">
+                <div class="promo-banner" style="background: linear-gradient(135deg, #ff6b6b 20%, #4ecdc4 80%);">
+                    <span class="promo-label">LIVE CRASH GAME</span>
+                    <h2 class="promo-title">JE WINS ZIJN<br /><small style="font-size: 0.7em;">KLAAR VOOR</small><br />TAKEOFF</h2>
+                    <a asp-controller="Games" asp-action="Index" class="btn btn-promo">
+                        SPEEL NU
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Categories Section -->
-@if (categories != null && categories.Any())
-{
-    <div class="container my-5">
-        <h2 class="text-center mb-4">Game Categorieën</h2>
-        <div class="row row-cols-2 row-cols-md-5 g-4">
-            @foreach (var category in categories)
+<!-- Category Icons Row -->
+<div class="section-bg-card">
+    <div class="container py-4">
+        <div class="row g-4 justify-content-center">
+            <div class="col-6 col-md-2">
+                <a asp-controller="Games" asp-action="Index" class="text-decoration-none">
+                    <div class="category-icon-wrapper">
+                        <div class="category-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="category-label">Daily Boost</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-2">
+                <a asp-controller="Games" asp-action="Popular" class="text-decoration-none">
+                    <div class="category-icon-wrapper">
+                        <div class="category-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="category-label">Tournament</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-2">
+                <a asp-controller="Games" asp-action="New" class="text-decoration-none">
+                    <div class="category-icon-wrapper">
+                        <div class="category-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <div class="category-label">Daily Spin</div>
+                        <span class="badge bg-danger position-absolute" style="top: 0; right: 30%;">FREE</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-2">
+                <a asp-controller="Games" asp-action="Index" class="text-decoration-none">
+                    <div class="category-icon-wrapper">
+                        <div class="category-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="category-label">Coin Shop</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-2">
+                <a asp-controller="Games" asp-action="Index" class="text-decoration-none">
+                    <div class="category-icon-wrapper">
+                        <div class="category-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="category-label">Providers</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-2">
+                <a asp-controller="Games" asp-action="Index" class="text-decoration-none">
+                    <div class="category-icon-wrapper">
+                        <div class="category-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="category-label">Exclusives</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Second Row -->
+        <div class="row g-4 justify-content-center mt-2">
+            @if (categories != null && categories.Any())
             {
-                <div class="col">
-                    <a asp-controller="Games" asp-action="Category" asp-route-id="@category.Id"
-                       class="text-decoration-none">
-                        <div class="card h-100 text-center category-card">
+                @foreach (var category in categories.Take(6))
+                {
+                    <div class="col-6 col-md-2">
+                        <a asp-controller="Games" asp-action="Category" asp-route-id="@category.Id" class="text-decoration-none">
+                            <div class="category-icon-wrapper">
+                                <div class="category-icon">
+                                    @if (category.Name == "Blackjack")
+                                    {
+                                        <i class="fas fa-spade"></i>
+                                    }
+                                    else if (category.Name == "Roulette")
+                                    {
+                                        <i class="fas fa-circle-notch"></i>
+                                    }
+                                    else if (category.Name == "Slots")
+                                    {
+                                        <i class="fas fa-dice"></i>
+                                    }
+                                    else if (category.Name == "Poker")
+                                    {
+                                        <i class="fas fa-heart"></i>
+                                    }
+                                    else if (category.Name == "Live Casino")
+                                    {
+                                        <i class="fas fa-video"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fas fa-gamepad"></i>
+                                    }
+                                </div>
+                                <div class="category-label">@category.Name</div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Only at SafeCasino - Exclusive Games -->
+@if (newGames != null && newGames.Any())
+{
+    <div class="section-bg-dark">
+        <div class="container py-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="section-title">
+                        <i class="fas fa-crown text-gold"></i> ALLEEN BIJ SAFECASINO
+                    </h2>
+                </div>
+                <a asp-controller="Games" asp-action="New" class="btn btn-outline-primary">
+                    Bekijk alles <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+
+            <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-4">
+                @foreach (var game in newGames.Take(10))
+                {
+                    <div class="col">
+                        <div class="game-card position-relative">
+                            <span class="badge-exclusive">EXCLUSIVE</span>
+                            <img src="@game.ThumbnailUrl" class="w-100" alt="@game.Name"
+                                 onerror="this.src='/images/placeholder-game.jpg'" />
                             <div class="card-body">
-                                <i class="fas fa-dice-d20 fa-3x mb-3 text-primary"></i>
-                                <h5 class="card-title">@category.Name</h5>
+                                <h5 class="card-title text-truncate">@game.Name</h5>
+                                <p class="card-text text-muted small mb-2">
+                                    <i class="fas fa-building"></i> @game.Provider.Name
+                                </p>
+                                <div class="d-grid">
+                                    <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id"
+                                       class="btn btn-primary btn-sm">
+                                        <i class="fas fa-play"></i> Speel Nu
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </a>
-                </div>
-            }
+                    </div>
+                }
+            </div>
         </div>
     </div>
 }
@@ -102,35 +240,41 @@
 <!-- Popular Games Section -->
 @if (popularGames != null && popularGames.Any())
 {
-    <div class="bg-light py-5">
-        <div class="container">
+    <div class="section-bg-card">
+        <div class="container py-5">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2><i class="fas fa-fire text-danger"></i> Populaire Games</h2>
+                <div>
+                    <h2 class="section-title">
+                        <i class="fas fa-fire text-danger"></i> POPULAIRE GAMES
+                    </h2>
+                </div>
                 <a asp-controller="Games" asp-action="Popular" class="btn btn-outline-primary">
-                    Bekijk alles <i class="fas fa-arrow-right"></i>
+                    Bekijk alles <i class="fas fa-arrow-right ms-2"></i>
                 </a>
             </div>
-            <div class="row row-cols-1 row-cols-md-4 g-4">
-                @foreach (var game in popularGames)
+
+            <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-4">
+                @foreach (var game in popularGames.Take(10))
                 {
                     <div class="col">
-                        <div class="card h-100 game-card">
-                            <img src="@game.ThumbnailUrl" class="card-img-top" alt="@game.Name"
+                        <div class="game-card position-relative">
+                            @if (game.IsPopular)
+                            {
+                                <span class="badge-exclusive badge-hot">HOT</span>
+                            }
+                            <img src="@game.ThumbnailUrl" class="w-100" alt="@game.Name"
                                  onerror="this.src='/images/placeholder-game.jpg'" />
                             <div class="card-body">
-                                <span class="badge bg-warning text-dark mb-2">Populair</span>
-                                <h5 class="card-title">@game.Name</h5>
-                                <p class="card-text text-muted small">@game.Provider.Name</p>
-                                <div class="d-flex justify-content-between text-muted small">
-                                    <span><i class="fas fa-percentage"></i> @game.RtpPercentage%</span>
-                                    <span><i class="fas fa-play"></i> @game.PlayCount</span>
+                                <h5 class="card-title text-truncate">@game.Name</h5>
+                                <p class="card-text text-muted small mb-2">
+                                    <i class="fas fa-percentage"></i> RTP: @game.RtpPercentage%
+                                </p>
+                                <div class="d-grid">
+                                    <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id"
+                                       class="btn btn-primary btn-sm">
+                                        <i class="fas fa-play"></i> Speel Nu
+                                    </a>
                                 </div>
-                            </div>
-                            <div class="card-footer bg-transparent">
-                                <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id"
-                                   class="btn btn-primary btn-sm w-100">
-                                    Speel Nu
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -140,69 +284,101 @@
     </div>
 }
 
-<!-- New Games Section -->
-@if (newGames != null && newGames.Any())
-{
-    <div class="container my-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2><i class="fas fa-star text-warning"></i> Nieuwe Games</h2>
-            <a asp-controller="Games" asp-action="New" class="btn btn-outline-primary">
-                Bekijk alles <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
-        <div class="row row-cols-1 row-cols-md-4 g-4">
-            @foreach (var game in newGames)
-            {
-                <div class="col">
-                    <div class="card h-100 game-card">
-                        <img src="@game.ThumbnailUrl" class="card-img-top" alt="@game.Name"
-                             onerror="this.src='/images/placeholder-game.jpg'" />
-                        <div class="card-body">
-                            <span class="badge bg-success mb-2">Nieuw</span>
-                            <h5 class="card-title">@game.Name</h5>
-                            <p class="card-text text-muted small">@game.Provider.Name</p>
-                            <div class="d-flex justify-content-between text-muted small">
-                                <span><i class="fas fa-percentage"></i> @game.RtpPercentage%</span>
-                                <span><i class="fas fa-calendar"></i> @game.CreatedDate.ToString("dd MMM")</span>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-transparent">
-                            <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id"
-                               class="btn btn-primary btn-sm w-100">
-                                Speel Nu
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            }
+<!-- Tournaments Section -->
+<div class="section-bg-dark">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-md-2 text-center">
+                <i class="fas fa-trophy" style="font-size: 5rem; color: var(--gold-accent);"></i>
+            </div>
+            <div class="col-md-8">
+                <h2 class="section-title mb-3">
+                    <i class="fas fa-medal text-gold"></i> TOURNAMENTS
+                </h2>
+                <p class="lead text-light mb-0">
+                    Doe mee aan onze spannende toernooien en win geweldige prijzen!
+                    Dagelijkse prijzenpotten tot €30,000.
+                </p>
+            </div>
+            <div class="col-md-2 text-center">
+                <a asp-controller="Games" asp-action="Index" class="btn btn-promo btn-lg">
+                    BEKIJK ALLES
+                </a>
+            </div>
         </div>
     </div>
-}
+</div>
 
 <!-- Features Section -->
-<div class="bg-dark text-white py-5">
+<div class="section-bg-card">
+    <div class="container py-5">
+        <h2 class="text-center section-title mb-5">WAAROM SAFECASINO?</h2>
+        <div class="row row-cols-1 row-cols-md-4 g-4 text-center">
+            <div class="col">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-shield-alt fa-4x text-success"></i>
+                </div>
+                <h4 class="text-white">100% Veilig</h4>
+                <p class="text-muted">SSL encryptie en veilige betalingen voor jouw gemoedsrust</p>
+            </div>
+            <div class="col">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-star fa-4x text-warning"></i>
+                </div>
+                <h4 class="text-white">Top Games</h4>
+                <p class="text-muted">Exclusieve games van de beste providers wereldwijd</p>
+            </div>
+            <div class="col">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-headset fa-4x text-info"></i>
+                </div>
+                <h4 class="text-white">24/7 Support</h4>
+                <p class="text-muted">Altijd bereikbaar voor al je vragen en ondersteuning</p>
+            </div>
+            <div class="col">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-percentage fa-4x text-gold"></i>
+                </div>
+                <h4 class="text-white">Beste RTP</h4>
+                <p class="text-muted">Hoogste uitkeringspercentages in de industrie</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Trust Badges -->
+<div class="section-bg-dark py-4">
     <div class="container">
-        <h2 class="text-center mb-5">Waarom SafeCasino?</h2>
-        <div class="row row-cols-1 row-cols-md-4 g-4">
-            <div class="col text-center">
-                <i class="fas fa-shield-alt fa-4x mb-3 text-success"></i>
-                <h4>100% Veilig</h4>
-                <p>SSL encryptie en veilige betalingen</p>
+        <div class="row align-items-center justify-content-center text-center">
+            <div class="col-md-2">
+                <div class="text-gold">
+                    <i class="fas fa-lock fa-3x mb-2"></i>
+                    <p class="small text-light mb-0">SSL Beveiligd</p>
+                </div>
             </div>
-            <div class="col text-center">
-                <i class="fas fa-star fa-4x mb-3 text-warning"></i>
-                <h4>Top Games</h4>
-                <p>Games van de beste providers</p>
+            <div class="col-md-2">
+                <div class="text-gold">
+                    <i class="fas fa-check-circle fa-3x mb-2"></i>
+                    <p class="small text-light mb-0">Vergunde Casino</p>
+                </div>
             </div>
-            <div class="col text-center">
-                <i class="fas fa-headset fa-4x mb-3 text-info"></i>
-                <h4>24/7 Support</h4>
-                <p>Altijd bereikbaar voor hulp</p>
+            <div class="col-md-2">
+                <div class="text-gold">
+                    <i class="fas fa-users fa-3x mb-2"></i>
+                    <p class="small text-light mb-0">10K+ Spelers</p>
+                </div>
             </div>
-            <div class="col text-center">
-                <i class="fas fa-percentage fa-4x mb-3 text-primary"></i>
-                <h4>Beste RTP</h4>
-                <p>Hoogste uitkeringspercentages</p>
+            <div class="col-md-2">
+                <div class="text-gold">
+                    <i class="fas fa-gamepad fa-3x mb-2"></i>
+                    <p class="small text-light mb-0">9000+ Games</p>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="text-gold">
+                    <i class="fas fa-award fa-3x mb-2"></i>
+                    <p class="small text-light mb-0">Beste RTP</p>
+                </div>
             </div>
         </div>
     </div>
@@ -210,27 +386,38 @@
 
 @section Styles {
     <style>
-        .hero-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
+        /* Extra animaties voor deze pagina */
         .game-card {
-            transition: transform 0.2s;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
         }
-        .game-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+
+            .game-card:nth-child(1) {
+                animation-delay: 0.1s;
+            }
+
+            .game-card:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+
+            .game-card:nth-child(3) {
+                animation-delay: 0.3s;
+            }
+
+            .game-card:nth-child(4) {
+                animation-delay: 0.4s;
+            }
+
+            .game-card:nth-child(5) {
+                animation-delay: 0.5s;
+            }
+
+        .feature-icon i {
+            transition: transform 0.3s ease;
         }
-        .game-card img {
-            height: 200px;
-            object-fit: cover;
-        }
-        .category-card {
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        .category-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+        .feature-icon:hover i {
+            transform: scale(1.2) rotate(5deg);
         }
     </style>
 }

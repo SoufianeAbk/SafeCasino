@@ -1,151 +1,315 @@
 ﻿@model SafeCasino.Web.ViewModels.GamesIndexViewModel
 @{
-    ViewData["Title"] = "Casino Games";
+    ViewData["Title"] = "Casino Games - SafeCasino";
 }
 
-<div class="container-fluid py-4">
-    <!-- Header -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <h1 class="display-4"><i class="fas fa-gamepad"></i> Casino Games</h1>
-            <p class="lead">Ontdek onze collectie van @Model.TotalGames spellen</p>
-        </div>
-    </div>
-
-    <!-- Filters -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <form asp-action="Index" method="get" class="row g-3">
-                        <!-- Zoeken -->
-                        <div class="col-md-4">
-                            <label class="form-label">Zoeken</label>
-                            <input type="text" name="search" value="@Model.SearchQuery" class="form-control" placeholder="Zoek naar spel..." />
-                        </div>
-
-                        <!-- Categorie -->
-                        <div class="col-md-4">
-                            <label class="form-label">Categorie</label>
-                            <select name="categoryId" class="form-select">
-                                <option value="">Alle categorieën</option>
-                                @foreach (var category in Model.Categories)
-                                {
-                                    <option value="@category.Id" selected="@(Model.SelectedCategoryId == category.Id)">
-                                        @category.Name
-                                    </option>
-                                }
-                            </select>
-                        </div>
-
-                        <!-- Sorteren -->
-                        <div class="col-md-3">
-                            <label class="form-label">Sorteren</label>
-                            <select name="sortBy" class="form-select">
-                                <option value="">Standaard</option>
-                                <option value="popular" selected="@(Model.SortBy == "popular")">Populair</option>
-                                <option value="new" selected="@(Model.SortBy == "new")">Nieuw</option>
-                                <option value="rtp" selected="@(Model.SortBy == "rtp")">Hoogste RTP</option>
-                                <option value="name" selected="@(Model.SortBy == "name")">Naam A-Z</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-1 d-flex align-items-end">
-                            <button type="submit" class="btn btn-primary w-100">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+<!-- Page Header -->
+<div class="section-bg-dark py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="display-4 text-white text-center mb-3">
+                    <i class="fas fa-gamepad text-gold"></i> CASINO GAMES
+                </h1>
+                <p class="lead text-center text-light mb-0">
+                    Ontdek onze collectie van <strong class="text-gold">@Model.TotalGames</strong> spellen
+                </p>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Categorieën -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="btn-group" role="group">
-                <a asp-action="Index" class="btn @(Model.SelectedCategoryId == null ? "btn-primary" : "btn-outline-primary")">
-                    Alle Games
+<!-- Filters Section -->
+<div class="section-bg-card py-4">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="Index" method="get" class="row g-3 align-items-end">
+                    <!-- Zoeken -->
+                    <div class="col-md-4">
+                        <label class="form-label">
+                            <i class="fas fa-search"></i> Zoek naar spel
+                        </label>
+                        <input type="text" name="search" value="@Model.SearchQuery"
+                               class="form-control" placeholder="Typ spelnaam..." />
+                    </div>
+
+                    <!-- Categorie Filter -->
+                    <div class="col-md-3">
+                        <label class="form-label">
+                            <i class="fas fa-filter"></i> Categorie
+                        </label>
+                        <select name="categoryId" class="form-select">
+                            <option value="">Alle categorieën</option>
+                            @foreach (var category in Model.Categories)
+                            {
+                                <option value="@category.Id" selected="@(Model.SelectedCategoryId == category.Id)">
+                                    @category.Name
+                                </option>
+                            }
+                        </select>
+                    </div>
+
+                    <!-- Sorteer Filter -->
+                    <div class="col-md-3">
+                        <label class="form-label">
+                            <i class="fas fa-sort"></i> Sorteren op
+                        </label>
+                        <select name="sortBy" class="form-select">
+                            <option value="">Standaard</option>
+                            <option value="popular" selected="@(Model.SortBy == "popular")">Populair</option>
+                            <option value="new" selected="@(Model.SortBy == "new")">Nieuwste</option>
+                            <option value="rtp" selected="@(Model.SortBy == "rtp")">Hoogste RTP</option>
+                            <option value="name" selected="@(Model.SortBy == "name")">Naam (A-Z)</option>
+                        </select>
+                    </div>
+
+                    <!-- Filter Button -->
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-filter"></i> Filter
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Category Filter Pills -->
+<div class="section-bg-dark py-3">
+    <div class="container">
+        <div class="d-flex flex-wrap gap-2 justify-content-center">
+            <a asp-action="Index"
+               class="btn @(Model.SelectedCategoryId == null ? "btn-primary" : "btn-outline-primary") btn-sm">
+                <i class="fas fa-th"></i> Alle Games
+            </a>
+            @foreach (var category in Model.Categories)
+            {
+                <a asp-action="Index" asp-route-categoryId="@category.Id"
+                   class="btn @(Model.SelectedCategoryId == category.Id ? "btn-primary" : "btn-outline-primary") btn-sm">
+                    @if (category.Name == "Slots")
+                    {
+                        <i class="fas fa-dice"></i>
+                    }
+                    else if (category.Name == "Roulette")
+                    {
+                        <i class="fas fa-circle-notch"></i>
+                    }
+                    else if (category.Name == "Blackjack")
+                    {
+                        <i class="fas fa-spade"></i>
+                    }
+                    else if (category.Name == "Live Casino")
+                    {
+                        <i class="fas fa-video"></i>
+                    }
+                    else if (category.Name == "Poker")
+                    {
+                        <i class="fas fa-heart"></i>
+                    }
+                    else
+                    {
+                        <i class="fas fa-gamepad"></i>
+                    }
+                    @category.Name
                 </a>
-                @foreach (var category in Model.Categories)
+            }
+            <a asp-action="Popular" class="btn btn-outline-warning btn-sm">
+                <i class="fas fa-fire"></i> Populair
+            </a>
+            <a asp-action="New" class="btn btn-outline-success btn-sm">
+                <i class="fas fa-star"></i> Nieuw
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Bar -->
+@if (Model.SelectedCategoryId.HasValue || !string.IsNullOrEmpty(Model.SearchQuery))
+{
+    <div class="section-bg-card py-3">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="text-light">
+                    <i class="fas fa-filter"></i>
+                    @if (Model.SelectedCategoryId.HasValue)
+                    {
+                        var selectedCategory = Model.Categories.FirstOrDefault(c => c.Id == Model.SelectedCategoryId);
+                        <span>Categorie: <strong class="text-gold">@selectedCategory?.Name</strong></span>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.SearchQuery))
+                    {
+                        <span class="ms-3">Zoekterm: <strong class="text-gold">"@Model.SearchQuery"</strong></span>
+                    }
+                </div>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-sm">
+                    <i class="fas fa-times"></i> Filters wissen
+                </a>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Games Grid -->
+<div class="section-bg-dark py-5">
+    <div class="container">
+        @if (Model.Games.Any())
+        {
+            <!-- Results Count -->
+            <div class="mb-4 text-center">
+                <h5 class="text-light">
+                    <i class="fas fa-check-circle text-success"></i>
+                    <strong class="text-gold">@Model.Games.Count</strong> games gevonden
+                </h5>
+            </div>
+
+            <!-- Game Cards Grid -->
+            <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-4">
+                @foreach (var game in Model.Games)
                 {
-                    <a asp-action="Index" asp-route-categoryId="@category.Id"
-                       class="btn @(Model.SelectedCategoryId == category.Id ? "btn-primary" : "btn-outline-primary")">
-                        @category.Name
+                    <div class="col">
+                        <div class="game-card position-relative">
+                            <!-- Badges -->
+                            @if (game.IsNew)
+                            {
+                                <span class="badge-exclusive badge-new">NEW</span>
+                            }
+                            else if (game.IsPopular)
+                            {
+                                <span class="badge-exclusive badge-hot">HOT</span>
+                            }
+
+                            <!-- Game Image -->
+                            <img src="@game.ThumbnailUrl" class="w-100" alt="@game.Name"
+                                 onerror="this.src='/images/placeholder-game.jpg'" />
+
+                            <!-- Game Info -->
+                            <div class="card-body">
+                                <h5 class="card-title text-truncate" title="@game.Name">@game.Name</h5>
+                                <p class="card-text text-muted small mb-2">
+                                    <i class="fas fa-building"></i> @game.Provider.Name
+                                </p>
+
+                                <!-- Game Stats -->
+                                <div class="row g-2 mb-3 small">
+                                    <div class="col-6">
+                                        <div class="text-muted">
+                                            <i class="fas fa-percentage text-gold"></i>
+                                            RTP: <strong>@game.RtpPercentage%</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-muted">
+                                            <i class="fas fa-play text-success"></i>
+                                            <strong>@game.PlayCount</strong>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Action Buttons -->
+                                <div class="d-grid gap-2">
+                                    @if (User.Identity?.IsAuthenticated == true)
+                                    {
+                                        <a asp-action="Play" asp-route-id="@game.Id"
+                                           class="btn btn-primary btn-sm">
+                                            <i class="fas fa-play"></i> Speel Nu
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Account" asp-action="Login"
+                                           asp-route-returnUrl="@Url.Action("Play", new { id = game.Id })"
+                                           class="btn btn-success btn-sm">
+                                            <i class="fas fa-sign-in-alt"></i> Login om te spelen
+                                        </a>
+                                    }
+                                    <a asp-action="Details" asp-route-id="@game.Id"
+                                       class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <!-- No Results -->
+            <div class="row mt-5">
+                <div class="col-12 text-center py-5">
+                    <i class="fas fa-search fa-5x text-muted mb-4" style="opacity: 0.3;"></i>
+                    <h3 class="text-light mb-3">Geen games gevonden</h3>
+                    <p class="text-muted mb-4">
+                        Probeer een andere zoekopdracht of filter combinatie.
+                    </p>
+                    <a asp-action="Index" class="btn btn-primary btn-lg">
+                        <i class="fas fa-redo"></i> Reset Filters
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Promotion Banner -->
+<div class="section-bg-card py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h2 class="text-white mb-3">
+                    <i class="fas fa-gift text-gold"></i> Mis geen enkele promotie!
+                </h2>
+                <p class="text-light lead mb-0">
+                    Registreer nu en ontvang exclusieve bonussen en promoties direct in je inbox.
+                </p>
+            </div>
+            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                @if (User.Identity?.IsAuthenticated != true)
+                {
+                    <a asp-controller="Account" asp-action="Register" class="btn btn-promo btn-lg">
+                        <i class="fas fa-user-plus"></i> REGISTREER NU
                     </a>
                 }
             </div>
         </div>
     </div>
-
-    <!-- Games Grid -->
-    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-        @foreach (var game in Model.Games)
-        {
-            <div class="col">
-                <div class="card h-100 game-card">
-                    <img src="@game.ThumbnailUrl" class="card-img-top" alt="@game.Name"
-                         onerror="this.src='/images/placeholder-game.jpg'" />
-                    <div class="card-body">
-                        @if (game.IsNew)
-                        {
-                            <span class="badge bg-success mb-2">Nieuw</span>
-                        }
-                        @if (game.IsPopular)
-                        {
-                            <span class="badge bg-warning text-dark mb-2">Populair</span>
-                        }
-
-                        <h5 class="card-title">@game.Name</h5>
-                        <p class="card-text text-muted small">@game.Provider.Name</p>
-                        <p class="card-text"><small>@game.Category.Name</small></p>
-
-                        <div class="d-flex justify-content-between align-items-center">
-                            <small class="text-muted">
-                                <i class="fas fa-percentage"></i> RTP: @game.RtpPercentage%
-                            </small>
-                            <small class="text-muted">
-                                <i class="fas fa-play"></i> @game.PlayCount
-                            </small>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-transparent">
-                        <a asp-action="Details" asp-route-id="@game.Id" class="btn btn-primary btn-sm w-100">
-                            <i class="fas fa-info-circle"></i> Details
-                        </a>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-
-    @if (!Model.Games.Any())
-    {
-        <div class="row mt-5">
-            <div class="col-12 text-center">
-                <i class="fas fa-search fa-5x text-muted mb-3"></i>
-                <h3>Geen games gevonden</h3>
-                <p class="text-muted">Probeer een andere zoekopdracht of filter</p>
-            </div>
-        </div>
-    }
 </div>
 
 @section Styles {
     <style>
+        /* Stagger animation voor game cards */
         .game-card {
-            transition: transform 0.2s;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
         }
 
-            .game-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            .game-card:nth-child(n+1) {
+                animation-delay: 0.05s;
             }
 
-            .game-card img {
-                height: 200px;
-                object-fit: cover;
+            .game-card:nth-child(n+6) {
+                animation-delay: 0.1s;
+            }
+
+            .game-card:nth-child(n+11) {
+                animation-delay: 0.15s;
+            }
+
+            .game-card:nth-child(n+16) {
+                animation-delay: 0.2s;
+            }
+
+        /* Filter card hover effect */
+        .card {
+            transition: all 0.3s ease;
+        }
+
+            .card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 40px rgba(255, 215, 0, 0.2);
             }
     </style>
 }
