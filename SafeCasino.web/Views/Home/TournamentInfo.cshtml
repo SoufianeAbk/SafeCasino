@@ -1,0 +1,308 @@
+﻿@{
+    ViewData["Title"] = "Animal Tournament - Dagelijkse Prijzenpot";
+}
+
+<!-- Hero Section -->
+<div class="hero-section text-white">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-12 text-center fade-in-up">
+                <h1 class="display-3 fw-bold mb-4">
+                    <i class="fas fa-trophy text-gold"></i> ANIMAL TOURNAMENT
+                </h1>
+                <p class="lead mb-5" style="font-size: 1.4rem; max-width: 800px; margin: 0 auto;">
+                    Doe mee aan ons dagelijkse tournament en maak kans op een deel van de €30,000 prijzenpot!
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="section-bg-dark">
+    <div class="container py-5">
+        <div class="row">
+            <!-- Hoofdprijzen Card -->
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 shadow-lg" style="border: 3px solid var(--gold-accent);">
+                    <div class="card-header text-center" style="background: linear-gradient(135deg, #e91e63 0%, #9c27b0 100%);">
+                        <h3 class="mb-0 text-white">
+                            <i class="fas fa-star"></i> DAGELIJKSE PRIJZENPOT
+                        </h3>
+                    </div>
+                    <div class="card-body text-center">
+                        <h1 class="display-2 fw-bold mb-3" style="color: var(--gold-accent);">€30,000</h1>
+                        <p class="lead text-white mb-4">Elke dag opnieuw!</p>
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-white-50">1e plaats:</span>
+                                <strong class="text-gold">€10,000</strong>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-white-50">2e plaats:</span>
+                                <strong class="text-gold">€5,000</strong>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-white-50">3e plaats:</span>
+                                <strong class="text-gold">€3,000</strong>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-white-50">4e-10e plaats:</span>
+                                <strong class="text-gold">€1,000</strong>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="text-white-50">11e-100e plaats:</span>
+                                <strong class="text-gold">€30 - €500</strong>
+                            </div>
+                        </div>
+                        <a asp-controller="Games" asp-action="Index" class="btn btn-promo btn-lg w-100">
+                            <i class="fas fa-play"></i> SPEEL NU MEE
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hoe werkt het -->
+            <div class="col-lg-8 mb-4">
+                <div class="card h-100 shadow-lg">
+                    <div class="card-header" style="background: linear-gradient(135deg, var(--secondary-purple) 0%, var(--accent-purple) 100%);">
+                        <h3 class="mb-0 text-white">
+                            <i class="fas fa-question-circle"></i> Hoe Werkt Het?
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-start mb-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center"
+                                             style="width: 50px; height: 50px;">
+                                            <span class="fw-bold text-white fs-4">1</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h5 class="text-white">Speel Deelnemende Games</h5>
+                                        <p class="text-white-50 mb-0">
+                                            Speel een van de aangewezen Animal Tournament slots met een minimale inzet van €0.20 per spin.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-start mb-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center"
+                                             style="width: 50px; height: 50px;">
+                                            <span class="fw-bold text-dark fs-4">2</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h5 class="text-white">Verzamel Punten</h5>
+                                        <p class="text-white-50 mb-0">
+                                            Voor elke €1 die je inzet, verdien je 10 punten. Hoe meer je speelt, hoe hoger je op de ranglijst komt!
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-start mb-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="rounded-circle bg-success d-flex align-items-center justify-content-center"
+                                             style="width: 50px; height: 50px;">
+                                            <span class="fw-bold text-white fs-4">3</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h5 class="text-white">Bekijk Je Positie</h5>
+                                        <p class="text-white-50 mb-0">
+                                            Volg je voortgang live in het tournament leaderboard en zie waar je staat ten opzichte van andere spelers.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-start mb-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="rounded-circle bg-danger d-flex align-items-center justify-content-center"
+                                             style="width: 50px; height: 50px;">
+                                            <span class="fw-bold text-white fs-4">4</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h5 class="text-white">Win Prijzen!</h5>
+                                        <p class="text-white-50 mb-0">
+                                            Eindig in de top 100 en ontvang je prijs automatisch na afloop van het tournament om 23:59 uur.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deelnemende Games -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-header" style="background: linear-gradient(135deg, var(--secondary-purple) 0%, var(--accent-purple) 100%);">
+                        <h3 class="mb-0 text-white">
+                            <i class="fas fa-gamepad"></i> Deelnemende Games
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-white lead mb-4">
+                            Speel deze populaire Animal-themed slots en maak kans op geweldige prijzen:
+                        </p>
+                        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
+                            <div class="col">
+                                <div class="text-center p-3 rounded" style="background: rgba(255, 255, 255, 0.05);">
+                                    <i class="fas fa-paw fa-3x text-gold mb-2"></i>
+                                    <p class="text-white mb-0 small">Wild Safari</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 rounded" style="background: rgba(255, 255, 255, 0.05);">
+                                    <i class="fas fa-dragon fa-3x text-danger mb-2"></i>
+                                    <p class="text-white mb-0 small">Dragon's Fortune</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 rounded" style="background: rgba(255, 255, 255, 0.05);">
+                                    <i class="fas fa-fish fa-3x text-info mb-2"></i>
+                                    <p class="text-white mb-0 small">Ocean Treasures</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 rounded" style="background: rgba(255, 255, 255, 0.05);">
+                                    <i class="fas fa-crow fa-3x text-warning mb-2"></i>
+                                    <p class="text-white mb-0 small">Eagle's Flight</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 rounded" style="background: rgba(255, 255, 255, 0.05);">
+                                    <i class="fas fa-horse fa-3x text-success mb-2"></i>
+                                    <p class="text-white mb-0 small">Wild Horses</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 rounded" style="background: rgba(255, 255, 255, 0.05);">
+                                    <i class="fas fa-cat fa-3x text-primary mb-2"></i>
+                                    <p class="text-white mb-0 small">Lucky Lions</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <a asp-controller="Games" asp-action="Index" class="btn btn-primary btn-lg">
+                                <i class="fas fa-eye"></i> Bekijk Alle Deelnemende Games
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voorwaarden -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-header" style="background: linear-gradient(135deg, var(--secondary-purple) 0%, var(--accent-purple) 100%);">
+                        <h3 class="mb-0 text-white">
+                            <i class="fas fa-file-contract"></i> Voorwaarden
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="text-white-50">
+                            <li class="mb-2">Het tournament loopt dagelijks van 00:00 tot 23:59 uur CET</li>
+                            <li class="mb-2">Minimale inzet per spin is €0.20</li>
+                            <li class="mb-2">Je verdient 10 punten voor elke €1 die je inzet</li>
+                            <li class="mb-2">Alleen inzetten op deelnemende games tellen mee</li>
+                            <li class="mb-2">Prijzen worden automatisch toegekend binnen 24 uur na afloop</li>
+                            <li class="mb-2">Er is geen inschrijving vereist - speel gewoon en doe automatisch mee!</li>
+                            <li class="mb-2">De top 100 spelers ontvangen een prijs</li>
+                            <li class="mb-2">Algemene voorwaarden van SafeCasino zijn van toepassing</li>
+                            <li class="mb-2">SafeCasino behoudt zich het recht voor om het tournament te wijzigen of te beëindigen</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="text-center p-5 rounded"
+                     style="background: linear-gradient(135deg, #e91e63 0%, #9c27b0 100%); box-shadow: 0 10px 40px rgba(233, 30, 99, 0.3);">
+                    <h2 class="display-4 text-white fw-bold mb-3">
+                        <i class="fas fa-trophy text-gold"></i> Klaar om te Winnen?
+                    </h2>
+                    <p class="lead text-white mb-4">
+                        Start nu met spelen en maak vandaag nog kans op een deel van de €30,000 prijzenpot!
+                    </p>
+                    <div class="d-flex gap-3 justify-content-center flex-wrap">
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <a asp-controller="Games" asp-action="Index" class="btn btn-promo btn-lg px-5">
+                                <i class="fas fa-play"></i> SPEEL NU
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account" asp-action="Register" class="btn btn-promo btn-lg px-5">
+                                <i class="fas fa-user-plus"></i> REGISTREER NU
+                            </a>
+                            <a asp-controller="Account" asp-action="Login" class="btn btn-outline-light btn-lg px-5">
+                                <i class="fas fa-sign-in-alt"></i> INLOGGEN
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Info Banner -->
+<div class="section-bg-card py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-2 text-center">
+                <i class="fas fa-info-circle" style="font-size: 5rem; color: var(--gold-accent);"></i>
+            </div>
+            <div class="col-md-8">
+                <h4 class="text-white mb-2">Meer Informatie Nodig?</h4>
+                <p class="text-white-50 mb-0">
+                    Neem contact op met onze 24/7 klantenservice voor vragen over het Animal Tournament.
+                    We helpen je graag verder!
+                </p>
+            </div>
+            <div class="col-md-2 text-center">
+                <a href="#" class="btn btn-outline-primary btn-lg">
+                    <i class="fas fa-headset"></i> CONTACT
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        /* Extra animaties voor de tournament pagina */
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .card {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Glow effect voor de prijzen */
+        .text-gold {
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+    </style>
+}

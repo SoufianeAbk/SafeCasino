@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "SafeCasino - Online Casino met 9,000+ Games";
+    ViewData["Title"] = "SafeCasino";
     var popularGames = ViewBag.PopularGames as List<SafeCasino.Data.Entities.CasinoGame>;
     var newGames = ViewBag.NewGames as List<SafeCasino.Data.Entities.CasinoGame>;
     var categories = ViewBag.Categories as List<SafeCasino.Data.Entities.GameCategory>;
@@ -11,23 +11,12 @@
         <div class="row align-items-center">
             <div class="col-lg-12 text-center fade-in-up">
                 <h1 class="display-3 fw-bold mb-4">
-                    ONLINE CASINO MET 9,000+ GAMES
+                    SAFE CASINO MET DE BESTE GAMES
                 </h1>
                 <p class="lead mb-5" style="font-size: 1.4rem; max-width: 800px; margin: 0 auto;">
-                    Ontdek de meest uitgebreide collectie casino games van topzware providers.
+                    Ontdek de meest uitgebreide collectie casino games van de beste providers.
                     Speel veilig, verantwoord en geniet van de hoogste RTP percentages.
                 </p>
-                @if (User.Identity?.IsAuthenticated != true)
-                {
-                    <div class="d-flex gap-3 justify-content-center">
-                        <a asp-controller="Account" asp-action="Register" class="btn btn-promo btn-lg px-5">
-                            <i class="fas fa-user-plus"></i> REGISTREER NU
-                        </a>
-                        <a asp-controller="Account" asp-action="Login" class="btn btn-outline-light btn-lg px-5">
-                            <i class="fas fa-sign-in-alt"></i> INLOGGEN
-                        </a>
-                    </div>
-                }
             </div>
         </div>
     </div>
@@ -61,7 +50,7 @@
                         Haal je deel uit de<br />
                         dagelijkse prijzenpot
                     </p>
-                    <a asp-controller="Games" asp-action="Index" class="btn btn-promo">
+                    <a asp-controller="Home" asp-action="TournamentInfo" class="btn btn-promo">
                         MEER INFO
                     </a>
                 </div>

@@ -7,7 +7,8 @@ using SafeCasino.Data.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Voeg Memory Cache toe voor betere performance
+builder.Services.AddMemoryCache();
 builder.Services.AddControllersWithViews();
 
 // DbContext registreren
