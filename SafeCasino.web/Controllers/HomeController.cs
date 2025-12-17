@@ -1,114 +1,71 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
 using SafeCasino.Data.Data;
 using SafeCasino.web.Models;
 using System.Diagnostics;
 
-namespace SafeCasino.web.Controllers
+namespace SafeCasino.Web.Controllers
 {
     /// <summary>
-    /// Controller voor de homepage en algemene pagina's
+    /// Controller voor de home pagina en algemene informatie
     /// </summary>
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
-        private readonly IMemoryCache _cache;
+        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(
-            ILogger<HomeController> logger,
-            ApplicationDbContext context,
-            IMemoryCache cache)
+        public HomeController(ApplicationDbContext context, ILogger<HomeController> logger)
         {
-            _logger = logger;
             _context = context;
-            _cache = cache;
+            _logger = logger;
         }
 
         /// <summary>
-        /// Homepage met populaire en nieuwe games (met caching voor betere performance)
+        /// Home pagina
         /// </summary>
         public async Task<IActionResult> Index()
         {
-            try
-            {
-                // Cache populaire games voor 5 minuten
-                var popularGames = await _cache.GetOrCreateAsync("PopularGames", async entry =>
-                {
-                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
-                    _logger.LogInformation("Loading popular games from database");
+            // Haal populaire games op
+            var popularGames = await _context.CasinoGames
+                .Include(g => g.Provider)
+                .Include(g => g.Category)
+                .Where(g => g.IsAvailable && g.IsPopular)
+                .OrderByDescending(g => g.PlayCount)
+                .Take(10)
+                .ToListAsync();
 
-                    return await _context.CasinoGames
-                        .AsNoTracking() // Performance boost - read-only
-                        .Include(g => g.Provider)
-                        .Include(g => g.Category)
-                        .Where(g => g.IsAvailable && g.IsPopular)
-                        .OrderByDescending(g => g.PlayCount)
-                        .Take(10)
-                        .ToListAsync();
-                });
+            // Haal nieuwe games op
+            var newGames = await _context.CasinoGames
+                .Include(g => g.Provider)
+                .Include(g => g.Category)
+                .Where(g => g.IsAvailable && g.IsNew)
+                .OrderByDescending(g => g.CreatedDate)
+                .Take(10)
+                .ToListAsync();
 
-                // Cache nieuwe games voor 5 minuten
-                var newGames = await _cache.GetOrCreateAsync("NewGames", async entry =>
-                {
-                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
-                    _logger.LogInformation("Loading new games from database");
+            // Haal categorieën op
+            var categories = await _context.GameCategories
+                .Where(c => c.IsActive)
+                .OrderBy(c => c.DisplayOrder)
+                .ToListAsync();
 
-                    return await _context.CasinoGames
-                        .AsNoTracking()
-                        .Include(g => g.Provider)
-                        .Include(g => g.Category)
-                        .Where(g => g.IsAvailable && g.IsNew)
-                        .OrderByDescending(g => g.CreatedDate)
-                        .Take(10)
-                        .ToListAsync();
-                });
+            ViewBag.PopularGames = popularGames;
+            ViewBag.NewGames = newGames;
+            ViewBag.Categories = categories;
 
-                // Cache categorieën voor 10 minuten (verandert zelden)
-                var categories = await _cache.GetOrCreateAsync("Categories", async entry =>
-                {
-                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10);
-                    _logger.LogInformation("Loading categories from database");
-
-                    return await _context.GameCategories
-                        .AsNoTracking()
-                        .Where(c => c.IsActive)
-                        .OrderBy(c => c.DisplayOrder)
-                        .ToListAsync();
-                });
-
-                ViewBag.PopularGames = popularGames ?? new List<SafeCasino.Data.Entities.CasinoGame>();
-                ViewBag.NewGames = newGames ?? new List<SafeCasino.Data.Entities.CasinoGame>();
-                ViewBag.Categories = categories ?? new List<SafeCasino.Data.Entities.GameCategory>();
-
-                return View();
-            }
-            catch (Exception ex)
-            {
-                // Log de fout maar laat de site niet crashen
-                _logger.LogError(ex, "Error loading homepage data");
-
-                // Lege data tonen als fallback
-                ViewBag.PopularGames = new List<SafeCasino.Data.Entities.CasinoGame>();
-                ViewBag.NewGames = new List<SafeCasino.Data.Entities.CasinoGame>();
-                ViewBag.Categories = new List<SafeCasino.Data.Entities.GameCategory>();
-
-                return View();
-            }
-        }
-
-        /// <summary>
-        /// Tournament informatie pagina met details over de dagelijkse prijzenpot
-        /// </summary>
-        public IActionResult TournamentInfo()
-        {
-            _logger.LogInformation("Tournament info page accessed");
             return View();
         }
 
         /// <summary>
-        /// Privacy policy pagina
+        /// Tournament info pagina
+        /// </summary>
+        public IActionResult TournamentInfo()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Privacy pagina
         /// </summary>
         public IActionResult Privacy()
         {
@@ -121,7 +78,10 @@ namespace SafeCasino.web.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel
+            {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            });
         }
     }
 }
