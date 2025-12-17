@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36717.8 d17.14
+VisualStudioVersion = 17.14.36717.8
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeCasino.Web", "SafeCasino.web\SafeCasino.Web.csproj", "{63027AF9-BC33-422D-8C35-D9240C6E68D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeCasino.web", "SafeCasino.web\SafeCasino.web.csproj", "{63027AF9-BC33-422D-8C35-D9240C6E68D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeCasino.Data", "SafeCasino.Data\SafeCasino.Data.csproj", "{E79C77A5-E314-4571-A0E7-923AE1A64954}"
 EndProject
