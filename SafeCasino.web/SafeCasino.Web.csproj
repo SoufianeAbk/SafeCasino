@@ -27,5 +27,6 @@
     <Folder Include="Logging\" />
     <Folder Include="Resources\" />
     <Folder Include="Services\Interfaces\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 </Project>
