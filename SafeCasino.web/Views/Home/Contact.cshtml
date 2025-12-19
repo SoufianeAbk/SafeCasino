@@ -1,0 +1,442 @@
+﻿@{
+    ViewData["Title"] = "Contact - SafeCasino";
+}
+
+<!-- Hero Section -->
+<div class="hero-section text-white">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-12 text-center fade-in-up">
+                <h1 class="display-3 fw-bold mb-4">
+                    <i class="fas fa-headset text-info"></i> CONTACT
+                </h1>
+                <p class="lead mb-5" style="font-size: 1.4rem; max-width: 800px; margin: 0 auto;">
+                    Heb je vragen? Wij staan 24/7 voor je klaar
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Methodes -->
+<div class="section-bg-dark">
+    <div class="container py-5">
+        <div class="row g-4">
+            <!-- Live Chat -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-lg text-center">
+                    <div class="card-body p-4">
+                        <div class="mb-4">
+                            <i class="fas fa-comments fa-4x text-primary"></i>
+                        </div>
+                        <h4 class="text-white mb-3">Live Chat</h4>
+                        <p class="text-white-50 mb-4">
+                            Chat direct met onze medewerkers voor snelle hulp bij al je vragen.
+                        </p>
+                        <div class="mb-3">
+                            <p class="text-gold mb-1"><i class="fas fa-clock"></i> Beschikbaar</p>
+                            <p class="text-white-50 small mb-0">24 uur per dag, 7 dagen per week</p>
+                        </div>
+                        <button class="btn btn-primary btn-lg w-100" onclick="alert('Live chat functionaliteit komt binnenkort!')">
+                            <i class="fas fa-comment-dots"></i> Start Chat
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-lg text-center">
+                    <div class="card-body p-4">
+                        <div class="mb-4">
+                            <i class="fas fa-envelope fa-4x text-success"></i>
+                        </div>
+                        <h4 class="text-white mb-3">E-mail</h4>
+                        <p class="text-white-50 mb-4">
+                            Stuur ons een email en ontvang binnen 24 uur een antwoord.
+                        </p>
+                        <div class="mb-3">
+                            <p class="text-gold mb-2"><i class="fas fa-at"></i> E-mailadressen</p>
+                            <p class="text-white small mb-1">
+                                <strong>Algemeen:</strong><br />
+                                <a href="mailto:info@safecasino.be" class="text-info">info@safecasino.be</a>
+                            </p>
+                            <p class="text-white small mb-1">
+                                <strong>Support:</strong><br />
+                                <a href="mailto:support@safecasino.be" class="text-info">support@safecasino.be</a>
+                            </p>
+                            <p class="text-white small mb-0">
+                                <strong>VIP:</strong><br />
+                                <a href="mailto:vip@safecasino.be" class="text-info">vip@safecasino.be</a>
+                            </p>
+                        </div>
+                        <a href="mailto:support@safecasino.be" class="btn btn-success btn-lg w-100">
+                            <i class="fas fa-paper-plane"></i> Stuur E-mail
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Telefoon -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-lg text-center">
+                    <div class="card-body p-4">
+                        <div class="mb-4">
+                            <i class="fas fa-phone fa-4x text-warning"></i>
+                        </div>
+                        <h4 class="text-white mb-3">Telefoon</h4>
+                        <p class="text-white-50 mb-4">
+                            Bel ons direct voor persoonlijke assistentie.
+                        </p>
+                        <div class="mb-3">
+                            <p class="text-gold mb-1"><i class="fas fa-phone-alt"></i> Telefoonnummer</p>
+                            <p class="text-white h5 mb-2">
+                                <a href="tel:+3221234567" class="text-white">+32 2 123 45 67</a>
+                            </p>
+                            <p class="text-white-50 small mb-1"><i class="fas fa-clock"></i> Ma-Vr: 09:00 - 21:00</p>
+                            <p class="text-white-50 small mb-0">Za-Zo: 10:00 - 18:00</p>
+                        </div>
+                        <a href="tel:+3221234567" class="btn btn-warning btn-lg w-100">
+                            <i class="fas fa-phone-alt"></i> Bel Ons
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Formulier -->
+<div class="section-bg-card">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card shadow-lg">
+                    <div class="card-header" style="background: linear-gradient(135deg, var(--secondary-purple) 0%, var(--accent-purple) 100%);">
+                        <h3 class="mb-0 text-white">
+                            <i class="fas fa-envelope-open-text"></i> Stuur ons een bericht
+                        </h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <form id="contactForm">
+                            <div class="row g-3">
+                                <!-- Naam -->
+                                <div class="col-md-6">
+                                    <label class="form-label text-white">
+                                        <i class="fas fa-user"></i> Naam *
+                                    </label>
+                                    <input type="text" class="form-control" placeholder="Je volledige naam" required>
+                                </div>
+
+                                <!-- Email -->
+                                <div class="col-md-6">
+                                    <label class="form-label text-white">
+                                        <i class="fas fa-envelope"></i> E-mail *
+                                    </label>
+                                    <input type="email" class="form-control" placeholder="je@email.com" required>
+                                </div>
+
+                                <!-- Onderwerp -->
+                                <div class="col-12">
+                                    <label class="form-label text-white">
+                                        <i class="fas fa-tag"></i> Onderwerp *
+                                    </label>
+                                    <select class="form-select" required>
+                                        <option value="">Selecteer een onderwerp</option>
+                                        <option value="account">Account & Registratie</option>
+                                        <option value="deposit">Stortingen & Opnames</option>
+                                        <option value="game">Games & Spelregels</option>
+                                        <option value="bonus">Bonussen & Promoties</option>
+                                        <option value="technical">Technische Problemen</option>
+                                        <option value="complaint">Klacht</option>
+                                        <option value="other">Anders</option>
+                                    </select>
+                                </div>
+
+                                <!-- Bericht -->
+                                <div class="col-12">
+                                    <label class="form-label text-white">
+                                        <i class="fas fa-comment-alt"></i> Bericht *
+                                    </label>
+                                    <textarea class="form-control" rows="6"
+                                              placeholder="Beschrijf je vraag of probleem zo gedetailleerd mogelijk..."
+                                              required></textarea>
+                                </div>
+
+                                <!-- Account informatie (optioneel) -->
+                                @if (User.Identity?.IsAuthenticated != true)
+                                {
+                                    <div class="col-12">
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle"></i>
+                                            <strong>Tip:</strong> Als je bent ingelogd, kunnen we je sneller helpen omdat we je accountgegevens al hebben.
+                                        </div>
+                                    </div>
+                                }
+
+                                <!-- Submit Button -->
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-promo btn-lg w-100">
+                                        <i class="fas fa-paper-plane"></i> Verstuur Bericht
+                                    </button>
+                                </div>
+
+                                <div class="col-12">
+                                    <p class="text-white-50 small mb-0">
+                                        <i class="fas fa-shield-alt text-success"></i>
+                                        Jouw gegevens worden vertrouwelijk behandeld conform ons <a asp-action="Privacy" class="text-gold">Privacy Beleid</a>.
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FAQ Sectie -->
+<div class="section-bg-dark">
+    <div class="container py-5">
+        <h2 class="section-title text-center mb-5">
+            <i class="fas fa-question-circle text-warning"></i> VEELGESTELDE VRAGEN
+        </h2>
+
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="accordion" id="faqAccordion">
+                    <!-- FAQ 1 -->
+                    <div class="accordion-item bg-transparent border-secondary mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed bg-dark text-white" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq1">
+                                <i class="fas fa-clock text-gold me-2"></i>
+                                Hoe lang duurt het voordat ik antwoord krijg?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body bg-dark text-white-50">
+                                Via live chat krijg je direct antwoord. E-mails worden binnen 24 uur beantwoord.
+                                Tijdens drukke periodes kan dit iets langer duren, maar we doen ons best om zo snel mogelijk te reageren.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="accordion-item bg-transparent border-secondary mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed bg-dark text-white" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq2">
+                                <i class="fas fa-user-lock text-gold me-2"></i>
+                                Wat moet ik doen als ik niet kan inloggen?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body bg-dark text-white-50">
+                                Probeer eerst je wachtwoord te resetten via de 'Wachtwoord vergeten' link op de loginpagina.
+                                Als dit niet werkt, neem dan contact met ons op via live chat of e-mail met je gebruikersnaam.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="accordion-item bg-transparent border-secondary mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed bg-dark text-white" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq3">
+                                <i class="fas fa-coins text-gold me-2"></i>
+                                Hoe kan ik geld storten of opnemen?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body bg-dark text-white-50">
+                                Na het inloggen kun je via 'Mijn Account' stortingen en opnames doen.
+                                We accepteren verschillende betaalmethoden zoals Visa, Mastercard, bankoverschrijving en meer.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 4 -->
+                    <div class="accordion-item bg-transparent border-secondary mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed bg-dark text-white" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq4">
+                                <i class="fas fa-gift text-gold me-2"></i>
+                                Hoe claim ik mijn welkomstbonus?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body bg-dark text-white-50">
+                                Je welkomstbonus wordt automatisch gecrediteerd na je eerste storting.
+                                Zorg ervoor dat je akkoord gaat met de bonusvoorwaarden tijdens het storten.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 5 -->
+                    <div class="accordion-item bg-transparent border-secondary mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed bg-dark text-white" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq5">
+                                <i class="fas fa-shield-alt text-gold me-2"></i>
+                                Is SafeCasino veilig en betrouwbaar?
+                            </button>
+                        </h2>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body bg-dark text-white-50">
+                                Ja! SafeCasino is volledig vergund en gereguleerd door de Belgische Kansspelcommissie.
+                                We gebruiken SSL-encryptie en voldoen aan alle veiligheidsstandaarden om je gegevens te beschermen.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 6 -->
+                    <div class="accordion-item bg-transparent border-secondary mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed bg-dark text-white" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq6">
+                                <i class="fas fa-gamepad text-gold me-2"></i>
+                                Kan ik de games gratis uitproberen?
+                            </button>
+                        </h2>
+                        <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body bg-dark text-white-50">
+                                Veel van onze slots en tafelspellen kunnen in demo-modus gespeeld worden.
+                                Je hoeft hiervoor niet in te loggen of te storten. Klik gewoon op 'Demo Spelen' bij het spel.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bedrijfsinformatie -->
+<div class="section-bg-card">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="card shadow-lg">
+                    <div class="card-header" style="background: linear-gradient(135deg, var(--secondary-purple) 0%, var(--accent-purple) 100%);">
+                        <h3 class="mb-0 text-white">
+                            <i class="fas fa-building"></i> Bedrijfsinformatie
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h5 class="text-gold mb-3">
+                                    <i class="fas fa-map-marker-alt"></i> Adres
+                                </h5>
+                                <p class="text-white mb-1">SafeCasino BV</p>
+                                <p class="text-white-50 mb-1">Casinostraat 123</p>
+                                <p class="text-white-50 mb-1">1000 Brussel</p>
+                                <p class="text-white-50 mb-0">België</p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <h5 class="text-gold mb-3">
+                                    <i class="fas fa-info-circle"></i> Registratie
+                                </h5>
+                                <p class="text-white-50 mb-1">
+                                    <strong class="text-white">KVK:</strong> 12345678
+                                </p>
+                                <p class="text-white-50 mb-1">
+                                    <strong class="text-white">BTW:</strong> BE0123456789
+                                </p>
+                                <p class="text-white-50 mb-0">
+                                    <strong class="text-white">Vergunning:</strong> B+ License #12345
+                                </p>
+                            </div>
+
+                            <div class="col-12">
+                                <hr style="border-color: rgba(255, 255, 255, 0.1);" />
+                                <div class="text-center">
+                                    <h5 class="text-gold mb-3">
+                                        <i class="fas fa-share-alt"></i> Volg Ons
+                                    </h5>
+                                    <div class="d-flex justify-content-center gap-3">
+                                        <a href="#" class="btn btn-outline-primary btn-lg">
+                                            <i class="fab fa-facebook fa-2x"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-outline-info btn-lg">
+                                            <i class="fab fa-twitter fa-2x"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-outline-danger btn-lg">
+                                            <i class="fab fa-instagram fa-2x"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-outline-danger btn-lg">
+                                            <i class="fab fa-youtube fa-2x"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Call to Action -->
+<div class="section-bg-dark">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="card shadow-lg" style="background: linear-gradient(135deg, #e91e63 0%, #9c27b0 100%); border: 2px solid var(--gold-accent);">
+                    <div class="card-body text-center p-5">
+                        <i class="fas fa-headset fa-4x text-gold mb-4"></i>
+                        <h3 class="text-white mb-3">Nog geen antwoord gevonden?</h3>
+                        <p class="text-white lead mb-4">
+                            Ons support team staat 24/7 klaar om je te helpen!
+                        </p>
+                        <div class="d-flex gap-3 justify-content-center flex-wrap">
+                            <button class="btn btn-promo btn-lg px-5" onclick="alert('Live chat komt binnenkort!')">
+                                <i class="fas fa-comment-dots"></i> START LIVE CHAT
+                            </button>
+                            <a href="mailto:support@safecasino.be" class="btn btn-outline-light btn-lg px-5">
+                                <i class="fas fa-envelope"></i> STUUR EMAIL
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Formulier submit handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Bedankt voor je bericht! We nemen zo snel mogelijk contact met je op.\n\nLet op: Dit is een demo. In productie wordt je bericht verzonden naar onze klantenservice.');
+            this.reset();
+        });
+    </script>
+}
+
+@section Styles {
+    <style>
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .card {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: var(--primary-purple) !important;
+            color: white !important;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: var(--gold-accent);
+        }
+    </style>
+}
