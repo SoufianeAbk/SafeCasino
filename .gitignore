@@ -5,8 +5,8 @@
 
 # ===== SafeCasino Project Specific =====
 # Case sensitivity fix - ignore uppercase version of project folders
-SafeCasino.Web/
-SafeCasino.API/
+# SafeCasino.web/
+# SafeCasino.API/
 
 # Project-specific build outputs
 SafeCasino.web/bin/

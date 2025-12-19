@@ -20,9 +20,4 @@
     <ProjectReference Include="..\SafeCasino.Data\SafeCasino.Data.csproj" />
     <ProjectReference Include="..\SafeCasino.Shared\SafeCasino.Shared.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Controllers\Api\" />
-    <Folder Include="Controllers\Admin\" />
-  </ItemGroup>
 </Project>
