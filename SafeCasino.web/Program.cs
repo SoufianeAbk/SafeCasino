@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SafeCasino.Data.Data;
 using SafeCasino.Data.Entities;
@@ -13,7 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Configure Identity
+// Configure Identity - BELANGRIJK: Gebruik IdentityRole, niet ApplicationRole in AddIdentity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     // Password settings
@@ -80,11 +80,14 @@ using (var scope = app.Services.CreateScope())
 
         // Seed data
         await DbSeeder.SeedAsync(context, userManager, roleManager);
+
+        Console.WriteLine("✅ Database succesvol geseeded!");
     }
     catch (Exception ex)
     {
         var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "Een fout is opgetreden tijdens het seeden van de database.");
+        logger.LogError(ex, "❌ Een fout is opgetreden tijdens het seeden van de database.");
+        Console.WriteLine($"❌ Fout bij seeden: {ex.Message}");
     }
 }
 

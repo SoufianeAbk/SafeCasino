@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SafeCasino.Data.Configurations;
 using SafeCasino.Data.Entities;
@@ -9,7 +10,7 @@ namespace SafeCasino.Data.Data
     /// <summary>
     /// Database context voor de SafeCasino applicatie
     /// </summary>
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
     {
         /// <summary>
         /// Constructor met options
