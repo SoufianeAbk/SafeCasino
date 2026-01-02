@@ -1,9 +1,10 @@
-﻿namespace SafeCasino.Api.Services
+﻿using SafeCasino.Data.Entities;
+
+namespace SafeCasino.Api.Services;
+
+public interface IEmailService
 {
-    public interface IEmailService
-    {
-        Task SendEmailVerificationAsync(string email, string userName, string verificationLink);
-        Task SendPasswordResetEmailAsync(string email, string userName, string resetLink);
-        Task SendWelcomeEmailAsync(string email, string userName);
-    }
+    Task SendEmailVerificationAsync(ApplicationUser user, string token);
+    Task SendPasswordResetEmailAsync(ApplicationUser user, string token);
+    Task SendWelcomeEmailAsync(ApplicationUser user);
 }

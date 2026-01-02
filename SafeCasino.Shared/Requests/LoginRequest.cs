@@ -1,16 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SafeCasino.Shared.Requests
+namespace SafeCasino.Shared.Requests;
+
+public class LoginRequest
 {
-    public class LoginRequest
-    {
-        [Required(ErrorMessage = "Email is verplicht")]
-        [EmailAddress(ErrorMessage = "Ongeldig email adres")]
-        public string Email { get; set; } = string.Empty;
+    [Required(ErrorMessage = "E-mailadres is verplicht")]
+    [EmailAddress(ErrorMessage = "Ongeldig e-mailadres")]
+    public string Email { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Wachtwoord is verplicht")]
-        public string Password { get; set; } = string.Empty;
+    [Required(ErrorMessage = "Wachtwoord is verplicht")]
+    [DataType(DataType.Password)]
+    public string Password { get; set; } = string.Empty;
 
-        public bool RememberMe { get; set; }
-    }
+    public bool RememberMe { get; set; }
 }

@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SafeCasino.Shared.Requests
+namespace SafeCasino.Shared.Requests;
+
+public class ForgotPasswordRequest
 {
-    public class ForgotPasswordRequest
-    {
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; } = string.Empty;
-    }
+    [Required(ErrorMessage = "E-mailadres is verplicht")]
+    [EmailAddress(ErrorMessage = "Ongeldig e-mailadres")]
+    public string Email { get; set; } = string.Empty;
 }
