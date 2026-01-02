@@ -41,6 +41,17 @@ namespace SafeCasino.Data.Data
         public DbSet<Review> Reviews { get; set; }
 
         /// <summary>
+        /// Configure warnings
+        /// </summary>
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // Suppress pending model changes warning (only for development)
+            optionsBuilder.ConfigureWarnings(warnings =>
+                warnings.Ignore(Microsoft.EntityFrameworkCore
+                    .Diagnostics.RelationalEventId.PendingModelChangesWarning));
+        }
+
+        /// <summary>
         /// Model configuratie met Fluent API
         /// </summary>
         protected override void OnModelCreating(ModelBuilder builder)
@@ -57,11 +68,11 @@ namespace SafeCasino.Data.Data
             // Identity tabellen hernoemen voor duidelijkheid
             builder.Entity<ApplicationUser>().ToTable("Users");
             builder.Entity<ApplicationRole>().ToTable("Roles");
-            builder.Entity<Microsoft.AspNetCore.Identity.IdentityUserRole<string>>().ToTable("UserRoles");
-            builder.Entity<Microsoft.AspNetCore.Identity.IdentityUserClaim<string>>().ToTable("UserClaims");
-            builder.Entity<Microsoft.AspNetCore.Identity.IdentityUserLogin<string>>().ToTable("UserLogins");
-            builder.Entity<Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>>().ToTable("RoleClaims");
-            builder.Entity<Microsoft.AspNetCore.Identity.IdentityUserToken<string>>().ToTable("UserTokens");
+            builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
+            builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
+            builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins");
+            builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
+            builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
 
             // Seed data toevoegen
             Seed.RoleSeed.SeedRoles(builder);

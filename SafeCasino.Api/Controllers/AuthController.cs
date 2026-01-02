@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using SafeCasino.Api.Services;
 using SafeCasino.Data.Entities;
@@ -89,18 +88,8 @@ namespace SafeCasino.Api.Controllers
                 // Genereer email verificatie token
                 var emailToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                // Maak verificatie link
-                var verificationLink = Url.Action(
-                    "VerifyEmail",
-                    "Auth",
-                    new { userId = user.Id, token = emailToken },
-                    Request.Scheme);
-
-                // Verstuur verificatie email
-                await _emailService.SendEmailVerificationAsync(
-                    user.Email,
-                    $"{user.FirstName} {user.LastName}",
-                    verificationLink!);
+                // Verstuur verificatie email (EmailService verwacht ApplicationUser en token)
+                await _emailService.SendEmailVerificationAsync(user, emailToken);
 
                 _logger.LogInformation($"Nieuwe gebruiker geregistreerd: {user.Email}");
 
@@ -158,9 +147,7 @@ namespace SafeCasino.Api.Controllers
                 await _userManager.UpdateAsync(user);
 
                 // Verstuur welkomst email
-                await _emailService.SendWelcomeEmailAsync(
-                    user.Email!,
-                    $"{user.FirstName} {user.LastName}");
+                await _emailService.SendWelcomeEmailAsync(user);
 
                 _logger.LogInformation($"Email geverifieerd voor gebruiker: {user.Email}");
 
@@ -200,16 +187,7 @@ namespace SafeCasino.Api.Controllers
                 // Genereer nieuwe token
                 var emailToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                var verificationLink = Url.Action(
-                    "VerifyEmail",
-                    "Auth",
-                    new { userId = user.Id, token = emailToken },
-                    Request.Scheme);
-
-                await _emailService.SendEmailVerificationAsync(
-                    user.Email!,
-                    $"{user.FirstName} {user.LastName}",
-                    verificationLink!);
+                await _emailService.SendEmailVerificationAsync(user, emailToken);
 
                 return Ok(ApiResponse.SuccessResponse(
                     "Verificatie email is opnieuw verstuurd"));
@@ -240,16 +218,7 @@ namespace SafeCasino.Api.Controllers
 
                 var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
 
-                var resetLink = Url.Action(
-                    "ResetPassword",
-                    "Auth",
-                    new { userId = user.Id, token = resetToken },
-                    Request.Scheme);
-
-                await _emailService.SendPasswordResetEmailAsync(
-                    user.Email!,
-                    $"{user.FirstName} {user.LastName}",
-                    resetLink!);
+                await _emailService.SendPasswordResetEmailAsync(user, resetToken);
 
                 _logger.LogInformation($"Password reset aangevraagd voor: {user.Email}");
 

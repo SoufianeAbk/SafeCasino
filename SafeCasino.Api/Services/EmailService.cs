@@ -1,10 +1,9 @@
-﻿using MailKit.Net.Smtp;
+﻿using System.Web;
+using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using SafeCasino.Data.Entities;
-using System.Net.Mail;
-using System.Web;
 
 namespace SafeCasino.Api.Services;
 
@@ -24,7 +23,6 @@ public class EmailService : IEmailService
         try
         {
             var encodedToken = HttpUtility.UrlEncode(token);
-            var encodedEmail = HttpUtility.UrlEncode(user.Email!);
             var verificationLink = $"https://localhost:7243/verify-email?userId={user.Id}&token={encodedToken}";
 
             var subject = "Bevestig je e-mailadres bij SafeCasino";

@@ -181,5 +181,48 @@
                 Timestamp = DateTime.UtcNow
             };
         }
+
+        /// <summary>
+        /// Creëert een fout response met validatie fouten
+        /// </summary>
+        public static ApiResponse ValidationErrorResponse(Dictionary<string, List<string>> errors, string message = "Validatiefouten opgetreden")
+        {
+            return new ApiResponse
+            {
+                Success = false,
+                StatusCode = 400,
+                Message = message,
+                Errors = errors,
+                Timestamp = DateTime.UtcNow
+            };
+        }
+
+        /// <summary>
+        /// Creëert een "niet gevonden" response (404)
+        /// </summary>
+        public static ApiResponse NotFoundResponse(string message = "Gevraagde resource niet gevonden")
+        {
+            return new ApiResponse
+            {
+                Success = false,
+                StatusCode = 404,
+                Message = message,
+                Timestamp = DateTime.UtcNow
+            };
+        }
+
+        /// <summary>
+        /// Creëert een "unauthorized" response (401)
+        /// </summary>
+        public static ApiResponse UnauthorizedResponse(string message = "U bent niet geautoriseerd voor deze actie")
+        {
+            return new ApiResponse
+            {
+                Success = false,
+                StatusCode = 401,
+                Message = message,
+                Timestamp = DateTime.UtcNow
+            };
+        }
     }
 }
