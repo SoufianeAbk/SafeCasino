@@ -1,13 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.11" />
-  </ItemGroup>
+	<ItemGroup>
+		<!-- ASP.NET Core packages -->
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
+
+		<!-- Entity Framework Core packages -->
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+		<!-- Identity packages -->
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- Project references -->
+		<ProjectReference Include="..\SafeCasino.Data\SafeCasino.Data.csproj" />
+		<ProjectReference Include="..\SafeCasino.Shared\SafeCasino.Shared.csproj" />
+	</ItemGroup>
 
 </Project>
