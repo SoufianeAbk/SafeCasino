@@ -1,0 +1,6 @@
+@SafeCasino.Api_HostAddress = http://localhost:5015
+
+GET {{SafeCasino.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

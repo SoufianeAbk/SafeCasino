@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeCasino.Data", "SafeCasi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeCasino.Shared", "SafeCasino.Shared\SafeCasino.Shared.csproj", "{B1740670-C17B-4102-B001-24A3060E795B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeCasino.Api", "SafeCasino.Api\SafeCasino.Api.csproj", "{DAD3A382-E51B-4B0B-B320-98E6D5BD8F7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B1740670-C17B-4102-B001-24A3060E795B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1740670-C17B-4102-B001-24A3060E795B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1740670-C17B-4102-B001-24A3060E795B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAD3A382-E51B-4B0B-B320-98E6D5BD8F7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAD3A382-E51B-4B0B-B320-98E6D5BD8F7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAD3A382-E51B-4B0B-B320-98E6D5BD8F7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAD3A382-E51B-4B0B-B320-98E6D5BD8F7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
