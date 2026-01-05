@@ -1,6 +1,345 @@
-@SafeCasino.Api_HostAddress = http://localhost:5015
+@ApiBaseUrl = https://localhost:7068
+@ApiBaseUrlHttp = http://localhost:5015
 
-GET {{SafeCasino.Api_HostAddress}}/weatherforecast/
-Accept: application/json
+### ===================================
+### AUTHENTICATION ENDPOINTS
+### ===================================
 
-###
+### Register nieuwe gebruiker
+POST {{ApiBaseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Test",
+  "lastName": "Gebruiker",
+  "email": "test@safecasino.be",
+  "dateOfBirth": "1990-01-15",
+  "password": "Test123!"
+}
+
+### Login
+POST {{ApiBaseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@safecasino.be",
+  "password": "Admin123!",
+  "rememberMe": true
+}
+
+### Login als speler
+POST {{ApiBaseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "speler@safecasino.be",
+  "password": "Speler123!",
+  "rememberMe": false
+}
+
+### Logout
+POST {{ApiBaseUrl}}/api/auth/logout
+
+### Forgot Password
+POST {{ApiBaseUrl}}/api/auth/forgot-password
+Content-Type: application/json
+
+{
+  "email": "test@safecasino.be"
+}
+
+### ===================================
+### GAMES ENDPOINTS
+### ===================================
+
+### Haal alle games op (met paginering)
+GET {{ApiBaseUrl}}/api/games?pageNumber=1&pageSize=12
+
+### Haal alle games op (met filtering)
+GET {{ApiBaseUrl}}/api/games?categoryId=1&isPopular=true&pageNumber=1&pageSize=12
+
+### Zoek games
+GET {{ApiBaseUrl}}/api/games?searchTerm=blackjack
+
+### Haal een specifieke game op
+GET {{ApiBaseUrl}}/api/games/1
+
+### Haal populaire games op
+GET {{ApiBaseUrl}}/api/games/popular?limit=8
+
+### Haal nieuwe games op
+GET {{ApiBaseUrl}}/api/games/new?limit=8
+
+### Haal games op per categorie
+GET {{ApiBaseUrl}}/api/games/category/1?pageNumber=1&pageSize=12
+
+### Haal alle categorieën op
+GET {{ApiBaseUrl}}/api/games/categories
+
+### Increment play count (ingelogd)
+POST {{ApiBaseUrl}}/api/games/1/play
+
+### Maak nieuwe game aan (Admin only)
+POST {{ApiBaseUrl}}/api/games
+Content-Type: application/json
+
+{
+  "name": "Test Blackjack Game",
+  "description": "Een test blackjack game voor de API",
+  "thumbnailUrl": "/images/games/test-blackjack.jpg",
+  "minimumBet": 1.00,
+  "maximumBet": 500.00,
+  "rtpPercentage": 99.5,
+  "isAvailable": true,
+  "isNew": true,
+  "isPopular": false,
+  "categoryId": 1,
+  "providerId": 1
+}
+
+### Update game (Admin only)
+PUT {{ApiBaseUrl}}/api/games/26
+Content-Type: application/json
+
+{
+  "name": "Updated Test Blackjack",
+  "description": "Updated description",
+  "thumbnailUrl": "/images/games/test-blackjack.jpg",
+  "minimumBet": 2.00,
+  "maximumBet": 1000.00,
+  "rtpPercentage": 99.6,
+  "isAvailable": true,
+  "isNew": false,
+  "isPopular": true,
+  "categoryId": 1,
+  "providerId": 1
+}
+
+### Verwijder game (Admin only)
+DELETE {{ApiBaseUrl}}/api/games/26
+
+### ===================================
+### USER ENDPOINTS
+### ===================================
+
+### Haal profiel op (ingelogd)
+GET {{ApiBaseUrl}}/api/user/profile
+
+### Update profiel (ingelogd)
+PUT {{ApiBaseUrl}}/api/user/profile
+Content-Type: application/json
+
+{
+  "firstName": "Updated",
+  "lastName": "Name"
+}
+
+### Haal saldo op (ingelogd)
+GET {{ApiBaseUrl}}/api/user/balance
+
+### Voeg saldo toe (ingelogd - test)
+POST {{ApiBaseUrl}}/api/user/balance/add
+Content-Type: application/json
+
+{
+  "amount": 100.00
+}
+
+### Haal gebruikersreviews op (ingelogd)
+GET {{ApiBaseUrl}}/api/user/reviews
+
+### Plaats nieuwe review (ingelogd)
+POST {{ApiBaseUrl}}/api/user/reviews
+Content-Type: application/json
+
+{
+  "gameId": 1,
+  "title": "Geweldig spel!",
+  "content": "Dit is echt een fantastisch blackjack spel. De graphics zijn mooi en het speelt soepel.",
+  "rating": 5
+}
+
+### Update review (ingelogd)
+PUT {{ApiBaseUrl}}/api/user/reviews/1
+Content-Type: application/json
+
+{
+  "gameId": 1,
+  "title": "Bijgewerkte review",
+  "content": "Na het opnieuw spelen vind ik het nog steeds geweldig!",
+  "rating": 5
+}
+
+### Verwijder review (ingelogd)
+DELETE {{ApiBaseUrl}}/api/user/reviews/1
+
+### Keur review goed (Admin/Moderator)
+POST {{ApiBaseUrl}}/api/user/reviews/1/approve
+
+### Haal alle gebruikers op (Admin only)
+GET {{ApiBaseUrl}}/api/user/all?pageNumber=1&pageSize=20
+
+### ===================================
+### CASINO ENDPOINTS
+### ===================================
+
+### Haal dashboard statistieken op (Admin only)
+GET {{ApiBaseUrl}}/api/casino/dashboard
+
+### Haal reviews voor een game op
+GET {{ApiBaseUrl}}/api/casino/games/1/reviews
+
+### Haal reviews voor game op (inclusief niet-goedgekeurd, Admin)
+GET {{ApiBaseUrl}}/api/casino/games/1/reviews?includeUnapproved=true
+
+### Haal alle reviews op (Admin/Moderator)
+GET {{ApiBaseUrl}}/api/casino/reviews?pageNumber=1&pageSize=20
+
+### Haal alleen niet-goedgekeurde reviews op (Admin/Moderator)
+GET {{ApiBaseUrl}}/api/casino/reviews?approved=false&pageNumber=1&pageSize=20
+
+### Haal alle providers op
+GET {{ApiBaseUrl}}/api/casino/providers
+
+### Haal games per provider op
+GET {{ApiBaseUrl}}/api/casino/providers/1/games?pageNumber=1&pageSize=12
+
+### Haal analytics op (Admin only)
+GET {{ApiBaseUrl}}/api/casino/analytics
+
+### Haal analytics op met datums (Admin only)
+GET {{ApiBaseUrl}}/api/casino/analytics?startDate=2025-01-01&endDate=2025-12-31
+
+### Zoek games
+GET {{ApiBaseUrl}}/api/casino/search?query=blackjack
+
+### ===================================
+### TEST SCENARIO: Complete user flow
+### ===================================
+
+### 1. Register nieuwe gebruiker
+POST {{ApiBaseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Jan",
+  "lastName": "Test",
+  "email": "jan.test@example.com",
+  "dateOfBirth": "1992-03-15",
+  "password": "JanTest123!"
+}
+
+### 2. Login (na email verificatie)
+POST {{ApiBaseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "jan.test@example.com",
+  "password": "JanTest123!",
+  "rememberMe": true
+}
+
+### 3. Haal profiel op
+GET {{ApiBaseUrl}}/api/user/profile
+
+### 4. Haal populaire games op
+GET {{ApiBaseUrl}}/api/games/popular
+
+### 5. Bekijk game details
+GET {{ApiBaseUrl}}/api/games/1
+
+### 6. Start game (increment play count)
+POST {{ApiBaseUrl}}/api/games/1/play
+
+### 7. Bekijk reviews
+GET {{ApiBaseUrl}}/api/casino/games/1/reviews
+
+### 8. Plaats review
+POST {{ApiBaseUrl}}/api/user/reviews
+Content-Type: application/json
+
+{
+  "gameId": 1,
+  "title": "Zeer leuk spel",
+  "content": "Classic Blackjack is echt een top game. Aanrader!",
+  "rating": 5
+}
+
+### 9. Voeg saldo toe
+POST {{ApiBaseUrl}}/api/user/balance/add
+Content-Type: application/json
+
+{
+  "amount": 50.00
+}
+
+### 10. Check updated balance
+GET {{ApiBaseUrl}}/api/user/balance
+
+### ===================================
+### ADMIN TEST SCENARIO
+### ===================================
+
+### 1. Admin login
+POST {{ApiBaseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@safecasino.be",
+  "password": "Admin123!",
+  "rememberMe": true
+}
+
+### 2. Bekijk dashboard
+GET {{ApiBaseUrl}}/api/casino/dashboard
+
+### 3. Bekijk analytics
+GET {{ApiBaseUrl}}/api/casino/analytics
+
+### 4. Bekijk niet-goedgekeurde reviews
+GET {{ApiBaseUrl}}/api/casino/reviews?approved=false
+
+### 5. Keur review goed
+POST {{ApiBaseUrl}}/api/user/reviews/1/approve
+
+### 6. Maak nieuwe game
+POST {{ApiBaseUrl}}/api/games
+Content-Type: application/json
+
+{
+  "name": "Premium Roulette VIP",
+  "description": "Exclusieve roulette tafel voor VIP spelers met hogere limieten",
+  "thumbnailUrl": "/images/games/premium-roulette.jpg",
+  "minimumBet": 25.00,
+  "maximumBet": 5000.00,
+  "rtpPercentage": 97.3,
+  "isAvailable": true,
+  "isNew": true,
+  "isPopular": false,
+  "categoryId": 3,
+  "providerId": 2
+}
+
+### 7. Update game
+PUT {{ApiBaseUrl}}/api/games/26
+Content-Type: application/json
+
+{
+  "name": "Premium Roulette VIP",
+  "description": "Exclusieve roulette tafel voor VIP spelers met hogere limieten en speciale bonussen",
+  "thumbnailUrl": "/images/games/premium-roulette.jpg",
+  "minimumBet": 25.00,
+  "maximumBet": 5000.00,
+  "rtpPercentage": 97.3,
+  "isAvailable": true,
+  "isNew": true,
+  "isPopular": true,
+  "categoryId": 3,
+  "providerId": 2
+}
+
+### 8. Bekijk alle gebruikers
+GET {{ApiBaseUrl}}/api/user/all
+
+### 9. Logout
+POST {{ApiBaseUrl}}/api/auth/logout
