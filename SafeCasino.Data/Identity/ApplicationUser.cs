@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using SafeCasino.Data.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace SafeCasino.Data.Identity
@@ -23,6 +24,21 @@ namespace SafeCasino.Data.Identity
         /// Geboortedatum van de gebruiker
         /// </summary>
         public DateTime? DateOfBirth { get; set; }
+
+        /// <summary>
+        /// Saldo van de gebruiker
+        /// </summary>
+        public decimal Balance { get; set; } = 0m;
+
+        /// <summary>
+        /// Is de gebruiker geverifieerd?
+        /// </summary>
+        public bool IsVerified { get; set; } = false;
+
+        /// <summary>
+        /// Registratiedatum
+        /// </summary>
+        public DateTime RegistrationDate { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Account aangemaakt op

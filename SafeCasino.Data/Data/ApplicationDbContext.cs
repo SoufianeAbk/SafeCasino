@@ -10,7 +10,7 @@ namespace SafeCasino.Data.Data
     /// <summary>
     /// Database context voor de SafeCasino applicatie
     /// </summary>
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         /// <summary>
         /// Constructor met options
@@ -41,6 +41,11 @@ namespace SafeCasino.Data.Data
         public DbSet<Review> Reviews { get; set; }
 
         /// <summary>
+        /// DbSet voor game reviews (alias van Reviews voor Ajax)
+        /// </summary>
+        public DbSet<GameReview> GameReviews { get; set; }
+
+        /// <summary>
         /// Configure warnings
         /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -65,6 +70,33 @@ namespace SafeCasino.Data.Data
             builder.ApplyConfiguration(new CasinoGameConfiguration());
             builder.ApplyConfiguration(new ReviewConfiguration());
 
+            // ============ CONFIGURE RELATIONSHIPS ============
+
+            // Many-to-Many: Users <-> Favorite Games
+            builder.Entity<ApplicationUser>()
+                .HasMany(u => u.FavoriteGames)
+                .WithMany(g => g.FavoritedByUsers)
+                .UsingEntity("UserFavoriteGames",
+                    l => l.HasOne(typeof(CasinoGame)).WithMany().HasForeignKey("GameId"),
+                    r => r.HasOne(typeof(ApplicationUser)).WithMany().HasForeignKey("UserId"));
+
+            // One-to-Many: Users -> Reviews
+            builder.Entity<Review>()
+                .HasOne(r => r.User)
+                .WithMany(u => u.Reviews)
+                .HasForeignKey(r => r.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // One-to-Many: Games -> Reviews
+            builder.Entity<Review>()
+                .HasOne(r => r.Game)
+                .WithMany(g => g.Reviews)
+                .HasForeignKey(r => r.GameId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+            // ============ CONFIGURE TABLE NAMES ============
+
             // Identity tabellen hernoemen voor duidelijkheid
             builder.Entity<ApplicationUser>().ToTable("Users");
             builder.Entity<ApplicationRole>().ToTable("Roles");
@@ -73,6 +105,11 @@ namespace SafeCasino.Data.Data
             builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins");
             builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
             builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
+
+            // Map GameReview naar Review tabel
+            builder.Entity<GameReview>().ToTable("Reviews");
+
+            // ============ SEED DATA ============
 
             // Seed data toevoegen
             Seed.RoleSeed.SeedRoles(builder);

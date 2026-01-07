@@ -1,58 +1,72 @@
-﻿namespace SafeCasino.Data.Entities
+﻿using SafeCasino.Data.Identity;
+using System;
+
+namespace SafeCasino.Data.Entities
 {
     /// <summary>
-    /// Entiteit voor gebruikersreviews van spellen
+    /// Review - Review op een casino spel door een gebruiker
     /// </summary>
     public class Review
     {
         /// <summary>
-        /// Unieke identifier voor de review
+        /// Unieke ID van de review
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
         /// Titel van de review
         /// </summary>
-        public string Title { get; set; } = string.Empty;
+        public string Title { get; set; }
 
         /// <summary>
         /// Inhoud van de review
         /// </summary>
-        public string Content { get; set; } = string.Empty;
+        public string Content { get; set; }
 
         /// <summary>
-        /// Beoordeling (1-5 sterren)
+        /// Rating (1-5 sterren)
         /// </summary>
         public int Rating { get; set; }
 
         /// <summary>
-        /// Datum waarop de review is geplaatst
+        /// Is deze review goedgekeurd door moderator?
         /// </summary>
-        public DateTime CreatedDate { get; set; }
+        public bool IsApproved { get; set; } = false;
 
         /// <summary>
-        /// Of de review is goedgekeurd door moderatie
+        /// Datum waarop review is aangemaakt
         /// </summary>
-        public bool IsApproved { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 
         /// <summary>
-        /// Foreign key naar CasinoGame
+        /// Datum waarop review is gewijzigd (nullable)
+        /// </summary>
+        public DateTime? ModifiedDate { get; set; }
+
+        // ============ FOREIGN KEYS ============
+
+        /// <summary>
+        /// ID van de gebruiker die deze review schreef
+        /// </summary>
+        public string UserId { get; set; }
+
+        /// <summary>
+        /// ID van het spel waar deze review over gaat
         /// </summary>
         public int GameId { get; set; }
 
-        /// <summary>
-        /// Navigatie property naar het spel
-        /// </summary>
-        public virtual CasinoGame Game { get; set; } = null!;
+        // ============ NAVIGATION PROPERTIES ============
 
         /// <summary>
-        /// Foreign key naar ApplicationUser
+        /// De gebruiker die deze review schreef
+        /// Many-to-One relationship
         /// </summary>
-        public string UserId { get; set; } = string.Empty;
+        public virtual ApplicationUser User { get; set; }
 
         /// <summary>
-        /// Navigatie property naar de gebruiker
+        /// Het spel waar deze review over gaat
+        /// Many-to-One relationship
         /// </summary>
-        public virtual ApplicationUser User { get; set; } = null!;
+        public virtual CasinoGame Game { get; set; }
     }
 }

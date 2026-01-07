@@ -1,42 +1,53 @@
-﻿namespace SafeCasino.Data.Entities
+﻿using System;
+using System.Collections.Generic;
+
+namespace SafeCasino.Data.Entities
 {
     /// <summary>
-    /// Entiteit voor spelcategorieën (bijv. Blackjack, Slots, etc.)
+    /// Game Category - Categorie van casino spellen
     /// </summary>
     public class GameCategory
     {
         /// <summary>
-        /// Unieke identifier voor de categorie
+        /// Unieke ID van de categorie
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
         /// Naam van de categorie
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; }
 
         /// <summary>
         /// Beschrijving van de categorie
         /// </summary>
-        public string Description { get; set; } = string.Empty;
+        public string Description { get; set; }
 
         /// <summary>
-        /// URL naar het icoon van de categorie
+        /// URL naar icon van de categorie
         /// </summary>
-        public string IconUrl { get; set; } = string.Empty;
+        public string IconUrl { get; set; }
 
         /// <summary>
-        /// Of de categorie actief is
+        /// Is deze categorie actief?
         /// </summary>
         public bool IsActive { get; set; } = true;
 
         /// <summary>
-        /// Sorteervolgorde voor weergave
+        /// Display volgorde
         /// </summary>
-        public int DisplayOrder { get; set; }
+        public int DisplayOrder { get; set; } = 0;
 
         /// <summary>
-        /// Navigatie property voor games in deze categorie
+        /// Categorie aangemaakt op
+        /// </summary>
+        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+
+        // ============ NAVIGATION PROPERTIES ============
+
+        /// <summary>
+        /// Alle games in deze categorie
+        /// One-to-Many relationship
         /// </summary>
         public virtual ICollection<CasinoGame> Games { get; set; } = new List<CasinoGame>();
     }

@@ -1,92 +1,109 @@
-﻿namespace SafeCasino.Data.Entities
+﻿using SafeCasino.Data.Identity;
+using System;
+using System.Collections.Generic;
+
+namespace SafeCasino.Data.Entities
 {
     /// <summary>
-    /// Entiteit voor casino spellen
+    /// Casino Game - Speelautomaat/spel in het casino
     /// </summary>
     public class CasinoGame
     {
         /// <summary>
-        /// Unieke identifier voor het spel
+        /// Unieke ID van het spel
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
         /// Naam van het spel
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; }
 
         /// <summary>
         /// Beschrijving van het spel
         /// </summary>
-        public string Description { get; set; } = string.Empty;
+        public string Description { get; set; }
 
         /// <summary>
-        /// URL naar de thumbnail van het spel
+        /// URL naar thumbnail afbeelding
         /// </summary>
-        public string ThumbnailUrl { get; set; } = string.Empty;
+        public string ThumbnailUrl { get; set; }
 
         /// <summary>
-        /// Minimum inzet voor het spel
+        /// Minimale inzet voor dit spel
         /// </summary>
         public decimal MinimumBet { get; set; }
 
         /// <summary>
-        /// Maximum inzet voor het spel
+        /// Maximale inzet voor dit spel
         /// </summary>
         public decimal MaximumBet { get; set; }
 
         /// <summary>
-        /// Return to Player percentage (RTP)
+        /// RTP (Return to Player) percentage
         /// </summary>
         public decimal RtpPercentage { get; set; }
 
         /// <summary>
-        /// Of het spel momenteel beschikbaar is
+        /// Is het spel beschikbaar?
         /// </summary>
         public bool IsAvailable { get; set; } = true;
 
         /// <summary>
-        /// Of het spel nieuw is
+        /// Aantal keren dat dit spel is gespeeld
         /// </summary>
-        public bool IsNew { get; set; }
+        public int PlayCount { get; set; } = 0;
 
         /// <summary>
-        /// Of het spel populair is
+        /// Is dit een nieuw spel?
         /// </summary>
-        public bool IsPopular { get; set; }
+        public bool IsNew { get; set; } = false;
 
         /// <summary>
-        /// Datum waarop het spel is toegevoegd
+        /// Is dit een populair spel?
         /// </summary>
-        public DateTime CreatedDate { get; set; }
+        public bool IsPopular { get; set; } = false;
 
         /// <summary>
-        /// Aantal keer dat het spel is gespeeld
+        /// Spel aangemaakt op
         /// </summary>
-        public int PlayCount { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+
+        // ============ FOREIGN KEYS ============
 
         /// <summary>
-        /// Foreign key naar GameCategory
-        /// </summary>
-        public int CategoryId { get; set; }
-
-        /// <summary>
-        /// Navigatie property naar de categorie
-        /// </summary>
-        public virtual GameCategory Category { get; set; } = null!;
-
-        /// <summary>
-        /// Foreign key naar GameProvider
+        /// ID van de provider (bv NetEnt, Playtech)
         /// </summary>
         public int ProviderId { get; set; }
 
         /// <summary>
-        /// Navigatie property naar de provider
+        /// ID van de categorie (bv Slots, Roulette, Blackjack)
         /// </summary>
-        public virtual GameProvider Provider { get; set; } = null!;
+        public int CategoryId { get; set; }
+
+        // ============ NAVIGATION PROPERTIES ============
 
         /// <summary>
-        /// Navigatie property voor reviews van dit spel
+        /// De provider van dit spel
+        /// One-to-Many relationship (inverse)
+        /// </summary>
+        public virtual GameProvider Provider { get; set; }
+
+        /// <summary>
+        /// De categorie van dit spel
+        /// One-to-Many relationship (inverse)
+        /// </summary>
+        public virtual GameCategory Category { get; set; }
+
+        /// <summary>
+        /// Gebruikers die dit spel als favoriet hebben gemarkeerd
+        /// Many-to-Many relationship met ApplicationUser
+        /// </summary>
+        public virtual ICollection<ApplicationUser> FavoritedByUsers { get; set; } = new List<ApplicationUser>();
+
+        /// <summary>
+        /// Reviews op dit spel
+        /// One-to-Many relationship
         /// </summary>
         public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
