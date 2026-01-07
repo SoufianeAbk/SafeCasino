@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SafeCasino.Data.Data;
 using SafeCasino.Data.Entities;
+using SafeCasino.Web.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,9 +45,25 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
+// Logging configuration
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Logging.AddFilter("SafeCasino.Web.Middleware", LogLevel.Debug);
+}
+else
+{
+    builder.Logging.AddFilter("SafeCasino.Web.Middleware", LogLevel.Information);
+}
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline
+app.UseRequestLogging();
+app.UseCookieSecurity();
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
