@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using SafeCasino.Data.Data;
 using SafeCasino.Data.Identity;
-using SafeCasino.Data.Entities;
 using SafeCasino.Web.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,8 +14,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Configure Identity - BELANGRIJK: Gebruik IdentityRole, niet ApplicationRole in AddIdentity
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+// Configure Identity - use ApplicationRole (matches ApplicationDbContext)
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 {
     // Password settings
     options.Password.RequireDigit = true;
@@ -91,7 +90,7 @@ using (var scope = app.Services.CreateScope())
     {
         var context = services.GetRequiredService<ApplicationDbContext>();
         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
 
         // Zorg dat database is aangemaakt
         context.Database.EnsureCreated();

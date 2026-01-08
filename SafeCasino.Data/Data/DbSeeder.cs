@@ -9,16 +9,24 @@ namespace SafeCasino.Data.Data
         public static async Task SeedAsync(
             ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<ApplicationRole> roleManager)
         {
             // Seed Roles
             if (!await roleManager.RoleExistsAsync("Admin"))
             {
-                await roleManager.CreateAsync(new IdentityRole("Admin"));
+                await roleManager.CreateAsync(new ApplicationRole
+                {
+                    Name = "Admin",
+                    Description = "Administrator met volledige toegang tot het systeem"
+                });
             }
             if (!await roleManager.RoleExistsAsync("Player"))
             {
-                await roleManager.CreateAsync(new IdentityRole("Player"));
+                await roleManager.CreateAsync(new ApplicationRole
+                {
+                    Name = "Player",
+                    Description = "Standaard speler rol"
+                });
             }
 
             // Seed Admin User
