@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SafeCasino.Data.Entities;
+using SafeCasino.Data.Identity;
 using SafeCasino.Web.ViewModels;
 
 namespace SafeCasino.Web.Controllers

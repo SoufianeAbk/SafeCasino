@@ -1,5 +1,4 @@
 ﻿using SafeCasino.Data.Identity;
-using System;
 
 namespace SafeCasino.Data.Entities
 {

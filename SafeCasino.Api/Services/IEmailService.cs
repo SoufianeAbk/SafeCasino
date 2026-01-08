@@ -1,4 +1,4 @@
-﻿using SafeCasino.Data.Entities;
+﻿using SafeCasino.Data.Identity;
 
 namespace SafeCasino.Api.Services;
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SafeCasino.Data.Data;
+using SafeCasino.Data.Identity;
 using SafeCasino.Data.Entities;
 using SafeCasino.Web.Middleware;
 

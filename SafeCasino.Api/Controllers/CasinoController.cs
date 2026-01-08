@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SafeCasino.Data.Data;
 using SafeCasino.Shared.DTOs;
 using SafeCasino.Shared.Responses;
+using SafeCasino.Data.Entities;
 
 namespace SafeCasino.Api.Controllers
 {

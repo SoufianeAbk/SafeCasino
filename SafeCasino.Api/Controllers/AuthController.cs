@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SafeCasino.Api.Services;
-using SafeCasino.Data.Entities;
+using SafeCasino.Data.Identity;
 using SafeCasino.Shared.DTOs;
 using SafeCasino.Shared.Requests;
 using SafeCasino.Shared.Responses;

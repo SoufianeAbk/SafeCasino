@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SafeCasino.Api.Services;
 using SafeCasino.Data.Data;
-using SafeCasino.Data.Entities;
+using SafeCasino.Data.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 

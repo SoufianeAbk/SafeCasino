@@ -3,7 +3,7 @@ using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using SafeCasino.Data.Entities;
+using SafeCasino.Data.Identity;
 
 namespace SafeCasino.Api.Services;
 

@@ -36,7 +36,7 @@
         /// Geboortedatum van de gebruiker
         /// Gebruikt voor leeftijdsverificatie
         /// </summary>
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         /// <summary>
         /// Huidigsaldo van de gebruiker in het casino

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SafeCasino.Data.Entities;
+using SafeCasino.Data.Identity;
 
 namespace SafeCasino.Data.Seed
 {

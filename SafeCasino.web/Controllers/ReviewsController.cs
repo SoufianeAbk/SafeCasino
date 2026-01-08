@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using SafeCasino.Data.Data;
 using SafeCasino.Data.Entities;
 using SafeCasino.Web.ViewModels;
+using SafeCasino.Data.Identity;
 
 namespace SafeCasino.Web.Controllers
 {

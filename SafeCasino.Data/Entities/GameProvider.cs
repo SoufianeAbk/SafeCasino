@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SafeCasino.Data.Entities;
 
-namespace SafeCasino.Data.Entities
+namespace SafeCasino.Data.Identity
 {
     /// <summary>
     /// Game Provider - Aanbieder van casino spellen

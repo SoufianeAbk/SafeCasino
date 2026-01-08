@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SafeCasino.Data.Data;
 using SafeCasino.Data.Entities;
+using SafeCasino.Data.Identity;
 using SafeCasino.Shared.DTOs;
 using SafeCasino.Shared.Responses;
 

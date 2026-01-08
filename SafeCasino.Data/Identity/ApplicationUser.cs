@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using SafeCasino.Data.Entities;
-using System;
-using System.Collections.Generic;
 
 namespace SafeCasino.Data.Identity
 {
@@ -13,12 +11,12 @@ namespace SafeCasino.Data.Identity
         /// <summary>
         /// Voornaam van de gebruiker
         /// </summary>
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;  // ← Voeg dit toe
 
         /// <summary>
         /// Achternaam van de gebruiker
         /// </summary>
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;  // ← Voeg dit toe
 
         /// <summary>
         /// Geboortedatum van de gebruiker
