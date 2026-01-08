@@ -4,7 +4,8 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-	</PropertyGroup>
+	  <UserSecretsId>bddd7c18-dbea-4092-bf2b-cd93b3f58a25</UserSecretsId>
+  </PropertyGroup>
 
 	<ItemGroup>
 		<!-- ASP.NET Core packages -->
