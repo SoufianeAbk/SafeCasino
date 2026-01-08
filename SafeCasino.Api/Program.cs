@@ -15,8 +15,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Configure Identity
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+// Configure Identity — use ApplicationRole (match ApplicationDbContext)
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 {
     // Password settings
     options.Password.RequireDigit = true;
@@ -58,9 +58,10 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Show developer exception page in Development so you can see startup errors
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.MapOpenApi();
 }
 

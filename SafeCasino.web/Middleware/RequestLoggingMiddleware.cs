@@ -49,6 +49,9 @@ namespace SafeCasino.Web.Middleware
                         context.Response.StatusCode,
                         stopwatch.ElapsedMilliseconds);
 
+                    // Reset stream position naar begin
+                    responseBody.Seek(0, SeekOrigin.Begin);
+
                     // Copy response body to original stream
                     await responseBody.CopyToAsync(originalBodyStream);
                 }
