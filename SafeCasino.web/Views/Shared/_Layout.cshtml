@@ -68,9 +68,9 @@
                                 <i class="fas fa-globe"></i> @CultureInfo.CurrentCulture.DisplayName
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end" style="background: var(--card-bg); border: 2px solid rgba(255, 255, 255, 0.1);">
-                                <li><a class="dropdown-item" href="?culture=nl" style="color: var(--text-light);">🇳🇱 Nederlands</a></li>
-                                <li><a class="dropdown-item" href="?culture=en" style="color: var(--text-light);">🇬🇧 English</a></li>
-                                <li><a class="dropdown-item" href="?culture=fr" style="color: var(--text-light);">🇫🇷 Français</a></li>
+                                <li><a class="dropdown-item" asp-controller="Culture" asp-action="SetCulture" asp-route-culture="nl" asp-route-returnUrl="@Context.Request.Path" style="color: var(--text-light);">🇳🇱 Nederlands</a></li>
+                                <li><a class="dropdown-item" asp-controller="Culture" asp-action="SetCulture" asp-route-culture="en" asp-route-returnUrl="@Context.Request.Path" style="color: var(--text-light);">🇬🇧 English</a></li>
+                                <li><a class="dropdown-item" asp-controller="Culture" asp-action="SetCulture" asp-route-culture="fr" asp-route-returnUrl="@Context.Request.Path" style="color: var(--text-light);">🇫🇷 Français</a></li>
                             </ul>
                         </div>
                     </div>
