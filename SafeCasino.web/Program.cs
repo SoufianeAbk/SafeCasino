@@ -1,13 +1,22 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using SafeCasino.Data.Data;
 using SafeCasino.Data.Identity;
 using SafeCasino.Web.Middleware;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
 builder.Services.AddControllersWithViews();
+
+// Configure Localization
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.AddMvc()
+    .AddViewLocalization()
+    .AddDataAnnotationsLocalization();
 
 // Configure Database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -60,6 +69,15 @@ else
 }
 
 var app = builder.Build();
+
+// Configure Localization Middleware
+var supportedCultures = new[] { "nl", "en", "fr" };
+var localizationOptions = new RequestLocalizationOptions()
+    .SetDefaultCulture("nl")
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
+
+app.UseRequestLocalization(localizationOptions);
 
 app.UseRequestLogging();
 app.UseCookieSecurity();

@@ -20,4 +20,19 @@
     <ProjectReference Include="..\SafeCasino.Data\SafeCasino.Data.csproj" />
     <ProjectReference Include="..\SafeCasino.Shared\SafeCasino.Shared.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\SharedResource.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>SafeCasino.web.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\SharedResource.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>SafeCasino.web.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\SharedResource.nl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>SafeCasino.web.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

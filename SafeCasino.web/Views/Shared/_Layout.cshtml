@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
-<html lang="nl">
+<html lang="@CultureInfo.CurrentCulture.TwoLetterISOLanguageName">
+@using System.Globalization
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,32 +24,32 @@
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Home" asp-action="Index">
-                                <i class="fas fa-home"></i> Home
+                                <i class="fas fa-home"></i> @SharedLocalizer["Home"]
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Games" asp-action="Index">
-                                <i class="fas fa-gamepad"></i> Casino
+                                <i class="fas fa-gamepad"></i> @SharedLocalizer["Casino"]
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Games" asp-action="Index">
-                                <i class="fas fa-dice"></i> Dice
+                                <i class="fas fa-dice"></i> @SharedLocalizer["Dice"]
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Games" asp-action="Index" asp-route-categoryId="2">
-                                <i class="fas fa-video"></i> Live Casino
+                                <i class="fas fa-video"></i> @SharedLocalizer["LiveCasino"]
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Games" asp-action="Popular">
-                                <i class="fas fa-gift"></i> Promos
+                                <i class="fas fa-gift"></i> @SharedLocalizer["Promos"]
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Games" asp-action="Index">
-                                <i class="fas fa-th"></i> Napoleon Hub
+                                <i class="fas fa-th"></i> @SharedLocalizer["NapoleonHub"]
                             </a>
                         </li>
                     </ul>
@@ -58,6 +59,20 @@
                         <button class="btn btn-link text-light" type="button">
                             <i class="fas fa-search fa-lg"></i>
                         </button>
+                    </div>
+
+                    <!-- Language Selector -->
+                    <div class="d-flex align-items-center me-3">
+                        <div class="dropdown">
+                            <button class="btn btn-link text-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown">
+                                <i class="fas fa-globe"></i> @CultureInfo.CurrentCulture.DisplayName
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" style="background: var(--card-bg); border: 2px solid rgba(255, 255, 255, 0.1);">
+                                <li><a class="dropdown-item" href="?culture=nl" style="color: var(--text-light);">🇳🇱 Nederlands</a></li>
+                                <li><a class="dropdown-item" href="?culture=en" style="color: var(--text-light);">🇬🇧 English</a></li>
+                                <li><a class="dropdown-item" href="?culture=fr" style="color: var(--text-light);">🇫🇷 Français</a></li>
+                            </ul>
+                        </div>
                     </div>
 
                     <!-- User Menu -->
@@ -74,19 +89,19 @@
                                 <ul class="dropdown-menu dropdown-menu-end" style="background: var(--card-bg); border: 2px solid rgba(255, 255, 255, 0.1);">
                                     <li>
                                         <a class="dropdown-item" asp-controller="Account" asp-action="Profile" style="color: var(--text-light);">
-                                            <i class="fas fa-user-circle"></i> Mijn Profiel
+                                            <i class="fas fa-user-circle"></i> @SharedLocalizer["MyProfile"]
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="#" style="color: var(--text-light);">
-                                            <i class="fas fa-wallet"></i> Mijn Saldo
+                                            <i class="fas fa-wallet"></i> @SharedLocalizer["MyBalance"]
                                         </a>
                                     </li>
                                     <li><hr class="dropdown-divider" style="border-color: rgba(255, 255, 255, 0.1);"></li>
                                     <li>
                                         <form asp-controller="Account" asp-action="Logout" method="post">
                                             <button type="submit" class="dropdown-item" style="color: var(--text-light);">
-                                                <i class="fas fa-sign-out-alt"></i> Uitloggen
+                                                <i class="fas fa-sign-out-alt"></i> @SharedLocalizer["Logout"]
                                             </button>
                                         </form>
                                     </li>
@@ -98,13 +113,13 @@
                             <!-- Login Button -->
                             <li class="nav-item me-2">
                                 <a class="btn btn-outline-light" asp-controller="Account" asp-action="Login">
-                                    <i class="fas fa-sign-in-alt"></i> Login
+                                    <i class="fas fa-sign-in-alt"></i> @SharedLocalizer["Login"]
                                 </a>
                             </li>
                             <!-- Register Button -->
                             <li class="nav-item">
                                 <a class="btn btn-promo" asp-controller="Account" asp-action="Register">
-                                    <i class="fas fa-user-plus"></i> Register
+                                    <i class="fas fa-user-plus"></i> @SharedLocalizer["Register"]
                                 </a>
                             </li>
                         }
@@ -146,8 +161,7 @@
                         <i class="fas fa-dice"></i> SafeCasino
                     </h5>
                     <p class="text-muted small">
-                        SafeCasino is jouw vertrouwde online casino met de grootste collectie games.
-                        Speel veilig en verantwoord met de beste RTP percentages.
+                        @SharedLocalizer["FooterDescription"]
                     </p>
                     <!-- Social Media -->
                     <div class="social-links mt-3">
@@ -160,31 +174,31 @@
 
                 <!-- Quick Links -->
                 <div class="col-md-3 mb-4">
-                    <h5 class="mb-3">Casino Games</h5>
+                    <h5 class="mb-3">@SharedLocalizer["CasinoGames"]</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2">
                             <a asp-controller="Games" asp-action="Index" asp-route-categoryId="5" class="text-white-50">
-                                <i class="fas fa-angle-right"></i> Slots
+                                <i class="fas fa-angle-right"></i> @SharedLocalizer["Slots"]
                             </a>
                         </li>
                         <li class="mb-2">
                             <a asp-controller="Games" asp-action="Index" asp-route-categoryId="3" class="text-white-50">
-                                <i class="fas fa-angle-right"></i> Roulette
+                                <i class="fas fa-angle-right"></i> @SharedLocalizer["Roulette"]
                             </a>
                         </li>
                         <li class="mb-2">
                             <a asp-controller="Games" asp-action="Index" asp-route-categoryId="1" class="text-white-50">
-                                <i class="fas fa-angle-right"></i> Blackjack
+                                <i class="fas fa-angle-right"></i> @SharedLocalizer["Blackjack"]
                             </a>
                         </li>
                         <li class="mb-2">
                             <a asp-controller="Games" asp-action="Index" asp-route-categoryId="2" class="text-white-50">
-                                <i class="fas fa-angle-right"></i> Live Casino
+                                <i class="fas fa-angle-right"></i> @SharedLocalizer["LiveCasino"]
                             </a>
                         </li>
                         <li class="mb-2">
                             <a asp-controller="Games" asp-action="Popular" class="text-white-50">
-                                <i class="fas fa-angle-right"></i> Populaire Games
+                                <i class="fas fa-angle-right"></i> @SharedLocalizer["PopularGames"]
                             </a>
                         </li>
                     </ul>
@@ -192,48 +206,48 @@
 
                 <!-- Info -->
                 <div class="col-md-3 mb-4">
-                    <h5 class="mb-3">Informatie</h5>
+                    <h5 class="mb-3">@SharedLocalizer["Information"]</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2">
                             <a href="#" class="text-white-50">
-                                <i class="fas fa-angle-right"></i> Over Ons
+                                <i class="fas fa-angle-right"></i> @SharedLocalizer["AboutUs"]
                             </a>
                         </li>
                         <li class="mb-2">
                             <a href="#" class="text-white-50">
-                                <i class="fas fa-angle-right"></i> Verantwoord Spelen
+                                <i class="fas fa-angle-right"></i> @SharedLocalizer["ResponsibleGaming"]
                             </a>
                         </li>
                         <li class="mb-2">
                             <a asp-controller="Home" asp-action="Privacy" class="text-white-50">
-                                <i class="fas fa-angle-right"></i> Privacy Policy
+                                <i class="fas fa-angle-right"></i> @SharedLocalizer["PrivacyPolicy"]
                             </a>
                         </li>
                         <li class="mb-2">
                             <a href="#" class="text-white-50">
-                                <i class="fas fa-angle-right"></i> Algemene Voorwaarden
+                                <i class="fas fa-angle-right"></i> @SharedLocalizer["TermsConditions"]
                             </a>
                         </li>
                         <li class="mb-2">
                             <a href="#" class="text-white-50">
-                                <i class="fas fa-angle-right"></i> Contact
+                                <i class="fas fa-angle-right"></i> @SharedLocalizer["Contact"]
                             </a>
                         </li>
                     </ul>
                 </div>
 
-                <!-- Support & Veiligheid -->
+                <!-- Support & Security -->
                 <div class="col-md-3 mb-4">
-                    <h5 class="mb-3">Support & Veiligheid</h5>
+                    <h5 class="mb-3">@SharedLocalizer["SupportSecurity"]</h5>
                     <p class="text-muted small mb-3">
-                        <i class="fas fa-headset"></i> 24/7 Klantenservice<br />
+                        <i class="fas fa-headset"></i> 24/7 @SharedLocalizer["CustomerService"]<br />
                         <i class="fas fa-envelope"></i> support@safecasino.be<br />
                         <i class="fas fa-phone"></i> +32 2 123 45 67
                     </p>
                     <div class="mt-3">
                         <span class="badge bg-success me-2 mb-2">18+</span>
-                        <span class="badge bg-warning text-dark me-2 mb-2">Speel Bewust</span>
-                        <span class="badge bg-info mb-2">SSL Beveiligd</span>
+                        <span class="badge bg-warning text-dark me-2 mb-2">@SharedLocalizer["PlayResponsibly"]</span>
+                        <span class="badge bg-info mb-2">SSL @SharedLocalizer["Secured"]</span>
                     </div>
                 </div>
             </div>
@@ -241,7 +255,7 @@
             <!-- Payment Methods -->
             <div class="row mt-4 pt-4 border-top" style="border-color: rgba(255, 255, 255, 0.1) !important;">
                 <div class="col-12">
-                    <h6 class="text-center text-muted mb-3">Betaalmethodes</h6>
+                    <h6 class="text-center text-muted mb-3">@SharedLocalizer["PaymentMethods"]</h6>
                     <div class="d-flex justify-content-center flex-wrap gap-3">
                         <span class="badge bg-secondary p-2"><i class="fab fa-cc-visa fa-2x"></i></span>
                         <span class="badge bg-secondary p-2"><i class="fab fa-cc-mastercard fa-2x"></i></span>
@@ -257,13 +271,13 @@
             <div class="row">
                 <div class="col-md-6 text-center text-md-start">
                     <p class="text-muted small mb-0">
-                        &copy; 2025 SafeCasino. Alle rechten voorbehouden.
+                        &copy; 2026 SafeCasino. @SharedLocalizer["AllRightsReserved"]
                     </p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     <p class="text-muted small mb-0">
-                        <i class="fas fa-shield-alt text-success"></i> Beveiligd door SSL Encryptie |
-                        <i class="fas fa-check-circle text-success"></i> Vergunde Casino
+                        <i class="fas fa-shield-alt text-success"></i> @SharedLocalizer["SecuredSSL"] |
+                        <i class="fas fa-check-circle text-success"></i> @SharedLocalizer["LicensedCasino"]
                     </p>
                 </div>
             </div>
@@ -272,8 +286,7 @@
             <div class="row mt-3">
                 <div class="col-12">
                     <p class="text-muted small text-center mb-0" style="font-size: 0.75rem;">
-                        <strong>Let op:</strong> Gokken kan verslavend zijn. Speel verantwoord en binnen je grenzen.
-                        SafeCasino is een 18+ platform. Als je hulp nodig hebt, neem contact op met een verslavingszorginstelling.
+                        @SharedLocalizer["Disclaimer"]
                     </p>
                 </div>
             </div>
