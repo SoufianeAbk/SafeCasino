@@ -1,4 +1,4 @@
-﻿﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -11,15 +11,16 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
       </xsd:complexType>
     </xsd:element>
   </xsd:schema>
+
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -32,201 +33,101 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  
+
   <!-- Navigation -->
-  <data name="Home" xml:space="preserve">
-    <value>Accueil</value>
-  </data>
-  <data name="Casino" xml:space="preserve">
-    <value>Casino</value>
-  </data>
-  <data name="Games" xml:space="preserve">
-    <value>Jeux</value>
-  </data>
-  <data name="LiveCasino" xml:space="preserve">
-    <value>Casino en Direct</value>
-  </data>
-  <data name="Promotions" xml:space="preserve">
-    <value>Promotions</value>
-  </data>
-  <data name="Login" xml:space="preserve">
-    <value>Connexion</value>
-  </data>
-  <data name="Register" xml:space="preserve">
-    <value>S'inscrire</value>
-  </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Déconnexion</value>
-  </data>
-  <data name="Profile" xml:space="preserve">
-    <value>Profil</value>
-  </data>
-  
+  <data name="Home"><value>Accueil</value></data>
+  <data name="Casino"><value>Casino</value></data>
+  <data name="Games"><value>Jeux</value></data>
+  <data name="Dice"><value>Dés</value></data>
+  <data name="LiveCasino"><value>Casino en Direct</value></data>
+  <data name="Promotions"><value>Promotions</value></data>
+  <data name="Promos"><value>Promos</value></data>
+  <data name="NapoleonHub"><value>Hub Napoléon</value></data>
+  <data name="Login"><value>Connexion</value></data>
+  <data name="Register"><value>S'inscrire</value></data>
+  <data name="Logout"><value>Déconnexion</value></data>
+  <data name="Profile"><value>Profil</value></data>
+
   <!-- Common Actions -->
-  <data name="Search" xml:space="preserve">
-    <value>Rechercher</value>
-  </data>
-  <data name="Filter" xml:space="preserve">
-    <value>Filtrer</value>
-  </data>
-  <data name="Sort" xml:space="preserve">
-    <value>Trier</value>
-  </data>
-  <data name="PlayNow" xml:space="preserve">
-    <value>Jouer Maintenant</value>
-  </data>
-  <data name="Submit" xml:space="preserve">
-    <value>Soumettre</value>
-  </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Annuler</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Enregistrer</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Supprimer</value>
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Modifier</value>
-  </data>
-  <data name="Back" xml:space="preserve">
-    <value>Retour</value>
-  </data>
-  <data name="LoadMore" xml:space="preserve">
-    <value>Charger Plus</value>
-  </data>
-  
+  <data name="Search"><value>Rechercher</value></data>
+  <data name="Filter"><value>Filtrer</value></data>
+  <data name="Sort"><value>Trier</value></data>
+  <data name="PlayNow"><value>Jouer Maintenant</value></data>
+  <data name="Submit"><value>Soumettre</value></data>
+  <data name="Cancel"><value>Annuler</value></data>
+  <data name="Save"><value>Enregistrer</value></data>
+  <data name="Delete"><value>Supprimer</value></data>
+  <data name="Edit"><value>Modifier</value></data>
+  <data name="Back"><value>Retour</value></data>
+  <data name="LoadMore"><value>Charger Plus</value></data>
+
   <!-- Game Related -->
-  <data name="Popular" xml:space="preserve">
-    <value>Populaire</value>
-  </data>
-  <data name="New" xml:space="preserve">
-    <value>Nouveau</value>
-  </data>
-  <data name="Category" xml:space="preserve">
-    <value>Catégorie</value>
-  </data>
-  <data name="Provider" xml:space="preserve">
-    <value>Fournisseur</value>
-  </data>
-  <data name="RTP" xml:space="preserve">
-    <value>RTP</value>
-  </data>
-  <data name="MinBet" xml:space="preserve">
-    <value>Mise Min.</value>
-  </data>
-  <data name="MaxBet" xml:space="preserve">
-    <value>Mise Max.</value>
-  </data>
-  <data name="PlayCount" xml:space="preserve">
-    <value>Fois Joué</value>
-  </data>
-  <data name="Reviews" xml:space="preserve">
-    <value>Avis</value>
-  </data>
-  <data name="Rating" xml:space="preserve">
-    <value>Évaluation</value>
-  </data>
-  <data name="Details" xml:space="preserve">
-    <value>Détails</value>
-  </data>
-  
+  <data name="Popular"><value>Populaire</value></data>
+  <data name="New"><value>Nouveau</value></data>
+  <data name="Category"><value>Catégorie</value></data>
+  <data name="Provider"><value>Fournisseur</value></data>
+  <data name="RTP"><value>RTP</value></data>
+  <data name="MinBet"><value>Mise Min.</value></data>
+  <data name="MaxBet"><value>Mise Max.</value></data>
+  <data name="PlayCount"><value>Fois Joué</value></data>
+  <data name="Reviews"><value>Avis</value></data>
+  <data name="Rating"><value>Évaluation</value></data>
+  <data name="Details"><value>Détails</value></data>
+  <data name="Slots"><value>Machines à Sous</value></data>
+  <data name="Roulette"><value>Roulette</value></data>
+  <data name="Blackjack"><value>Blackjack</value></data>
+  <data name="PopularGames"><value>Jeux Populaires</value></data>
+
   <!-- User Account -->
-  <data name="MyProfile" xml:space="preserve">
-    <value>Mon Profil</value>
-  </data>
-  <data name="MyBalance" xml:space="preserve">
-    <value>Mon Solde</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>Email</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Mot de passe</value>
-  </data>
-  <data name="ConfirmPassword" xml:space="preserve">
-    <value>Confirmer le mot de passe</value>
-  </data>
-  <data name="FirstName" xml:space="preserve">
-    <value>Prénom</value>
-  </data>
-  <data name="LastName" xml:space="preserve">
-    <value>Nom de famille</value>
-  </data>
-  <data name="DateOfBirth" xml:space="preserve">
-    <value>Date de naissance</value>
-  </data>
-  <data name="RememberMe" xml:space="preserve">
-    <value>Se souvenir de moi</value>
-  </data>
-  
+  <data name="MyProfile"><value>Mon Profil</value></data>
+  <data name="MyBalance"><value>Mon Solde</value></data>
+  <data name="Email"><value>Email</value></data>
+  <data name="Password"><value>Mot de passe</value></data>
+  <data name="ConfirmPassword"><value>Confirmer le mot de passe</value></data>
+  <data name="FirstName"><value>Prénom</value></data>
+  <data name="LastName"><value>Nom de famille</value></data>
+  <data name="DateOfBirth"><value>Date de naissance</value></data>
+  <data name="RememberMe"><value>Se souvenir de moi</value></data>
+
   <!-- Messages -->
-  <data name="Welcome" xml:space="preserve">
-    <value>Bienvenue chez SafeCasino</value>
-  </data>
-  <data name="WelcomeBack" xml:space="preserve">
-    <value>Bon retour</value>
-  </data>
-  <data name="LoginRequired" xml:space="preserve">
-    <value>Vous devez vous connecter pour jouer</value>
-  </data>
-  <data name="RegistrationSuccess" xml:space="preserve">
-    <value>Inscription réussie! Bienvenue chez SafeCasino!</value>
-  </data>
-  <data name="LoginSuccess" xml:space="preserve">
-    <value>Connexion réussie</value>
-  </data>
-  <data name="LogoutSuccess" xml:space="preserve">
-    <value>Vous avez été déconnecté</value>
-  </data>
-  <data name="InvalidLoginAttempt" xml:space="preserve">
-    <value>Tentative de connexion invalide</value>
-  </data>
-  <data name="AccountLockedOut" xml:space="preserve">
-    <value>Le compte est temporairement verrouillé</value>
-  </data>
-  
-  <!-- Validation Messages -->
-  <data name="Required" xml:space="preserve">
-    <value>{0} est requis</value>
-  </data>
-  <data name="EmailRequired" xml:space="preserve">
-    <value>L'adresse email est requise</value>
-  </data>
-  <data name="EmailInvalid" xml:space="preserve">
-    <value>Adresse email invalide</value>
-  </data>
-  <data name="PasswordRequired" xml:space="preserve">
-    <value>Le mot de passe est requis</value>
-  </data>
-  <data name="PasswordsDoNotMatch" xml:space="preserve">
-    <value>Les mots de passe ne correspondent pas</value>
-  </data>
-  <data name="MinimumAge" xml:space="preserve">
-    <value>Vous devez avoir au moins 18 ans</value>
-  </data>
-  <data name="StringLength" xml:space="preserve">
-    <value>{0} doit contenir entre {2} et {1} caractères</value>
-  </data>
-  
+  <data name="Welcome"><value>Bienvenue chez SafeCasino</value></data>
+  <data name="WelcomeBack"><value>Bon retour</value></data>
+  <data name="LoginRequired"><value>Vous devez vous connecter pour jouer</value></data>
+  <data name="RegistrationSuccess"><value>Inscription réussie! Bienvenue chez SafeCasino!</value></data>
+  <data name="LoginSuccess"><value>Connexion réussie</value></data>
+  <data name="LogoutSuccess"><value>Vous avez été déconnecté</value></data>
+  <data name="InvalidLoginAttempt"><value>Tentative de connexion invalide</value></data>
+  <data name="AccountLockedOut"><value>Le compte est temporairement verrouillé</value></data>
+
+  <!-- Validation -->
+  <data name="Required"><value>{0} est requis</value></data>
+  <data name="EmailRequired"><value>L'adresse email est requise</value></data>
+  <data name="EmailInvalid"><value>Adresse email invalide</value></data>
+  <data name="PasswordRequired"><value>Le mot de passe est requis</value></data>
+  <data name="PasswordsDoNotMatch"><value>Les mots de passe ne correspondent pas</value></data>
+  <data name="MinimumAge"><value>Vous devez avoir au moins 18 ans</value></data>
+  <data name="StringLength"><value>{0} doit contenir entre {2} et {1} caractères</value></data>
+
   <!-- Footer -->
-  <data name="ResponsibleGaming" xml:space="preserve">
-    <value>Jeu Responsable</value>
-  </data>
-  <data name="Privacy" xml:space="preserve">
-    <value>Confidentialité</value>
-  </data>
-  <data name="Terms" xml:space="preserve">
-    <value>Conditions</value>
-  </data>
-  <data name="Contact" xml:space="preserve">
-    <value>Contact</value>
-  </data>
-  <data name="About" xml:space="preserve">
-    <value>À Propos</value>
-  </data>
-  <data name="Copyright" xml:space="preserve">
-    <value>© 2025 SafeCasino. Tous droits réservés.</value>
-  </data>
+  <data name="ResponsibleGaming"><value>Jeu Responsable</value></data>
+  <data name="Privacy"><value>Confidentialité</value></data>
+  <data name="Terms"><value>Conditions</value></data>
+  <data name="Contact"><value>Contact</value></data>
+  <data name="About"><value>À Propos</value></data>
+  <data name="Copyright"><value>© 2025 SafeCasino. Tous droits réservés.</value></data>
+  <data name="FooterDescription"><value>Votre casino en ligne de confiance avec les meilleurs jeux et les normes de sécurité les plus élevées. Jouez de manière responsable.</value></data>
+  <data name="CasinoGames"><value>Jeux de Casino</value></data>
+  <data name="Information"><value>Information</value></data>
+  <data name="AboutUs"><value>À Propos de Nous</value></data>
+  <data name="PrivacyPolicy"><value>Politique de Confidentialité</value></data>
+  <data name="TermsConditions"><value>Conditions Générales</value></data>
+  <data name="SupportSecurity"><value>Support &amp; Sécurité</value></data>
+  <data name="CustomerService"><value>Service Client</value></data>
+  <data name="PlayResponsibly"><value>Jouez Responsable</value></data>
+  <data name="Secured"><value>Sécurisé</value></data>
+  <data name="PaymentMethods"><value>Méthodes de Paiement</value></data>
+  <data name="AllRightsReserved"><value>Tous droits réservés.</value></data>
+  <data name="SecuredSSL"><value>Sécurisé avec SSL</value></data>
+  <data name="LicensedCasino"><value>Casino Licencié</value></data>
+  <data name="Disclaimer"><value>Les jeux d'argent peuvent créer une dépendance. Jouez de manière responsable. SafeCasino est licencié et réglementé. Réservé aux joueurs de 18 ans et plus.</value></data>
 </root>
