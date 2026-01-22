@@ -5,6 +5,23 @@
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
@@ -14,6 +31,15 @@
               <xsd:attribute name="name" type="xsd:string" use="required" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -28,126 +54,282 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Resources.Extensions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Resources.Extensions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51</value>
   </resheader>
 
   <!-- Navigation -->
-  <data name="Home"><value>Home</value></data>
-  <data name="Casino"><value>Casino</value></data>
-  <data name="Games"><value>Spellen</value></data>
-  <data name="Dice"><value>Dobbelstenen</value></data>
-  <data name="LiveCasino"><value>Live Casino</value></data>
-  <data name="Promotions"><value>Promoties</value></data>
-  <data name="Promos"><value>Acties</value></data>
-  <data name="NapoleonHub"><value>Napoleon Hub</value></data>
-  <data name="Login"><value>Inloggen</value></data>
-  <data name="Register"><value>Registreren</value></data>
-  <data name="Logout"><value>Uitloggen</value></data>
-  <data name="Profile"><value>Profiel</value></data>
+  <data name="Home" xml:space="preserve"><value>Home</value></data>
+  <data name="Casino" xml:space="preserve"><value>Casino</value></data>
+  <data name="Games" xml:space="preserve"><value>Spellen</value></data>
+  <data name="Dice" xml:space="preserve"><value>Dobbelstenen</value></data>
+  <data name="LiveCasino" xml:space="preserve"><value>Live Casino</value></data>
+  <data name="Promotions" xml:space="preserve"><value>Promoties</value></data>
+  <data name="Promos" xml:space="preserve"><value>Acties</value></data>
+  <data name="NapoleonHub" xml:space="preserve"><value>Napoleon Hub</value></data>
+  <data name="Login" xml:space="preserve"><value>Inloggen</value></data>
+  <data name="Register" xml:space="preserve"><value>Registreren</value></data>
+  <data name="Logout" xml:space="preserve"><value>Uitloggen</value></data>
+  <data name="Profile" xml:space="preserve"><value>Profiel</value></data>
 
   <!-- Common Actions -->
-  <data name="Search"><value>Zoeken</value></data>
-  <data name="Filter"><value>Filteren</value></data>
-  <data name="Sort"><value>Sorteren</value></data>
-  <data name="PlayNow"><value>Speel Nu</value></data>
-  <data name="Submit"><value>Verzenden</value></data>
-  <data name="Cancel"><value>Annuleren</value></data>
-  <data name="Save"><value>Opslaan</value></data>
-  <data name="Delete"><value>Verwijderen</value></data>
-  <data name="Edit"><value>Bewerken</value></data>
-  <data name="Back"><value>Terug</value></data>
-  <data name="LoadMore"><value>Meer Laden</value></data>
+  <data name="Search" xml:space="preserve"><value>Zoeken</value></data>
+  <data name="Filter" xml:space="preserve"><value>Filteren</value></data>
+  <data name="Sort" xml:space="preserve"><value>Sorteren</value></data>
+  <data name="PlayNow" xml:space="preserve"><value>Speel Nu</value></data>
+  <data name="Submit" xml:space="preserve"><value>Verzenden</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Annuleren</value></data>
+  <data name="Save" xml:space="preserve"><value>Opslaan</value></data>
+  <data name="Delete" xml:space="preserve"><value>Verwijderen</value></data>
+  <data name="Edit" xml:space="preserve"><value>Bewerken</value></data>
+  <data name="Back" xml:space="preserve"><value>Terug</value></data>
+  <data name="LoadMore" xml:space="preserve"><value>Meer Laden</value></data>
+  <data name="ViewAll" xml:space="preserve"><value>Bekijk Alles</value></data>
+  <data name="MoreInfo" xml:space="preserve"><value>Meer Info</value></data>
 
   <!-- Game Related -->
-  <data name="Popular"><value>Populair</value></data>
-  <data name="New"><value>Nieuw</value></data>
-  <data name="Category"><value>Categorie</value></data>
-  <data name="Provider"><value>Provider</value></data>
-  <data name="RTP"><value>RTP</value></data>
-  <data name="MinBet"><value>Min. Inzet</value></data>
-  <data name="MaxBet"><value>Max. Inzet</value></data>
-  <data name="PlayCount"><value>Keer Gespeeld</value></data>
-  <data name="Reviews"><value>Reviews</value></data>
-  <data name="Rating"><value>Beoordeling</value></data>
-  <data name="Details"><value>Details</value></data>
-  <data name="Slots"><value>Slots</value></data>
-  <data name="Roulette"><value>Roulette</value></data>
-  <data name="Blackjack"><value>Blackjack</value></data>
-  <data name="PopularGames"><value>Populaire Spellen</value></data>
+  <data name="Popular" xml:space="preserve"><value>Populair</value></data>
+  <data name="New" xml:space="preserve"><value>Nieuw</value></data>
+  <data name="Category" xml:space="preserve"><value>Categorie</value></data>
+  <data name="Provider" xml:space="preserve"><value>Provider</value></data>
+  <data name="Providers" xml:space="preserve"><value>Providers</value></data>
+  <data name="RTP" xml:space="preserve"><value>RTP</value></data>
+  <data name="MinBet" xml:space="preserve"><value>Min. Inzet</value></data>
+  <data name="MaxBet" xml:space="preserve"><value>Max. Inzet</value></data>
+  <data name="PlayCount" xml:space="preserve"><value>Keer Gespeeld</value></data>
+  <data name="Reviews" xml:space="preserve"><value>Reviews</value></data>
+  <data name="Rating" xml:space="preserve"><value>Beoordeling</value></data>
+  <data name="Details" xml:space="preserve"><value>Details</value></data>
+  <data name="Slots" xml:space="preserve"><value>Slots</value></data>
+  <data name="Roulette" xml:space="preserve"><value>Roulette</value></data>
+  <data name="Blackjack" xml:space="preserve"><value>Blackjack</value></data>
+  <data name="PopularGames" xml:space="preserve"><value>Populaire Spellen</value></data>
+  <data name="Exclusive" xml:space="preserve"><value>Exclusief</value></data>
+  <data name="Exclusives" xml:space="preserve"><value>Exclusief</value></data>
 
   <!-- User Account -->
-  <data name="MyProfile"><value>Mijn Profiel</value></data>
-  <data name="MyBalance"><value>Mijn Saldo</value></data>
-  <data name="Email"><value>E-mail</value></data>
-  <data name="Password"><value>Wachtwoord</value></data>
-  <data name="ConfirmPassword"><value>Bevestig Wachtwoord</value></data>
-  <data name="FirstName"><value>Voornaam</value></data>
-  <data name="LastName"><value>Achternaam</value></data>
-  <data name="DateOfBirth"><value>Geboortedatum</value></data>
-  <data name="RememberMe"><value>Onthoud mij</value></data>
+  <data name="MyProfile" xml:space="preserve"><value>Mijn Profiel</value></data>
+  <data name="MyBalance" xml:space="preserve"><value>Mijn Saldo</value></data>
+  <data name="Email" xml:space="preserve"><value>E-mail</value></data>
+  <data name="Password" xml:space="preserve"><value>Wachtwoord</value></data>
+  <data name="ConfirmPassword" xml:space="preserve"><value>Bevestig Wachtwoord</value></data>
+  <data name="FirstName" xml:space="preserve"><value>Voornaam</value></data>
+  <data name="LastName" xml:space="preserve"><value>Achternaam</value></data>
+  <data name="DateOfBirth" xml:space="preserve"><value>Geboortedatum</value></data>
+  <data name="RememberMe" xml:space="preserve"><value>Onthoud mij</value></data>
+  <data name="NoAccount" xml:space="preserve"><value>Nog geen account?</value></data>
 
   <!-- Messages -->
-  <data name="Welcome"><value>Welkom bij SafeCasino</value></data>
-  <data name="WelcomeBack"><value>Welkom terug</value></data>
-  <data name="LoginRequired"><value>Je moet inloggen om te spelen</value></data>
-  <data name="RegistrationSuccess"><value>Registratie succesvol! Welkom bij SafeCasino!</value></data>
-  <data name="LoginSuccess"><value>Succesvol ingelogd</value></data>
-  <data name="LogoutSuccess"><value>Je bent uitgelogd</value></data>
-  <data name="InvalidLoginAttempt"><value>Ongeldige inlogpoging</value></data>
-  <data name="AccountLockedOut"><value>Account is tijdelijk vergrendeld</value></data>
+  <data name="Welcome" xml:space="preserve"><value>Welkom bij SafeCasino</value></data>
+  <data name="WelcomeBack" xml:space="preserve"><value>Welkom terug</value></data>
+  <data name="LoginRequired" xml:space="preserve"><value>Je moet inloggen om te spelen</value></data>
+  <data name="RegistrationSuccess" xml:space="preserve"><value>Registratie succesvol! Welkom bij SafeCasino!</value></data>
+  <data name="LoginSuccess" xml:space="preserve"><value>Succesvol ingelogd</value></data>
+  <data name="LogoutSuccess" xml:space="preserve"><value>Je bent uitgelogd</value></data>
+  <data name="InvalidLoginAttempt" xml:space="preserve"><value>Ongeldige inlogpoging</value></data>
+  <data name="AccountLockedOut" xml:space="preserve"><value>Account is tijdelijk vergrendeld</value></data>
 
   <!-- Validation -->
-  <data name="Required"><value>{0} is verplicht</value></data>
-  <data name="EmailRequired"><value>E-mailadres is verplicht</value></data>
-  <data name="EmailInvalid"><value>Ongeldig e-mailadres</value></data>
-  <data name="PasswordRequired"><value>Wachtwoord is verplicht</value></data>
-  <data name="PasswordsDoNotMatch"><value>Wachtwoorden komen niet overeen</value></data>
-  <data name="MinimumAge"><value>Je moet minimaal 18 jaar oud zijn</value></data>
-  <data name="StringLength"><value>{0} moet tussen {2} en {1} tekens lang zijn</value></data>
+  <data name="Required" xml:space="preserve"><value>{0} is verplicht</value></data>
+  <data name="EmailRequired" xml:space="preserve"><value>E-mailadres is verplicht</value></data>
+  <data name="EmailInvalid" xml:space="preserve"><value>Ongeldig e-mailadres</value></data>
+  <data name="PasswordRequired" xml:space="preserve"><value>Wachtwoord is verplicht</value></data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve"><value>Wachtwoorden komen niet overeen</value></data>
+  <data name="MinimumAge" xml:space="preserve"><value>Je moet minimaal 18 jaar oud zijn</value></data>
+  <data name="StringLength" xml:space="preserve"><value>{0} moet tussen {2} en {1} tekens lang zijn</value></data>
+
+  <!-- Home Page -->
+  <data name="SafeCasino" xml:space="preserve"><value>SafeCasino</value></data>
+  <data name="SafeCasinoTitle" xml:space="preserve"><value>Welkom bij SafeCasino - Jouw Vertrouwde Online Casino</value></data>
+  <data name="SafeCasinoSubtitle" xml:space="preserve"><value>Ontdek duizenden spannende casinospellen, live dealers en dagelijkse toernooien met fantastische prijzen!</value></data>
+  <data name="DailyBoost" xml:space="preserve"><value>Dagelijkse Boost</value></data>
+  <data name="UpTo" xml:space="preserve"><value>Tot</value></data>
+  <data name="PlayAndWin10Times" xml:space="preserve"><value>Speel en win 10x je inzet</value></data>
+  <data name="Receive25PercentCashback" xml:space="preserve"><value>Ontvang 25% cashback</value></data>
+  <data name="AnimalTournament" xml:space="preserve"><value>Dieren Toernooi</value></data>
+  <data name="Daily" xml:space="preserve"><value>Dagelijks</value></data>
+  <data name="GetYourShareOf" xml:space="preserve"><value>Maak kans op</value></data>
+  <data name="DailyPrizePool" xml:space="preserve"><value>Dagelijkse Prijzenpot</value></data>
+  <data name="LiveCrashGame" xml:space="preserve"><value>Live Crash Game</value></data>
+  <data name="YourWinsAre" xml:space="preserve"><value>Je winsten zijn</value></data>
+  <data name="ReadyFor" xml:space="preserve"><value>Klaar voor</value></data>
+  <data name="Takeoff" xml:space="preserve"><value>Opstijgen</value></data>
+  <data name="Tournament" xml:space="preserve"><value>Toernooi</value></data>
+  <data name="DailySpin" xml:space="preserve"><value>Dagelijkse Draai</value></data>
+  <data name="CoinShop" xml:space="preserve"><value>Muntenwinkel</value></data>
+  <data name="OnlyAtSafeCasino" xml:space="preserve"><value>Alleen bij SafeCasino</value></data>
+  <data name="JoinExcitingTournaments" xml:space="preserve"><value>Doe mee aan spannende toernooien en win fantastische prijzen!</value></data>
+  <data name="DailyPrizePotsUp" xml:space="preserve"><value>Dagelijkse prijzenpotten tot €30.000!</value></data>
+  <data name="WhySafeCasino" xml:space="preserve"><value>Waarom SafeCasino?</value></data>
+  <data name="CompletelySecure" xml:space="preserve"><value>100% Veilig</value></data>
+  <data name="SSLEncryptionSecurePayments" xml:space="preserve"><value>SSL-versleuteling en veilige betalingen</value></data>
+  <data name="TopGames" xml:space="preserve"><value>Top Spellen</value></data>
+  <data name="ExclusiveGamesTopProviders" xml:space="preserve"><value>Exclusieve spellen van topspellen</value></data>
+  <data name="Support24" xml:space="preserve"><value>24/7 Support</value></data>
+  <data name="AlwaysAvailableForQuestions" xml:space="preserve"><value>Altijd beschikbaar voor je vragen</value></data>
+  <data name="BestRTP" xml:space="preserve"><value>Beste RTP</value></data>
+  <data name="HighestPayoutPercentages" xml:space="preserve"><value>Hoogste uitbetalingspercentages</value></data>
+  <data name="SSLSecured" xml:space="preserve"><value>SSL Beveiligd</value></data>
+  <data name="PlayersCount" xml:space="preserve"><value>10.000+ Spelers</value></data>
+  <data name="GamesCount" xml:space="preserve"><value>9.000+ Spellen</value></data>
+
+  <!-- Tournament Info Page -->
+  <data name="JoinDailyTournament" xml:space="preserve"><value>Doe mee aan ons dagelijkse toernooi en win €30.000!</value></data>
+  <data name="EveryDayAgain" xml:space="preserve"><value>Elke dag opnieuw!</value></data>
+  <data name="FirstPlace" xml:space="preserve"><value>1e Plaats</value></data>
+  <data name="SecondPlace" xml:space="preserve"><value>2e Plaats</value></data>
+  <data name="ThirdPlace" xml:space="preserve"><value>3e Plaats</value></data>
+  <data name="FourthToTenth" xml:space="preserve"><value>4e - 10e Plaats</value></data>
+  <data name="EleventhToHundredth" xml:space="preserve"><value>11e - 100e Plaats</value></data>
+  <data name="HowItWorks" xml:space="preserve"><value>Hoe werkt het?</value></data>
+  <data name="PlayParticipatingGames" xml:space="preserve"><value>Speel Deelnemende Spellen</value></data>
+  <data name="PlayParticipatingGamesDescription" xml:space="preserve"><value>Speel een van de deelnemende spellen met echte inzetten</value></data>
+  <data name="CollectPoints" xml:space="preserve"><value>Verzamel Punten</value></data>
+  <data name="CollectPointsDescription" xml:space="preserve"><value>Elke €1 inzet = 1 toernooipunt</value></data>
+  <data name="CheckPosition" xml:space="preserve"><value>Controleer je Positie</value></data>
+  <data name="CheckPositionDescription" xml:space="preserve"><value>Bekijk live je positie op het klassement</value></data>
+  <data name="WinPrizes" xml:space="preserve"><value>Win Prijzen</value></data>
+  <data name="WinPrizesDescription" xml:space="preserve"><value>Top 100 spelers winnen gegarandeerd een prijs!</value></data>
+  <data name="ParticipatingGames" xml:space="preserve"><value>Deelnemende Spellen</value></data>
+  <data name="PlayPopularAnimalsGames" xml:space="preserve"><value>Speel de populairste dierenspellen en verzamel punten!</value></data>
+  <data name="ViewAllParticipatingGames" xml:space="preserve"><value>Bekijk Alle Deelnemende Spellen</value></data>
+  <data name="TournamentDailyHours" xml:space="preserve"><value>Toernooi loopt dagelijks van 00:00 tot 23:59 uur</value></data>
+  <data name="MinimumBetPerSpin" xml:space="preserve"><value>Minimale inzet €0,20 per spin</value></data>
+  <data name="PointsPerEuro" xml:space="preserve"><value>1 punt per €1 inzet</value></data>
+  <data name="OnlyParticipatingGamesCount" xml:space="preserve"><value>Alleen inzetten op deelnemende spellen tellen mee</value></data>
+  <data name="PrizesAwardedWithin24Hours" xml:space="preserve"><value>Prijzen worden binnen 24 uur na het toernooi uitgekeerd</value></data>
+  <data name="NoRegistrationRequired" xml:space="preserve"><value>Geen registratie vereist, speel automatisch mee</value></data>
+  <data name="Top100PlayersWinPrizes" xml:space="preserve"><value>Top 100 spelers winnen een prijs</value></data>
+  <data name="SafeCasinoTermsApply" xml:space="preserve"><value>Algemene voorwaarden van SafeCasino zijn van toepassing</value></data>
+  <data name="SafeCasinoReservesRight" xml:space="preserve"><value>SafeCasino behoudt zich het recht voor het toernooi te wijzigen of stop te zetten</value></data>
+  <data name="ReadyToWin" xml:space="preserve"><value>Klaar om te Winnen?</value></data>
+  <data name="StartPlayingTodayWin" xml:space="preserve"><value>Begin vandaag nog met spelen en maak kans op €30.000!</value></data>
+  <data name="RegisterNow" xml:space="preserve"><value>Registreer Nu</value></data>
+  <data name="NeedMoreInfo" xml:space="preserve"><value>Meer informatie nodig?</value></data>
+  <data name="ContactCustomerServiceTournament" xml:space="preserve"><value>Neem contact op met onze klantenservice voor meer details over het toernooi.</value></data>
+
+  <!-- About Page -->
+  <data name="TrustedOnlineCasino" xml:space="preserve"><value>Jouw vertrouwde online casino sinds 2020</value></data>
+  <data name="OurMission" xml:space="preserve"><value>Onze Missie</value></data>
+  <data name="MissionStatement" xml:space="preserve"><value>SafeCasino streeft ernaar de beste en veiligste online casino-ervaring te bieden</value></data>
+  <data name="MissionDescription" xml:space="preserve"><value>Wij geloven dat gokken leuk, veilig en eerlijk moet zijn. Daarom werken we alleen met de beste providers, gebruiken we de nieuwste beveiligingstechnologie en bieden we transparante voorwaarden.</value></data>
+  <data name="MissionStats" xml:space="preserve"><value>Met meer dan 10.000 tevreden spelers en 9.000+ spellen zijn we trots op wat we hebben opgebouwd.</value></data>
+  <data name="OfficiallyLicensedRegulated" xml:space="preserve"><value>Officieel gelicentieerd en gereguleerd</value></data>
+  <data name="TeamAlwaysReady" xml:space="preserve"><value>Ons team staat altijd voor je klaar</value></data>
+  <data name="OurValues" xml:space="preserve"><value>Onze Waarden</value></data>
+  <data name="Fairness" xml:space="preserve"><value>Eerlijkheid</value></data>
+  <data name="FairnessDescription" xml:space="preserve"><value>Alle spellen worden onafhankelijk getest en gecertificeerd voor eerlijkheid</value></data>
+  <data name="Safety" xml:space="preserve"><value>Veiligheid</value></data>
+  <data name="SafetyDescription" xml:space="preserve"><value>Je gegevens en geld zijn 100% veilig bij ons</value></data>
+  <data name="Responsibility" xml:space="preserve"><value>Verantwoordelijkheid</value></data>
+  <data name="ResponsibilityDescription" xml:space="preserve"><value>We nemen verantwoord gokken serieus en bieden hulp waar nodig</value></data>
+  <data name="ActivePlayers" xml:space="preserve"><value>Actieve Spelers</value></data>
+  <data name="JoinSafeCasinoFamily" xml:space="preserve"><value>Word Lid van de SafeCasino Familie</value></data>
+  <data name="JoinThousandsHappyPlayers" xml:space="preserve"><value>Sluit je aan bij duizenden tevreden spelers die elke dag genieten van onze spellen!</value></data>
+  <data name="ViewGames" xml:space="preserve"><value>Bekijk Spellen</value></data>
+
+  <!-- Privacy Page -->
+  <data name="PrivacyImportant" xml:space="preserve"><value>Jouw privacy is belangrijk voor ons</value></data>
+  <data name="LastUpdated" xml:space="preserve"><value>Laatst bijgewerkt</value></data>
+  <data name="DecemberMonthName" xml:space="preserve"><value>december</value></data>
+  <data name="PrivacyIntroduction" xml:space="preserve"><value>SafeCasino respecteert jouw privacy en beschermt je persoonlijke gegevens. Dit privacybeleid legt uit welke informatie we verzamelen, hoe we deze gebruiken en wat jouw rechten zijn.</value></data>
+  <data name="PrivacyAgree" xml:space="preserve"><value>Door gebruik te maken van onze diensten, ga je akkoord met dit privacybeleid.</value></data>
+  <data name="WhatInfoCollect" xml:space="preserve"><value>Welke Informatie Verzamelen We?</value></data>
+  <data name="PersonalInfo" xml:space="preserve"><value>Persoonlijke Informatie</value></data>
+  <data name="PersonalInfoDescription" xml:space="preserve"><value>We verzamelen de volgende persoonlijke informatie:</value></data>
+  <data name="NameContactDetails" xml:space="preserve"><value>Naam en contactgegevens (e-mail, telefoonnummer)</value></data>
+  <data name="BirthdateIDVerification" xml:space="preserve"><value>Geboortedatum en ID-verificatie</value></data>
+  <data name="PaymentInfo" xml:space="preserve"><value>Betalingsinformatie</value></data>
+  <data name="CustomerServiceComm" xml:space="preserve"><value>Communicatie met klantenservice</value></data>
+  <data name="AutomaticInfo" xml:space="preserve"><value>Automatisch Verzamelde Informatie</value></data>
+  <data name="AutomaticInfoDescription" xml:space="preserve"><value>We verzamelen automatisch:</value></data>
+  <data name="IPAddressDevice" xml:space="preserve"><value>IP-adres en apparaatinformatie</value></data>
+  <data name="BrowserType" xml:space="preserve"><value>Browsertype en versie</value></data>
+  <data name="PagesVisited" xml:space="preserve"><value>Bezochte pagina's en klikgedrag</value></data>
+  <data name="CookiesTech" xml:space="preserve"><value>Cookies en vergelijkbare technologieën</value></data>
+  <data name="GamingBehavior" xml:space="preserve"><value>Spelgedrag</value></data>
+  <data name="GamingBehaviorMonitor" xml:space="preserve"><value>We monitoren je spelgedrag om verantwoord gokken te bevorderen:</value></data>
+  <data name="PlayHistory" xml:space="preserve"><value>Speelgeschiedenis</value></data>
+  <data name="DepositsWithdrawals" xml:space="preserve"><value>Stortingen en opnames</value></data>
+  <data name="BetsWinnings" xml:space="preserve"><value>Inzetten en winsten</value></data>
+  <data name="SessionDuration" xml:space="preserve"><value>Sessieduur en frequentie</value></data>
+  <data name="HowWeUseInfo" xml:space="preserve"><value>Hoe Gebruiken We Je Informatie?</value></data>
+  <data name="DataUsedFor" xml:space="preserve"><value>Je gegevens worden gebruikt voor:</value></data>
+  <data name="AccountManagement" xml:space="preserve"><value>Accountbeheer</value></data>
+  <data name="AccountVerification" xml:space="preserve"><value>Account aanmaken en verifiëren</value></data>
+  <data name="ServiceDelivery" xml:space="preserve"><value>Dienstverlening</value></data>
+  <data name="ProvidingCasinoService" xml:space="preserve"><value>Leveren van casinodiensten</value></data>
+  <data name="Security" xml:space="preserve"><value>Beveiliging</value></data>
+  <data name="DetectingFraud" xml:space="preserve"><value>Detecteren van fraude en misbruik</value></data>
+  <data name="MonitoringGamingBehavior" xml:space="preserve"><value>Monitoren van spelgedrag voor verantwoord gokken</value></data>
+  <data name="Improvement" xml:space="preserve"><value>Verbetering</value></data>
+  <data name="AnalyzingImprovingServices" xml:space="preserve"><value>Analyseren en verbeteren van onze diensten</value></data>
+  <data name="Communication" xml:space="preserve"><value>Communicatie</value></data>
+  <data name="SendingUpdatesPromo" xml:space="preserve"><value>Verzenden van updates en promoties</value></data>
+  <data name="DoWeShareInfo" xml:space="preserve"><value>Delen We Je Informatie?</value></data>
+  <data name="NoShareMarketing" xml:space="preserve"><value>We verkopen je gegevens NOOIT aan derden voor marketingdoeleinden.</value></data>
+  <data name="ShareInfoWith" xml:space="preserve"><value>We delen je informatie alleen met:</value></data>
+  <data name="PaymentProviders" xml:space="preserve"><value>Betalingsproviders</value></data>
+  <data name="ProcessingDeposits" xml:space="preserve"><value>Voor het verwerken van stortingen en opnames</value></data>
+  <data name="GameProviders" xml:space="preserve"><value>Spelproviders</value></data>
+  <data name="DeliveringGames" xml:space="preserve"><value>Voor het leveren van spellen</value></data>
+  <data name="Authorities" xml:space="preserve"><value>Autoriteiten</value></data>
+  <data name="WhenLegallyRequired" xml:space="preserve"><value>Wanneer wettelijk verplicht</value></data>
+  <data name="ServiceProviders" xml:space="preserve"><value>Dienstverleners</value></data>
+  <data name="WorkingOurBehalf" xml:space="preserve"><value>Die namens ons werken</value></data>
+  <data name="YourRights" xml:space="preserve"><value>Jouw Rechten</value></data>
+  <data name="GDPRRights" xml:space="preserve"><value>Onder de AVG heb je de volgende rechten:</value></data>
+  <data name="RightToAccess" xml:space="preserve"><value>Recht op Inzage</value></data>
+  <data name="ViewYourData" xml:space="preserve"><value>Bekijk je gegevens</value></data>
+  <data name="RightToCorrect" xml:space="preserve"><value>Recht op Correctie</value></data>
+  <data name="CorrectIncorrectData" xml:space="preserve"><value>Corrigeer onjuiste gegevens</value></data>
+  <data name="RightToDelete" xml:space="preserve"><value>Recht op Verwijdering</value></data>
+  <data name="RequestDataDeletion" xml:space="preserve"><value>Vraag verwijdering aan</value></data>
+  <data name="RightToData" xml:space="preserve"><value>Recht op Gegevens</value></data>
+  <data name="DataReadableFormat" xml:space="preserve"><value>Gegevens in leesbaar formaat</value></data>
+  <data name="RightToRestrict" xml:space="preserve"><value>Recht op Beperking</value></data>
+  <data name="LimitDataUsage" xml:space="preserve"><value>Beperk gegevensgebruik</value></data>
+  <data name="RightToObjection" xml:space="preserve"><value>Recht op Bezwaar</value></data>
+  <data name="ObjectProcessing" xml:space="preserve"><value>Maak bezwaar tegen verwerking</value></data>
+  <data name="ExerciseRights" xml:space="preserve"><value>Om je rechten uit te oefenen, neem contact op via</value></data>
+  <data name="DataSecurity" xml:space="preserve"><value>Gegevensbeveiliging</value></data>
+  <data name="SecurityMeasures" xml:space="preserve"><value>We nemen uitgebreide beveiligingsmaatregelen om je gegevens te beschermen:</value></data>
+  <data name="Encryption" xml:space="preserve"><value>Versleuteling</value></data>
+  <data name="AllCommunicationEncrypted" xml:space="preserve"><value>Alle communicatie is versleuteld</value></data>
+  <data name="SecureServers" xml:space="preserve"><value>Beveiligde Servers</value></data>
+  <data name="DataStoredSecureServers" xml:space="preserve"><value>Gegevens opgeslagen op beveiligde servers</value></data>
+  <data name="FirewallProtection" xml:space="preserve"><value>Firewall Bescherming</value></data>
+  <data name="AdvancedFirewalls" xml:space="preserve"><value>Geavanceerde firewalls</value></data>
+  <data name="RegularAudits" xml:space="preserve"><value>Regelmatige Audits</value></data>
+  <data name="IndependentSecurityAudits" xml:space="preserve"><value>Onafhankelijke beveiligingsaudits</value></data>
+  <data name="PrivacyQuestions" xml:space="preserve"><value>Vragen over Privacy?</value></data>
+  <data name="FreeToContact" xml:space="preserve"><value>Neem gerust contact met ons op als je vragen hebt over dit privacybeleid.</value></data>
 
   <!-- Responsible Gaming -->
-  <data name="ResponsibleGamingTitle" xml:space="preserve">
-    <value>Verantwoord Spelen - SafeCasino</value>
-  </data>
-
-  <data name="ResponsibleGaming" xml:space="preserve">
-    <value>VERANTWOORD SPELEN</value>
-  </data>
-
-  <data name="ResponsibleGamingSubtitle" xml:space="preserve">
-    <value>Gokken moet leuk blijven. Speel altijd binnen je grenzen.</value>
-  </data>
-
-  <data name="Important" xml:space="preserve">
-    <value>Belangrijk!</value>
-  </data>
-
-  <data name="GamblingCanBeAddictive" xml:space="preserve">
-    <value>Gokken kan verslavend zijn.</value>
-  </data>
+  <data name="ResponsibleGamingTitle" xml:space="preserve"><value>Verantwoord Spelen - SafeCasino</value></data>
+  <data name="ResponsibleGaming" xml:space="preserve"><value>VERANTWOORD SPELEN</value></data>
+  <data name="ResponsibleGamingSubtitle" xml:space="preserve"><value>Gokken moet leuk blijven. Speel altijd binnen je grenzen.</value></data>
+  <data name="Important" xml:space="preserve"><value>Belangrijk!</value></data>
+  <data name="GamblingCanBeAddictive" xml:space="preserve"><value>Gokken kan verslavend zijn.</value></data>
 
   <!-- Footer -->
-  <data name="Privacy"><value>Privacy</value></data>
-  <data name="Terms"><value>Voorwaarden</value></data>
-  <data name="Contact"><value>Contact</value></data>
-  <data name="About"><value>Over Ons</value></data>
-  <data name="Copyright"><value>© 2025 SafeCasino. Alle rechten voorbehouden.</value></data>
-  <data name="FooterDescription"><value>Jouw vertrouwde online casino met de beste spellen en hoogste beveiligingsstandaarden. Speel verantwoord.</value></data>
-  <data name="CasinoGames"><value>Casino Spellen</value></data>
-  <data name="Information"><value>Informatie</value></data>
-  <data name="AboutUs"><value>Over Ons</value></data>
-  <data name="PrivacyPolicy"><value>Privacybeleid</value></data>
-  <data name="TermsConditions"><value>Algemene Voorwaarden</value></data>
-  <data name="SupportSecurity"><value>Ondersteuning &amp; Beveiliging</value></data>
-  <data name="CustomerService"><value>Klantenservice</value></data>
-  <data name="PlayResponsibly"><value>Speel Verantwoord</value></data>
-  <data name="Secured"><value>Beveiligd</value></data>
-  <data name="PaymentMethods"><value>Betaalmethoden</value></data>
-  <data name="AllRightsReserved"><value>Alle rechten voorbehouden.</value></data>
-  <data name="SecuredSSL"><value>Beveiligd met SSL</value></data>
-  <data name="LicensedCasino"><value>Gelicentieerd Casino</value></data>
-  <data name="Disclaimer"><value>Gokken kan verslavend zijn. Speel verantwoord. SafeCasino is gelicentieerd en gereguleerd. Alleen voor spelers van 18+.</value></data>
+  <data name="Privacy" xml:space="preserve"><value>Privacy</value></data>
+  <data name="Contact" xml:space="preserve"><value>Contact</value></data>
+  <data name="About" xml:space="preserve"><value>Over Ons</value></data>
+  <data name="Copyright" xml:space="preserve"><value>© 2025 SafeCasino. Alle rechten voorbehouden.</value></data>
+  <data name="FooterDescription" xml:space="preserve"><value>Jouw vertrouwde online casino met de beste spellen en hoogste beveiligingsstandaarden. Speel verantwoord.</value></data>
+  <data name="CasinoGames" xml:space="preserve"><value>Casino Spellen</value></data>
+  <data name="Information" xml:space="preserve"><value>Informatie</value></data>
+  <data name="TermsConditions" xml:space="preserve"><value>Algemene Voorwaarden</value></data>
+  <data name="SupportSecurity" xml:space="preserve"><value>Ondersteuning &amp; Beveiliging</value></data>
+  <data name="CustomerService" xml:space="preserve"><value>Klantenservice</value></data>
+  <data name="Secured" xml:space="preserve"><value>Beveiligd</value></data>
+  <data name="PaymentMethods" xml:space="preserve"><value>Betaalmethoden</value></data>
+  <data name="AllRightsReserved" xml:space="preserve"><value>Alle rechten voorbehouden.</value></data>
+  <data name="LicensedCasino" xml:space="preserve"><value>Gelicentieerd Casino</value></data>
+  <data name="Disclaimer" xml:space="preserve"><value>Gokken kan verslavend zijn. Speel verantwoord. SafeCasino is gelicentieerd en gereguleerd. Alleen voor spelers van 18+.</value></data>
+  <data name="PlayResponsibly" xml:space="preserve"><value>Speel Verantwoord</value></data>
+  <data name="SecuredSSL" xml:space="preserve"><value>SSL Beveiligd</value></data>
 </root>

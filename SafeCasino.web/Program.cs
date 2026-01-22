@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SafeCasino.Data.Data;
 using SafeCasino.Data.Identity;
 using SafeCasino.Web.Middleware;
+using SafeCasino.Web.Resources;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,10 +14,13 @@ builder.Services.AddControllersWithViews();
 
 // Configure Localization
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
-
-builder.Services.AddMvc()
+builder.Services.AddControllersWithViews()
     .AddViewLocalization()
-    .AddDataAnnotationsLocalization();
+    .AddDataAnnotationsLocalization(options =>
+    {
+        options.DataAnnotationLocalizerProvider = (type, factory) =>
+            factory.Create(typeof(SharedResource));
+    });
 
 // Configure Database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -26,25 +30,21 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Configure Identity - use ApplicationRole (matches ApplicationDbContext)
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 {
-    // Password settings
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
     options.Password.RequireUppercase = true;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredLength = 8;
 
-    // Lockout settings
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
     options.Lockout.MaxFailedAccessAttempts = 5;
     options.Lockout.AllowedForNewUsers = true;
 
-    // User settings
     options.User.RequireUniqueEmail = true;
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 
-// Configure application cookie
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
@@ -54,7 +54,6 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
-// Logging configuration
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
@@ -70,7 +69,6 @@ else
 
 var app = builder.Build();
 
-// Configure Localization Middleware
 var supportedCultures = new[] { "nl", "en", "fr" };
 var localizationOptions = new RequestLocalizationOptions()
     .SetDefaultCulture("nl")
@@ -100,7 +98,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// Seed database
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -110,10 +107,8 @@ using (var scope = app.Services.CreateScope())
         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
         var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
 
-        // Zorg dat database is aangemaakt
         context.Database.EnsureCreated();
 
-        // Seed data
         await DbSeeder.SeedAsync(context, userManager, roleManager);
 
         Console.WriteLine("✅ Database succesvol geseeded!");

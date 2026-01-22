@@ -1,5 +1,4 @@
-﻿@inject IStringLocalizer<SharedResource> SharedLocalizer
-@{
+﻿@{
     ViewData["Title"] = SharedLocalizer["SafeCasino"];
     var popularGames = ViewBag.PopularGames as List<SafeCasino.Data.Entities.CasinoGame>;
     var newGames = ViewBag.NewGames as List<SafeCasino.Data.Entities.CasinoGame>;
