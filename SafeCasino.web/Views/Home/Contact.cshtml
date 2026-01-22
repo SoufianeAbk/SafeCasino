@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Contact - SafeCasino";
+﻿@inject IStringLocalizer<SharedResource> SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer["Contact"];
 }
 
 <!-- Hero Section -->
@@ -8,10 +9,10 @@
         <div class="row align-items-center">
             <div class="col-lg-12 text-center fade-in-up">
                 <h1 class="display-3 fw-bold mb-4">
-                    <i class="fas fa-headset text-info"></i> CONTACT
+                    <i class="fas fa-headset text-info"></i> @SharedLocalizer["Contact"]
                 </h1>
                 <p class="lead mb-5" style="font-size: 1.4rem; max-width: 800px; margin: 0 auto;">
-                    Heb je vragen? Wij staan 24/7 voor je klaar
+                    @SharedLocalizer["ContactHaveQuestions"]
                 </p>
             </div>
         </div>
@@ -29,16 +30,16 @@
                         <div class="mb-4">
                             <i class="fas fa-comments fa-4x text-primary"></i>
                         </div>
-                        <h4 class="text-white mb-3">Live Chat</h4>
+                        <h4 class="text-white mb-3">@SharedLocalizer["LiveChat"]</h4>
                         <p class="text-white-50 mb-4">
-                            Chat direct met onze medewerkers voor snelle hulp bij al je vragen.
+                            @SharedLocalizer["ContactDirectWithStaff"]
                         </p>
                         <div class="mb-3">
-                            <p class="text-gold mb-1"><i class="fas fa-clock"></i> Beschikbaar</p>
-                            <p class="text-white-50 small mb-0">24 uur per dag, 7 dagen per week</p>
+                            <p class="text-gold mb-1"><i class="fas fa-clock"></i> @SharedLocalizer["Available"]</p>
+                            <p class="text-white-50 small mb-0">@SharedLocalizer["24HourAvailable"]</p>
                         </div>
-                        <button class="btn btn-primary btn-lg w-100" onclick="alert('Live chat functionaliteit komt binnenkort!')">
-                            <i class="fas fa-comment-dots"></i> Start Chat
+                        <button class="btn btn-primary btn-lg w-100" onclick="alert('@SharedLocalizer["LiveChatComingSoon"]')">
+                            <i class="fas fa-comment-dots"></i> @SharedLocalizer["StartChat"]
                         </button>
                     </div>
                 </div>
@@ -51,18 +52,18 @@
                         <div class="mb-4">
                             <i class="fas fa-envelope fa-4x text-success"></i>
                         </div>
-                        <h4 class="text-white mb-3">E-mail</h4>
+                        <h4 class="text-white mb-3">@SharedLocalizer["Email"]</h4>
                         <p class="text-white-50 mb-4">
-                            Stuur ons een email en ontvang binnen 24 uur een antwoord.
+                            @SharedLocalizer["SendEmailResponse"]
                         </p>
                         <div class="mb-3">
-                            <p class="text-gold mb-2"><i class="fas fa-at"></i> E-mailadressen</p>
+                            <p class="text-gold mb-2"><i class="fas fa-at"></i> @SharedLocalizer["EmailAddresses"]</p>
                             <p class="text-white small mb-1">
-                                <strong>Algemeen:</strong><br />
+                                <strong>@SharedLocalizer["General"]:</strong><br />
                                 <a href="mailto:info@safecasino.be" class="text-info">info@safecasino.be</a>
                             </p>
                             <p class="text-white small mb-1">
-                                <strong>Support:</strong><br />
+                                <strong>@SharedLocalizer["Support"]:</strong><br />
                                 <a href="mailto:support@safecasino.be" class="text-info">support@safecasino.be</a>
                             </p>
                             <p class="text-white small mb-0">
@@ -71,7 +72,7 @@
                             </p>
                         </div>
                         <a href="mailto:support@safecasino.be" class="btn btn-success btn-lg w-100">
-                            <i class="fas fa-paper-plane"></i> Stuur E-mail
+                            <i class="fas fa-paper-plane"></i> @SharedLocalizer["SendEmail"]
                         </a>
                     </div>
                 </div>
@@ -84,20 +85,20 @@
                         <div class="mb-4">
                             <i class="fas fa-phone fa-4x text-warning"></i>
                         </div>
-                        <h4 class="text-white mb-3">Telefoon</h4>
+                        <h4 class="text-white mb-3">@SharedLocalizer["Phone"]</h4>
                         <p class="text-white-50 mb-4">
-                            Bel ons direct voor persoonlijke assistentie.
+                            @SharedLocalizer["CallDirectSupport"]
                         </p>
                         <div class="mb-3">
-                            <p class="text-gold mb-1"><i class="fas fa-phone-alt"></i> Telefoonnummer</p>
+                            <p class="text-gold mb-1"><i class="fas fa-phone-alt"></i> @SharedLocalizer["PhoneNumber"]</p>
                             <p class="text-white h5 mb-2">
                                 <a href="tel:+3221234567" class="text-white">+32 2 123 45 67</a>
                             </p>
-                            <p class="text-white-50 small mb-1"><i class="fas fa-clock"></i> Ma-Vr: 09:00 - 21:00</p>
-                            <p class="text-white-50 small mb-0">Za-Zo: 10:00 - 18:00</p>
+                            <p class="text-white-50 small mb-1"><i class="fas fa-clock"></i> @SharedLocalizer["MondayFriday"]: 09:00 - 21:00</p>
+                            <p class="text-white-50 small mb-0">@SharedLocalizer["SaturdaySunday"]: 10:00 - 18:00</p>
                         </div>
                         <a href="tel:+3221234567" class="btn btn-warning btn-lg w-100">
-                            <i class="fas fa-phone-alt"></i> Bel Ons
+                            <i class="fas fa-phone-alt"></i> @SharedLocalizer["CallUs"]
                         </a>
                     </div>
                 </div>
@@ -114,7 +115,7 @@
                 <div class="card shadow-lg">
                     <div class="card-header" style="background: linear-gradient(135deg, var(--secondary-purple) 0%, var(--accent-purple) 100%);">
                         <h3 class="mb-0 text-white">
-                            <i class="fas fa-envelope-open-text"></i> Stuur ons een bericht
+                            <i class="fas fa-envelope-open-text"></i> @SharedLocalizer["SendUsMessage"]
                         </h3>
                     </div>
                     <div class="card-body p-4">
@@ -123,43 +124,43 @@
                                 <!-- Naam -->
                                 <div class="col-md-6">
                                     <label class="form-label text-white">
-                                        <i class="fas fa-user"></i> Naam *
+                                        <i class="fas fa-user"></i> @SharedLocalizer["Name"] *
                                     </label>
-                                    <input type="text" class="form-control" placeholder="Je volledige naam" required>
+                                    <input type="text" class="form-control" placeholder="@SharedLocalizer["YourFullName"]" required>
                                 </div>
 
                                 <!-- Email -->
                                 <div class="col-md-6">
                                     <label class="form-label text-white">
-                                        <i class="fas fa-envelope"></i> E-mail *
+                                        <i class="fas fa-envelope"></i> @SharedLocalizer["Email"] *
                                     </label>
-                                    <input type="email" class="form-control" placeholder="je@email.com" required>
+                                    <input type="email" class="form-control" placeholder="you@email.com" required>
                                 </div>
 
                                 <!-- Onderwerp -->
                                 <div class="col-12">
                                     <label class="form-label text-white">
-                                        <i class="fas fa-tag"></i> Onderwerp *
+                                        <i class="fas fa-tag"></i> @SharedLocalizer["Subject"] *
                                     </label>
                                     <select class="form-select" required>
-                                        <option value="">Selecteer een onderwerp</option>
-                                        <option value="account">Account & Registratie</option>
-                                        <option value="deposit">Stortingen & Opnames</option>
-                                        <option value="game">Games & Spelregels</option>
-                                        <option value="bonus">Bonussen & Promoties</option>
-                                        <option value="technical">Technische Problemen</option>
-                                        <option value="complaint">Klacht</option>
-                                        <option value="other">Anders</option>
+                                        <option value="">@SharedLocalizer["SelectTopic"]</option>
+                                        <option value="account">@SharedLocalizer["AccountRegistration"]</option>
+                                        <option value="deposit">@SharedLocalizer["DepositsWithdrawals"]</option>
+                                        <option value="game">@SharedLocalizer["GamesRules"]</option>
+                                        <option value="bonus">@SharedLocalizer["BonusesPromotions"]</option>
+                                        <option value="technical">@SharedLocalizer["TechnicalProblems"]</option>
+                                        <option value="complaint">@SharedLocalizer["Complaint"]</option>
+                                        <option value="other">@SharedLocalizer["Other"]</option>
                                     </select>
                                 </div>
 
                                 <!-- Bericht -->
                                 <div class="col-12">
                                     <label class="form-label text-white">
-                                        <i class="fas fa-comment-alt"></i> Bericht *
+                                        <i class="fas fa-comment-alt"></i> @SharedLocalizer["Message"] *
                                     </label>
                                     <textarea class="form-control" rows="6"
-                                              placeholder="Beschrijf je vraag of probleem zo gedetailleerd mogelijk..."
+                                              placeholder="@SharedLocalizer["DescribeQuestionDetailed"]..."
                                               required></textarea>
                                 </div>
 
@@ -169,7 +170,7 @@
                                     <div class="col-12">
                                         <div class="alert alert-info">
                                             <i class="fas fa-info-circle"></i>
-                                            <strong>Tip:</strong> Als je bent ingelogd, kunnen we je sneller helpen omdat we je accountgegevens al hebben.
+                                            <strong>@SharedLocalizer["Tip"]:</strong> @SharedLocalizer["LoginTipMessage"]
                                         </div>
                                     </div>
                                 }
@@ -177,14 +178,14 @@
                                 <!-- Submit Button -->
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-promo btn-lg w-100">
-                                        <i class="fas fa-paper-plane"></i> Verstuur Bericht
+                                        <i class="fas fa-paper-plane"></i> @SharedLocalizer["SendMessage"]
                                     </button>
                                 </div>
 
                                 <div class="col-12">
                                     <p class="text-white-50 small mb-0">
                                         <i class="fas fa-shield-alt text-success"></i>
-                                        Jouw gegevens worden vertrouwelijk behandeld conform ons <a asp-action="Privacy" class="text-gold">Privacy Beleid</a>.
+                                        @SharedLocalizer["DataConfidential"] <a asp-action="Privacy" class="text-gold">@SharedLocalizer["PrivacyPolicy"]</a>.
                                     </p>
                                 </div>
                             </div>
@@ -200,7 +201,7 @@
 <div class="section-bg-dark">
     <div class="container py-5">
         <h2 class="section-title text-center mb-5">
-            <i class="fas fa-question-circle text-warning"></i> VEELGESTELDE VRAGEN
+            <i class="fas fa-question-circle text-warning"></i> @SharedLocalizer["FAQ"]
         </h2>
 
         <div class="row">
@@ -212,13 +213,12 @@
                             <button class="accordion-button collapsed bg-dark text-white" type="button"
                                     data-bs-toggle="collapse" data-bs-target="#faq1">
                                 <i class="fas fa-clock text-gold me-2"></i>
-                                Hoe lang duurt het voordat ik antwoord krijg?
+                                @SharedLocalizer["HowLongResponseTime"]
                             </button>
                         </h2>
                         <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body bg-dark text-white-50">
-                                Via live chat krijg je direct antwoord. E-mails worden binnen 24 uur beantwoord.
-                                Tijdens drukke periodes kan dit iets langer duren, maar we doen ons best om zo snel mogelijk te reageren.
+                                @SharedLocalizer["ResponseTimeAnswer"]
                             </div>
                         </div>
                     </div>
@@ -229,13 +229,12 @@
                             <button class="accordion-button collapsed bg-dark text-white" type="button"
                                     data-bs-toggle="collapse" data-bs-target="#faq2">
                                 <i class="fas fa-user-lock text-gold me-2"></i>
-                                Wat moet ik doen als ik niet kan inloggen?
+                                @SharedLocalizer["CantLogin"]
                             </button>
                         </h2>
                         <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body bg-dark text-white-50">
-                                Probeer eerst je wachtwoord te resetten via de 'Wachtwoord vergeten' link op de loginpagina.
-                                Als dit niet werkt, neem dan contact met ons op via live chat of e-mail met je gebruikersnaam.
+                                @SharedLocalizer["CantLoginAnswer"]
                             </div>
                         </div>
                     </div>
@@ -246,13 +245,12 @@
                             <button class="accordion-button collapsed bg-dark text-white" type="button"
                                     data-bs-toggle="collapse" data-bs-target="#faq3">
                                 <i class="fas fa-coins text-gold me-2"></i>
-                                Hoe kan ik geld storten of opnemen?
+                                @SharedLocalizer["HowDepositWithdraw"]
                             </button>
                         </h2>
                         <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body bg-dark text-white-50">
-                                Na het inloggen kun je via 'Mijn Account' stortingen en opnames doen.
-                                We accepteren verschillende betaalmethoden zoals Visa, Mastercard, bankoverschrijving en meer.
+                                @SharedLocalizer["DepositWithdrawAnswer"]
                             </div>
                         </div>
                     </div>
@@ -263,13 +261,12 @@
                             <button class="accordion-button collapsed bg-dark text-white" type="button"
                                     data-bs-toggle="collapse" data-bs-target="#faq4">
                                 <i class="fas fa-gift text-gold me-2"></i>
-                                Hoe claim ik mijn welkomstbonus?
+                                @SharedLocalizer["HowClaimWelcomeBonus"]
                             </button>
                         </h2>
                         <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body bg-dark text-white-50">
-                                Je welkomstbonus wordt automatisch gecrediteerd na je eerste storting.
-                                Zorg ervoor dat je akkoord gaat met de bonusvoorwaarden tijdens het storten.
+                                @SharedLocalizer["WelcomeBonusAnswer"]
                             </div>
                         </div>
                     </div>
@@ -280,13 +277,12 @@
                             <button class="accordion-button collapsed bg-dark text-white" type="button"
                                     data-bs-toggle="collapse" data-bs-target="#faq5">
                                 <i class="fas fa-shield-alt text-gold me-2"></i>
-                                Is SafeCasino veilig en betrouwbaar?
+                                @SharedLocalizer["IsSafeCasinoSafe"]
                             </button>
                         </h2>
                         <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body bg-dark text-white-50">
-                                Ja! SafeCasino is volledig vergund en gereguleerd door de Belgische Kansspelcommissie.
-                                We gebruiken SSL-encryptie en voldoen aan alle veiligheidsstandaarden om je gegevens te beschermen.
+                                @SharedLocalizer["SafeCasinoSafeAnswer"]
                             </div>
                         </div>
                     </div>
@@ -297,13 +293,12 @@
                             <button class="accordion-button collapsed bg-dark text-white" type="button"
                                     data-bs-toggle="collapse" data-bs-target="#faq6">
                                 <i class="fas fa-gamepad text-gold me-2"></i>
-                                Kan ik de games gratis uitproberen?
+                                @SharedLocalizer["CanPlayGamesFree"]
                             </button>
                         </h2>
                         <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body bg-dark text-white-50">
-                                Veel van onze slots en tafelspellen kunnen in demo-modus gespeeld worden.
-                                Je hoeft hiervoor niet in te loggen of te storten. Klik gewoon op 'Demo Spelen' bij het spel.
+                                @SharedLocalizer["FreeGamesDemoAnswer"]
                             </div>
                         </div>
                     </div>
@@ -321,33 +316,33 @@
                 <div class="card shadow-lg">
                     <div class="card-header" style="background: linear-gradient(135deg, var(--secondary-purple) 0%, var(--accent-purple) 100%);">
                         <h3 class="mb-0 text-white">
-                            <i class="fas fa-building"></i> Bedrijfsinformatie
+                            <i class="fas fa-building"></i> @SharedLocalizer["CompanyInfo"]
                         </h3>
                     </div>
                     <div class="card-body">
                         <div class="row g-4">
                             <div class="col-md-6">
                                 <h5 class="text-gold mb-3">
-                                    <i class="fas fa-map-marker-alt"></i> Adres
+                                    <i class="fas fa-map-marker-alt"></i> @SharedLocalizer["Address"]
                                 </h5>
                                 <p class="text-white mb-1">SafeCasino BV</p>
-                                <p class="text-white-50 mb-1">Casinostraat 123</p>
-                                <p class="text-white-50 mb-1">1000 Brussel</p>
-                                <p class="text-white-50 mb-0">België</p>
+                                <p class="text-white-50 mb-1">@SharedLocalizer["AddressStreet"]</p>
+                                <p class="text-white-50 mb-1">@SharedLocalizer["AddressCity"]</p>
+                                <p class="text-white-50 mb-0">@SharedLocalizer["AddressCountry"]</p>
                             </div>
 
                             <div class="col-md-6">
                                 <h5 class="text-gold mb-3">
-                                    <i class="fas fa-info-circle"></i> Registratie
+                                    <i class="fas fa-info-circle"></i> @SharedLocalizer["Registration"]
                                 </h5>
                                 <p class="text-white-50 mb-1">
                                     <strong class="text-white">KVK:</strong> 12345678
                                 </p>
                                 <p class="text-white-50 mb-1">
-                                    <strong class="text-white">BTW:</strong> BE0123456789
+                                    <strong class="text-white">VAT:</strong> BE0123456789
                                 </p>
                                 <p class="text-white-50 mb-0">
-                                    <strong class="text-white">Vergunning:</strong> B+ License #12345
+                                    <strong class="text-white">@SharedLocalizer["License"]:</strong> B+ License #12345
                                 </p>
                             </div>
 
@@ -355,7 +350,7 @@
                                 <hr style="border-color: rgba(255, 255, 255, 0.1);" />
                                 <div class="text-center">
                                     <h5 class="text-gold mb-3">
-                                        <i class="fas fa-share-alt"></i> Volg Ons
+                                        <i class="fas fa-share-alt"></i> @SharedLocalizer["FollowUs"]
                                     </h5>
                                     <div class="d-flex justify-content-center gap-3">
                                         <a href="#" class="btn btn-outline-primary btn-lg">
@@ -389,16 +384,16 @@
                 <div class="card shadow-lg" style="background: linear-gradient(135deg, #e91e63 0%, #9c27b0 100%); border: 2px solid var(--gold-accent);">
                     <div class="card-body text-center p-5">
                         <i class="fas fa-headset fa-4x text-gold mb-4"></i>
-                        <h3 class="text-white mb-3">Nog geen antwoord gevonden?</h3>
+                        <h3 class="text-white mb-3">@SharedLocalizer["NoAnswerFound"]</h3>
                         <p class="text-white lead mb-4">
-                            Ons support team staat 24/7 klaar om je te helpen!
+                            @SharedLocalizer["SupportTeamReady"]
                         </p>
                         <div class="d-flex gap-3 justify-content-center flex-wrap">
-                            <button class="btn btn-promo btn-lg px-5" onclick="alert('Live chat komt binnenkort!')">
-                                <i class="fas fa-comment-dots"></i> START LIVE CHAT
+                            <button class="btn btn-promo btn-lg px-5" onclick="alert('@SharedLocalizer["LiveChatComingSoon"]')">
+                                <i class="fas fa-comment-dots"></i> @SharedLocalizer["StartLiveChat"]
                             </button>
                             <a href="mailto:support@safecasino.be" class="btn btn-outline-light btn-lg px-5">
-                                <i class="fas fa-envelope"></i> STUUR EMAIL
+                                <i class="fas fa-envelope"></i> @SharedLocalizer["SendEmail"]
                             </a>
                         </div>
                     </div>
@@ -413,7 +408,7 @@
         // Formulier submit handler
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Bedankt voor je bericht! We nemen zo snel mogelijk contact met je op.\n\nLet op: Dit is een demo. In productie wordt je bericht verzonden naar onze klantenservice.');
+            alert('@SharedLocalizer["ContactFormSuccess"]\n\n@SharedLocalizer["ContactFormDemo"]');
             this.reset();
         });
     </script>

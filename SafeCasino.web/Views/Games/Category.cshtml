@@ -1,6 +1,7 @@
 ﻿@model List<SafeCasino.Data.Entities.CasinoGame>
+@inject IStringLocalizer<SharedResource> SharedLocalizer
 @{
-    ViewData["Title"] = ViewBag.CategoryName ?? "Categorie";
+    ViewData["Title"] = ViewBag.CategoryName ?? SharedLocalizer["Category"];
 }
 
 <div class="container py-4">
@@ -9,7 +10,7 @@
         <div class="col-12">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a asp-action="Index">Games</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index">@SharedLocalizer["Games"]</a></li>
                     <li class="breadcrumb-item active" aria-current="page">@ViewBag.CategoryName</li>
                 </ol>
             </nav>
@@ -23,7 +24,7 @@
                 <p class="lead text-muted">@ViewBag.CategoryDescription</p>
             }
 
-            <p class="text-muted">@Model.Count games beschikbaar</p>
+            <p class="text-muted">@Model.Count @SharedLocalizer["GamesAvailable"]</p>
         </div>
     </div>
 
@@ -43,11 +44,11 @@
                                 <div class="position-absolute top-0 end-0 p-2">
                                     @if (game.IsNew)
                                     {
-                                        <span class="badge bg-success">Nieuw</span>
+                                        <span class="badge bg-success">@SharedLocalizer["New"]</span>
                                     }
                                     @if (game.IsPopular)
                                     {
-                                        <span class="badge bg-warning text-dark">Populair</span>
+                                        <span class="badge bg-warning text-dark">@SharedLocalizer["Popular"]</span>
                                     }
                                 </div>
                             }
@@ -69,7 +70,7 @@
                                 <div class="col-6">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-play text-success me-1"></i>
-                                        <span>@game.PlayCount plays</span>
+                                        <span>@game.PlayCount @SharedLocalizer["Plays"]</span>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -84,13 +85,13 @@
                             <div class="d-grid gap-2">
                                 <a asp-action="Details" asp-route-id="@game.Id"
                                    class="btn btn-outline-primary btn-sm">
-                                    <i class="fas fa-info-circle"></i> Details
+                                    <i class="fas fa-info-circle"></i> @SharedLocalizer["Details"]
                                 </a>
                                 @if (User.Identity?.IsAuthenticated == true)
                                 {
                                     <a asp-action="Play" asp-route-id="@game.Id"
                                        class="btn btn-primary btn-sm">
-                                        <i class="fas fa-play"></i> Speel Nu
+                                        <i class="fas fa-play"></i> @SharedLocalizer["PlayNow"]
                                     </a>
                                 }
                                 else
@@ -98,7 +99,7 @@
                                     <a asp-controller="Account" asp-action="Login"
                                        asp-route-returnUrl="@Url.Action("Play", new { id = game.Id })"
                                        class="btn btn-success btn-sm">
-                                        <i class="fas fa-sign-in-alt"></i> Login om te spelen
+                                        <i class="fas fa-sign-in-alt"></i> @SharedLocalizer["LoginToPlay"]
                                     </a>
                                 }
                             </div>
@@ -113,10 +114,10 @@
         <div class="row mt-5">
             <div class="col-12 text-center">
                 <i class="fas fa-box-open fa-5x text-muted mb-3"></i>
-                <h3>Geen games in deze categorie</h3>
-                <p class="text-muted">Er zijn momenteel geen beschikbare games in @ViewBag.CategoryName.</p>
+                <h3>@SharedLocalizer["NoGamesInCategory"]</h3>
+                <p class="text-muted">@SharedLocalizer["NoAvailableGames"] @ViewBag.CategoryName.</p>
                 <a asp-action="Index" class="btn btn-primary mt-3">
-                    <i class="fas fa-th"></i> Bekijk alle games
+                    <i class="fas fa-th"></i> @SharedLocalizer["ViewAllGames"]
                 </a>
             </div>
         </div>
@@ -126,7 +127,7 @@
     <div class="row mt-5">
         <div class="col-12">
             <a asp-action="Index" class="btn btn-lg btn-secondary">
-                <i class="fas fa-arrow-left"></i> Terug naar alle games
+                <i class="fas fa-arrow-left"></i> @SharedLocalizer["BackToAllGames"]
             </a>
         </div>
     </div>

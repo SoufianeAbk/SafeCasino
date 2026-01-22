@@ -108,6 +108,15 @@
   <data name="MinimumAge"><value>Vous devez avoir au moins 18 ans</value></data>
   <data name="StringLength"><value>{0} doit contenir entre {2} et {1} caractères</value></data>
 
+  <!-- Responsible Gaming -->
+  <data name="ResponsibleGamingTitle" xml:space="preserve">
+    <value>Jeu Responsable - SafeCasino</value>
+  </data>
+
+  <data name="ResponsibleGamingSubtitle" xml:space="preserve">
+    <value>Le jeu doit rester amusant. Jouez toujours dans vos limites.</value>
+  </data>
+
   <!-- Footer -->
   <data name="ResponsibleGaming"><value>Jeu Responsable</value></data>
   <data name="Privacy"><value>Confidentialité</value></data>

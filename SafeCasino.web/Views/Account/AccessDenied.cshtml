@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Toegang Geweigerd";
+﻿@inject IStringLocalizer<SharedResource> SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer["AccessDenied"];
 }
 
 <div class="container mt-5">
@@ -8,18 +9,17 @@
             <div class="card shadow-lg border-danger">
                 <div class="card-body p-5">
                     <i class="fas fa-lock fa-5x text-danger mb-4"></i>
-                    <h1 class="display-4 text-danger mb-3">Toegang Geweigerd</h1>
+                    <h1 class="display-4 text-danger mb-3">@SharedLocalizer["AccessDenied"]</h1>
                     <p class="lead mb-4">
-                        Je hebt geen toegang tot deze pagina.
+                        @SharedLocalizer["YouHaveNoAccessToPage"]
                     </p>
                     <p class="text-muted mb-4">
-                        Deze pagina is alleen toegankelijk voor gebruikers met specifieke rechten.
-                        Als je denkt dat je wel toegang zou moeten hebben, neem dan contact op met de administrator.
+                        @SharedLocalizer["PageOnlyAccessibleWithSpecificRights"]
                     </p>
 
                     <div class="alert alert-warning" role="alert">
                         <i class="fas fa-exclamation-triangle"></i>
-                        <strong>Let op:</strong> Als je niet bent ingelogd, probeer dan eerst in te loggen.
+                        <strong>@SharedLocalizer["Attention"]:</strong> @SharedLocalizer["IfNotLoggedInTryLogin"]
                     </div>
 
                     <hr class="my-4" />
@@ -28,10 +28,10 @@
                         @if (User.Identity?.IsAuthenticated == true)
                         {
                             <a asp-controller="Home" asp-action="Index" class="btn btn-primary btn-lg">
-                                <i class="fas fa-home"></i> Ga naar Home
+                                <i class="fas fa-home"></i> @SharedLocalizer["GoHome"]
                             </a>
                             <a asp-controller="Games" asp-action="Index" class="btn btn-outline-primary btn-lg">
-                                <i class="fas fa-gamepad"></i> Bekijk Games
+                                <i class="fas fa-gamepad"></i> @SharedLocalizer["ViewGames"]
                             </a>
                         }
                         else
@@ -39,10 +39,10 @@
                             <a asp-controller="Account" asp-action="Login"
                                asp-route-returnUrl="@Context.Request.Path"
                                class="btn btn-success btn-lg">
-                                <i class="fas fa-sign-in-alt"></i> Inloggen
+                                <i class="fas fa-sign-in-alt"></i> @SharedLocalizer["Login"]
                             </a>
                             <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary btn-lg">
-                                <i class="fas fa-home"></i> Ga naar Home
+                                <i class="fas fa-home"></i> @SharedLocalizer["GoHome"]
                             </a>
                         }
                     </div>
@@ -52,19 +52,19 @@
             <!-- Help Section -->
             <div class="card mt-4 shadow">
                 <div class="card-body">
-                    <h5><i class="fas fa-question-circle text-info"></i> Waarom zie ik dit?</h5>
+                    <h5><i class="fas fa-question-circle text-info"></i> @SharedLocalizer["WhySeingThis"]</h5>
                     <ul class="text-start list-unstyled mt-3">
                         <li class="mb-2">
                             <i class="fas fa-check text-success"></i>
-                            Je bent niet ingelogd
+                            @SharedLocalizer["NotLoggedIn"]
                         </li>
                         <li class="mb-2">
                             <i class="fas fa-check text-success"></i>
-                            Je hebt niet de juiste rol voor deze pagina
+                            @SharedLocalizer["DontHaveRequiredRole"]
                         </li>
                         <li class="mb-2">
                             <i class="fas fa-check text-success"></i>
-                            Deze pagina is alleen voor administrators
+                            @SharedLocalizer["PageAdminOnly"]
                         </li>
                     </ul>
                 </div>

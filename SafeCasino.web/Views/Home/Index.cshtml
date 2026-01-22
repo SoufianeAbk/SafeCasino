@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "SafeCasino";
+﻿@inject IStringLocalizer<SharedResource> SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer["SafeCasino"];
     var popularGames = ViewBag.PopularGames as List<SafeCasino.Data.Entities.CasinoGame>;
     var newGames = ViewBag.NewGames as List<SafeCasino.Data.Entities.CasinoGame>;
     var categories = ViewBag.Categories as List<SafeCasino.Data.Entities.GameCategory>;
@@ -11,11 +12,10 @@
         <div class="row align-items-center">
             <div class="col-lg-12 text-center fade-in-up">
                 <h1 class="display-3 fw-bold mb-4">
-                    SAFE CASINO MET DE BESTE GAMES
+                    @SharedLocalizer["SafeCasinoTitle"]
                 </h1>
                 <p class="lead mb-5" style="font-size: 1.4rem; max-width: 800px; margin: 0 auto;">
-                    Ontdek de meest uitgebreide collectie casino games van de beste providers.
-                    Speel veilig, verantwoord en geniet van de hoogste RTP percentages.
+                    @SharedLocalizer["SafeCasinoSubtitle"]
                 </p>
             </div>
         </div>
@@ -29,14 +29,14 @@
             <!-- Daily Boost Promo -->
             <div class="col-lg-4">
                 <div class="promo-banner" style="background: linear-gradient(135deg, #e74c3c 20%, #8e44ad 80%);">
-                    <span class="promo-label">DAILY BOOST</span>
-                    <h2 class="promo-title">TOT €10</h2>
+                    <span class="promo-label">@SharedLocalizer["DailyBoost"]</span>
+                    <h2 class="promo-title">@SharedLocalizer["UpTo"] €10</h2>
                     <p class="promo-subtitle">
-                        Speel & win 10 keer<br />
-                        Ontvang 25% cashback
+                        @SharedLocalizer["PlayAndWin10Times"]<br />
+                        @SharedLocalizer["Receive25PercentCashback"]
                     </p>
                     <a asp-controller="Games" asp-action="Index" class="btn btn-promo">
-                        SPEEL NU
+                        @SharedLocalizer["PlayNow"]
                     </a>
                 </div>
             </div>
@@ -44,14 +44,14 @@
             <!-- Tournament Promo -->
             <div class="col-lg-4">
                 <div class="promo-banner" style="background: linear-gradient(135deg, #e91e63 20%, #9c27b0 80%);">
-                    <span class="promo-label">ANIMAL TOURNAMENT</span>
-                    <h2 class="promo-title">€30000<small style="font-size: 0.5em;"> DAILY</small></h2>
+                    <span class="promo-label">@SharedLocalizer["AnimalTournament"]</span>
+                    <h2 class="promo-title">€30000<small style="font-size: 0.5em;"> @SharedLocalizer["Daily"]</small></h2>
                     <p class="promo-subtitle">
-                        Haal je deel uit de<br />
-                        dagelijkse prijzenpot
+                        @SharedLocalizer["GetYourShareOf"]<br />
+                        @SharedLocalizer["DailyPrizePool"]
                     </p>
                     <a asp-controller="Home" asp-action="TournamentInfo" class="btn btn-promo">
-                        MEER INFO
+                        @SharedLocalizer["MoreInfo"]
                     </a>
                 </div>
             </div>
@@ -59,10 +59,10 @@
             <!-- Live Crash Game Promo -->
             <div class="col-lg-4">
                 <div class="promo-banner" style="background: linear-gradient(135deg, #ff6b6b 20%, #4ecdc4 80%);">
-                    <span class="promo-label">LIVE CRASH GAME</span>
-                    <h2 class="promo-title">JE WINS ZIJN<br /><small style="font-size: 0.7em;">KLAAR VOOR</small><br />TAKEOFF</h2>
+                    <span class="promo-label">@SharedLocalizer["LiveCrashGame"]</span>
+                    <h2 class="promo-title">@SharedLocalizer["YourWinsAre"]<br /><small style="font-size: 0.7em;">@SharedLocalizer["ReadyFor"]</small><br />@SharedLocalizer["Takeoff"]</h2>
                     <a asp-controller="Games" asp-action="Index" class="btn btn-promo">
-                        SPEEL NU
+                        @SharedLocalizer["PlayNow"]
                     </a>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                         <div class="category-icon">
                             <i class="fas fa-rocket"></i>
                         </div>
-                        <div class="category-label">Daily Boost</div>
+                        <div class="category-label">@SharedLocalizer["DailyBoost"]</div>
                     </div>
                 </a>
             </div>
@@ -90,7 +90,7 @@
                         <div class="category-icon">
                             <i class="fas fa-trophy"></i>
                         </div>
-                        <div class="category-label">Tournament</div>
+                        <div class="category-label">@SharedLocalizer["Tournament"]</div>
                     </div>
                 </a>
             </div>
@@ -100,7 +100,7 @@
                         <div class="category-icon">
                             <i class="fas fa-sync-alt"></i>
                         </div>
-                        <div class="category-label">Daily Spin</div>
+                        <div class="category-label">@SharedLocalizer["DailySpin"]</div>
                         <span class="badge bg-danger position-absolute" style="top: 0; right: 30%;">FREE</span>
                     </div>
                 </a>
@@ -111,7 +111,7 @@
                         <div class="category-icon">
                             <i class="fas fa-shopping-cart"></i>
                         </div>
-                        <div class="category-label">Coin Shop</div>
+                        <div class="category-label">@SharedLocalizer["CoinShop"]</div>
                     </div>
                 </a>
             </div>
@@ -121,7 +121,7 @@
                         <div class="category-icon">
                             <i class="fas fa-building"></i>
                         </div>
-                        <div class="category-label">Providers</div>
+                        <div class="category-label">@SharedLocalizer["Providers"]</div>
                     </div>
                 </a>
             </div>
@@ -131,7 +131,7 @@
                         <div class="category-icon">
                             <i class="fas fa-star"></i>
                         </div>
-                        <div class="category-label">Exclusives</div>
+                        <div class="category-label">@SharedLocalizer["Exclusives"]</div>
                     </div>
                 </a>
             </div>
@@ -190,11 +190,11 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <h2 class="section-title">
-                        <i class="fas fa-crown text-gold"></i> ALLEEN BIJ SAFECASINO
+                        <i class="fas fa-crown text-gold"></i> @SharedLocalizer["OnlyAtSafeCasino"]
                     </h2>
                 </div>
                 <a asp-controller="Games" asp-action="New" class="btn btn-outline-primary">
-                    Bekijk alles <i class="fas fa-arrow-right ms-2"></i>
+                    @SharedLocalizer["ViewAll"] <i class="fas fa-arrow-right ms-2"></i>
                 </a>
             </div>
 
@@ -203,7 +203,7 @@
                 {
                     <div class="col">
                         <div class="game-card position-relative">
-                            <span class="badge-exclusive">EXCLUSIVE</span>
+                            <span class="badge-exclusive">@SharedLocalizer["Exclusive"]</span>
                             <img src="@game.ThumbnailUrl" class="w-100" alt="@game.Name"
                                  onerror="this.src='/images/placeholder-game.jpg'" />
                             <div class="card-body">
@@ -214,7 +214,7 @@
                                 <div class="d-grid">
                                     <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id"
                                        class="btn btn-primary btn-sm">
-                                        <i class="fas fa-play"></i> Speel Nu
+                                        <i class="fas fa-play"></i> @SharedLocalizer["PlayNow"]
                                     </a>
                                 </div>
                             </div>
@@ -234,11 +234,11 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <h2 class="section-title">
-                        <i class="fas fa-fire text-danger"></i> POPULAIRE GAMES
+                        <i class="fas fa-fire text-danger"></i> @SharedLocalizer["PopularGames"]
                     </h2>
                 </div>
                 <a asp-controller="Games" asp-action="Popular" class="btn btn-outline-primary">
-                    Bekijk alles <i class="fas fa-arrow-right ms-2"></i>
+                    @SharedLocalizer["ViewAll"] <i class="fas fa-arrow-right ms-2"></i>
                 </a>
             </div>
 
@@ -261,7 +261,7 @@
                                 <div class="d-grid">
                                     <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id"
                                        class="btn btn-primary btn-sm">
-                                        <i class="fas fa-play"></i> Speel Nu
+                                        <i class="fas fa-play"></i> @SharedLocalizer["PlayNow"]
                                     </a>
                                 </div>
                             </div>
@@ -282,16 +282,16 @@
             </div>
             <div class="col-md-8">
                 <h2 class="section-title mb-3">
-                    <i class="fas fa-medal text-gold"></i> TOURNAMENTS
+                    <i class="fas fa-medal text-gold"></i> @SharedLocalizer["Tournament"]
                 </h2>
                 <p class="lead text-light mb-0">
-                    Doe mee aan onze spannende toernooien en win geweldige prijzen!
-                    Dagelijkse prijzenpotten tot €30,000.
+                    @SharedLocalizer["JoinExcitingTournaments"]
+                    @SharedLocalizer["DailyPrizePotsUp"]
                 </p>
             </div>
             <div class="col-md-2 text-center">
                 <a asp-controller="Games" asp-action="Index" class="btn btn-promo btn-lg">
-                    BEKIJK ALLES
+                    @SharedLocalizer["ViewAll"]
                 </a>
             </div>
         </div>
@@ -301,35 +301,35 @@
 <!-- Features Section -->
 <div class="section-bg-card">
     <div class="container py-5">
-        <h2 class="text-center section-title mb-5">WAAROM SAFECASINO?</h2>
+        <h2 class="text-center section-title mb-5">@SharedLocalizer["WhySafeCasino"]</h2>
         <div class="row row-cols-1 row-cols-md-4 g-4 text-center">
             <div class="col">
                 <div class="feature-icon mb-3">
                     <i class="fas fa-shield-alt fa-4x text-success"></i>
                 </div>
-                <h4 class="text-white">100% Veilig</h4>
-                <p class="text-muted">SSL encryptie en veilige betalingen voor jouw gemoedsrust</p>
+                <h4 class="text-white">@SharedLocalizer["CompletelySecure"]</h4>
+                <p class="text-muted">@SharedLocalizer["SSLEncryptionSecurePayments"]</p>
             </div>
             <div class="col">
                 <div class="feature-icon mb-3">
                     <i class="fas fa-star fa-4x text-warning"></i>
                 </div>
-                <h4 class="text-white">Top Games</h4>
-                <p class="text-muted">Exclusieve games van de beste providers wereldwijd</p>
+                <h4 class="text-white">@SharedLocalizer["TopGames"]</h4>
+                <p class="text-muted">@SharedLocalizer["ExclusiveGamesTopProviders"]</p>
             </div>
             <div class="col">
                 <div class="feature-icon mb-3">
                     <i class="fas fa-headset fa-4x text-info"></i>
                 </div>
-                <h4 class="text-white">24/7 Support</h4>
-                <p class="text-muted">Altijd bereikbaar voor al je vragen en ondersteuning</p>
+                <h4 class="text-white">@SharedLocalizer["Support24"]</h4>
+                <p class="text-muted">@SharedLocalizer["AlwaysAvailableForQuestions"]</p>
             </div>
             <div class="col">
                 <div class="feature-icon mb-3">
                     <i class="fas fa-percentage fa-4x text-gold"></i>
                 </div>
-                <h4 class="text-white">Beste RTP</h4>
-                <p class="text-muted">Hoogste uitkeringspercentages in de industrie</p>
+                <h4 class="text-white">@SharedLocalizer["BestRTP"]</h4>
+                <p class="text-muted">@SharedLocalizer["HighestPayoutPercentages"]</p>
             </div>
         </div>
     </div>
@@ -342,31 +342,31 @@
             <div class="col-md-2">
                 <div class="text-gold">
                     <i class="fas fa-lock fa-3x mb-2"></i>
-                    <p class="small text-light mb-0">SSL Beveiligd</p>
+                    <p class="small text-light mb-0">@SharedLocalizer["SSLSecured"]</p>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="text-gold">
                     <i class="fas fa-check-circle fa-3x mb-2"></i>
-                    <p class="small text-light mb-0">Vergunde Casino</p>
+                    <p class="small text-light mb-0">@SharedLocalizer["LicensedCasino"]</p>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="text-gold">
                     <i class="fas fa-users fa-3x mb-2"></i>
-                    <p class="small text-light mb-0">10K+ Spelers</p>
+                    <p class="small text-light mb-0">@SharedLocalizer["PlayersCount"]</p>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="text-gold">
                     <i class="fas fa-gamepad fa-3x mb-2"></i>
-                    <p class="small text-light mb-0">9000+ Games</p>
+                    <p class="small text-light mb-0">@SharedLocalizer["GamesCount"]</p>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="text-gold">
                     <i class="fas fa-award fa-3x mb-2"></i>
-                    <p class="small text-light mb-0">Beste RTP</p>
+                    <p class="small text-light mb-0">@SharedLocalizer["BestRTP"]</p>
                 </div>
             </div>
         </div>

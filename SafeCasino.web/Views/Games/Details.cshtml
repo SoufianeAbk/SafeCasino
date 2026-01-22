@@ -1,4 +1,5 @@
 ﻿@model SafeCasino.Web.ViewModels.GameDetailsViewModel
+@inject IStringLocalizer<SharedResource> SharedLocalizer
 @{
     ViewData["Title"] = Model.Game.Name;
 }
@@ -19,11 +20,11 @@
                 <div>
                     @if (Model.Game.IsNew)
                     {
-                        <span class="badge bg-success fs-6">Nieuw</span>
+                        <span class="badge bg-success fs-6">@SharedLocalizer["New"]</span>
                     }
                     @if (Model.Game.IsPopular)
                     {
-                        <span class="badge bg-warning text-dark fs-6">Populair</span>
+                        <span class="badge bg-warning text-dark fs-6">@SharedLocalizer["Popular"]</span>
                     }
                 </div>
             </div>
@@ -43,7 +44,7 @@
                 <div class="col-md-3">
                     <div class="card text-center">
                         <div class="card-body">
-                            <h6 class="text-muted mb-1">Min. Inzet</h6>
+                            <h6 class="text-muted mb-1">@SharedLocalizer["MinBet"]</h6>
                             <h4 class="mb-0">€@Model.Game.MinimumBet</h4>
                         </div>
                     </div>
@@ -51,7 +52,7 @@
                 <div class="col-md-3">
                     <div class="card text-center">
                         <div class="card-body">
-                            <h6 class="text-muted mb-1">Max. Inzet</h6>
+                            <h6 class="text-muted mb-1">@SharedLocalizer["MaxBet"]</h6>
                             <h4 class="mb-0">€@Model.Game.MaximumBet</h4>
                         </div>
                     </div>
@@ -59,7 +60,7 @@
                 <div class="col-md-3">
                     <div class="card text-center">
                         <div class="card-body">
-                            <h6 class="text-muted mb-1">Gespeeld</h6>
+                            <h6 class="text-muted mb-1">@SharedLocalizer["Played"]</h6>
                             <h4 class="mb-0">@Model.Game.PlayCount</h4>
                         </div>
                     </div>
@@ -71,18 +72,18 @@
                 @if (User.Identity?.IsAuthenticated == true)
                 {
                     <a asp-action="Play" asp-route-id="@Model.Game.Id" class="btn btn-primary btn-lg">
-                        <i class="fas fa-play"></i> Speel Nu
+                        <i class="fas fa-play"></i> @SharedLocalizer["PlayNow"]
                     </a>
                 }
                 else
                 {
                     <a asp-action="Login" asp-controller="Account" asp-route-returnUrl="@Url.Action("Play", new { id = Model.Game.Id })"
                        class="btn btn-primary btn-lg">
-                        <i class="fas fa-sign-in-alt"></i> Log in om te spelen
+                        <i class="fas fa-sign-in-alt"></i> @SharedLocalizer["LoginToPlay"]
                     </a>
                 }
                 <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
-                    <i class="fas fa-arrow-left"></i> Terug naar overzicht
+                    <i class="fas fa-arrow-left"></i> @SharedLocalizer["BackToOverview"]
                 </a>
             </div>
         </div>
@@ -95,30 +96,30 @@
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
-                    <h2>Reviews</h2>
+                    <h2>@SharedLocalizer["Reviews"]</h2>
                     @if (Model.TotalReviews > 0)
                     {
                         <p class="text-muted">
                             <i class="fas fa-star text-warning"></i>
                             <span id="avgRating">@Model.AverageRating.ToString("F1")</span> / 5.0
-                            (<span id="totalReviewCount">@Model.TotalReviews</span> reviews)
+                            (<span id="totalReviewCount">@Model.TotalReviews</span> @SharedLocalizer["Reviews"])
                         </p>
                     }
                     else
                     {
-                        <p class="text-muted">Nog geen reviews</p>
+                        <p class="text-muted">@SharedLocalizer["NoReviewsYet"]</p>
                     }
                 </div>
                 @if (Model.CanReview && !Model.UserHasReviewed)
                 {
                     <a asp-controller="Reviews" asp-action="Create" asp-route-gameId="@Model.Game.Id"
                        class="btn btn-success">
-                        <i class="fas fa-plus"></i> Review schrijven
+                        <i class="fas fa-plus"></i> @SharedLocalizer["WriteReview"]
                     </a>
                 }
                 else if (Model.UserHasReviewed)
                 {
-                    <span class="badge bg-info">Je hebt dit spel al beoordeeld</span>
+                    <span class="badge bg-info">@SharedLocalizer["YouReviewedThisGame"]</span>
                 }
             </div>
 
@@ -137,7 +138,7 @@
                                                 <h5 class="card-title mb-1">@review.Title</h5>
                                                 <p class="text-muted mb-2">
                                                     <small>
-                                                        door @review.User.FirstName @review.User.LastName -
+                                                        @SharedLocalizer["By"] @review.User.FirstName @review.User.LastName -
                                                         @review.CreatedDate.ToString("dd MMM yyyy")
                                                     </small>
                                                 </p>
@@ -163,13 +164,13 @@
                                             <div class="mt-3">
                                                 <a asp-controller="Reviews" asp-action="Edit" asp-route-id="@review.Id"
                                                    class="btn btn-sm btn-outline-primary">
-                                                    <i class="fas fa-edit"></i> Bewerken
+                                                    <i class="fas fa-edit"></i> @SharedLocalizer["Edit"]
                                                 </a>
                                                 <form asp-controller="Reviews" asp-action="Delete" asp-route-id="@review.Id"
                                                       method="post" class="d-inline"
-                                                      onsubmit="return confirm('Weet je zeker dat je deze review wilt verwijderen?')">
+                                                      onsubmit="return confirm('@SharedLocalizer["ConfirmDeleteReview"]')">
                                                     <button type="submit" class="btn btn-sm btn-outline-danger">
-                                                        <i class="fas fa-trash"></i> Verwijderen
+                                                        <i class="fas fa-trash"></i> @SharedLocalizer["Delete"]
                                                     </button>
                                                 </form>
                                             </div>
@@ -184,7 +185,7 @@
                 {
                     <div class="text-center py-5" id="noReviewsMessage">
                         <i class="fas fa-comment-slash fa-3x text-muted mb-3"></i>
-                        <p class="text-muted">Nog geen reviews voor dit spel. Wees de eerste!</p>
+                        <p class="text-muted">@SharedLocalizer["NoReviewsBeFirst"]</p>
                     </div>
                 }
             </div>
@@ -195,10 +196,10 @@
                 <div class="row mt-4">
                     <div class="col-12 text-center">
                         <button id="loadMoreReviewsBtn" class="btn btn-outline-primary btn-lg" data-page="2" data-game-id="@Model.Game.Id">
-                            <i class="fas fa-spinner"></i> Meer Reviews Laden
+                            <i class="fas fa-spinner"></i> @SharedLocalizer["LoadMoreReviews"]
                         </button>
                         <p class="text-muted small mt-2">
-                            <span id="loadedReviewCount">@Model.Reviews.Count</span> / <span id="totalReviewCount2">@Model.TotalReviews</span> reviews geladen
+                            <span id="loadedReviewCount">@Model.Reviews.Count</span> / <span id="totalReviewCount2">@Model.TotalReviews</span> @SharedLocalizer["ReviewsLoaded"]
                         </p>
                     </div>
                 </div>
@@ -296,14 +297,14 @@
                 this.disabled = true;
                 this.classList.add('loading');
                 const originalHTML = this.innerHTML;
-                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Laden...';
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> @SharedLocalizer["Loading"]...';
 
                 try {
                     const response = await fetch(`/Games/LoadReviews?gameId=${gameId}&page=${page}`);
                     const result = await response.json();
 
                     if (!result.success) {
-                        showNotification('❌ Fout bij laden reviews', 'error');
+                        showNotification('❌ @SharedLocalizer["ErrorLoadingReviews"]', 'error');
                         return;
                     }
 
@@ -336,7 +337,7 @@
 
                     if (!result.hasMore) {
                         this.remove(); // Verwijder button als geen meer reviews
-                        showNotification('✅ Alle reviews geladen!', 'success');
+                        showNotification('✅ @SharedLocalizer["AllReviewsLoaded"]', 'success');
                     } else {
                         this.disabled = false;
                         this.classList.remove('loading');
@@ -350,7 +351,7 @@
                     this.disabled = false;
                     this.classList.remove('loading');
                     this.innerHTML = originalHTML;
-                    showNotification('❌ Fout bij laden reviews', 'error');
+                    showNotification('❌ @SharedLocalizer["ErrorLoadingReviews"]', 'error');
                 }
             });
         }
@@ -371,7 +372,7 @@
                                 <div>
                                     <h5 class="card-title mb-1">${review.title}</h5>
                                     <p class="text-muted mb-2">
-                                        <small>door ${review.userName} - ${review.createdDate}</small>
+                                        <small>@SharedLocalizer["By"] ${review.userName} - ${review.createdDate}</small>
                                     </p>
                                 </div>
                                 <div>${stars}</div>

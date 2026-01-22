@@ -1,6 +1,7 @@
 ﻿@model SafeCasino.Web.ViewModels.LoginViewModel
+@inject IStringLocalizer<SharedResource> SharedLocalizer
 @{
-    ViewData["Title"] = "Inloggen";
+    ViewData["Title"] = SharedLocalizer["Login"];
 }
 
 <div class="container mt-5">
@@ -8,7 +9,7 @@
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0"><i class="fas fa-sign-in-alt"></i> Inloggen</h3>
+                    <h3 class="mb-0"><i class="fas fa-sign-in-alt"></i> @SharedLocalizer["Login"]</h3>
                 </div>
                 <div class="card-body">
                     <form asp-action="Login" asp-controller="Account" method="post">
@@ -16,25 +17,25 @@
                         <input type="hidden" asp-for="ReturnUrl" />
 
                         <div class="mb-3">
-                            <label asp-for="Email" class="form-label"></label>
+                            <label asp-for="Email" class="form-label">@SharedLocalizer["Email"]</label>
                             <input asp-for="Email" class="form-control" placeholder="voorbeeld@email.com" />
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="Password" class="form-label"></label>
+                            <label asp-for="Password" class="form-label">@SharedLocalizer["Password"]</label>
                             <input asp-for="Password" class="form-control" placeholder="••••••••" />
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3 form-check">
                             <input asp-for="RememberMe" class="form-check-input" />
-                            <label asp-for="RememberMe" class="form-check-label"></label>
+                            <label asp-for="RememberMe" class="form-check-label">@SharedLocalizer["RememberMe"]</label>
                         </div>
 
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary btn-lg">
-                                <i class="fas fa-sign-in-alt"></i> Inloggen
+                                <i class="fas fa-sign-in-alt"></i> @SharedLocalizer["Login"]
                             </button>
                         </div>
                     </form>
@@ -42,9 +43,9 @@
                     <hr class="my-4" />
 
                     <div class="text-center">
-                        <p class="mb-0">Nog geen account?</p>
+                        <p class="mb-0">@SharedLocalizer["NoAccount"]</p>
                         <a asp-action="Register" asp-controller="Account" class="btn btn-outline-primary mt-2">
-                            <i class="fas fa-user-plus"></i> Registreren
+                            <i class="fas fa-user-plus"></i> @SharedLocalizer["Register"]
                         </a>
                     </div>
                 </div>

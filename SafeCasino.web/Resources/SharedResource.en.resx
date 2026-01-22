@@ -108,16 +108,30 @@
   <data name="MinimumAge"><value>You must be at least 18 years old</value></data>
   <data name="StringLength"><value>{0} must be between {2} and {1} characters long</value></data>
 
+  <!-- Responsible Gaming -->
+  <data name="ResponsibleGamingTitle" xml:space="preserve">
+    <value>Responsible Gaming - SafeCasino</value>
+  </data>
+
+  <data name="ResponsibleGaming" xml:space="preserve">
+    <value>RESPONSIBLE GAMING</value>
+  </data>
+
+  <data name="ResponsibleGamingSubtitle" xml:space="preserve">
+    <value>Gambling should stay fun. Always play within your limits.</value>
+  </data>
+
   <!-- Footer -->
-  <data name="ResponsibleGaming"><value>Responsible Gaming</value></data>
   <data name="Privacy"><value>Privacy</value></data>
   <data name="Terms"><value>Terms</value></data>
   <data name="Contact"><value>Contact</value></data>
   <data name="About"><value>About Us</value></data>
   <data name="Copyright"><value>© 2025 SafeCasino. All rights reserved.</value></data>
+
   <data name="FooterDescription">
     <value>Your trusted online casino with the best games and highest security standards. Play responsibly.</value>
   </data>
+
   <data name="CasinoGames"><value>Casino Games</value></data>
   <data name="Information"><value>Information</value></data>
   <data name="AboutUs"><value>About Us</value></data>
@@ -131,6 +145,7 @@
   <data name="AllRightsReserved"><value>All rights reserved.</value></data>
   <data name="SecuredSSL"><value>Secured with SSL</value></data>
   <data name="LicensedCasino"><value>Licensed Casino</value></data>
+
   <data name="Disclaimer">
     <value>Gambling can be addictive. Play responsibly. SafeCasino is licensed and regulated. Only for players 18+.</value>
   </data>

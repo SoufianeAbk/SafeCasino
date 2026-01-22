@@ -108,8 +108,28 @@
   <data name="MinimumAge"><value>Je moet minimaal 18 jaar oud zijn</value></data>
   <data name="StringLength"><value>{0} moet tussen {2} en {1} tekens lang zijn</value></data>
 
+  <!-- Responsible Gaming -->
+  <data name="ResponsibleGamingTitle" xml:space="preserve">
+    <value>Verantwoord Spelen - SafeCasino</value>
+  </data>
+
+  <data name="ResponsibleGaming" xml:space="preserve">
+    <value>VERANTWOORD SPELEN</value>
+  </data>
+
+  <data name="ResponsibleGamingSubtitle" xml:space="preserve">
+    <value>Gokken moet leuk blijven. Speel altijd binnen je grenzen.</value>
+  </data>
+
+  <data name="Important" xml:space="preserve">
+    <value>Belangrijk!</value>
+  </data>
+
+  <data name="GamblingCanBeAddictive" xml:space="preserve">
+    <value>Gokken kan verslavend zijn.</value>
+  </data>
+
   <!-- Footer -->
-  <data name="ResponsibleGaming"><value>Verantwoord Spelen</value></data>
   <data name="Privacy"><value>Privacy</value></data>
   <data name="Terms"><value>Voorwaarden</value></data>
   <data name="Contact"><value>Contact</value></data>

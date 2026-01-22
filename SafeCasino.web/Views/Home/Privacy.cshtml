@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy - SafeCasino";
+﻿@inject IStringLocalizer<SharedResource> SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer["PrivacyPolicy"];
 }
 
 <!-- Hero Section -->
@@ -8,10 +9,10 @@
         <div class="row align-items-center">
             <div class="col-lg-12 text-center fade-in-up">
                 <h1 class="display-3 fw-bold mb-4">
-                    <i class="fas fa-shield-alt text-success"></i> PRIVACY POLICY
+                    <i class="fas fa-shield-alt text-success"></i> @SharedLocalizer["PrivacyPolicy"]
                 </h1>
                 <p class="lead mb-5" style="font-size: 1.4rem; max-width: 800px; margin: 0 auto;">
-                    Jouw privacy is belangrijk voor ons
+                    @SharedLocalizer["PrivacyImportant"]
                 </p>
             </div>
         </div>
@@ -26,13 +27,13 @@
                 <div class="card shadow-lg">
                     <div class="card-body">
                         <p class="text-white lead mb-3">
-                            Laatst bijgewerkt: <strong class="text-gold">19 december 2025</strong>
+                            @SharedLocalizer["LastUpdated"]: <strong class="text-gold">19 @SharedLocalizer["DecemberMonthName"] 2025</strong>
                         </p>
                         <p class="text-white-50 mb-3">
-                            Bij SafeCasino nemen we de bescherming van jouw persoonlijke gegevens zeer serieus. Deze Privacy Policy legt uit hoe we jouw informatie verzamelen, gebruiken, delen en beschermen wanneer je onze diensten gebruikt.
+                            @SharedLocalizer["PrivacyIntroduction"]
                         </p>
                         <p class="text-white-50 mb-0">
-                            Door gebruik te maken van SafeCasino ga je akkoord met de voorwaarden zoals beschreven in dit privacy beleid.
+                            @SharedLocalizer["PrivacyAgree"]
                         </p>
                     </div>
                 </div>
@@ -45,45 +46,45 @@
 <div class="section-bg-card">
     <div class="container py-5">
         <h2 class="section-title mb-4">
-            <i class="fas fa-database text-info"></i> 1. WELKE INFORMATIE VERZAMELEN WE?
+            <i class="fas fa-database text-info"></i> 1. @SharedLocalizer["WhatInfoCollect"]
         </h2>
         <div class="row">
             <div class="col-lg-10 mx-auto">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h5 class="text-white mb-3">Persoonlijke Informatie</h5>
-                        <p class="text-white-50 mb-2">We verzamelen informatie die je ons verstrekt bij registratie en gebruik van onze diensten:</p>
+                        <h5 class="text-white mb-3">@SharedLocalizer["PersonalInfo"]</h5>
+                        <p class="text-white-50 mb-2">@SharedLocalizer["PersonalInfoDescription"]</p>
                         <ul class="text-white-50">
-                            <li>Naam en contactgegevens (email, telefoonnummer)</li>
-                            <li>Geboortedatum en identificatiegegevens (voor leeftijdsverificatie)</li>
-                            <li>Betalingsinformatie</li>
-                            <li>Communicatie met onze klantenservice</li>
+                            <li>@SharedLocalizer["NameContactDetails"]</li>
+                            <li>@SharedLocalizer["BirthdateIDVerification"]</li>
+                            <li>@SharedLocalizer["PaymentInfo"]</li>
+                            <li>@SharedLocalizer["CustomerServiceComm"]</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h5 class="text-white mb-3">Automatisch Verzamelde Informatie</h5>
-                        <p class="text-white-50 mb-2">We verzamelen automatisch bepaalde informatie wanneer je onze website gebruikt:</p>
+                        <h5 class="text-white mb-3">@SharedLocalizer["AutomaticInfo"]</h5>
+                        <p class="text-white-50 mb-2">@SharedLocalizer["AutomaticInfoDescription"]</p>
                         <ul class="text-white-50">
-                            <li>IP-adres en apparaatinformatie</li>
-                            <li>Browser type en versie</li>
-                            <li>Pagina's die je bezoekt en tijdstippen</li>
-                            <li>Cookies en vergelijkbare technologieën</li>
+                            <li>@SharedLocalizer["IPAddressDevice"]</li>
+                            <li>@SharedLocalizer["BrowserType"]</li>
+                            <li>@SharedLocalizer["PagesVisited"]</li>
+                            <li>@SharedLocalizer["CookiesTech"]</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="text-white mb-3">Spelgedrag Informatie</h5>
-                        <p class="text-white-50 mb-2">Voor verantwoord gokken monitoren we:</p>
+                        <h5 class="text-white mb-3">@SharedLocalizer["GamingBehavior"]</h5>
+                        <p class="text-white-50 mb-2">@SharedLocalizer["GamingBehaviorMonitor"]</p>
                         <ul class="text-white-50 mb-0">
-                            <li>Speelgeschiedenis en voorkeuren</li>
-                            <li>Stortingen en opnames</li>
-                            <li>Inzetten en winsten</li>
-                            <li>Sessieduur en frequentie</li>
+                            <li>@SharedLocalizer["PlayHistory"]</li>
+                            <li>@SharedLocalizer["DepositsWithdrawals"]</li>
+                            <li>@SharedLocalizer["BetsWinnings"]</li>
+                            <li>@SharedLocalizer["SessionDuration"]</li>
                         </ul>
                     </div>
                 </div>
@@ -96,71 +97,71 @@
 <div class="section-bg-dark">
     <div class="container py-5">
         <h2 class="section-title mb-4">
-            <i class="fas fa-cogs text-warning"></i> 2. HOE GEBRUIKEN WE JE INFORMATIE?
+            <i class="fas fa-cogs text-warning"></i> 2. @SharedLocalizer["HowWeUseInfo"]
         </h2>
         <div class="row">
             <div class="col-lg-10 mx-auto">
                 <div class="card">
                     <div class="card-body">
-                        <p class="text-white-50 mb-3">We gebruiken jouw gegevens voor:</p>
+                        <p class="text-white-50 mb-3">@SharedLocalizer["DataUsedFor"]</p>
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="p-3" style="background: rgba(255, 255, 255, 0.05); border-radius: 10px;">
                                     <h6 class="text-gold mb-2">
-                                        <i class="fas fa-user-check"></i> Account Beheer
+                                        <i class="fas fa-user-check"></i> @SharedLocalizer["AccountManagement"]
                                     </h6>
                                     <p class="text-white-50 small mb-0">
-                                        Creëren en beheren van je account, leeftijdsverificatie en identiteitscontrole
+                                        @SharedLocalizer["AccountVerification"]
                                     </p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="p-3" style="background: rgba(255, 255, 255, 0.05); border-radius: 10px;">
                                     <h6 class="text-gold mb-2">
-                                        <i class="fas fa-gamepad"></i> Dienstverlening
+                                        <i class="fas fa-gamepad"></i> @SharedLocalizer["ServiceDelivery"]
                                     </h6>
                                     <p class="text-white-50 small mb-0">
-                                        Het leveren van onze casinodiensten en verwerken van transacties
+                                        @SharedLocalizer["ProvidingCasinoService"]
                                     </p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="p-3" style="background: rgba(255, 255, 255, 0.05); border-radius: 10px;">
                                     <h6 class="text-gold mb-2">
-                                        <i class="fas fa-shield-alt"></i> Veiligheid
+                                        <i class="fas fa-shield-alt"></i> @SharedLocalizer["Security"]
                                     </h6>
                                     <p class="text-white-50 small mb-0">
-                                        Detectie en preventie van fraude en misbruik
+                                        @SharedLocalizer["DetectingFraud"]
                                     </p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="p-3" style="background: rgba(255, 255, 255, 0.05); border-radius: 10px;">
                                     <h6 class="text-gold mb-2">
-                                        <i class="fas fa-heart"></i> Verantwoord Gokken
+                                        <i class="fas fa-heart"></i> @SharedLocalizer["ResponsibleGaming"]
                                     </h6>
                                     <p class="text-white-50 small mb-0">
-                                        Monitoren van spelgedrag en beschermen tegen gokverslaving
+                                        @SharedLocalizer["MonitoringGamingBehavior"]
                                     </p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="p-3" style="background: rgba(255, 255, 255, 0.05); border-radius: 10px;">
                                     <h6 class="text-gold mb-2">
-                                        <i class="fas fa-chart-line"></i> Verbetering
+                                        <i class="fas fa-chart-line"></i> @SharedLocalizer["Improvement"]
                                     </h6>
                                     <p class="text-white-50 small mb-0">
-                                        Analyseren en verbeteren van onze diensten
+                                        @SharedLocalizer["AnalyzingImprovingServices"]
                                     </p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="p-3" style="background: rgba(255, 255, 255, 0.05); border-radius: 10px;">
                                     <h6 class="text-gold mb-2">
-                                        <i class="fas fa-envelope"></i> Communicatie
+                                        <i class="fas fa-envelope"></i> @SharedLocalizer["Communication"]
                                     </h6>
                                     <p class="text-white-50 small mb-0">
-                                        Sturen van belangrijke updates en promotionele berichten (met toestemming)
+                                        @SharedLocalizer["SendingUpdatesPromo"]
                                     </p>
                                 </div>
                             </div>
@@ -176,21 +177,21 @@
 <div class="section-bg-card">
     <div class="container py-5">
         <h2 class="section-title mb-4">
-            <i class="fas fa-share-alt text-danger"></i> 3. DELEN WE JE INFORMATIE?
+            <i class="fas fa-share-alt text-danger"></i> 3. @SharedLocalizer["DoWeShareInfo"]
         </h2>
         <div class="row">
             <div class="col-lg-10 mx-auto">
                 <div class="card">
                     <div class="card-body">
                         <p class="text-white lead mb-4">
-                            Wij delen je persoonlijke informatie NIET met derden voor marketingdoeleinden.
+                            @SharedLocalizer["NoShareMarketing"]
                         </p>
-                        <p class="text-white-50 mb-3">We kunnen je informatie wel delen met:</p>
+                        <p class="text-white-50 mb-3">@SharedLocalizer["ShareInfoWith"]</p>
                         <ul class="text-white-50">
-                            <li class="mb-2"><strong class="text-white">Betalingsproviders:</strong> Voor het verwerken van stortingen en opnames</li>
-                            <li class="mb-2"><strong class="text-white">Speleveranciers:</strong> Voor het leveren van casinogames</li>
-                            <li class="mb-2"><strong class="text-white">Autoriteiten:</strong> Wanneer dit wettelijk verplicht is</li>
-                            <li class="mb-2"><strong class="text-white">Service providers:</strong> Die namens ons werken (onder strikte vertrouwelijkheidsovereenkomsten)</li>
+                            <li class="mb-2"><strong class="text-white">@SharedLocalizer["PaymentProviders"]:</strong> @SharedLocalizer["ProcessingDeposits"]</li>
+                            <li class="mb-2"><strong class="text-white">@SharedLocalizer["GameProviders"]:</strong> @SharedLocalizer["DeliveringGames"]</li>
+                            <li class="mb-2"><strong class="text-white">@SharedLocalizer["Authorities"]:</strong> @SharedLocalizer["WhenLegallyRequired"]</li>
+                            <li class="mb-2"><strong class="text-white">@SharedLocalizer["ServiceProviders"]:</strong> @SharedLocalizer["WorkingOurBehalf"]</li>
                         </ul>
                     </div>
                 </div>
@@ -203,60 +204,60 @@
 <div class="section-bg-dark">
     <div class="container py-5">
         <h2 class="section-title mb-4">
-            <i class="fas fa-balance-scale text-success"></i> 4. JOUW RECHTEN
+            <i class="fas fa-balance-scale text-success"></i> 4. @SharedLocalizer["YourRights"]
         </h2>
         <div class="row">
             <div class="col-lg-10 mx-auto">
                 <div class="card">
                     <div class="card-body">
-                        <p class="text-white-50 mb-3">Onder de AVG (Algemene Verordening Gegevensbescherming) heb je de volgende rechten:</p>
+                        <p class="text-white-50 mb-3">@SharedLocalizer["GDPRRights"]</p>
                         <div class="row g-3">
                             <div class="col-md-4">
                                 <div class="text-center p-3">
                                     <i class="fas fa-eye fa-2x text-info mb-2"></i>
-                                    <h6 class="text-white">Recht op inzage</h6>
-                                    <p class="text-white-50 small mb-0">Bekijk welke gegevens we van je hebben</p>
+                                    <h6 class="text-white">@SharedLocalizer["RightToAccess"]</h6>
+                                    <p class="text-white-50 small mb-0">@SharedLocalizer["ViewYourData"]</p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="text-center p-3">
                                     <i class="fas fa-edit fa-2x text-warning mb-2"></i>
-                                    <h6 class="text-white">Recht op correctie</h6>
-                                    <p class="text-white-50 small mb-0">Laat onjuiste gegevens corrigeren</p>
+                                    <h6 class="text-white">@SharedLocalizer["RightToCorrect"]</h6>
+                                    <p class="text-white-50 small mb-0">@SharedLocalizer["CorrectIncorrectData"]</p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="text-center p-3">
                                     <i class="fas fa-trash fa-2x text-danger mb-2"></i>
-                                    <h6 class="text-white">Recht op verwijdering</h6>
-                                    <p class="text-white-50 small mb-0">Vraag verwijdering van je gegevens</p>
+                                    <h6 class="text-white">@SharedLocalizer["RightToDelete"]</h6>
+                                    <p class="text-white-50 small mb-0">@SharedLocalizer["RequestDataDeletion"]</p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="text-center p-3">
                                     <i class="fas fa-download fa-2x text-success mb-2"></i>
-                                    <h6 class="text-white">Recht op overdracht</h6>
-                                    <p class="text-white-50 small mb-0">Ontvang je gegevens in leesbaar formaat</p>
+                                    <h6 class="text-white">@SharedLocalizer["RightToData"]</h6>
+                                    <p class="text-white-50 small mb-0">@SharedLocalizer["DataReadableFormat"]</p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="text-center p-3">
                                     <i class="fas fa-ban fa-2x text-warning mb-2"></i>
-                                    <h6 class="text-white">Recht op beperking</h6>
-                                    <p class="text-white-50 small mb-0">Beperk het gebruik van je gegevens</p>
+                                    <h6 class="text-white">@SharedLocalizer["RightToRestrict"]</h6>
+                                    <p class="text-white-50 small mb-0">@SharedLocalizer["LimitDataUsage"]</p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="text-center p-3">
                                     <i class="fas fa-times-circle fa-2x text-danger mb-2"></i>
-                                    <h6 class="text-white">Recht op bezwaar</h6>
-                                    <p class="text-white-50 small mb-0">Maak bezwaar tegen verwerking</p>
+                                    <h6 class="text-white">@SharedLocalizer["RightToObjection"]</h6>
+                                    <p class="text-white-50 small mb-0">@SharedLocalizer["ObjectProcessing"]</p>
                                 </div>
                             </div>
                         </div>
                         <div class="alert alert-info mt-4 mb-0">
                             <p class="mb-0">
-                                <i class="fas fa-envelope"></i> Om je rechten uit te oefenen, neem contact op via <strong>privacy@safecasino.be</strong>
+                                <i class="fas fa-envelope"></i> @SharedLocalizer["ExerciseRights"] <strong>privacy@safecasino.be</strong>
                             </p>
                         </div>
                     </div>
@@ -270,22 +271,22 @@
 <div class="section-bg-card">
     <div class="container py-5">
         <h2 class="section-title mb-4">
-            <i class="fas fa-lock text-gold"></i> 5. BEVEILIGING VAN JOUW GEGEVENS
+            <i class="fas fa-lock text-gold"></i> 5. @SharedLocalizer["DataSecurity"]
         </h2>
         <div class="row">
             <div class="col-lg-10 mx-auto">
                 <div class="card">
                     <div class="card-body">
                         <p class="text-white-50 mb-4">
-                            We nemen de beveiliging van jouw gegevens zeer serieus en gebruiken diverse technische en organisatorische maatregelen:
+                            @SharedLocalizer["SecurityMeasures"]
                         </p>
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="d-flex align-items-start">
                                     <i class="fas fa-check-circle text-success fa-2x me-3 mt-1"></i>
                                     <div>
-                                        <h6 class="text-white mb-2">SSL/TLS Encryptie</h6>
-                                        <p class="text-white-50 small mb-0">Alle communicatie is versleuteld met 256-bit SSL encryptie</p>
+                                        <h6 class="text-white mb-2">SSL/TLS @SharedLocalizer["Encryption"]</h6>
+                                        <p class="text-white-50 small mb-0">@SharedLocalizer["AllCommunicationEncrypted"]</p>
                                     </div>
                                 </div>
                             </div>
@@ -293,8 +294,8 @@
                                 <div class="d-flex align-items-start">
                                     <i class="fas fa-check-circle text-success fa-2x me-3 mt-1"></i>
                                     <div>
-                                        <h6 class="text-white mb-2">Veilige Servers</h6>
-                                        <p class="text-white-50 small mb-0">Gegevens worden opgeslagen op beveiligde servers met beperkte toegang</p>
+                                        <h6 class="text-white mb-2">@SharedLocalizer["SecureServers"]</h6>
+                                        <p class="text-white-50 small mb-0">@SharedLocalizer["DataStoredSecureServers"]</p>
                                     </div>
                                 </div>
                             </div>
@@ -302,8 +303,8 @@
                                 <div class="d-flex align-items-start">
                                     <i class="fas fa-check-circle text-success fa-2x me-3 mt-1"></i>
                                     <div>
-                                        <h6 class="text-white mb-2">Firewall Bescherming</h6>
-                                        <p class="text-white-50 small mb-0">Geavanceerde firewalls beschermen tegen ongeautoriseerde toegang</p>
+                                        <h6 class="text-white mb-2">@SharedLocalizer["FirewallProtection"]</h6>
+                                        <p class="text-white-50 small mb-0">@SharedLocalizer["AdvancedFirewalls"]</p>
                                     </div>
                                 </div>
                             </div>
@@ -311,8 +312,8 @@
                                 <div class="d-flex align-items-start">
                                     <i class="fas fa-check-circle text-success fa-2x me-3 mt-1"></i>
                                     <div>
-                                        <h6 class="text-white mb-2">Regelmatige Audits</h6>
-                                        <p class="text-white-50 small mb-0">Onafhankelijke beveiligingsaudits en penetratietesten</p>
+                                        <h6 class="text-white mb-2">@SharedLocalizer["RegularAudits"]</h6>
+                                        <p class="text-white-50 small mb-0">@SharedLocalizer["IndependentSecurityAudits"]</p>
                                     </div>
                                 </div>
                             </div>
@@ -330,13 +331,13 @@
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
                 <h2 class="text-white display-5 fw-bold mb-4">
-                    Vragen over Privacy?
+                    @SharedLocalizer["PrivacyQuestions"]
                 </h2>
                 <p class="text-white-50 lead mb-4">
-                    Neem gerust contact met ons op als je vragen hebt over ons privacybeleid.
+                    @SharedLocalizer["FreeToContact"]
                 </p>
                 <a asp-controller="Home" asp-action="Contact" class="btn btn-promo btn-lg px-5">
-                    <i class="fas fa-envelope"></i> CONTACT
+                    <i class="fas fa-envelope"></i> @SharedLocalizer["Contact"]
                 </a>
             </div>
         </div>

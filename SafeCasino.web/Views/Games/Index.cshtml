@@ -1,6 +1,7 @@
 ﻿@model SafeCasino.Web.ViewModels.GamesIndexViewModel
+@inject IStringLocalizer<SharedResource> SharedLocalizer
 @{
-    ViewData["Title"] = "Casino Games - SafeCasino";
+    ViewData["Title"] = SharedLocalizer["CasinoGames"];
 }
 
 <!-- Page Header -->
@@ -9,10 +10,10 @@
         <div class="row">
             <div class="col-12">
                 <h1 class="display-4 text-white text-center mb-3">
-                    <i class="fas fa-gamepad text-gold"></i> CASINO GAMES
+                    <i class="fas fa-gamepad text-gold"></i> @SharedLocalizer["CasinoGames"]
                 </h1>
                 <p class="lead text-center text-light mb-0">
-                    Ontdek onze collectie van <strong class="text-gold">@Model.TotalGames</strong> spellen
+                    @SharedLocalizer["DiscoverOurCollection"] <strong class="text-gold">@Model.TotalGames</strong> @SharedLocalizer["Games"]
                 </p>
             </div>
         </div>
@@ -28,7 +29,7 @@
                     <!-- ============ AJAX: LIVE SEARCH ============ -->
                     <div class="col-md-4">
                         <label class="form-label">
-                            <i class="fas fa-search"></i> Zoek naar spel
+                            <i class="fas fa-search"></i> @SharedLocalizer["SearchGame"]
                         </label>
                         <div class="position-relative">
                             <input type="text"
@@ -36,7 +37,7 @@
                                    name="search"
                                    value="@Model.SearchQuery"
                                    class="form-control"
-                                   placeholder="Typ spelnaam..."
+                                   placeholder="@SharedLocalizer["TypeGameName"]..."
                                    autocomplete="off" />
                             <div id="searchResults" class="search-results"></div>
                         </div>
@@ -45,10 +46,10 @@
                     <!-- Categorie Filter -->
                     <div class="col-md-3">
                         <label class="form-label">
-                            <i class="fas fa-filter"></i> Categorie
+                            <i class="fas fa-filter"></i> @SharedLocalizer["Category"]
                         </label>
                         <select name="categoryId" id="categoryFilter" class="form-select">
-                            <option value="">Alle categorieën</option>
+                            <option value="">@SharedLocalizer["AllCategories"]</option>
                             @foreach (var category in Model.Categories)
                             {
                                 <option value="@category.Id" selected="@(Model.SelectedCategoryId == category.Id)">
@@ -61,21 +62,21 @@
                     <!-- Sorteer Filter -->
                     <div class="col-md-3">
                         <label class="form-label">
-                            <i class="fas fa-sort"></i> Sorteren op
+                            <i class="fas fa-sort"></i> @SharedLocalizer["SortBy"]
                         </label>
                         <select name="sortBy" class="form-select">
-                            <option value="">Standaard</option>
-                            <option value="popular" selected="@(Model.SortBy == "popular")">Populair</option>
-                            <option value="new" selected="@(Model.SortBy == "new")">Nieuwste</option>
-                            <option value="rtp" selected="@(Model.SortBy == "rtp")">Hoogste RTP</option>
-                            <option value="name" selected="@(Model.SortBy == "name")">Naam (A-Z)</option>
+                            <option value="">@SharedLocalizer["Default"]</option>
+                            <option value="popular" selected="@(Model.SortBy == "popular")">@SharedLocalizer["Popular"]</option>
+                            <option value="new" selected="@(Model.SortBy == "new")">@SharedLocalizer["Newest"]</option>
+                            <option value="rtp" selected="@(Model.SortBy == "rtp")">@SharedLocalizer["HighestRTP"]</option>
+                            <option value="name" selected="@(Model.SortBy == "name")">@SharedLocalizer["NameAZ"]</option>
                         </select>
                     </div>
 
                     <!-- Filter Button -->
                     <div class="col-md-2">
                         <button type="submit" class="btn btn-primary w-100">
-                            <i class="fas fa-filter"></i> Filter
+                            <i class="fas fa-filter"></i> @SharedLocalizer["Filter"]
                         </button>
                     </div>
                 </form>
@@ -90,7 +91,7 @@
         <div class="d-flex flex-wrap gap-2 justify-content-center">
             <a asp-action="Index"
                class="btn @(Model.SelectedCategoryId == null ? "btn-primary" : "btn-outline-primary") btn-sm">
-                <i class="fas fa-th"></i> Alle Games
+                <i class="fas fa-th"></i> @SharedLocalizer["AllGames"]
             </a>
             @foreach (var category in Model.Categories)
             {
@@ -124,10 +125,10 @@
                 </a>
             }
             <a asp-action="Popular" class="btn btn-outline-warning btn-sm">
-                <i class="fas fa-fire"></i> Populair
+                <i class="fas fa-fire"></i> @SharedLocalizer["Popular"]
             </a>
             <a asp-action="New" class="btn btn-outline-success btn-sm">
-                <i class="fas fa-star"></i> Nieuw
+                <i class="fas fa-star"></i> @SharedLocalizer["New"]
             </a>
         </div>
     </div>
@@ -144,15 +145,15 @@
                     @if (Model.SelectedCategoryId.HasValue)
                     {
                         var selectedCategory = Model.Categories.FirstOrDefault(c => c.Id == Model.SelectedCategoryId);
-                        <span>Categorie: <strong class="text-gold">@selectedCategory?.Name</strong></span>
+                        <span>@SharedLocalizer["Category"]: <strong class="text-gold">@selectedCategory?.Name</strong></span>
                     }
                     @if (!string.IsNullOrEmpty(Model.SearchQuery))
                     {
-                        <span class="ms-3">Zoekterm: <strong class="text-gold">"@Model.SearchQuery"</strong></span>
+                        <span class="ms-3">@SharedLocalizer["SearchTerm"]: <strong class="text-gold">"@Model.SearchQuery"</strong></span>
                     }
                 </div>
                 <a asp-action="Index" class="btn btn-outline-secondary btn-sm">
-                    <i class="fas fa-times"></i> Filters wissen
+                    <i class="fas fa-times"></i> @SharedLocalizer["ClearFilters"]
                 </a>
             </div>
         </div>
@@ -168,7 +169,7 @@
             <div class="mb-4 text-center">
                 <h5 class="text-light">
                     <i class="fas fa-check-circle text-success"></i>
-                    <strong class="text-gold" id="gameCount">@Model.Games.Count</strong> games gevonden
+                    <strong class="text-gold" id="gameCount">@Model.Games.Count</strong> @SharedLocalizer["GamesFound"]
                 </h5>
             </div>
 
@@ -181,7 +182,7 @@
                             <!-- Badges -->
                             @if (game.IsNew)
                             {
-                                <span class="badge-exclusive badge-new">NEW</span>
+                                <span class="badge-exclusive badge-new">@SharedLocalizer["New"]</span>
                             }
                             else if (game.IsPopular)
                             {
@@ -221,7 +222,7 @@
                                     {
                                         <a asp-action="Play" asp-route-id="@game.Id"
                                            class="btn btn-primary btn-sm">
-                                            <i class="fas fa-play"></i> Speel Nu
+                                            <i class="fas fa-play"></i> @SharedLocalizer["PlayNow"]
                                         </a>
                                     }
                                     else
@@ -229,12 +230,12 @@
                                         <a asp-controller="Account" asp-action="Login"
                                            asp-route-returnUrl="@Url.Action("Play", new { id = game.Id })"
                                            class="btn btn-success btn-sm">
-                                            <i class="fas fa-sign-in-alt"></i> Login
+                                            <i class="fas fa-sign-in-alt"></i> @SharedLocalizer["Login"]
                                         </a>
                                     }
                                     <a asp-action="Details" asp-route-id="@game.Id"
                                        class="btn btn-outline-primary btn-sm">
-                                        <i class="fas fa-info-circle"></i> Details
+                                        <i class="fas fa-info-circle"></i> @SharedLocalizer["Details"]
                                     </a>
                                 </div>
                             </div>
@@ -247,7 +248,7 @@
             <div class="row mt-5">
                 <div class="col-12 text-center">
                     <button id="loadMoreBtn" class="btn btn-primary btn-lg" style="display: none;">
-                        <i class="fas fa-spinner fa-spin"></i> Meer Games Laden
+                        <i class="fas fa-spinner fa-spin"></i> @SharedLocalizer["LoadMoreGames"]
                     </button>
                 </div>
             </div>
@@ -258,12 +259,12 @@
             <div class="row mt-5">
                 <div class="col-12 text-center py-5">
                     <i class="fas fa-search fa-5x text-muted mb-4" style="opacity: 0.3;"></i>
-                    <h3 class="text-light mb-3">Geen games gevonden</h3>
+                    <h3 class="text-light mb-3">@SharedLocalizer["NoGamesFound"]</h3>
                     <p class="text-muted mb-4">
-                        Probeer een andere zoekopdracht of filter combinatie.
+                        @SharedLocalizer["TryDifferentSearch"]
                     </p>
                     <a asp-action="Index" class="btn btn-primary btn-lg">
-                        <i class="fas fa-redo"></i> Reset Filters
+                        <i class="fas fa-redo"></i> @SharedLocalizer["ResetFilters"]
                     </a>
                 </div>
             </div>
@@ -277,17 +278,17 @@
         <div class="row align-items-center">
             <div class="col-md-8">
                 <h2 class="text-white mb-3">
-                    <i class="fas fa-gift text-gold"></i> Mis geen enkele promotie!
+                    <i class="fas fa-gift text-gold"></i> @SharedLocalizer["DontMissPromotions"]
                 </h2>
                 <p class="text-light lead mb-0">
-                    Registreer nu en ontvang exclusieve bonussen en promoties direct in je inbox.
+                    @SharedLocalizer["RegisterNowReceiveExclusiveBonus"]
                 </p>
             </div>
             <div class="col-md-4 text-md-end mt-3 mt-md-0">
                 @if (User.Identity?.IsAuthenticated != true)
                 {
                     <a asp-controller="Account" asp-action="Register" class="btn btn-promo btn-lg">
-                        <i class="fas fa-user-plus"></i> REGISTREER NU
+                        <i class="fas fa-user-plus"></i> @SharedLocalizer["RegisterNow"]
                     </a>
                 }
             </div>
@@ -313,9 +314,9 @@
             display: none;
         }
 
-        .search-results.active {
-            display: block;
-        }
+            .search-results.active {
+                display: block;
+            }
 
         .search-result-item {
             padding: 10px 15px;
@@ -331,12 +332,12 @@
                 background: rgba(255, 255, 255, 0.08);
             }
 
-        .search-result-item img {
-            width: 40px;
-            height: 40px;
-            border-radius: 5px;
-            object-fit: cover;
-        }
+            .search-result-item img {
+                width: 40px;
+                height: 40px;
+                border-radius: 5px;
+                object-fit: cover;
+            }
 
         .search-result-info {
             flex: 1;
@@ -419,7 +420,7 @@
             }
 
             // Toon loading indicator
-            searchResults.innerHTML = '<div class="search-loading"><i class="fas fa-spinner fa-spin"></i> Zoeken...</div>';
+            searchResults.innerHTML = '<div class="search-loading"><i class="fas fa-spinner fa-spin"></i> @SharedLocalizer["Searching"]...</div>';
             searchResults.classList.add('active');
 
             // Debounce: wacht 300ms na laatste invoer
@@ -434,12 +435,12 @@
                 const result = await response.json();
 
                 if (!result.success) {
-                    searchResults.innerHTML = '<div class="search-no-results">❌ Zoeken mislukt</div>';
+                    searchResults.innerHTML = '<div class="search-no-results">❌ @SharedLocalizer["SearchFailed"]</div>';
                     return;
                 }
 
                 if (result.data.length === 0) {
-                    searchResults.innerHTML = '<div class="search-no-results"><i class="fas fa-search"></i> Geen games gevonden</div>';
+                    searchResults.innerHTML = '<div class="search-no-results"><i class="fas fa-search"></i> @SharedLocalizer["NoGamesFound"]</div>';
                     return;
                 }
 
@@ -466,7 +467,7 @@
                 console.log(`✅ Live Search | Found ${result.data.length} results for: "${query}"`);
             } catch (error) {
                 console.error('❌ Search error:', error);
-                searchResults.innerHTML = '<div class="search-no-results">❌ Zoeken mislukt</div>';
+                searchResults.innerHTML = '<div class="search-no-results">❌ @SharedLocalizer["SearchFailed"]</div>';
             }
         }
 
