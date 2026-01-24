@@ -1,0 +1,95 @@
+﻿@using SafeCasino.Web.ViewModels.Admin
+@model UsersIndexViewModel
+@{
+    ViewData["Title"] = "Gebruikersbeheer";
+}
+
+<div class="container py-5">
+    <h1 class="mb-4">
+        <i class="fas fa-users"></i> Gebruikersbeheer
+    </h1>
+
+    <!-- Search -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-10">
+                    <input type="text" name="search" value="@Model.SearchQuery"
+                           class="form-control" placeholder="Zoek op email, naam..." />
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-search"></i> Zoeken
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Users Table -->
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Naam</th>
+                        <th>Rollen</th>
+                        <th>Registratie</th>
+                        <th>Status</th>
+                        <th>Acties</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var userVm in Model.Users)
+                    {
+                        <tr>
+                            <td>@userVm.User.Email</td>
+                            <td>@userVm.User.FirstName @userVm.User.LastName</td>
+                            <td>
+                                @foreach (var role in userVm.Roles)
+                                {
+                                    <span class="badge bg-primary">@role</span>
+                                }
+                            </td>
+                            <td>@userVm.User.RegistrationDate.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                @if (userVm.IsLocked)
+                                {
+                                    <span class="badge bg-danger">Geblokkeerd</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">Actief</span>
+                                }
+                            </td>
+                            <td>
+                                <a asp-action="UserDetails" asp-route-id="@userVm.User.Id"
+                                   class="btn btn-sm btn-info">
+                                    <i class="fas fa-eye"></i> Details
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            @if (Model.TotalPages > 1)
+            {
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        @for (int i = 1; i <= Model.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                                <a class="page-link" asp-action="Users" asp-route-page="@i" asp-route-search="@Model.SearchQuery">
+                                    @i
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+﻿@using SafeCasino.Web.ViewModels.Admin
+@model ReviewModerationViewModel
+@{
+    ViewData["Title"] = "Review Moderatie";
+}
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1><i class="fas fa-comment-dots"></i> Review Moderatie</h1>
+        <div>
+            <a asp-action="Reviews" asp-route-showApproved="false"
+               class="btn @(!Model.ShowApproved ? "btn-primary" : "btn-outline-primary")">
+                Pending (@Model.Reviews.Count(r => !r.IsApproved))
+            </a>
+            <a asp-action="Reviews" asp-route-showApproved="true"
+               class="btn @(Model.ShowApproved ? "btn-success" : "btn-outline-success")">
+                Goedgekeurd
+            </a>
+        </div>
+    </div>
+
+    @if (Model.Reviews.Any())
+    {
+        <div class="row g-4">
+            @foreach (var review in Model.Reviews)
+            {
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <h5>@review.Title</h5>
+                                    <p class="text-muted mb-1">
+                                        <strong>Game:</strong> @review.Game.Name
+                                    </p>
+                                    <p class="text-muted mb-0">
+                                        <strong>Door:</strong> @review.User.FirstName @review.User.LastName
+                                        (@review.User.Email) - @review.CreatedDate.ToString("dd/MM/yyyy HH:mm")
+                                    </p>
+                                </div>
+                                <div>
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        if (i <= review.Rating)
+                                        {
+                                            <i class="fas fa-star text-warning"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="far fa-star text-warning"></i>
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <p>@review.Content</p>
+
+                            @if (!review.IsApproved)
+                            {
+                                <div class="d-flex gap-2">
+                                    <form method="post" asp-action="ApproveReview" class="d-inline">
+                                        <input type="hidden" name="reviewId" value="@review.Id" />
+                                        <button type="submit" class="btn btn-success">
+                                            <i class="fas fa-check"></i> Goedkeuren
+                                        </button>
+                                    </form>
+                                    <form method="post" asp-action="RejectReview" class="d-inline"
+                                          onsubmit="return confirm('Weet je zeker dat je deze review wilt afkeuren en verwijderen?')">
+                                        <input type="hidden" name="reviewId" value="@review.Id" />
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-times"></i> Afkeuren
+                                        </button>
+                                    </form>
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success">Goedgekeurd</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i> Geen reviews gevonden.
+        </div>
+    }
+</div>

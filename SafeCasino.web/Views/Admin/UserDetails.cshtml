@@ -1,0 +1,141 @@
+﻿@using SafeCasino.Web.ViewModels.Admin
+@model UserDetailsViewModel
+@{
+    ViewData["Title"] = "Gebruiker Details";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4><i class="fas fa-user"></i> Gebruikersgegevens</h4>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Email:</dt>
+                        <dd class="col-sm-9">@Model.User.Email</dd>
+
+                        <dt class="col-sm-3">Naam:</dt>
+                        <dd class="col-sm-9">@Model.User.FirstName @Model.User.LastName</dd>
+
+                        <dt class="col-sm-3">Geboortedatum:</dt>
+                        <dd class="col-sm-9">@(Model.User.DateOfBirth?.ToString("dd/MM/yyyy") ?? "Niet opgegeven")</dd>
+
+                        <dt class="col-sm-3">Registratie:</dt>
+                        <dd class="col-sm-9">@Model.User.RegistrationDate.ToString("dd/MM/yyyy HH:mm")</dd>
+
+                        <dt class="col-sm-3">Saldo:</dt>
+                        <dd class="col-sm-9">€@Model.User.Balance</dd>
+
+                        <dt class="col-sm-3">Geverifieerd:</dt>
+                        <dd class="col-sm-9">
+                            @if (Model.User.IsVerified)
+                            {
+                                <span class="badge bg-success">Ja</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning">Nee</span>
+                            }
+                        </dd>
+
+                        <dt class="col-sm-3">Status:</dt>
+                        <dd class="col-sm-9">
+                            @if (Model.IsLocked)
+                            {
+                                <span class="badge bg-danger">Geblokkeerd tot @Model.User.LockoutEnd</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success">Actief</span>
+                            }
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <!-- Rollen Beheer -->
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-shield-alt"></i> Rollen</h4>
+                </div>
+                <div class="card-body">
+                    <h5>Huidige Rollen:</h5>
+                    <div class="mb-3">
+                        @foreach (var role in Model.CurrentRoles)
+                        {
+                            <form method="post" asp-action="RemoveRole" class="d-inline">
+                                <input type="hidden" name="userId" value="@Model.User.Id" />
+                                <input type="hidden" name="roleName" value="@role" />
+                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                    @role <i class="fas fa-times"></i>
+                                </button>
+                            </form>
+                        }
+                    </div>
+
+                    <hr />
+
+                    <h5>Rol Toekennen:</h5>
+                    <form method="post" asp-action="AssignRole" class="row g-3">
+                        <input type="hidden" name="userId" value="@Model.User.Id" />
+                        <div class="col-md-8">
+                            <select name="roleName" class="form-select">
+                                @foreach (var role in Model.AvailableRoles.Except(Model.CurrentRoles))
+                                {
+                                    <option value="@role">@role</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-plus"></i> Toevoegen
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <!-- Acties -->
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-tools"></i> Acties</h4>
+                </div>
+                <div class="card-body">
+                    @if (Model.IsLocked)
+                    {
+                        <form method="post" asp-action="UnlockUser">
+                            <input type="hidden" name="userId" value="@Model.User.Id" />
+                            <button type="submit" class="btn btn-success w-100 mb-3">
+                                <i class="fas fa-unlock"></i> Deblokkeer Gebruiker
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form method="post" asp-action="LockUser"
+                              onsubmit="return confirm('Weet je zeker dat je deze gebruiker wilt blokkeren?')">
+                            <input type="hidden" name="userId" value="@Model.User.Id" />
+                            <div class="mb-3">
+                                <label class="form-label">Blokkeren voor (dagen):</label>
+                                <input type="number" name="days" value="30" class="form-control" min="1" max="365" />
+                            </div>
+                            <button type="submit" class="btn btn-danger w-100">
+                                <i class="fas fa-ban"></i> Blokkeer Gebruiker
+                            </button>
+                        </form>
+                    }
+
+                    <hr />
+
+                    <a asp-action="Users" class="btn btn-secondary w-100">
+                        <i class="fas fa-arrow-left"></i> Terug naar Overzicht
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
