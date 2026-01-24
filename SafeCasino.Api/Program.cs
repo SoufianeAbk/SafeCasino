@@ -54,7 +54,7 @@ builder.Services.AddSwaggerGen(options =>
 
 // Configure Database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(
+    options.UseSqlite(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Configure Identity — use ApplicationRole (match ApplicationDbContext)
