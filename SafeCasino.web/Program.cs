@@ -78,8 +78,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 
-    // ✨ Activeer Request Logging in Development
-    app.UseRequestLogging();
+    // ❌ Request Logging Middleware DISABLED
+    // app.UseRequestLogging();
 }
 else
 {

@@ -1,0 +1,262 @@
+﻿/* ===== TEXT CONTRAST FIXES ===== */
+/* Fix voor donkere tekst op donkere achtergronden */
+
+/* Override Bootstrap's text-muted voor betere leesbaarheid */
+.text-muted {
+    color: #b0b0b0 !important; /* Lichter grijs in plaats van donker grijs */
+}
+
+    /* Specifieke fix voor kleine tekst */
+    .text-muted.small {
+        color: #c0c0c0 !important;
+    }
+
+/* Fix voor text-dark op badges tegen donkere achtergronden */
+.badge.text-dark {
+    color: #0a0e27 !important; /* Zeer donker, maar op gekleurde badge achtergrond */
+    background-color: #ffc107; /* Zorg dat badge altijd gele achtergrond heeft */
+}
+
+/* Verbeterde contrast voor card text */
+.card-text.text-muted {
+    color: #b8b8b8 !important;
+}
+
+/* Fix voor accordion items */
+.accordion-button.bg-dark {
+    background-color: rgba(45, 27, 78, 0.8) !important; /* Paarse tint i.p.v. zwart */
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+    .accordion-button.bg-dark:not(.collapsed) {
+        background-color: var(--accent-purple) !important;
+        color: #ffffff !important;
+    }
+
+.accordion-body.bg-dark {
+    background-color: rgba(26, 15, 46, 0.9) !important; /* Donkere paarse tint */
+    color: #e0e0e0 !important;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Fix voor text-white-50 (te donker) */
+.text-white-50 {
+    color: rgba(255, 255, 255, 0.7) !important; /* Verhoog van 50% naar 70% opacity */
+}
+
+/* Specifieke fixes voor provider namen en category labels */
+.card-text.text-muted.small {
+    color: #c8c8c8 !important;
+    font-weight: 500;
+}
+
+/* Fix voor list items in donkere secties */
+.text-white-50 li {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* Verbeterde contrast voor links in donkere secties */
+.text-white-50 a,
+.text-muted a {
+    color: #ffd700 !important;
+    text-decoration: underline;
+}
+
+    .text-white-50 a:hover,
+    .text-muted a:hover {
+        color: #ffed4e !important;
+    }
+
+/* Fix voor small text in badges */
+small.text-muted {
+    color: #d0d0d0 !important;
+}
+
+/* Verbeterde contrast voor form labels */
+.form-label.text-white {
+    color: #f0f0f0 !important;
+    font-weight: 600;
+}
+
+/* Fix voor disabled/muted state text */
+.text-muted:disabled,
+.text-muted.disabled {
+    color: #888888 !important;
+}
+
+/* Specifieke fix voor game statistics */
+.game-card .text-muted {
+    color: #c5c5c5 !important;
+}
+
+/* Fix voor secondary text in cards */
+.card-body .text-secondary {
+    color: #b5b5b5 !important;
+}
+
+/* Verbeterde contrast voor alert text */
+.alert .text-muted {
+    color: #d5d5d5 !important;
+}
+
+/* Fix voor breadcrumb text */
+.breadcrumb .text-muted {
+    color: #c0c0c0 !important;
+}
+
+/* Specifieke fix voor "Populair" badge in GamesList */
+.badge.bg-warning.text-dark {
+    background-color: #ffc107 !important;
+    color: #000000 !important;
+    font-weight: 700;
+}
+
+/* Ensure sufficient contrast for all heading levels */
+h1.text-muted, h2.text-muted, h3.text-muted,
+h4.text-muted, h5.text-muted, h6.text-muted {
+    color: #d0d0d0 !important;
+}
+
+/* Fix voor dropdown menu items */
+.dropdown-item.text-muted {
+    color: #333333 !important; /* Donker op lichte dropdown achtergrond */
+}
+
+/* Fix voor table text */
+.table .text-muted {
+    color: #b8b8b8 !important;
+}
+
+/* Verbeterde contrast voor footer text */
+footer .text-muted {
+    color: #b0b0b0 !important;
+}
+
+/* Fix voor placeholder text in forms */
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.form-control:focus::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Fix voor text-secondary class */
+.text-secondary {
+    color: #b5b5b5 !important;
+}
+
+/* Fix voor muted text in list groups */
+.list-group-item .text-muted {
+    color: #b8b8b8 !important;
+}
+
+/* Verbeterde contrast voor nav links */
+.nav-link.text-muted {
+    color: #c0c0c0 !important;
+}
+
+    .nav-link.text-muted:hover {
+        color: #ffd700 !important;
+    }
+
+/* Fix voor badge text op donkere achtergronden */
+.badge.bg-secondary {
+    background-color: #6c757d !important;
+    color: #ffffff !important;
+}
+
+/* Specifieke fix voor review cards */
+.review-card .text-muted {
+    color: #c0c0c0 !important;
+}
+
+/* Fix voor timestamp text */
+.timestamp.text-muted,
+.date.text-muted {
+    color: #b8b8b8 !important;
+}
+
+/* Verbeterde contrast voor metadata text */
+.metadata .text-muted {
+    color: #c5c5c5 !important;
+}
+
+/* Fix voor disabled buttons */
+.btn.text-muted:disabled {
+    color: #909090 !important;
+}
+
+/* Fix voor input group text */
+.input-group-text.text-muted {
+    color: #c0c0c0 !important;
+}
+
+/* Verbeterde contrast voor card headers */
+.card-header .text-muted {
+    color: #d0d0d0 !important;
+}
+
+/* Fix voor card footers */
+.card-footer .text-muted {
+    color: #b8b8b8 !important;
+}
+
+/* Specifieke fix voor pagination */
+.pagination .text-muted {
+    color: #b0b0b0 !important;
+}
+
+/* Fix voor modal text */
+.modal-body .text-muted {
+    color: #555555 !important; /* Donkerder omdat modals meestal lichte achtergrond hebben */
+}
+
+/* Verbeterde contrast voor tooltips */
+.tooltip .text-muted {
+    color: #e0e0e0 !important;
+}
+
+/* Fix voor progress bar text */
+.progress .text-muted {
+    color: #e0e0e0 !important;
+}
+
+/* Specifieke fix voor dark theme cards */
+.card.bg-dark .text-muted,
+.bg-dark .text-muted {
+    color: #c0c0c0 !important;
+}
+
+/* Fix voor text in dark sections */
+.section-bg-dark .text-muted,
+.section-bg-card .text-muted {
+    color: #c0c0c0 !important;
+}
+
+/* Verbeterde contrast voor labels */
+label.text-muted {
+    color: #b8b8b8 !important;
+}
+
+/* Fix voor help text */
+.form-text.text-muted,
+.help-text.text-muted {
+    color: #b8b8b8 !important;
+}
+
+/* Specifieke fix voor admin tables */
+.admin-table .text-muted {
+    color: #b0b0b0 !important;
+}
+
+/* Fix voor status indicators */
+.status.text-muted {
+    color: #c5c5c5 !important;
+}
+
+/* Verbeterde contrast voor empty state messages */
+.empty-state .text-muted {
+    color: #c0c0c0 !important;
+}
