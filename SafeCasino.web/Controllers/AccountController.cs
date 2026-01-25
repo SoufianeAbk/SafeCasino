@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SafeCasino.Api.Services;
 using SafeCasino.Data.Identity;
 using SafeCasino.Web.ViewModels;
+using System.Web;
 
 namespace SafeCasino.Web.Controllers
 {
@@ -13,15 +15,18 @@ namespace SafeCasino.Web.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IEmailService _emailService;
         private readonly ILogger<AccountController> _logger;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
+            IEmailService emailService,
             ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailService = emailService;
             _logger = logger;
         }
 
@@ -47,21 +52,32 @@ namespace SafeCasino.Web.Controllers
                 return View(model);
             }
 
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            // Check of email geverifieerd is
+            if (user != null && !user.EmailConfirmed)
+            {
+                ModelState.AddModelError(string.Empty, "Je moet eerst je e-mailadres verifiëren. Check je inbox.");
+                ViewData["ShowResendLink"] = true;
+                ViewData["Email"] = model.Email;
+                return View(model);
+            }
+
             var result = await _signInManager.PasswordSignInAsync(
                 model.Email,
                 model.Password,
                 model.RememberMe,
-                lockoutOnFailure: false);
+                lockoutOnFailure: true);
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("User logged in successfully");
+                _logger.LogInformation("User logged in successfully: {Email}", model.Email);
                 return RedirectToLocal(model.ReturnUrl);
             }
 
             if (result.IsLockedOut)
             {
-                _logger.LogWarning("User account locked out");
+                _logger.LogWarning("User account locked out: {Email}", model.Email);
                 ModelState.AddModelError(string.Empty, "Account is tijdelijk vergrendeld");
                 return View(model);
             }
@@ -109,23 +125,39 @@ namespace SafeCasino.Web.Controllers
                 LastName = model.LastName,
                 DateOfBirth = model.DateOfBirth,
                 RegistrationDate = DateTime.Now,
-                Balance = 100m, // Welkomstbonus
-                IsVerified = false
+                Balance = 0m, // Bonus komt pas na verificatie
+                IsVerified = false,
+                EmailConfirmed = false
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("User created successfully");
+                _logger.LogInformation("User created successfully: {Email}", user.Email);
 
                 // Voeg Player rol toe
                 await _userManager.AddToRoleAsync(user, "Player");
 
-                // Log de gebruiker automatisch in
-                await _signInManager.SignInAsync(user, isPersistent: false);
+                // ✨ Genereer email verificatie token
+                var emailToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                return RedirectToAction("Index", "Home");
+                try
+                {
+                    // ✨ Verstuur verificatie email
+                    await _emailService.SendEmailVerificationAsync(user, emailToken);
+
+                    TempData["Success"] = "Registratie succesvol! We hebben een verificatielink naar je e-mailadres gestuurd.";
+                    TempData["Email"] = user.Email;
+
+                    return RedirectToAction(nameof(RegisterSuccess));
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Fout bij verzenden verificatie email naar {Email}", user.Email);
+                    TempData["Warning"] = "Account is aangemaakt, maar er ging iets mis bij het verzenden van de verificatie email.";
+                    return RedirectToAction(nameof(RegisterSuccess));
+                }
             }
 
             foreach (var error in result.Errors)
@@ -134,6 +166,106 @@ namespace SafeCasino.Web.Controllers
             }
 
             return View(model);
+        }
+
+        /// <summary>
+        /// Registratie succes pagina
+        /// </summary>
+        [HttpGet]
+        public IActionResult RegisterSuccess()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Verifieer email adres
+        /// </summary>
+        [HttpGet]
+        public async Task<IActionResult> VerifyEmail(string userId, string token)
+        {
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
+            {
+                TempData["Error"] = "Ongeldige verificatie link";
+                return RedirectToAction("Login");
+            }
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                TempData["Error"] = "Gebruiker niet gevonden";
+                return RedirectToAction("Login");
+            }
+
+            if (user.EmailConfirmed)
+            {
+                TempData["Info"] = "Je email is al geverifieerd";
+                return RedirectToAction("Login");
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+
+            if (result.Succeeded)
+            {
+                // Markeer gebruiker als geverifieerd
+                user.IsVerified = true;
+                user.Balance = 100m; // ✨ Welkomstbonus na verificatie
+                await _userManager.UpdateAsync(user);
+
+                try
+                {
+                    // Verstuur welkomst email
+                    await _emailService.SendWelcomeEmailAsync(user);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Fout bij verzenden welkomst email naar {Email}", user.Email);
+                }
+
+                _logger.LogInformation("Email geverifieerd voor gebruiker: {Email}", user.Email);
+
+                TempData["Success"] = "Je email is succesvol geverifieerd! Je ontvangt €100 welkomstbonus. Je kunt nu inloggen.";
+                return RedirectToAction("Login");
+            }
+
+            TempData["Error"] = "Email verificatie mislukt. De link is mogelijk verlopen.";
+            ViewData["Email"] = user.Email;
+            return View("VerificationFailed");
+        }
+
+        /// <summary>
+        /// Verstuur verificatie email opnieuw
+        /// </summary>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResendVerification(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                TempData["Info"] = "Als het account bestaat, is er een verificatie email verstuurd";
+                return RedirectToAction("Login");
+            }
+
+            if (user.EmailConfirmed)
+            {
+                TempData["Info"] = "Je email is al geverifieerd";
+                return RedirectToAction("Login");
+            }
+
+            try
+            {
+                var emailToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                await _emailService.SendEmailVerificationAsync(user, emailToken);
+
+                TempData["Success"] = "Verificatie email is opnieuw verstuurd. Check je inbox.";
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Fout bij opnieuw versturen verificatie email naar {Email}", email);
+                TempData["Error"] = "Er is een fout opgetreden bij het verzenden van de email";
+            }
+
+            return RedirectToAction("Login");
         }
 
         /// <summary>

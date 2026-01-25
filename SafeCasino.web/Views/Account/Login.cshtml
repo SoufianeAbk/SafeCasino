@@ -39,6 +39,27 @@
                         </div>
                     </form>
 
+                    <!-- ✅ EMAIL VERIFICATIE SECTIE -->
+                    @if (ViewData["ShowResendLink"] != null && (bool)ViewData["ShowResendLink"])
+                    {
+                        <div class="card mt-3 border-warning">
+                            <div class="card-body">
+                                <h6 class="card-title">
+                                    <i class="fas fa-envelope text-warning me-2"></i>Email Verificatie Vereist
+                                </h6>
+                                <p class="card-text small mb-3">
+                                    Je moet eerst je e-mailadres verifiëren voor je kunt inloggen.
+                                </p>
+                                <form asp-action="ResendVerification" method="post">
+                                    <input type="hidden" name="email" value="@ViewData["Email"]" />
+                                    <button type="submit" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-paper-plane me-1"></i>Verificatie Email Opnieuw Verzenden
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+
                     <hr class="my-4" />
 
                     <div class="text-center">

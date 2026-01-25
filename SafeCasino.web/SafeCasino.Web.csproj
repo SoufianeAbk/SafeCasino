@@ -19,34 +19,6 @@
   <ItemGroup>
     <ProjectReference Include="..\SafeCasino.Data\SafeCasino.Data.csproj" />
     <ProjectReference Include="..\SafeCasino.Shared\SafeCasino.Shared.csproj" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Compile Update="Resources\SharedResource.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>SharedResource.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\SharedResource.en.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <CustomToolNamespace>SafeCasino.web.Resources</CustomToolNamespace>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\SharedResource.fr.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <CustomToolNamespace>SafeCasino.web.Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\SharedResource.nl.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <CustomToolNamespace>SafeCasino.web.Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\SharedResource.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>SharedResource.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>SafeCasino.web.Resources</CustomToolNamespace>
-    </EmbeddedResource>
+	<ProjectReference Include="..\SafeCasino.Api\SafeCasino.Api.csproj" />
   </ItemGroup>
 </Project>

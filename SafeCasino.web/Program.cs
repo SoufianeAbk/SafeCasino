@@ -1,50 +1,42 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using SafeCasino.Api.Services;
 using SafeCasino.Data.Data;
 using SafeCasino.Data.Identity;
 using SafeCasino.Web.Middleware;
-using SafeCasino.Web.Resources;
-using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
-builder.Services.AddControllersWithViews();
-
-// Configure Localization
-builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
-builder.Services.AddControllersWithViews()
-    .AddViewLocalization()
-    .AddDataAnnotationsLocalization(options =>
-    {
-        options.DataAnnotationLocalizerProvider = (type, factory) =>
-            factory.Create(typeof(SharedResource));
-    });
-
-// Configure Database
+// Database Configuration
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Configure Identity - use ApplicationRole (matches ApplicationDbContext)
+// Identity Configuration
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 {
+    // Password settings
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
     options.Password.RequireUppercase = true;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredLength = 8;
 
+    // Lockout settings
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
     options.Lockout.MaxFailedAccessAttempts = 5;
     options.Lockout.AllowedForNewUsers = true;
 
+    // User settings
     options.User.RequireUniqueEmail = true;
+
+    // Email confirmation vereist
+    options.SignIn.RequireConfirmedEmail = true;
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 
+// Configure Cookie Settings
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
@@ -54,33 +46,42 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
-builder.Logging.ClearProviders();
-builder.Logging.AddConsole();
-builder.Logging.AddDebug();
+// Configure SMTP Settings
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
 
-if (builder.Environment.IsDevelopment())
+// Register Email Service
+builder.Services.AddScoped<IEmailService, EmailService>();
+
+// Localization Configuration
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization(options =>
+    {
+        options.DataAnnotationLocalizerProvider = (type, factory) =>
+            factory.Create(typeof(SafeCasino.web.Resources.SharedResource));
+    });
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
-    builder.Logging.AddFilter("SafeCasino.Web.Middleware", LogLevel.Debug);
-}
-else
-{
-    builder.Logging.AddFilter("SafeCasino.Web.Middleware", LogLevel.Information);
-}
+    var supportedCultures = new[] { "nl", "en", "fr" };
+    options.SetDefaultCulture("nl")
+        .AddSupportedCultures(supportedCultures)
+        .AddSupportedUICultures(supportedCultures);
+});
 
 var app = builder.Build();
 
-var supportedCultures = new[] { "nl", "en", "fr" };
-var localizationOptions = new RequestLocalizationOptions()
-    .SetDefaultCulture("nl")
-    .AddSupportedCultures(supportedCultures)
-    .AddSupportedUICultures(supportedCultures);
+// Configure the HTTP request pipeline
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
 
-app.UseRequestLocalization(localizationOptions);
-
-app.UseRequestLogging();
-app.UseCookieSecurity();
-
-if (!app.Environment.IsDevelopment())
+    // ✨ Activeer Request Logging in Development
+    app.UseRequestLogging();
+}
+else
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
@@ -88,6 +89,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseRequestLocalization();
 
 app.UseRouting();
 
@@ -98,6 +101,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+// Seed database
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -107,17 +111,13 @@ using (var scope = app.Services.CreateScope())
         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
         var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
 
-        context.Database.EnsureCreated();
-
+        context.Database.Migrate();
         await DbSeeder.SeedAsync(context, userManager, roleManager);
-
-        Console.WriteLine("✅ Database succesvol geseeded!");
     }
     catch (Exception ex)
     {
         var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "❌ Een fout is opgetreden tijdens het seeden van de database.");
-        Console.WriteLine($"❌ Fout bij seeden: {ex.Message}");
+        logger.LogError(ex, "Een fout is opgetreden tijdens het seeden van de database");
     }
 }
 

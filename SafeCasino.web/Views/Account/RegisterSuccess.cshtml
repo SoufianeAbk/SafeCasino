@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Registratie Succesvol";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-5 text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-envelope-circle-check" style="font-size: 5rem; color: var(--gold);"></i>
+                    </div>
+
+                    <h2 class="mb-4">Registratie Succesvol! 🎉</h2>
+
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success">
+                            @TempData["Success"]
+                        </div>
+                    }
+
+                    <div class="alert alert-info mb-4">
+                        <h5><i class="fas fa-info-circle"></i> Laatste Stap</h5>
+                        <p class="mb-0">
+                            We hebben een verificatielink naar <strong>@TempData["Email"]</strong> gestuurd.
+                            Klik op de link in de email om je account te activeren.
+                        </p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Waarom verificatie?</h5>
+                        <ul class="list-unstyled text-start mx-auto" style="max-width: 500px;">
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Beveiliging van je account
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Ontvang €100 welkomstbonus
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Belangrijke notificaties ontvangen
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-light p-3 rounded mb-4">
+                        <p class="mb-2"><strong>Email niet ontvangen?</strong></p>
+                        <p class="small text-muted mb-3">Check je spam folder of vraag een nieuwe aan</p>
+                        <form asp-action="ResendVerification" method="post">
+                            <input type="hidden" name="email" value="@TempData["Email"]" />
+                            <button type="submit" class="btn btn-outline-primary">
+                                <i class="fas fa-paper-plane me-2"></i>Verstuur Opnieuw
+                            </button>
+                        </form>
+                    </div>
+
+                    <a asp-action="Login" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Terug naar Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

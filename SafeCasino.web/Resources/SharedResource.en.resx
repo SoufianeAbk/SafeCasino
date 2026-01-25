@@ -1,335 +1,101 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+	<!-- 
+		Microsoft ResX Schema
 
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Resources.Extensions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Resources.Extensions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51</value>
-  </resheader>
+		Version 1.3
 
-  <!-- Navigation -->
-  <data name="Home" xml:space="preserve"><value>Home</value></data>
-  <data name="Casino" xml:space="preserve"><value>Casino</value></data>
-  <data name="Games" xml:space="preserve"><value>Games</value></data>
-  <data name="Dice" xml:space="preserve"><value>Dice</value></data>
-  <data name="LiveCasino" xml:space="preserve"><value>Live Casino</value></data>
-  <data name="Promotions" xml:space="preserve"><value>Promotions</value></data>
-  <data name="Promos" xml:space="preserve"><value>Promos</value></data>
-  <data name="NapoleonHub" xml:space="preserve"><value>Napoleon Hub</value></data>
-  <data name="Login" xml:space="preserve"><value>Login</value></data>
-  <data name="Register" xml:space="preserve"><value>Register</value></data>
-  <data name="Logout" xml:space="preserve"><value>Logout</value></data>
-  <data name="Profile" xml:space="preserve"><value>Profile</value></data>
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
 
-  <!-- Common Actions -->
-  <data name="Search" xml:space="preserve"><value>Search</value></data>
-  <data name="Filter" xml:space="preserve"><value>Filter</value></data>
-  <data name="Sort" xml:space="preserve"><value>Sort</value></data>
-  <data name="PlayNow" xml:space="preserve"><value>Play Now</value></data>
-  <data name="Submit" xml:space="preserve"><value>Submit</value></data>
-  <data name="Cancel" xml:space="preserve"><value>Cancel</value></data>
-  <data name="Save" xml:space="preserve"><value>Save</value></data>
-  <data name="Delete" xml:space="preserve"><value>Delete</value></data>
-  <data name="Edit" xml:space="preserve"><value>Edit</value></data>
-  <data name="Back" xml:space="preserve"><value>Back</value></data>
-  <data name="LoadMore" xml:space="preserve"><value>Load More</value></data>
-  <data name="ViewAll" xml:space="preserve"><value>View All</value></data>
-  <data name="MoreInfo" xml:space="preserve"><value>More Info</value></data>
+		Example:
 
-  <!-- Game Related -->
-  <data name="Popular" xml:space="preserve"><value>Popular</value></data>
-  <data name="New" xml:space="preserve"><value>New</value></data>
-  <data name="Category" xml:space="preserve"><value>Category</value></data>
-  <data name="Provider" xml:space="preserve"><value>Provider</value></data>
-  <data name="Providers" xml:space="preserve"><value>Providers</value></data>
-  <data name="RTP" xml:space="preserve"><value>RTP</value></data>
-  <data name="MinBet" xml:space="preserve"><value>Min. Bet</value></data>
-  <data name="MaxBet" xml:space="preserve"><value>Max. Bet</value></data>
-  <data name="PlayCount" xml:space="preserve"><value>Times Played</value></data>
-  <data name="Reviews" xml:space="preserve"><value>Reviews</value></data>
-  <data name="Rating" xml:space="preserve"><value>Rating</value></data>
-  <data name="Details" xml:space="preserve"><value>Details</value></data>
-  <data name="Slots" xml:space="preserve"><value>Slots</value></data>
-  <data name="Roulette" xml:space="preserve"><value>Roulette</value></data>
-  <data name="Blackjack" xml:space="preserve"><value>Blackjack</value></data>
-  <data name="PopularGames" xml:space="preserve"><value>Popular Games</value></data>
-  <data name="Exclusive" xml:space="preserve"><value>Exclusive</value></data>
-  <data name="Exclusives" xml:space="preserve"><value>Exclusives</value></data>
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
 
-  <!-- User Account -->
-  <data name="MyProfile" xml:space="preserve"><value>My Profile</value></data>
-  <data name="MyBalance" xml:space="preserve"><value>My Balance</value></data>
-  <data name="Email" xml:space="preserve"><value>Email</value></data>
-  <data name="Password" xml:space="preserve"><value>Password</value></data>
-  <data name="ConfirmPassword" xml:space="preserve"><value>Confirm Password</value></data>
-  <data name="FirstName" xml:space="preserve"><value>First Name</value></data>
-  <data name="LastName" xml:space="preserve"><value>Last Name</value></data>
-  <data name="DateOfBirth" xml:space="preserve"><value>Date of Birth</value></data>
-  <data name="RememberMe" xml:space="preserve"><value>Remember me</value></data>
-  <data name="NoAccount" xml:space="preserve"><value>Don't have an account?</value></data>
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
 
-  <!-- Messages -->
-  <data name="Welcome" xml:space="preserve"><value>Welcome to SafeCasino</value></data>
-  <data name="WelcomeBack" xml:space="preserve"><value>Welcome back</value></data>
-  <data name="LoginRequired" xml:space="preserve"><value>You must login to play</value></data>
-  <data name="RegistrationSuccess" xml:space="preserve"><value>Registration successful! Welcome to SafeCasino!</value></data>
-  <data name="LoginSuccess" xml:space="preserve"><value>Successfully logged in</value></data>
-  <data name="LogoutSuccess" xml:space="preserve"><value>You have been logged out</value></data>
-  <data name="InvalidLoginAttempt" xml:space="preserve"><value>Invalid login attempt</value></data>
-  <data name="AccountLockedOut" xml:space="preserve"><value>Account is temporarily locked</value></data>
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
 
-  <!-- Validation -->
-  <data name="Required" xml:space="preserve"><value>{0} is required</value></data>
-  <data name="EmailRequired" xml:space="preserve"><value>Email address is required</value></data>
-  <data name="EmailInvalid" xml:space="preserve"><value>Invalid email address</value></data>
-  <data name="PasswordRequired" xml:space="preserve"><value>Password is required</value></data>
-  <data name="PasswordsDoNotMatch" xml:space="preserve"><value>Passwords do not match</value></data>
-  <data name="MinimumAge" xml:space="preserve"><value>You must be at least 18 years old</value></data>
-  <data name="StringLength" xml:space="preserve"><value>{0} must be between {2} and {1} characters long</value></data>
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
 
-  <!-- Home Page -->
-  <data name="SafeCasino" xml:space="preserve"><value>SafeCasino</value></data>
-  <data name="SafeCasinoTitle" xml:space="preserve"><value>Welcome to SafeCasino - Your Trusted Online Casino</value></data>
-  <data name="SafeCasinoSubtitle" xml:space="preserve"><value>Discover thousands of exciting casino games, live dealers and daily tournaments with fantastic prizes!</value></data>
-  <data name="DailyBoost" xml:space="preserve"><value>Daily Boost</value></data>
-  <data name="UpTo" xml:space="preserve"><value>Up to</value></data>
-  <data name="PlayAndWin10Times" xml:space="preserve"><value>Play and win 10x your bet</value></data>
-  <data name="Receive25PercentCashback" xml:space="preserve"><value>Receive 25% cashback</value></data>
-  <data name="AnimalTournament" xml:space="preserve"><value>Animal Tournament</value></data>
-  <data name="Daily" xml:space="preserve"><value>Daily</value></data>
-  <data name="GetYourShareOf" xml:space="preserve"><value>Get your share of</value></data>
-  <data name="DailyPrizePool" xml:space="preserve"><value>Daily Prize Pool</value></data>
-  <data name="LiveCrashGame" xml:space="preserve"><value>Live Crash Game</value></data>
-  <data name="YourWinsAre" xml:space="preserve"><value>Your wins are</value></data>
-  <data name="ReadyFor" xml:space="preserve"><value>Ready for</value></data>
-  <data name="Takeoff" xml:space="preserve"><value>Takeoff</value></data>
-  <data name="Tournament" xml:space="preserve"><value>Tournament</value></data>
-  <data name="DailySpin" xml:space="preserve"><value>Daily Spin</value></data>
-  <data name="CoinShop" xml:space="preserve"><value>Coin Shop</value></data>
-  <data name="OnlyAtSafeCasino" xml:space="preserve"><value>Only at SafeCasino</value></data>
-  <data name="JoinExcitingTournaments" xml:space="preserve"><value>Join exciting tournaments and win fantastic prizes!</value></data>
-  <data name="DailyPrizePotsUp" xml:space="preserve"><value>Daily prize pots up to €30,000!</value></data>
-  <data name="WhySafeCasino" xml:space="preserve"><value>Why SafeCasino?</value></data>
-  <data name="CompletelySecure" xml:space="preserve"><value>100% Secure</value></data>
-  <data name="SSLEncryptionSecurePayments" xml:space="preserve"><value>SSL encryption and secure payments</value></data>
-  <data name="TopGames" xml:space="preserve"><value>Top Games</value></data>
-  <data name="ExclusiveGamesTopProviders" xml:space="preserve"><value>Exclusive games from top providers</value></data>
-  <data name="Support24" xml:space="preserve"><value>24/7 Support</value></data>
-  <data name="AlwaysAvailableForQuestions" xml:space="preserve"><value>Always available for your questions</value></data>
-  <data name="BestRTP" xml:space="preserve"><value>Best RTP</value></data>
-  <data name="HighestPayoutPercentages" xml:space="preserve"><value>Highest payout percentages</value></data>
-  <data name="SSLSecured" xml:space="preserve"><value>SSL Secured</value></data>
-  <data name="PlayersCount" xml:space="preserve"><value>10,000+ Players</value></data>
-  <data name="GamesCount" xml:space="preserve"><value>9,000+ Games</value></data>
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
 
-  <!-- Tournament Info Page -->
-  <data name="JoinDailyTournament" xml:space="preserve"><value>Join our daily tournament and win €30,000!</value></data>
-  <data name="EveryDayAgain" xml:space="preserve"><value>Every day again!</value></data>
-  <data name="FirstPlace" xml:space="preserve"><value>1st Place</value></data>
-  <data name="SecondPlace" xml:space="preserve"><value>2nd Place</value></data>
-  <data name="ThirdPlace" xml:space="preserve"><value>3rd Place</value></data>
-  <data name="FourthToTenth" xml:space="preserve"><value>4th - 10th Place</value></data>
-  <data name="EleventhToHundredth" xml:space="preserve"><value>11th - 100th Place</value></data>
-  <data name="HowItWorks" xml:space="preserve"><value>How It Works</value></data>
-  <data name="PlayParticipatingGames" xml:space="preserve"><value>Play Participating Games</value></data>
-  <data name="PlayParticipatingGamesDescription" xml:space="preserve"><value>Play any of the participating games with real bets</value></data>
-  <data name="CollectPoints" xml:space="preserve"><value>Collect Points</value></data>
-  <data name="CollectPointsDescription" xml:space="preserve"><value>Every €1 bet = 1 tournament point</value></data>
-  <data name="CheckPosition" xml:space="preserve"><value>Check Your Position</value></data>
-  <data name="CheckPositionDescription" xml:space="preserve"><value>View your position live on the leaderboard</value></data>
-  <data name="WinPrizes" xml:space="preserve"><value>Win Prizes</value></data>
-  <data name="WinPrizesDescription" xml:space="preserve"><value>Top 100 players win a guaranteed prize!</value></data>
-  <data name="ParticipatingGames" xml:space="preserve"><value>Participating Games</value></data>
-  <data name="PlayPopularAnimalsGames" xml:space="preserve"><value>Play the most popular animal games and collect points!</value></data>
-  <data name="ViewAllParticipatingGames" xml:space="preserve"><value>View All Participating Games</value></data>
-  <data name="TournamentDailyHours" xml:space="preserve"><value>Tournament runs daily from 00:00 to 23:59</value></data>
-  <data name="MinimumBetPerSpin" xml:space="preserve"><value>Minimum bet €0.20 per spin</value></data>
-  <data name="PointsPerEuro" xml:space="preserve"><value>1 point per €1 bet</value></data>
-  <data name="OnlyParticipatingGamesCount" xml:space="preserve"><value>Only bets on participating games count</value></data>
-  <data name="PrizesAwardedWithin24Hours" xml:space="preserve"><value>Prizes awarded within 24 hours after tournament</value></data>
-  <data name="NoRegistrationRequired" xml:space="preserve"><value>No registration required, play automatically</value></data>
-  <data name="Top100PlayersWinPrizes" xml:space="preserve"><value>Top 100 players win a prize</value></data>
-  <data name="SafeCasinoTermsApply" xml:space="preserve"><value>SafeCasino general terms and conditions apply</value></data>
-  <data name="SafeCasinoReservesRight" xml:space="preserve"><value>SafeCasino reserves the right to modify or stop the tournament</value></data>
-  <data name="ReadyToWin" xml:space="preserve"><value>Ready to Win?</value></data>
-  <data name="StartPlayingTodayWin" xml:space="preserve"><value>Start playing today and win up to €30,000!</value></data>
-  <data name="RegisterNow" xml:space="preserve"><value>Register Now</value></data>
-  <data name="NeedMoreInfo" xml:space="preserve"><value>Need more information?</value></data>
-  <data name="ContactCustomerServiceTournament" xml:space="preserve"><value>Contact our customer service for more details about the tournament.</value></data>
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
 
-  <!-- About Page -->
-  <data name="TrustedOnlineCasino" xml:space="preserve"><value>Your trusted online casino since 2020</value></data>
-  <data name="OurMission" xml:space="preserve"><value>Our Mission</value></data>
-  <data name="MissionStatement" xml:space="preserve"><value>SafeCasino strives to provide the best and safest online casino experience</value></data>
-  <data name="MissionDescription" xml:space="preserve"><value>We believe that gambling should be fun, safe and fair. That's why we only work with the best providers, use the latest security technology and offer transparent conditions.</value></data>
-  <data name="MissionStats" xml:space="preserve"><value>With more than 10,000 satisfied players and 9,000+ games, we are proud of what we have built.</value></data>
-  <data name="OfficiallyLicensedRegulated" xml:space="preserve"><value>Officially licensed and regulated</value></data>
-  <data name="TeamAlwaysReady" xml:space="preserve"><value>Our team is always ready for you</value></data>
-  <data name="OurValues" xml:space="preserve"><value>Our Values</value></data>
-  <data name="Fairness" xml:space="preserve"><value>Fairness</value></data>
-  <data name="FairnessDescription" xml:space="preserve"><value>All games are independently tested and certified for fairness</value></data>
-  <data name="Safety" xml:space="preserve"><value>Safety</value></data>
-  <data name="SafetyDescription" xml:space="preserve"><value>Your data and money are 100% safe with us</value></data>
-  <data name="Responsibility" xml:space="preserve"><value>Responsibility</value></data>
-  <data name="ResponsibilityDescription" xml:space="preserve"><value>We take responsible gambling seriously and offer help where needed</value></data>
-  <data name="ActivePlayers" xml:space="preserve"><value>Active Players</value></data>
-  <data name="JoinSafeCasinoFamily" xml:space="preserve"><value>Join the SafeCasino Family</value></data>
-  <data name="JoinThousandsHappyPlayers" xml:space="preserve"><value>Join thousands of happy players who enjoy our games every day!</value></data>
-  <data name="ViewGames" xml:space="preserve"><value>View Games</value></data>
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
 
-  <!-- Privacy Page -->
-  <data name="PrivacyImportant" xml:space="preserve"><value>Your privacy is important to us</value></data>
-  <data name="LastUpdated" xml:space="preserve"><value>Last updated</value></data>
-  <data name="DecemberMonthName" xml:space="preserve"><value>December</value></data>
-  <data name="PrivacyIntroduction" xml:space="preserve"><value>SafeCasino respects your privacy and protects your personal data. This privacy policy explains what information we collect, how we use it and what your rights are.</value></data>
-  <data name="PrivacyAgree" xml:space="preserve"><value>By using our services, you agree to this privacy policy.</value></data>
-  <data name="WhatInfoCollect" xml:space="preserve"><value>What Information Do We Collect?</value></data>
-  <data name="PersonalInfo" xml:space="preserve"><value>Personal Information</value></data>
-  <data name="PersonalInfoDescription" xml:space="preserve"><value>We collect the following personal information:</value></data>
-  <data name="NameContactDetails" xml:space="preserve"><value>Name and contact details (email, phone number)</value></data>
-  <data name="BirthdateIDVerification" xml:space="preserve"><value>Date of birth and ID verification</value></data>
-  <data name="PaymentInfo" xml:space="preserve"><value>Payment information</value></data>
-  <data name="CustomerServiceComm" xml:space="preserve"><value>Communication with customer service</value></data>
-  <data name="AutomaticInfo" xml:space="preserve"><value>Automatically Collected Information</value></data>
-  <data name="AutomaticInfoDescription" xml:space="preserve"><value>We automatically collect:</value></data>
-  <data name="IPAddressDevice" xml:space="preserve"><value>IP address and device information</value></data>
-  <data name="BrowserType" xml:space="preserve"><value>Browser type and version</value></data>
-  <data name="PagesVisited" xml:space="preserve"><value>Pages visited and click behavior</value></data>
-  <data name="CookiesTech" xml:space="preserve"><value>Cookies and similar technologies</value></data>
-  <data name="GamingBehavior" xml:space="preserve"><value>Gaming Behavior</value></data>
-  <data name="GamingBehaviorMonitor" xml:space="preserve"><value>We monitor your gaming behavior to promote responsible gambling:</value></data>
-  <data name="PlayHistory" xml:space="preserve"><value>Play history</value></data>
-  <data name="DepositsWithdrawals" xml:space="preserve"><value>Deposits and withdrawals</value></data>
-  <data name="BetsWinnings" xml:space="preserve"><value>Bets and winnings</value></data>
-  <data name="SessionDuration" xml:space="preserve"><value>Session duration and frequency</value></data>
-  <data name="HowWeUseInfo" xml:space="preserve"><value>How Do We Use Your Information?</value></data>
-  <data name="DataUsedFor" xml:space="preserve"><value>Your data is used for:</value></data>
-  <data name="AccountManagement" xml:space="preserve"><value>Account Management</value></data>
-  <data name="AccountVerification" xml:space="preserve"><value>Creating and verifying accounts</value></data>
-  <data name="ServiceDelivery" xml:space="preserve"><value>Service Delivery</value></data>
-  <data name="ProvidingCasinoService" xml:space="preserve"><value>Providing casino services</value></data>
-  <data name="Security" xml:space="preserve"><value>Security</value></data>
-  <data name="DetectingFraud" xml:space="preserve"><value>Detecting fraud and abuse</value></data>
-  <data name="MonitoringGamingBehavior" xml:space="preserve"><value>Monitoring gaming behavior for responsible gambling</value></data>
-  <data name="Improvement" xml:space="preserve"><value>Improvement</value></data>
-  <data name="AnalyzingImprovingServices" xml:space="preserve"><value>Analyzing and improving our services</value></data>
-  <data name="Communication" xml:space="preserve"><value>Communication</value></data>
-  <data name="SendingUpdatesPromo" xml:space="preserve"><value>Sending updates and promotions</value></data>
-  <data name="DoWeShareInfo" xml:space="preserve"><value>Do We Share Your Information?</value></data>
-  <data name="NoShareMarketing" xml:space="preserve"><value>We NEVER sell your data to third parties for marketing purposes.</value></data>
-  <data name="ShareInfoWith" xml:space="preserve"><value>We only share your information with:</value></data>
-  <data name="PaymentProviders" xml:space="preserve"><value>Payment Providers</value></data>
-  <data name="ProcessingDeposits" xml:space="preserve"><value>For processing deposits and withdrawals</value></data>
-  <data name="GameProviders" xml:space="preserve"><value>Game Providers</value></data>
-  <data name="DeliveringGames" xml:space="preserve"><value>For delivering games</value></data>
-  <data name="Authorities" xml:space="preserve"><value>Authorities</value></data>
-  <data name="WhenLegallyRequired" xml:space="preserve"><value>When legally required</value></data>
-  <data name="ServiceProviders" xml:space="preserve"><value>Service Providers</value></data>
-  <data name="WorkingOurBehalf" xml:space="preserve"><value>Working on our behalf</value></data>
-  <data name="YourRights" xml:space="preserve"><value>Your Rights</value></data>
-  <data name="GDPRRights" xml:space="preserve"><value>Under GDPR you have the following rights:</value></data>
-  <data name="RightToAccess" xml:space="preserve"><value>Right to Access</value></data>
-  <data name="ViewYourData" xml:space="preserve"><value>View your data</value></data>
-  <data name="RightToCorrect" xml:space="preserve"><value>Right to Correct</value></data>
-  <data name="CorrectIncorrectData" xml:space="preserve"><value>Correct incorrect data</value></data>
-  <data name="RightToDelete" xml:space="preserve"><value>Right to Delete</value></data>
-  <data name="RequestDataDeletion" xml:space="preserve"><value>Request data deletion</value></data>
-  <data name="RightToData" xml:space="preserve"><value>Right to Data Portability</value></data>
-  <data name="DataReadableFormat" xml:space="preserve"><value>Data in readable format</value></data>
-  <data name="RightToRestrict" xml:space="preserve"><value>Right to Restrict</value></data>
-  <data name="LimitDataUsage" xml:space="preserve"><value>Limit data usage</value></data>
-  <data name="RightToObjection" xml:space="preserve"><value>Right to Object</value></data>
-  <data name="ObjectProcessing" xml:space="preserve"><value>Object to processing</value></data>
-  <data name="ExerciseRights" xml:space="preserve"><value>To exercise your rights, contact us at</value></data>
-  <data name="DataSecurity" xml:space="preserve"><value>Data Security</value></data>
-  <data name="SecurityMeasures" xml:space="preserve"><value>We take extensive security measures to protect your data:</value></data>
-  <data name="Encryption" xml:space="preserve"><value>Encryption</value></data>
-  <data name="AllCommunicationEncrypted" xml:space="preserve"><value>All communication is encrypted</value></data>
-  <data name="SecureServers" xml:space="preserve"><value>Secure Servers</value></data>
-  <data name="DataStoredSecureServers" xml:space="preserve"><value>Data stored on secure servers</value></data>
-  <data name="FirewallProtection" xml:space="preserve"><value>Firewall Protection</value></data>
-  <data name="AdvancedFirewalls" xml:space="preserve"><value>Advanced firewalls</value></data>
-  <data name="RegularAudits" xml:space="preserve"><value>Regular Audits</value></data>
-  <data name="IndependentSecurityAudits" xml:space="preserve"><value>Independent security audits</value></data>
-  <data name="PrivacyQuestions" xml:space="preserve"><value>Privacy Questions?</value></data>
-  <data name="FreeToContact" xml:space="preserve"><value>Feel free to contact us if you have questions about this privacy policy.</value></data>
-
-  <!-- Responsible Gaming -->
-  <data name="ResponsibleGamingTitle" xml:space="preserve"><value>Responsible Gaming - SafeCasino</value></data>
-  <data name="ResponsibleGaming" xml:space="preserve"><value>RESPONSIBLE GAMING</value></data>
-  <data name="ResponsibleGamingSubtitle" xml:space="preserve"><value>Gambling should stay fun. Always play within your limits.</value></data>
-  <data name="Important" xml:space="preserve"><value>Important!</value></data>
-  <data name="GamblingCanBeAddictive" xml:space="preserve"><value>Gambling can be addictive.</value></data>
-
-  <!-- Footer -->
-  <data name="Privacy" xml:space="preserve"><value>Privacy</value></data>
-  <data name="Contact" xml:space="preserve"><value>Contact</value></data>
-  <data name="About" xml:space="preserve"><value>About Us</value></data>
-  <data name="Copyright" xml:space="preserve"><value>© 2025 SafeCasino. All rights reserved.</value></data>
-  <data name="FooterDescription" xml:space="preserve"><value>Your trusted online casino with the best games and highest security standards. Play responsibly.</value></data>
-  <data name="CasinoGames" xml:space="preserve"><value>Casino Games</value></data>
-  <data name="Information" xml:space="preserve"><value>Information</value></data>
-  <data name="TermsConditions" xml:space="preserve"><value>Terms &amp; Conditions</value></data>
-  <data name="SupportSecurity" xml:space="preserve"><value>Support &amp; Security</value></data>
-  <data name="CustomerService" xml:space="preserve"><value>Customer Service</value></data>
-  <data name="Secured" xml:space="preserve"><value>Secured</value></data>
-  <data name="PaymentMethods" xml:space="preserve"><value>Payment Methods</value></data>
-  <data name="AllRightsReserved" xml:space="preserve"><value>All rights reserved.</value></data>
-  <data name="LicensedCasino" xml:space="preserve"><value>Licensed Casino</value></data>
-  <data name="Disclaimer" xml:space="preserve"><value>Gambling can be addictive. Play responsibly. SafeCasino is licensed and regulated. Only for players 18+.</value></data>
-  <data name="PlayResponsibly" xml:space="preserve"><value>Play Responsibly</value></data>
-  <data name="SecuredSSL" xml:space="preserve"><value>SSL Secured</value></data>
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+	
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
 </root>

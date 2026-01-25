@@ -1,4 +1,4 @@
-﻿namespace SafeCasino.Web.Resources
+﻿namespace SafeCasino.web.Resources
 {
     public class SharedResource
     {
